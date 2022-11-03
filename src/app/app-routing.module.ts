@@ -24,10 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'nav-bar',
-    loadChildren: () => import('./pages/nav-bar/nav-bar.module').then( m => m.NavBarPageModule)
-  },
-  {
     path: 'my-places',
     loadChildren: () => import('./pages/my-places/my-places.module').then( m => m.MyPlacesPageModule)
   },
