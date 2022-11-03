@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'search-bar',
-    loadChildren: () => import('./pages/search-bar/search-bar.module').then( m => m.SearchBarPageModule)
+    path: 'nav-bar',
+    loadChildren: () => import('./pages/nav-bar/nav-bar.module').then( m => m.NavBarPageModule)
   },
   {
     path: 'my-places',
@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'edit-account',
     loadChildren: () => import('./pages/edit-account/edit-account.module').then( m => m.EditAccountPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
   },
 
 ];
