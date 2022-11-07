@@ -1,0 +1,42 @@
+{
+  "Places": [
+    {
+      "id": 1,
+      "visited": "false",
+      "userId": "53",
+      "createdOn": "1/20/22",
+      "placeName": "WallyWorld",
+      "this.starRating": "1.5"
+    },
+    {
+      "id": 2,
+      "visited": "false",
+      "userId": "53",
+      "createdOn": "1/20/22",
+      "placeName": "SquareBucks",
+      "this.starRating": "4"
+    },
+    {
+      "id": 2,
+      "visited": "false",
+      "userId": "53",
+      "createdOn": "1/20/22",
+      "placeName": "DunkinMuffin",
+      "this.starRating": "3"
+    }
+  ],
+  "profiles": [
+    {
+      "id": 1,
+      "name": "bob"
+    },
+    {
+      "id": 2,
+      "name": "Frank"
+    },
+    {
+      "id": 3,
+      "name": "Samwise"
+    }
+  ]
+}
