@@ -10,18 +10,23 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 })
 export class HomePage implements OnInit {
   position: Position = null;
+  //These are current coordinates being pulled in from the geolocation
+  currentLatitude: number = null;
+  currentLongitude: number = null;
 
-  constructor(private geoService: GeolocationService) { }
+  constructor(private geoService: GeolocationService) {}
 
   ngOnInit() {
+    this.getGPS();
   }
 
   getGPS() {
-    this.geoService.getCurrentPosition().subscribe(result => {
-
-        this.position = result;
-        console.log(this.position.coords.latitude);
-        console.log(this.position.coords.longitude)
+    this.geoService.getCurrentPosition().subscribe((result) => {
+      this.position = result;
+      this.currentLatitude = this.position.coords.latitude;
+      this.currentLongitude = this.position.coords.longitude;
+      console.log("Current Latitude: " + this.currentLatitude);
+      console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
 }
