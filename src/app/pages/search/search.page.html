@@ -1,70 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>search</ion-title>
-  </ion-toolbar>
+  <app-navbar></app-navbar>
 </ion-header>
 
 <ion-content>
   <ion-searchbar placeholder="Search by Zipcode"></ion-searchbar>
 
-  <ion-slides>
-    <ion-card>
-      <img
-        alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
-      />
-      <ion-card-header>
-        <ion-card-title>State Park</ion-card-title>
-      </ion-card-header>
+  <ion-grid>
+    <ion-row>
+      
+    <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+        <!-- <ion-col  *ngFor="let Place of SearchResults; first as isFirst" col-12 col-md-8  class="SearchCard" > -->
+       <ng-template  *ngFor="let Place of SearchResults" swiperSlide > 
+          <ion-card>
 
-      <ion-card-content>
-        <ion-card-subtitle>20 min</ion-card-subtitle>
-        3.5 <ion-icon name="star"></ion-icon>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <img
-        alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
-      />
-      <ion-card-header>
-        <ion-card-title>State Park</ion-card-title>
-      </ion-card-header>
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+            <ion-card-header>
+              <ion-card-title>{{Place.name}}</ion-card-title>
+            </ion-card-header>
 
-      <ion-card-content>
-        <ion-card-subtitle>20 min</ion-card-subtitle>
-        3.5 <ion-icon name="star"></ion-icon>
-      </ion-card-content>
-    </ion-card>
-  </ion-slides>
-  <ion-slides>
-    <ion-card>
-      <img
-        alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
-      />
-      <ion-card-header>
-        <ion-card-title>State Park</ion-card-title>
-      </ion-card-header>
+            <ion-card-content>
+              <ion-card-subtitle>{{Place.formatted_address}}</ion-card-subtitle>
+              {{Place.rating}} <ion-icon name="star"></ion-icon>
+            </ion-card-content>
+          </ion-card>
+      </ng-template>
+        <!-- </ion-col> -->
+      </swiper>
+      <!-- </ion-slides> -->
+    </ion-row>
+  </ion-grid>
 
-      <ion-card-content>
-        <ion-card-subtitle>20 min</ion-card-subtitle>
-        3.5 <ion-icon name="star"></ion-icon>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <img
-        alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
-      />
-      <ion-card-header>
-        <ion-card-title>State Park</ion-card-title>
-      </ion-card-header>
 
-      <ion-card-content>
-        <ion-card-subtitle>20 min</ion-card-subtitle>
-        3.5 <ion-icon name="star"></ion-icon>
-      </ion-card-content>
-    </ion-card>
-  </ion-slides>
 </ion-content>

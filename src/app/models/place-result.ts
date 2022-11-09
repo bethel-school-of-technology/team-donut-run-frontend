@@ -1,5 +1,5 @@
 export class PlaceResult {
-  place_id: string;
+  place_id?: string;
   name?: string;
   types?: [];
   formatted_address?: string;
@@ -12,7 +12,7 @@ export class PlaceResult {
   business_status?: string;
 
   constructor(
-    place_id: string,
+    place_id?: string,
     name?: string,
     types?: [],
     formatted_address?: string,

@@ -30,3 +30,6 @@ export class HomePage implements OnInit {
     });
   }
 }
+
+
+// this all is commented out until we preform bugfixes with geolocation
