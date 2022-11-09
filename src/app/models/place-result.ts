@@ -2,7 +2,7 @@ export class PlaceResult {
   name?: string;
   type?: string[];
   formatted_address?: string;
-  rating?: string;
+  rating?: number;
   price_level?: number;
   open_now?: boolean;
   website?: string;
@@ -14,7 +14,7 @@ export class PlaceResult {
     name?: string,
     type?: string[],
     formatted_address?: string,
-    rating?: string,
+    rating?: number,
     price_level?: number,
     open_now?: boolean,
     website?: string,
