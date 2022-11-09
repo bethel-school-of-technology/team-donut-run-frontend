@@ -1,103 +1,96 @@
+place_id: string;
+  name?: string;
+  types?: string[];
+  formatted_address?: string;
+  rating?: number;
+  price_level?: number;
+  open_now?: boolean;
+  website?: string;
+  editorial_summary?: string;
+  photos?: string[];
+  business_status?: string;
+  
 {
-  "html_attributions": [],
-  "result": {
-    "editorial_summary": {
-      "language": "en",
-      "overview": "Known as the \"Mother Church of Country Music,\" this venue hosts diverse concerts & daily tours."
+  "results": [
+    {
+      "place_id": "ChIJletJO1lmZIgRq0UiSZV5AGM",
+      "name": "Ryman Auditorium",
+      "types": [
+        "tourist_attraction",
+        "museum",
+        "store",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formatted_address": "116 5th Ave N, Nashville, TN 37219, USA",
+      "rating": 5,
+      "price_level": 3,
+      "opening_hours": {
+        "open_now": false
+       },
+      "website": "https://www.ryman.com",
+      "editorial_summary": {
+         "language": "en",
+         "overview": "Known as the \"Mother Church of Country Music,\" this venue hosts diverse concerts & daily tours."
+       },
+      "business_status": "OPERATIONAL",
+      "photos": [
+        {
+          "height": 9000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/104133867579442810613\">Lewis</a>"
+          ],
+          "photo_reference": "AW30NDw1D5ReljuXBvytu6Q4oX4-YnFt2oqefHm0N-MW_2UPrgNqFy81AoUEF6iXk3adq5LVM-y8b5ucr1wdyGLPTsIL1_FVuONrIWMHPAucepR95ixL7GlzV33ZiFH0_QsW3QATZzs9uP_Tjm8FDZwr4m5kf49HgW5lAQ-uPYRxirmXaJUv",
+          "width": 12000
+        },
+        {
+          "height": 9000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/108674716163188772667\">Richard Huffman</a>"
+          ],
+          "photo_reference": "AW30NDwt49zFj-NZC4o7Z7DcOaE1XR8XAyR4sHanmtczuSV4v70k1zwMgYo3yVFaQyUG-z0GJICH4OJdDg-5UHOhMebZSi-l-qYX3mgrTPAaukhMHtJB-E7akK9uZ9NlSkyBm1WSj1EcO3lolaCtt-JiGmYGSn6dYHwymDhLUuoA2VFcp4rZ",
+          "width": 12000
+        }
+      ]
     },
-    "formatted_address": "116 5th Ave N, Nashville, TN 37219, USA",
-    "name": "Ryman Auditorium",
-    "photos": [
-      {
-        "height": 9000,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/104133867579442810613\">Lewis</a>"
-        ],
-        "photo_reference": "AW30NDw1D5ReljuXBvytu6Q4oX4-YnFt2oqefHm0N-MW_2UPrgNqFy81AoUEF6iXk3adq5LVM-y8b5ucr1wdyGLPTsIL1_FVuONrIWMHPAucepR95ixL7GlzV33ZiFH0_QsW3QATZzs9uP_Tjm8FDZwr4m5kf49HgW5lAQ-uPYRxirmXaJUv",
-        "width": 12000
-      },
-      {
-        "height": 9000,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/108674716163188772667\">Richard Huffman</a>"
-        ],
-        "photo_reference": "AW30NDwt49zFj-NZC4o7Z7DcOaE1XR8XAyR4sHanmtczuSV4v70k1zwMgYo3yVFaQyUG-z0GJICH4OJdDg-5UHOhMebZSi-l-qYX3mgrTPAaukhMHtJB-E7akK9uZ9NlSkyBm1WSj1EcO3lolaCtt-JiGmYGSn6dYHwymDhLUuoA2VFcp4rZ",
-        "width": 12000
-      },
-      {
-        "height": 2160,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/116429824428201052878\">Brian Auger</a>"
-        ],
-        "photo_reference": "AW30NDxittUWwJQQCls2zYy5VdIFXrhJUajz6PUEDavIHyxpHmbFxLxdXn6RbUIylyo8QHdmAhDrgy8i3G46q13RUp0O8Nq9zeJumi5GFDxPKGjhzAzZLB5RQMciSYkODu4nSWyZfJMNmmxSEVi1dvtYG-6B8TC-AfQHKdMlXbMmPJZ9rQcz",
-        "width": 2701
-      },
-      {
-        "height": 2268,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/108006341684531719092\">Tony Ferrara</a>"
-        ],
-        "photo_reference": "AW30NDxLY0xJSfauzc4nKR7Y1UzAEBvH2fz1r3wUZ-omInQJ6iIc42coruDCfSCKHqnfoy5W6i2xEkYsm6rlWyTYKtjzE6-krWQ7jCNeKEQitJBv4lsqP5--3JFy7OMQX-TF2B_n6b-KiO2lwyzaYD9Ng4UGTivjFEyN2HIpjkVfKjLRyEE9",
-        "width": 4032
-      },
-      {
-        "height": 4624,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/109429353588083113779\">Donald Blaylock</a>"
-        ],
-        "photo_reference": "AW30NDw8z90I8ERGn-qrEBAxdtPK-GZcOyio7lTM9dzxwjCyq1A4pATzD_YB0hZWoxWGxCmNJz9K7GMxhJS22-OFkxVC8uwZs2g6S5FqPU6ULU3qxIwMqRJyOQELQmNeYg8lkbfEQ9W9pnkX5s9pbfWqXFTUorQnjkphju8UMGYrQmQ2H_CW",
-        "width": 3468
-      },
-      {
-        "height": 2268,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/108006341684531719092\">Tony Ferrara</a>"
-        ],
-        "photo_reference": "AW30NDxIiA7mM9kEoIsAI181zB1StfHVZB6GFPuiHlgki6XqMBhd1fOEF906vNST1PtBLZ-AWmvgHUk44jW0Z1_B8vwrogSC2HL8hw0nPKLZ2gqU5_ZumQ5ozvHcRcVLzGD6W6GANKifSEO3UKBQ7Lg6cUHe9u0XVkB7_r_8-BCmYgbYRm-K",
-        "width": 4032
-      },
-      {
-        "height": 3024,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/107353104247440922284\">ASM TRAVEL</a>"
-        ],
-        "photo_reference": "AW30NDywaVaox8EMFjWBXok1vcG59QXwjfqeykQmvCO2-ssWIZgjGvGFvHL8jZYI8joFcfL9Ro8rpT0THRI43RCGYmKP8Dgv4IQaT7fh3GB91HcPX__9m7pFGsK6PC3iLtwsP6NVVqiCZjoKfUkwRo5kXTgfpsuxxOK2rUXwH76Bn7NgKEqV",
-        "width": 4032
-      },
-      {
-        "height": 4032,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/108169272336671999111\">Debbie Blesi</a>"
-        ],
-        "photo_reference": "AW30NDx-t_CXA5Tm2NbieixvO0pUxtVWSoG5dBMBBA8X8GFJVKbi9Y-lcBGlQhR8I8-OOaZ5ibkTPhyi6zHjIGjicp_b5NPLqRARMLdnwahnd5nCvX4nbu-nN9Q1u90Y-QeOzz1AsuJU6ahrHJ7kJt1KcgaPqoR3YTLAXGOzv4-VZd7lDtxs",
-        "width": 3024
-      },
-      {
-        "height": 2448,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/114042771848716864009\">L M</a>"
-        ],
-        "photo_reference": "AW30NDwhggFLVNRYwSAyQrkbYiP38yw8V79WPWKoSiseQWKA-8qvl2w5j2Z2R2HZW4TGNu-Yb-16_OfK4o2m8drDDfGdifTNrUZBTa1OCcacmbw6PFBacZpAKYk5XXGjYCEC0AGnhdtM0eGKKX7iJKN3N4KC3qygPnCxV0AXkAgJWrvQFpsG",
-        "width": 3264
-      },
-      {
-        "height": 3024,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/109537107859824934916\">Dewey Kinchen</a>"
-        ],
-        "photo_reference": "AW30NDz_j16QdF1H-wPYNYXLjmdL5JnJARBOqEpLBx3dDCE9uBRTsN5b5xenUAqGR3KXd1VmH50usJfZg-Mt-Ix1_0HI331YeSiI2hMuWoOv1vkbqwXxIzK_PxY3K9RnZXoD3uJJYwfEUCogygQiRFXFoYQnPgZnvnmUTY1XzaBLCMSoe5JY",
-        "width": 4032
-      }
-    ],
-    "place_id": "ChIJletJO1lmZIgRq0UiSZV5AGM",
-    "types": [
-      "tourist_attraction",
-      "museum",
-      "store",
-      "point_of_interest",
-      "establishment"
-    ],
-    "website": "https://www.ryman.com/?utm_campaign=ryman&utm_medium=organicsearch&utm_source=googlemybusiness&utm_audience=tofu_googlemybusiness&utm_content=brandstory_google_my_business_website_link"
-  },
-  "status": "OK"
+    
+    
+    {
+      "place_id": "",
+      "name": "",
+      "types": [],
+      "formatted_address": "",
+      "rating": 0,
+      "price_level": 0,
+      "opening_hours": {
+        "open_now": false
+       },
+      "website": "",
+      "editorial_summary": {
+         "language": "en",
+         "overview": "Known as the \"Mother Church of Country Music,\" this venue hosts diverse concerts & daily tours."
+       },
+      "business_status": "",
+      "photos": [
+        {
+          "height": 9000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/104133867579442810613\">Lewis</a>"
+          ],
+          "photo_reference": "AW30NDw1D5ReljuXBvytu6Q4oX4-YnFt2oqefHm0N-MW_2UPrgNqFy81AoUEF6iXk3adq5LVM-y8b5ucr1wdyGLPTsIL1_FVuONrIWMHPAucepR95ixL7GlzV33ZiFH0_QsW3QATZzs9uP_Tjm8FDZwr4m5kf49HgW5lAQ-uPYRxirmXaJUv",
+          "width": 12000
+        },
+        {
+          "height": 9000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/108674716163188772667\">Richard Huffman</a>"
+          ],
+          "photo_reference": "AW30NDwt49zFj-NZC4o7Z7DcOaE1XR8XAyR4sHanmtczuSV4v70k1zwMgYo3yVFaQyUG-z0GJICH4OJdDg-5UHOhMebZSi-l-qYX3mgrTPAaukhMHtJB-E7akK9uZ9NlSkyBm1WSj1EcO3lolaCtt-JiGmYGSn6dYHwymDhLUuoA2VFcp4rZ",
+          "width": 12000
+        }
+      ]
+    },
+    
+    // add more full placeResults objects here
+  ]
 }
