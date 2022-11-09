@@ -1,5 +1,5 @@
 export class PlaceResult {
-  placeId: string;
+  place_id: string;
   name?: string;
   types?: string[];
   formatted_address?: string;
@@ -12,7 +12,7 @@ export class PlaceResult {
   business_status?: string;
 
   constructor(
-    placeId: string,
+    place_id: string,
     name?: string,
     types?: string[],
     formatted_address?: string,
@@ -22,9 +22,9 @@ export class PlaceResult {
     website?: string,
     editorial_summary?: string,
     photos?: string[],
-    business_status?: string,
+    business_status?: string
   ) {
-    this.placeId = placeId;
+    this.place_id = place_id;
     this.name = name;
     this.types = types;
     this.rating = rating;
