@@ -1,7 +1,7 @@
 export class PlaceResult {
   placeId: string;
   name?: string;
-  type?: string[];
+  types?: string[];
   formatted_address?: string;
   rating?: number;
   price_level?: number;
@@ -14,7 +14,7 @@ export class PlaceResult {
   constructor(
     placeId: string,
     name?: string,
-    type?: string[],
+    types?: string[],
     formatted_address?: string,
     rating?: number,
     price_level?: number,
@@ -26,7 +26,7 @@ export class PlaceResult {
   ) {
     this.placeId = placeId;
     this.name = name;
-    this.type = type;
+    this.types = types;
     this.rating = rating;
     this.formatted_address = formatted_address;
     this.price_level = price_level;
