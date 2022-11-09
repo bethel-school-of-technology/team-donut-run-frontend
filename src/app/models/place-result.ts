@@ -1,27 +1,27 @@
 export class PlaceResult {
   place_id: string;
   name?: string;
-  types?: string[];
+  types?: [];
   formatted_address?: string;
   rating?: number;
   price_level?: number;
-  open_now?: boolean;
+  opening_hours?: {};
   website?: string;
-  editorial_summary?: string;
-  photos?: string[];
+  editorial_summary?: {};
+  photos?: [];
   business_status?: string;
 
   constructor(
     place_id: string,
     name?: string,
-    types?: string[],
+    types?: [],
     formatted_address?: string,
     rating?: number,
     price_level?: number,
-    open_now?: boolean,
+    opening_hours?: {};
     website?: string,
-    editorial_summary?: string,
-    photos?: string[],
+    editorial_summary?: {},
+    photos?: [],
     business_status?: string
   ) {
     this.place_id = place_id;
@@ -30,7 +30,7 @@ export class PlaceResult {
     this.rating = rating;
     this.formatted_address = formatted_address;
     this.price_level = price_level;
-    this.open_now = open_now;
+    this.opening_hours = opening_hours;
     this.website = website;
     this.editorial_summary = editorial_summary;
     this.photos = photos;
