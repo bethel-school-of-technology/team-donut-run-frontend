@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { SwiperModule } from 'swiper/angular';
+import SwiperCore from 'swiper';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +16,9 @@ import { SearchPage } from './search.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchPageRoutingModule
+    SearchPageRoutingModule,
+    SwiperModule
   ],
-  declarations: [SearchPage]
+  declarations: [SearchPage,NavbarComponent]
 })
 export class SearchPageModule {}
