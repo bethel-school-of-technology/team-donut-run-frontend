@@ -1,26 +1,26 @@
 export class PlaceResult {
-  name: string;
-  type: string[];
-  formatted_address: string;
-  rating: string;
-  price_level: number;
-  open_now: boolean;
-  website: string;
-  editorial_summary: string;
-  photos: string[];
-  business_status: string;
+  name?: string;
+  type?: string[];
+  formatted_address?: string;
+  rating?: string;
+  price_level?: number;
+  open_now?: boolean;
+  website?: string;
+  editorial_summary?: string;
+  photos?: string[];
+  business_status?: string;
 
   constructor(
-    name: string,
-    type: string[],
-    formatted_address: string,
-    rating: string,
-    price_level: number,
-    open_now: boolean,
-    website: string,
-    editorial_summary: string,
-    photos: string[],
-    business_status: string,
+    name?: string,
+    type?: string[],
+    formatted_address?: string,
+    rating?: string,
+    price_level?: number,
+    open_now?: boolean,
+    website?: string,
+    editorial_summary?: string,
+    photos?: string[],
+    business_status?: string,
   ) {
     this.name = name;
     this.type = type;
