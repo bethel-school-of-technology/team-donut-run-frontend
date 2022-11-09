@@ -1,4 +1,5 @@
 export class PlaceResult {
+  placeId: string;
   name?: string;
   type?: string[];
   formatted_address?: string;
@@ -11,6 +12,7 @@ export class PlaceResult {
   business_status?: string;
 
   constructor(
+    placeId: string,
     name?: string,
     type?: string[],
     formatted_address?: string,
@@ -22,6 +24,7 @@ export class PlaceResult {
     photos?: string[],
     business_status?: string,
   ) {
+    this.placeId = placeId;
     this.name = name;
     this.type = type;
     this.rating = rating;
