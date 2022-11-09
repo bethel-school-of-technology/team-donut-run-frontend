@@ -1,4 +1,4 @@
-import { MyPlaces } from './my-places';
+import { MyPlaces } from './my-place';
 
 describe('MyPlaces', () => {
   it('should create an instance', () => {
