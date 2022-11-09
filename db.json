@@ -1,50 +1,69 @@
 {
-  "places": [
+  "myPlaces": [
     {
-      "id": 1,
-      "visited": "false",
-      "userId": "53",
-      "createdOn": "1/20/22",
-      "placeName": "WallyWorld",
-      "starRating": "1.5"
+      "myPlaceId": 1,
+      "visited": false,
+      "userId": 1,
+      "createdOn": "11/21/22",
+      "googlePlaceId": "ChIJE2FKt1hmZIgRaMGEIR4Qs-0"
     },
     {
-      "id": 2,
-      "visited": "true",
-      "userId": "51",
-      "createdOn": "1/20/22",
-      "placeName": "SquareBucks",
-      "starRating": "4"
+      "myPlaceId": 2,
+      "visited": true,
+      "userId": 2,
+      "createdOn": "11/20/22",
+      "googlePlaceId": "ChIJGVuc4xGGZIgR7fI2E4yqTpU"
     },
     {
-      "id": 2,
-      "visited": "false",
-      "userId": "53",
-      "createdOn": "1/20/22",
-      "placeName": "DunkinMuffin",
-      "starRating": "3"
+      "myPlaceId": 3,
+      "visited": false,
+      "userId": 3,
+      "createdOn": "11/20/22",
+      "googlePlaceId": "ChIJUfhVrKB5ZIgRdSNJy8Ng4ew"
     },
     {
-      "visited": "false",
-      "userId": "55",
-      "createdOn": "1/02/21",
-      "placeName": "Marlins",
-      "starRating": "3.2",
-      "id": 5
+      "myPlaceId": 4,
+      "visited": true,
+      "userId": 4,
+      "createdOn": "01/02/21",
+      "googlePlaceId": "ChIJletJO1lmZIgRq0UiSZV5AGM"
     }
   ],
+
   "profiles": [
     {
-      "id": 1,
-      "name": "Bob"
+      "userId": 1,
+      "username": "bob.smith",
+      "email": "bob.smith@example.com",
+      "firstName": "Bob",
+      "lastName": "Smith",
+      "location": "Nashville, TN"
+      "myPlaces": []
     },
     {
-      "id": 2,
-      "name": "Frank"
+      "userId": 2,
+      "username": "brian.wade",
+      "email": "brian.wade@example.com",
+      "firstName": "Brian",
+      "lastName": "Wade",
+      "location": "Franklin, TN"
+      "myPlaces": []
     },
     {
-      "id": 3,
-      "name": "Samwise"
-    }
+      "userId": 3,
+      "username": "sam.jones",
+      "email": "sam.jones@example.com",
+      "firstName": "Sam",
+      "lastName": "Jones",
+      "location": "Hampstead, MD"
+      "myPlaces": []
+    }, 
+      "userId": 4,
+      "username": "ken.mackey",
+      "email": "ken.mackey@example.com",
+      "firstName": "Kendall",
+      "lastName": "Mackey",
+      "location": "Los Angeles, CA"
+      "myPlaces": []
   ]
 }
