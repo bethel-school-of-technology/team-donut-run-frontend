@@ -3,37 +3,42 @@
     {
       "myPlaceId": 1,
       "visited": false,
-      "userId": 53,
+      "userId": 1,
       "createdOn": "11/21/22",
       "googlePlaceId": "ChIJtwapWjeuEmsRcxV5JARHpSk"
     },
     {
       "myPlaceId": 2,
       "visited": true,
-      "userId": 51,
+      "userId": 2,
       "createdOn": "11/20/22",
-      "googlePlaceId": "ChIJtwapWjeuEmsRcxV5JARHpSk"
-    },
-    {
-      "myPlaceId": 2,
-      "visited": false,
-      "userId": 53,
-      "createdOn": "11/20/22",
-      "googlePlaceId": "ChIJtwapWjeuEmsRcxV5JARHpSk"
+      "googlePlaceId": "ChIJGVuc4xGGZIgR7fI2E4yqTpU"
     },
     {
       "myPlaceId": 3,
       "visited": false,
-      "userId": 55,
+      "userId": 3,
+      "createdOn": "11/20/22",
+      "googlePlaceId": "ChIJUfhVrKB5ZIgRdSNJy8Ng4ew"
+    },
+    {
+      "myPlaceId": 4,
+      "visited": true,
+      "userId": 4,
       "createdOn": "01/02/21",
-      "googlePlaceId": "ChIJtwapWjeuEmsRcxV5JARHpSk"
+      "googlePlaceId": "ChIJUfhVrKB5ZIgRtkDxnk_JbvY"
     }
   ],
 
   "profiles": [
     {
-      "id": 1,
-      "name": "Bob"
+      "userId": 1,
+      "username": "bob.smith",
+      "email": "bob.smith@example.com",
+      "firstName": "Bob",
+      "lastName": "Smith",
+      "location": "Nashville, TN"
+      "myPlaces": []
     },
     {
       "id": 2,
