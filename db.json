@@ -41,12 +41,29 @@
       "myPlaces": []
     },
     {
-      "id": 2,
-      "name": "Frank"
+      "userId": 2,
+      "username": "brian.wade",
+      "email": "brian.wade@example.com",
+      "firstName": "Brian",
+      "lastName": "Wade",
+      "location": "Franklin, TN"
+      "myPlaces": []
     },
     {
-      "id": 3,
-      "name": "Samwise"
-    }
+      "userId": 3,
+      "username": "sam.jones",
+      "email": "sam.jones@example.com",
+      "firstName": "Sam",
+      "lastName": "Jones",
+      "location": "Hampstead, MD"
+      "myPlaces": []
+    }, 
+      "userId": 4,
+      "username": "ken.mackey",
+      "email": "ken.mackey@example.com",
+      "firstName": "Kendall",
+      "lastName": "Mackey",
+      "location": "Los Angeles, CA"
+      "myPlaces": []
   ]
 }
