@@ -18,7 +18,7 @@ export class PlaceResult {
     formatted_address?: string,
     rating?: number,
     price_level?: number,
-    opening_hours?: {};
+    opening_hours?: {},
     website?: string,
     editorial_summary?: {},
     photos?: [],

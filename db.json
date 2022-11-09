@@ -37,7 +37,7 @@
       "email": "bob.smith@example.com",
       "firstName": "Bob",
       "lastName": "Smith",
-      "location": "Nashville, TN"
+      "location": "Nashville, TN",
       "myPlaces": []
     },
     {
@@ -46,7 +46,7 @@
       "email": "brian.wade@example.com",
       "firstName": "Brian",
       "lastName": "Wade",
-      "location": "Franklin, TN"
+      "location": "Franklin, TN",
       "myPlaces": []
     },
     {
@@ -55,15 +55,17 @@
       "email": "sam.jones@example.com",
       "firstName": "Sam",
       "lastName": "Jones",
-      "location": "Hampstead, MD"
+      "location": "Hampstead, MD",
       "myPlaces": []
     }, 
+    {
       "userId": 4,
       "username": "ken.mackey",
       "email": "ken.mackey@example.com",
       "firstName": "Kendall",
       "lastName": "Mackey",
-      "location": "Los Angeles, CA"
+      "location": "Los Angeles, CA",
       "myPlaces": []
+    }
   ]
 }
