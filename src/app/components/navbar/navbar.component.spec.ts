@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { NavbarComponent } from './navbar.component';
+import NavbarComponent from './navbar.component';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
