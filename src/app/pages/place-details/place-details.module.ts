@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +14,9 @@ import { PlaceDetailsPage } from './place-details.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PlaceDetailsPageRoutingModule
+    PlaceDetailsPageRoutingModule,
+ 
   ],
-  declarations: [PlaceDetailsPage]
+  declarations: [PlaceDetailsPage, NavbarComponent],
 })
 export class PlaceDetailsPageModule {}
