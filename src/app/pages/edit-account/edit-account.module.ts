@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EditAccountPageRoutingModule } from './edit-account-routing.module';
 
 import { EditAccountPage } from './edit-account.page';
+import { NavbarModule } from 'src/app/components/navbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditAccountPageRoutingModule
+    EditAccountPageRoutingModule,
+    NavbarModule
   ],
-  declarations: [EditAccountPage]
+  declarations: [EditAccountPage],
 })
 export class EditAccountPageModule {}
