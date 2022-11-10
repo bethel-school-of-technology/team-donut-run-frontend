@@ -17,8 +17,8 @@ export class ResultsService {
     return this.http.get<PlaceResult[]>(this.dataSource);
   }
 
-  getResultsByID(id: number): Observable<PlaceResult> {
-    return this.http.get<PlaceResult>(this.dataSource + '/' + id);
+  getResultsByID(placeId: string): Observable<PlaceResult> {
+    return this.http.get<PlaceResult>(this.dataSource + '/' + '?place_id=' + placeId);
   }
 
   createNewResults(newPlace: PlaceResult): Observable<PlaceResult> {

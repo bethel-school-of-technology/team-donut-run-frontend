@@ -7,8 +7,9 @@ export class PlaceResult {
   price_level?: number;
   opening_hours?: {};
   website?: string;
-  editorial_summary?: {};
+  overview?: string;
   photos?: [];
+  photo_reference: string;
   business_status?: string;
 
   constructor(
@@ -20,7 +21,6 @@ export class PlaceResult {
     price_level?: number,
     opening_hours?: {},
     website?: string,
-    editorial_summary?: {},
     photos?: [],
     business_status?: string
   ) {
@@ -32,7 +32,6 @@ export class PlaceResult {
     this.price_level = price_level;
     this.opening_hours = opening_hours;
     this.website = website;
-    this.editorial_summary = editorial_summary;
     this.photos = photos;
     this.business_status = business_status;
   }
