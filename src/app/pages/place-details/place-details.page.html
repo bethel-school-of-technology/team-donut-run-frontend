@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>placeDetails</ion-title>
-  </ion-toolbar>
+    <app-navbar></app-navbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>Name: {{this.placeDetails.name}}</ion-card-header>
+    <ion-card-content>
+      <p>Address: {{this.placeDetails.formatted_address}}</p>
+      <p>Website: {{this.placeDetails.website}}</p>
+      <p>Overview: {{this.placeDetails.overview}}</p>
+      <p>Photo Reference: {{this.placeDetails.photo_reference}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

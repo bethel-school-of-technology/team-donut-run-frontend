@@ -25,16 +25,13 @@ export class SearchPage implements OnInit {
     console.log('slide change');
   }
 
-
   constructor(private resultsService: ResultsService) { }
-
-
 
   SearchAll() {
     this.SearchResults = [];
     this.resultsService.getAllResults().subscribe(ReturnedPlaces => {
       this.SearchResults = ReturnedPlaces;
-      console.log(ReturnedPlaces)
+      console.log(ReturnedPlaces);
     });
   }
 

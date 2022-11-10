@@ -7,7 +7,6 @@
 
   <ion-grid>
     <ion-row>
-      
     <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
         <!-- <ion-col  *ngFor="let Place of SearchResults; first as isFirst" col-12 col-md-8  class="SearchCard" > -->
        <ng-template  *ngFor="let Place of SearchResults" swiperSlide > 
