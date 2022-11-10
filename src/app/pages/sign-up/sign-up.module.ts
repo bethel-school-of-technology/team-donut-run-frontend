@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
+import { NavbarModule } from 'src/app/components/navbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignUpPageRoutingModule
+    SignUpPageRoutingModule,
+    NavbarModule
   ],
-  declarations: [SignUpPage]
+  declarations: [SignUpPage],
 })
 export class SignUpPageModule {}

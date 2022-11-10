@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MyPlacesPageRoutingModule } from './my-places-routing.module';
 
 import { MyPlacesPage } from './my-places.page';
+import { NavbarModule } from 'src/app/components/navbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MyPlacesPageRoutingModule
+    MyPlacesPageRoutingModule,
+    NavbarModule
   ],
-  declarations: [MyPlacesPage]
+  declarations: [MyPlacesPage],
 })
 export class MyPlacesPageModule {}
