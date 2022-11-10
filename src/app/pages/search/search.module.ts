@@ -10,7 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { SearchPageRoutingModule } from './search-routing.module';
 
 import { SearchPage } from './search.page';
-import { NavbarModule } from 'src/app/components/navbar.module';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
 @NgModule({
   imports: [

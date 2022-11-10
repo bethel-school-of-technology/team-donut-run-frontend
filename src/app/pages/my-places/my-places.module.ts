@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyPlacesPageRoutingModule } from './my-places-routing.module';
 
 import { MyPlacesPage } from './my-places.page';
-import { NavbarModule } from 'src/app/components/navbar.module';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
 @NgModule({
   imports: [

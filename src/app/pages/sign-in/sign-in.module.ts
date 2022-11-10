@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignInPageRoutingModule } from './sign-in-routing.module';
 
 import { SignInPage } from './sign-in.page';
-import { NavbarModule } from 'src/app/components/navbar.module';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
 @NgModule({
   imports: [

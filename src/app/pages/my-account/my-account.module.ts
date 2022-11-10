@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyAccountPageRoutingModule } from './my-account-routing.module';
 
 import { MyAccountPage } from './my-account.page';
-import { NavbarModule } from 'src/app/components/navbar.module';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
 @NgModule({
   imports: [
