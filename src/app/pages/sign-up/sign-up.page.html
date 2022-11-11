@@ -5,37 +5,33 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-list>
+    <form (ngSubmit)="signUp()">
       <ion-item>
         <ion-label>First Name</ion-label>
-        <ion-input placeholder="Enter text"></ion-input>
+        <ion-input placeholder="Enter text" type="text" [(ngModel)]="this.newUser.firstName" name="firstName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Last Name</ion-label>
-        <ion-input placeholder="Enter text"></ion-input>
+        <ion-input placeholder="Enter text" type="text" [(ngModel)]="this.newUser.lastName" name="lastName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Zipcode</ion-label>
-        <ion-input type="number" placeholder="00000"></ion-input>
+        <ion-label>Location</ion-label>
+        <ion-input placeholder="Enter text" type="text" [(ngModel)]="this.newUser.location" name="location"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Email</ion-label>
-        <ion-input type="email" placeholder="email@domain.com"></ion-input>
+        <ion-input type="email" placeholder="email@domain.com" [(ngModel)]="this.newUser.email" name="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Username</ion-label>
-        <ion-input type="email" placeholder="Enter text"></ion-input>
+        <ion-input type="text" placeholder="Enter text" [(ngModel)]="this.newUser.username" name="username"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" placeholder="********"></ion-input>
+        <ion-input type="password" placeholder="********" [(ngModel)]="this.newUser.password" name="password"></ion-input>
       </ion-item>
-    </ion-list>
-  </div>
-  <div>
-    <ion-button>Create account</ion-button>
-  </div>
+    <ion-button type="submit">Create account</ion-button>
+    </form>
   <div>
     <p>Already have an account? Sign-In!</p>
     <p>Forgot Password?</p>
