@@ -15,11 +15,11 @@ export class PlaceDetailsPage implements OnInit {
   ngOnInit() {
     //will need to get the current place_id based on the place clicked -- filler string
     this.place_id = 'ChIJletJO1lmZIgRq0UiSZV5AGM';
-    this.findPlaceDetailsById(this.place_id);
+    this.findPlaceDetailsByGooglePlaceId(this.place_id);
   }
 
-  findPlaceDetailsById(place_id) {
-    this.resultsService.getResultsByID(place_id).subscribe((result) => {
+  findPlaceDetailsByGooglePlaceId(place_id) {
+    this.resultsService.getResultsByGooglePlaceId(place_id).subscribe((result) => {
       this.placeDetails = result[0];
       //printing results
       console.log(this.placeDetails);

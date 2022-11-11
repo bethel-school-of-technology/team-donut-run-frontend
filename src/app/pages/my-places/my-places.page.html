@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>myPlaces</ion-title>
+    <ion-title>My Places</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card *ngFor="let place of mySavedPlaces">
+  <ion-card-header>
+    <ion-card-title>{{place.place_id}}
+    </ion-card-title>
+    <p>{{place.name}}</p>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Here's a small text description for the card content. Nothing more, nothing less.
+  </ion-card-content>
+</ion-card>
 
 </ion-content>

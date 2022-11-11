@@ -26,6 +26,13 @@
       "visited": true,
       "userId": 4,
       "createdOn": "01/02/21",
+      "googlePlaceId": "ChIJGVuc4xGGZIgR7fI2E4yqTpU"
+    }, 
+    {
+      "myPlaceId": 5,
+      "visited": true,
+      "userId": 4,
+      "createdOn": "01/01/21",
       "googlePlaceId": "ChIJletJO1lmZIgRq0UiSZV5AGM"
     }
   ],
