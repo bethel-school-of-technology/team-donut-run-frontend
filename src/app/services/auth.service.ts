@@ -21,17 +21,10 @@ export class AuthService {
   }
 
   signIn(username: string, password: string): Observable<any> {
-    let queryParams = new HttpParams();
-    console.log(queryParams);
-    queryParams = queryParams.append('username', username);
-    queryParams = queryParams.append('password', password);
-    return this.http
-      .get(`${this.authBaseUrl}/signin`, { params: queryParams, responseType: 'text' })
-      .pipe(
-        tap((response: any) => {
-          localStorage.setItem('myUserToken', response);
-        })
-      );
+       return this.http.post(`${this.authBaseUrl}/signin`, {username, password}, {responseType: 'text'})
+      .pipe(tap((response: any) => {
+        localStorage.setItem('myUserToken', response);
+      }));
   }
 
   signout(): void {
