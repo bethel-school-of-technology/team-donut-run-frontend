@@ -13,7 +13,8 @@ export class SignUpPage implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   signUp() {
     this.authService.signUp(this.newUser).subscribe(
