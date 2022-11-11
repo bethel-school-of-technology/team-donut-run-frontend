@@ -6,27 +6,29 @@ import { MyPlace } from '../models/my-place';
   providedIn: 'root',
 })
 export class MyPlacesService {
-  dataSource: string = 'http://localhost:3000/places';
+  dataSource: string = 'http://localhost:3000/myplaces';
 
   constructor(private http: HttpClient) {}
 
   getAllPlaces(): Observable<MyPlace[]> {
     return this.http.get<MyPlace[]>(this.dataSource);
   }
-
-  getPlaceByID(id: number): Observable<MyPlace> {
-    return this.http.get<MyPlace>(this.dataSource + '/' + id);
+  getPlacesByUserId(userId: number): Observable<MyPlace[]> {
+    return this.http.get<MyPlace[]>(this.dataSource + '/?userId=' + userId);
   }
-
-  createNewPlace(newPlace: MyPlace): Observable<MyPlace> {
+  getPlaceByGoogleId(googleId: string): Observable<MyPlace> {
+    return this.http.get<MyPlace>(this.dataSource + '/' + googleId);
+  }
+  saveNewPlace(newPlace: MyPlace): Observable<MyPlace> {
     return this.http.post<MyPlace>(this.dataSource, newPlace);
   }
-
-  editPlaceByID(id: number, edittedPlace: MyPlace): Observable<MyPlace> {
-    return this.http.put<MyPlace>(this.dataSource + '/' + id, edittedPlace);
+  editPlaceByPlaceId(
+    placeId: number,
+    editedPlace: MyPlace
+  ): Observable<MyPlace> {
+    return this.http.put<MyPlace>(this.dataSource + '/' + placeId, editedPlace);
   }
-
-  deletePlaceByID(id: number): Observable<any> {
-    return this.http.delete<any>(this.dataSource + '/' + id);
+  deletePlaceByPlaceId(placeId: number): Observable<any> {
+    return this.http.delete<any>(this.dataSource + '/' + placeId);
   }
 }
