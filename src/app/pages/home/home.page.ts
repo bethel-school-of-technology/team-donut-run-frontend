@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Position } from '@capacitor/geolocation';
+import { NavController } from '@ionic/angular';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 
 
@@ -14,7 +15,7 @@ export class HomePage implements OnInit {
   currentLatitude: number = null;
   currentLongitude: number = null;
 
-  constructor(private geoService: GeolocationService) {}
+  constructor(private geoService: GeolocationService, public navCtrl: NavController) {}
 
   ngOnInit() {
     this.getGPS();
@@ -29,7 +30,10 @@ export class HomePage implements OnInit {
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
+
+  SearchPage() {
+    console.log("I am alive in Jesus!")
+    this.navCtrl.navigateForward('search');
+  }
 }
 
-
-// this all is commented out until we preform bugfixes with geolocation
