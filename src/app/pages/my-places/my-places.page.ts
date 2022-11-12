@@ -43,7 +43,7 @@ export class MyPlacesPage implements OnInit {
 
   getPlaceDetailsByGooglePlaceId(googlePlaceId) {
     this.resultsService
-      .getResultsByGooglePlaceId(googlePlaceId)
+      .getSavedResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
         this.mySavedPlaces.push(this.currentPlaceDetails); 
