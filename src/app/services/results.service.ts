@@ -6,6 +6,7 @@ import { PlaceResult } from '../models/place-result';
 
 // import { Loader } from "@googlemaps/js-api-loader"
 
+import {} from 'googlemaps';
 
 @Injectable({
   providedIn: 'root',
@@ -92,7 +93,7 @@ export class ResultsService {
   callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
-        console.log("Results: ", results[i]);
+        console.log("Callback Results: ", results[i]);
         console.log("Status: ", google.maps.places.PlacesServiceStatus);
       }
     }
