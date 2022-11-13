@@ -7,7 +7,16 @@
 <ion-content>
   <!--My Saved Places - found by current UserId-->
   <h2>My Saved Places</h2>
-  <ion-card *ngFor="let place of allSavedPlaces">
+   <ion-card *ngFor="let place of myVisitedPlaces">
+    <ion-card-header>
+      <ion-card-title>{{place.name}} </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+       <p>{{place.overview}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let place of myUnvisitedPlaces">
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
     </ion-card-header>
