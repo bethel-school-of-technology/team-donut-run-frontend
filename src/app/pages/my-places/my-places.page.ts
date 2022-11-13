@@ -17,7 +17,7 @@ export class MyPlacesPage implements OnInit {
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
 
-  //We probably won't need this
+  //We probably won't need this -- commented out code saves this
   allSavedPlaces: PlaceResult[] = [];
   //We will use these
   myVisitedPlaces: PlaceResult[] = [];
@@ -35,7 +35,6 @@ export class MyPlacesPage implements OnInit {
     this.findAllPlacesByUserId(this.currentUserId);
   }
 
-  //get all place-details for this user -- allSavedPlaces array
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
