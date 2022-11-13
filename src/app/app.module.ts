@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './components/navbar/navbar.module';
+// import { GooglePlaceModule } from 'google.maps';
 
 @NgModule({
   declarations: [AppComponent],
