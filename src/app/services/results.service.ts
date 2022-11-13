@@ -31,15 +31,18 @@ export class ResultsService {
 
   // GET / Place Details search (for MyPlaces page)
   // Limited details, return: place_id, name, types
+
+  // This one is used for mock data
   getSavedResultsByGooglePlaceId(googlePlaceId: string): Observable<PlaceResult> {
     return this.http.get<PlaceResult>(
       this.dataSource + '/' + '?place_id=' + googlePlaceId
     );
   }
 
-  getSavedResultsByGooglePlaceId2() {
+  // This one is used for actual Google Places data
+  getSavedResultsByGooglePlaceId2(googlePlaceId: string) {
     var request = {
-      placeId: "",
+      placeId: googlePlaceId,
       fields: ['place_id', 'name', 'types']
     };
 
