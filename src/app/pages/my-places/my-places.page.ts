@@ -13,42 +13,101 @@ export class MyPlacesPage implements OnInit {
   //place details variable
   myPlaceArray: MyPlace[] = [];
   currentUserId: number;
-  mySavedPlaces: PlaceResult[] = [];
+
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
 
-  constructor(private placesService: MyPlacesService, private resultsService: ResultsService) {}
+  allSavedPlaces: PlaceResult[] = [];
+  myVisitedPlaces: PlaceResult[] = [];
+  myUnvisitedPlaces: PlaceResult[] = [];
+
+  constructor(
+    private placesService: MyPlacesService,
+    private resultsService: ResultsService
+  ) {}
 
   ngOnInit() {
-    //get the current userID
+    //get the current userID -- will need to get this from the URL
     this.currentUserId = 4;
+    //get all myPlace results for this user
     this.findAllPlacesByUserId(this.currentUserId);
   }
 
+  //get all place-details for this user -- allSavedPlaces array
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
+      console.log('My Place Results: ', this.myPlaceArray);
       this.getSavedPlaces(this.myPlaceArray);
+      //get all unvisited place-details for this user -- myUnvisitedPlaces array
+      this.getUnvisitedPlacesByUserId(this.myPlaceArray);
+      //get all visited place-details for this user -- myVisitedPlaces array
+      this.getVisitedPlacesByUserId(this.myPlaceArray);
     });
+    console.log('Get Saved Places Result: ', this.allSavedPlaces);
+    console.log('Get Visited Places Result: ', this.myVisitedPlaces);
+    console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
   }
 
   getSavedPlaces(myPlaceArray) {
     for (let i = 0; i <= myPlaceArray.length - 1; i++) {
       this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
       //for each googlePlaceId in the array, call for the place details
-      this.getPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
-    } 
-    console.log('Get Saved Places Result: ', this.mySavedPlaces);
+      this.getAllPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+    }
   }
 
-  getPlaceDetailsByGooglePlaceId(googlePlaceId) {
+  getAllPlaceDetailsByGooglePlaceId(googlePlaceId) {
     this.resultsService
       .getResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
-        this.mySavedPlaces.push(this.currentPlaceDetails); 
-        
+        this.currentPlaceDetails.open_now = result[0].opening_hours.open_now;
+        this.allSavedPlaces.push(this.currentPlaceDetails);
       });
-  } 
+  }
 
+  //get the Visited places based on userId -- result is myVisitedPlaces
+  getVisitedPlacesByUserId(myPlaceArray) {
+    for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
+      let currentPlace = this.myPlaceArray[i];
+      this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
+      if (currentPlace.visited == true) {
+        //for each visited place in the array, call for the place details
+        this.getVisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+      }
+    }
+  }
+
+  //get the Unvisited places based on userId -- result is myUnvisitedPlaces
+  getUnvisitedPlacesByUserId(myPlaceArray) {
+    for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
+      let currentPlace = this.myPlaceArray[i];
+      this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
+      if (currentPlace.visited == false) {
+        //for each visited place in the array, call for the place details
+        this.getUnvisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+      }
+    }
+  }
+
+  getVisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
+    this.resultsService
+      .getResultsByGooglePlaceId(googlePlaceId)
+      .subscribe((result) => {
+        this.currentPlaceDetails = result[0];
+        this.currentPlaceDetails.open_now = result[0].opening_hours.open_now;
+        this.myVisitedPlaces.push(this.currentPlaceDetails);
+      });
+  }
+
+  getUnvisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
+    this.resultsService
+      .getResultsByGooglePlaceId(googlePlaceId)
+      .subscribe((result) => {
+        this.currentPlaceDetails = result[0];
+        this.currentPlaceDetails.open_now = result[0].opening_hours.open_now;
+        this.myUnvisitedPlaces.push(this.currentPlaceDetails);
+      });
+  }
 }
