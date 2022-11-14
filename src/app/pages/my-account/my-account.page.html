@@ -1,9 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>myAccount</ion-title>
-  </ion-toolbar>
+  <app-navbar></app-navbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="Cushion">
+    <ion-title> Account Details</ion-title>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+      <ion-text> <h5> Username: </h5><p> {{username}}</p> </ion-text>
+    </ion-row>
+    <ion-row>
+      
+      <ion-text> <h5> Email:</h5> <p> {{email}}</p></ion-text>
+    </ion-row>
+    <ion-row>
+      <ion-text> <h5>First Name: </h5> <p>{{firstName}}</p></ion-text>
+    </ion-row>
+    <ion-row>
+     
+      <ion-text> <h5> Last Name:</h5> <p> {{lastName}} </p></ion-text>
+    </ion-row>
+    <ion-row>
+ 
+      <ion-text><h5> My Location: </h5> <p>{{location}}</p></ion-text>
+    </ion-row>
+    </ion-grid>
+    </ion-item>
+  </div>
 </ion-content>
