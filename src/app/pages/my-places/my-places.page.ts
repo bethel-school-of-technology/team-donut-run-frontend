@@ -16,9 +16,16 @@ export class MyPlacesPage implements OnInit {
   //place details variable
   myPlaceArray: MyPlace[] = [];
   currentUserId: number;
-  mySavedPlaces: PlaceResult[] = [];
+
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
+
+
+  //We probably won't need this -- commented out code saves this
+  allSavedPlaces: PlaceResult[] = [];
+  //We will use these
+  myVisitedPlaces: PlaceResult[] = [];
+  myUnvisitedPlaces: PlaceResult[] = [];
 
   constructor(
     private placesService: MyPlacesService,
@@ -26,37 +33,77 @@ export class MyPlacesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // get the current userID
-    // this.currentUserId = 4;
-    // this.findAllPlacesByUserId(this.currentUserId);
 
+    //get the current userID -- will need to get this from the URL
+    this.currentUserId = 4;
+    //get all myPlace results for this user
+    this.findAllPlacesByUserId(this.currentUserId);
   }
 
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
-      this.getSavedPlaces(this.myPlaceArray);
+      console.log('My Place Results: ', this.myPlaceArray);
+      //this.getSavedPlaces(this.myPlaceArray);
+      this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
+    //console.log('Get Saved Places Result: ', this.allSavedPlaces);
+    console.log('Get Visited Places Result: ', this.myVisitedPlaces);
+    console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
   }
 
-  getSavedPlaces(myPlaceArray) {
-    for (let i = 0; i <= myPlaceArray.length - 1; i++) {
+  //sorts whether the place has been visited or not
+  sortSavedPlacesByUserId(myPlaceArray) {
+    for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
+      let currentPlace = this.myPlaceArray[i];
       this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
-      //for each googlePlaceId in the array, call for the place details
-      this.getPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+
+      if (currentPlace.visited == true) {
+        //for each visited place in the array, call for the place details
+        this.getVisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+      } else {
+        //for each unvisited place in the array, call for the place details
+        this.getUnvisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+      }
     }
-    console.log('Get Saved Places Result: ', this.mySavedPlaces);
   }
 
-  getPlaceDetailsByGooglePlaceId(googlePlaceId) {
+  getVisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
     this.resultsService
       .getSavedResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
-        this.mySavedPlaces.push(this.currentPlaceDetails);
+
+        //saves place details to myVisitedPlaces array
+        this.myVisitedPlaces.push(this.currentPlaceDetails);
       });
   }
 
-  
+  getUnvisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
+    this.resultsService
+      .getResultsByGooglePlaceId(googlePlaceId)
+      .subscribe((result) => {
+        this.currentPlaceDetails = result[0];
+        //saves place details to myUnvisitedPlaces array
+        this.myUnvisitedPlaces.push(this.currentPlaceDetails);
+      });
+  }
 
+  // getSavedPlaces(myPlaceArray) {
+  //   for (let i = 0; i <= myPlaceArray.length - 1; i++) {
+  //     this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
+  //     //for each googlePlaceId in the array, call for the place details
+  //     this.getAllPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+  //   }
+  // }
+
+  // getAllPlaceDetailsByGooglePlaceId(googlePlaceId) {
+  //   this.resultsService
+  //     .getResultsByGooglePlaceId(googlePlaceId)
+  //     .subscribe((result) => {
+  //       this.currentPlaceDetails = result[0];
+  //       this.currentPlaceDetails.open_now = result[0].opening_hours.open_now;
+  //       this.allSavedPlaces.push(this.currentPlaceDetails);
+  //     });
+  // }
 }

@@ -5,22 +5,37 @@
 </ion-header>
 
 <ion-content>
+  <!--My Saved Places - found by current UserId-->
+  <h2>My Saved Places</h2>
+   <ion-card *ngFor="let place of myVisitedPlaces">
+    <ion-card-header>
+      <ion-card-title>{{place.name}} </ion-card-title>
+    </ion-card-header>
 
-  <ion-card *ngFor="let place of mySavedPlaces">
-  <ion-card-header>
-    <ion-card-title>{{place.place_id}}
-    </ion-card-title>
-    <p>{{place.name}}</p>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
+    <ion-card-content>
+       <p>{{place.overview}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let place of myUnvisitedPlaces">
+    <ion-card-header>
+      <ion-card-title>{{place.name}} </ion-card-title>
+    </ion-card-header>
 
-  <ion-card-content>
-    Here's a small text description for the card content. Nothing more, nothing less.
-  </ion-card-content>
-</ion-card>
+    <ion-card-content>
+       <p>{{place.overview}}</p>
+    </ion-card-content>
+  </ion-card>
 
-<div id="main">
 
-</div>
+  <!--My Visited Places - found by current UserId-->
+  <h2>My Visited Places</h2>
+   <ion-card *ngFor="let place of myVisitedPlaces">
+    <ion-card-header>
+      <ion-card-title>{{place.name}} </ion-card-title>
+    </ion-card-header>
 
+    <ion-card-content>
+       <p>{{place.overview}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
