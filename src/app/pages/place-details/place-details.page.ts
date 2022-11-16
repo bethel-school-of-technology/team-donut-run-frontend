@@ -19,7 +19,7 @@ export class PlaceDetailsPage implements OnInit {
   }
 
   findPlaceDetailsByGooglePlaceId(place_id) {
-    this.resultsService.getResultsByGooglePlaceId(place_id).subscribe((result) => {
+    this.resultsService.getSavedResultsByGooglePlaceId(place_id).subscribe((result) => {
       this.placeDetails = result[0];
       //printing results
       console.log(this.placeDetails);

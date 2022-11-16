@@ -4,6 +4,9 @@ import { PlaceResult } from 'src/app/models/place-result';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
 
+// Connected to the index.d.ts file to override missing module import
+import {} from 'googlemaps';
+
 @Component({
   selector: 'app-my-places',
   templateUrl: './my-places.page.html',
@@ -17,6 +20,7 @@ export class MyPlacesPage implements OnInit {
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
 
+
   //We probably won't need this -- commented out code saves this
   allSavedPlaces: PlaceResult[] = [];
   //We will use these
@@ -29,6 +33,7 @@ export class MyPlacesPage implements OnInit {
   ) {}
 
   ngOnInit() {
+
     //get the current userID -- will need to get this from the URL
     this.currentUserId = 4;
     //get all myPlace results for this user
@@ -53,6 +58,7 @@ export class MyPlacesPage implements OnInit {
     for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
       let currentPlace = this.myPlaceArray[i];
       this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
+
       if (currentPlace.visited == true) {
         //for each visited place in the array, call for the place details
         this.getVisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
@@ -65,9 +71,10 @@ export class MyPlacesPage implements OnInit {
 
   getVisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
     this.resultsService
-      .getResultsByGooglePlaceId(googlePlaceId)
+      .getSavedResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
+
         this.currentPlaceDetails.types = result[0].types[0];
 
         //saves place details to myVisitedPlaces array
