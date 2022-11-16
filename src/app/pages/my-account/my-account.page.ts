@@ -8,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class MyAccountPage implements OnInit {
 
   constructor() { }
+username: string = "bob";
+email:string = "BobTheSlob@gmail.com"
+firstName: string = "frank"
+lastName: string = "Synatra"
+location: string = "Area 51, USA"
 
   ngOnInit() {
   }

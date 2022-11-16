@@ -40,6 +40,7 @@ export class MyPlacesPage implements OnInit {
     this.findAllPlacesByUserId(this.currentUserId);
   }
 
+
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
@@ -74,6 +75,8 @@ export class MyPlacesPage implements OnInit {
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
 
+        this.currentPlaceDetails.types = result[0].types[0];
+
         //saves place details to myVisitedPlaces array
         this.myVisitedPlaces.push(this.currentPlaceDetails);
       });
@@ -84,6 +87,7 @@ export class MyPlacesPage implements OnInit {
       .getResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
+        this.currentPlaceDetails.types = result[0].types[0];
         //saves place details to myUnvisitedPlaces array
         this.myUnvisitedPlaces.push(this.currentPlaceDetails);
       });
