@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PlaceResult } from '../models/place-result';
 
+import {} from 'googlemaps';
+import { GooglePlaceModule } from 'googlemaps';
+// not sure if we need this
+
 @Injectable({
   providedIn: 'root',
 })
