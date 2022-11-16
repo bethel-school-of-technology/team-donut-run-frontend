@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Position } from '@capacitor/geolocation';
 import { PlaceResult } from 'src/app/models/place-result';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
 import SwiperCore, { SwiperOptions } from 'swiper';
 
@@ -9,8 +11,29 @@ import SwiperCore, { SwiperOptions } from 'swiper';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+
+  // To get current geolocation
+  position: Position = null;
+
+  // These are current coordinates being pulled in from the geolocation
+  currentLatitude: number = 35.8416001;
+  currentLongitude: number = -86.8301986;
+
+  // To display data results
   newPlace: PlaceResult = new PlaceResult();
   SearchResults: PlaceResult[] = [];
+
+  // To use to easily switch between mock and API data
+  useAPI: boolean = false;
+
+  // Inputs for API Nearby Search method
+  // For V2, we can let the user choose the radius and number of results?
+  searchType: string = 'restaurant';
+  searchRadius: number = 35000;
+  // searchLimit: number = 3;
+
+
+  // What is this used for? To carousel?
   config: SwiperOptions = {
     slidesPerView: 3,
     spaceBetween: 20,
@@ -25,9 +48,50 @@ export class SearchPage implements OnInit {
     console.log('slide change');
   }
 
-  constructor(private resultsService: ResultsService) { }
+  constructor(private resultsService: ResultsService, private geoService: GeolocationService) { };
 
-  SearchAll() {
+
+  ngOnInit() {
+    // To get current user's geolocation 
+    // this.getGPS();
+
+    // With API data, I don't think there will be anything in ngOnInit
+    // this.searchAll();
+
+    // Or using this...
+    // this.toggleDataSource(this.useAPI);
+
+    // TESTING API
+    // this is not working when also in onit with getGPS
+    // this.nearbySearchByGeolocation(this.currentLatitude, this.currentLongitude, this.searchType, this.searchRadius);
+  }
+
+  getGPS() {
+    this.geoService.getCurrentPosition().subscribe((result) => {
+      this.position = result;
+      this.currentLatitude = this.position.coords.latitude;
+      this.currentLongitude = this.position.coords.longitude;
+      console.log("Current Latitude: " + this.currentLatitude);
+      console.log('Current Longitude: ' + this.currentLongitude);
+    });
+  }
+
+
+  toggleDataSource (useAPI: boolean) {
+    if (useAPI == true) {
+    
+      // use API endpoints
+      
+    } else {
+
+      // use MOCK endpoints
+      
+    }
+  }
+  
+
+  ////////// MOCK -- GET ALL RESULTS //////////
+  searchAll() {
     this.SearchResults = [];
     this.resultsService.getAllResults().subscribe(ReturnedPlaces => {
       this.SearchResults = ReturnedPlaces;
@@ -35,8 +99,47 @@ export class SearchPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.SearchAll();
+  ////////// API -- NEARBY SEARCH RESULTS //////////
+  // GET / Nearby Search (by current geolocation)
+  nearbySearchByGeolocation(lat: number, lng: number, searchType: string, searchRadius: number) {
+
+    var location = new google.maps.LatLng(lat, lng);
+
+    var request = {
+      location: location,
+      radius: searchRadius,
+      type: searchType,
+    };
+
+    let service = new google.maps.places.PlacesService(
+      document.createElement('div')
+    );
+
+    service.nearbySearch(request, callback);
+
+    function callback(results, status) {
+      // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
+
+      let searchLimit = 3;
+      let limitedResults = [];
+
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        // console.log('Status: ', google.maps.places.PlacesServiceStatus);
+        // console.log('Callback Results: ', results);
+
+        // This is limiting the results that we'll use BUT I don't think it's actually limiting the results that are returned (I don't think we can do that)
+        // for (var i = 0; i < searchLimit; i++) {
+        //   // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
+        //   // if (results[i].business_status == 'OPERATIONAL') {
+        //   //   limitedResults.push(results[i]);
+        //   // }
+        //   limitedResults.push(results[i]);
+        // }
+
+        // console.log('Callback Results: ', limitedResults);
+        console.log('Callback Results: ', results);
+      }
+    }
   }
 
 }

@@ -17,6 +17,8 @@ export class ResultsService {
   
   constructor(private http: HttpClient) {}  
 
+  // If we wanted to add the API endopints to the service, could we just initiate the service in the .ts file? Not sure...
+
   ////////////// MOCK DATA TEST ENDPOINTS ////////////////
 
   // GET / Place Details search (for MyPlaces page)
@@ -166,50 +168,50 @@ export class ResultsService {
     }
   }
 
-  // GET / Nearby Search (by current geolocation)
-  nearbySearchByGeolocation(lat: number, lng: number, searchType: string) {
-    // For V2, we can let the user choose the radius
-    let searchRadius: number = 35000;
+  // // GET / Nearby Search (by current geolocation)
+  // nearbySearchByGeolocation(lat: number, lng: number, searchType: string) {
+  //   // For V2, we can let the user choose the radius
+  //   let searchRadius: number = 35000;
 
-    var location = new google.maps.LatLng(lat, lng);
+  //   var location = new google.maps.LatLng(lat, lng);
 
-    var request = {
-      location: location,
-      radius: searchRadius,
-      type: searchType,
-    };
+  //   var request = {
+  //     location: location,
+  //     radius: searchRadius,
+  //     type: searchType,
+  //   };
 
-    let service = new google.maps.places.PlacesService(
-      document.createElement('div')
-    );
+  //   let service = new google.maps.places.PlacesService(
+  //     document.createElement('div')
+  //   );
 
-    service.nearbySearch(request, callback);
+  //   service.nearbySearch(request, callback);
 
-    function callback(results, status) {
-      // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
+  //   function callback(results, status) {
+  //     // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
 
-      // Do we want to decide on this? Or let the user decide? (keeping in mind the cost of the requests)
-      let searchLimit = 3;
+  //     // Do we want to decide on this? Or let the user decide? (keeping in mind the cost of the requests)
+  //     let searchLimit = 3;
 
-      let limitedResults = [];
+  //     let limitedResults = [];
 
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        console.log('Status: ', google.maps.places.PlacesServiceStatus);
-        // console.log('Callback Results: ', results);
+  //     if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //       console.log('Status: ', google.maps.places.PlacesServiceStatus);
+  //       // console.log('Callback Results: ', results);
 
-        // This is limiting the results that we'll use BUT I don't think it's actually limiting the results that are returned (I don't think we can do that)
-        for (var i = 0; i < searchLimit; i++) {
-          // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
-          // if (results[i].business_status == 'OPERATIONAL') {
-          //   limitedResults.push(results[i]);
-          // }
-          limitedResults.push(results[i]);
-        }
+  //       // This is limiting the results that we'll use BUT I don't think it's actually limiting the results that are returned (I don't think we can do that)
+  //       for (var i = 0; i < searchLimit; i++) {
+  //         // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
+  //         // if (results[i].business_status == 'OPERATIONAL') {
+  //         //   limitedResults.push(results[i]);
+  //         // }
+  //         limitedResults.push(results[i]);
+  //       }
 
-        console.log('Callback Results: ', limitedResults);
-      }
-    }
-  }
+  //       console.log('Callback Results: ', limitedResults);
+  //     }
+  //   }
+  // }
 
   // GET / Place Photos (for Place Details page)
   // I think we could combine this with the PlaceDetails request AND maybe with the MyPlace Place Details request if it's that easy??
