@@ -1,40 +1,45 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>My Places</ion-title>
-  </ion-toolbar>
+  <app-navbar></app-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <!--My Saved Places - found by current UserId-->
-  <h2>My Saved Places</h2>
-   <ion-card *ngFor="let place of myVisitedPlaces">
+  <div class="ion-padding-horizontal">
+    <h2>My Saved Places</h2>
+  </div>
+  <ion-card *ngFor="let place of myVisitedPlaces">
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
+      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-       <p>{{place.overview}}</p>
+      <p>{{place.formatted_address}}</p>
     </ion-card-content>
   </ion-card>
   <ion-card *ngFor="let place of myUnvisitedPlaces">
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
+      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-       <p>{{place.overview}}</p>
+      <p>{{place.formatted_address}}</p>
     </ion-card-content>
   </ion-card>
 
   <!--My Visited Places - found by current UserId-->
-  <h2>My Visited Places</h2>
-   <ion-card *ngFor="let place of myVisitedPlaces">
+  <div class="ion-padding-horizontal">
+    <h2>My Visited Places</h2>
+  </div>
+  <ion-card *ngFor="let place of myVisitedPlaces">
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
+      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-       <p>{{place.overview}}</p>
+      <p>{{place.formatted_address}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
