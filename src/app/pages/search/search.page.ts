@@ -5,6 +5,8 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
 import SwiperCore, { SwiperOptions } from 'swiper';
 
+import {} from 'googlemaps';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
@@ -64,6 +66,8 @@ export class SearchPage implements OnInit {
     // TESTING API
     // this is not working when also in onit with getGPS
     // this.nearbySearchByGeolocation(this.currentLatitude, this.currentLongitude, this.searchType, this.searchRadius);
+
+    // this.getApiNearbySearchResults();
   }
 
   getGPS() {
@@ -74,6 +78,13 @@ export class SearchPage implements OnInit {
       console.log("Current Latitude: " + this.currentLatitude);
       console.log('Current Longitude: ' + this.currentLongitude);
     });
+  }
+
+  getApiNearbySearchResults() {
+    this.resultsService.getApiNearbySearchResults().subscribe(results => {
+      this.SearchResults = results;
+      console.log(this.SearchResults);
+    })
   }
 
 
@@ -114,31 +125,41 @@ export class SearchPage implements OnInit {
     let service = new google.maps.places.PlacesService(
       document.createElement('div')
     );
-
+    
     service.nearbySearch(request, callback);
 
-    function callback(results, status) {
+    function callback(results, status)  {
       // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
 
-      let searchLimit = 3;
-      let limitedResults = [];
+      // let searchLimit = 3;
+      let apiResults = [];
 
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         // console.log('Status: ', google.maps.places.PlacesServiceStatus);
         // console.log('Callback Results: ', results);
 
         // This is limiting the results that we'll use BUT I don't think it's actually limiting the results that are returned (I don't think we can do that)
-        // for (var i = 0; i < searchLimit; i++) {
-        //   // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
-        //   // if (results[i].business_status == 'OPERATIONAL') {
-        //   //   limitedResults.push(results[i]);
-        //   // }
-        //   limitedResults.push(results[i]);
-        // }
+        for (var i = 0; i < 3; i++) {
+          // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
+          // if (results[i].business_status == 'OPERATIONAL') {
+          //   limitedResults.push(results[i]);
+          // }
+          // apiResults.push(results[i]);
 
-        // console.log('Callback Results: ', limitedResults);
-        console.log('Callback Results: ', results);
+          let node = document.createTextNode(results[i].name);
+
+          document.getElementById('resultsCard').appendChild(document.createElement('p').appendChild(node));
+        }
+
+        // console.log('Callback Results: ', apiResults);
+        // return apiResults;
+        // let newPlace = new PlaceResult();
+        // newPlace = results[0];
+        // return results;
       }
+      // console.log(apiResults);
+      
+      // return results;
     }
   }
 

@@ -14,10 +14,16 @@ export class ResultsService {
   dataSource: string = 'http://localhost:3000/results';
 
   geocodeUrl: string = "https://geocode.maps.co/search?";
+
+  apiUrl: string = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=35.89872340000001,-86.96240859999999&radius=35000&type=restaurant&key=AIzaSyBAfqHiiucNbsPmmV3hPYaqU_W7ernJ0ms"
   
   constructor(private http: HttpClient) {}  
 
   // If we wanted to add the API endopints to the service, could we just initiate the service in the .ts file? Not sure...
+
+  getApiNearbySearchResults(): Observable<PlaceResult[]> {
+    return this.http.get<PlaceResult[]>(this.apiUrl);
+  }
 
   ////////////// MOCK DATA TEST ENDPOINTS ////////////////
 
