@@ -5,7 +5,8 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
 import SwiperCore, { SwiperOptions } from 'swiper';
 
-import {} from 'googlemaps';
+// import {} from 'googlemaps';
+declare var google;
 
 @Component({
   selector: 'app-search',
@@ -13,6 +14,9 @@ import {} from 'googlemaps';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+
+  // TESTING https://www.techiediaries.com/ionic-geolocation-google-maps-places-api-part-2/
+  places: Array<any> ;
 
   // To get current geolocation
   position: Position = null;
@@ -66,6 +70,7 @@ export class SearchPage implements OnInit {
     // TESTING API
     // this is not working when also in onit with getGPS
     // this.nearbySearchByGeolocation(this.currentLatitude, this.currentLongitude, this.searchType, this.searchRadius);
+    this.setVariables(this.currentLatitude, this.currentLongitude);
 
     // this.getApiNearbySearchResults();
   }
@@ -80,6 +85,42 @@ export class SearchPage implements OnInit {
     });
   }
 
+  // TESTING IONIC TUTORIAL
+  getRestaurants(latLng) {
+    var service = new google.maps.places.PlacesService(document.createElement('div'));
+
+    let request = {
+      location : latLng,
+      radius : 8047 ,
+      types: ["restaurant"]
+  };
+
+  return new Promise((resolve,reject)=>{
+    service.nearbySearch(request,function(results,status){
+        if(status === google.maps.places.PlacesServiceStatus.OK)
+        {
+            resolve(results);    
+        }else
+        {
+            reject(status);
+        }
+
+    }); 
+  });
+  }
+
+  setVariables(lat, long) {
+    let latLng = new google.maps.LatLng(lat, long);
+
+    this.getRestaurants(latLng).then((results : Array<any>) => {
+      this.places = results;
+      console.log(this.places);
+    }, (status) => console.log(status));
+  }
+
+  
+  
+  // TESTING IF WE COULD USE HTTP -- NOPE
   getApiNearbySearchResults() {
     this.resultsService.getApiNearbySearchResults().subscribe(results => {
       this.SearchResults = results;
@@ -139,17 +180,23 @@ export class SearchPage implements OnInit {
         // console.log('Callback Results: ', results);
 
         // This is limiting the results that we'll use BUT I don't think it's actually limiting the results that are returned (I don't think we can do that)
-        for (var i = 0; i < 3; i++) {
+        // for (var i = 0; i < 3; i++) {
           // How to handle here if "business_status" is not 'operational'? This doesn't work for some reason.
           // if (results[i].business_status == 'OPERATIONAL') {
           //   limitedResults.push(results[i]);
           // }
           // apiResults.push(results[i]);
 
-          let node = document.createTextNode(results[i].name);
+          let node1 = document.createTextNode(results[0].name);
+          let node2 = document.createTextNode(results[1].name);
+          let node3 = document.createTextNode(results[2].name);
 
-          document.getElementById('resultsCard').appendChild(document.createElement('p').appendChild(node));
-        }
+          document.getElementById('resultsCard1').appendChild(document.createElement('p').appendChild(node1));
+
+          document.getElementById('resultsCard2').appendChild(document.createElement('p').appendChild(node2));
+
+          document.getElementById('resultsCard3').appendChild(document.createElement('p').appendChild(node3));
+        // }
 
         // console.log('Callback Results: ', apiResults);
         // return apiResults;

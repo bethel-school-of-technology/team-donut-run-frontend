@@ -54,13 +54,16 @@
   </ion-grid>
 
   <div id="main">
-    <ion-card id="resultsCard">
+    <ion-card id="resultsCard1" *ngFor="let place of places">
+      <h3>{{place.name}}</h3>
+    </ion-card>
+    <!-- <ion-card id="resultsCard2">
       
     </ion-card>
+    <ion-card id="resultsCard3">
+      
+    </ion-card> -->
 
   </div>
-
-
-
 
 </ion-content>

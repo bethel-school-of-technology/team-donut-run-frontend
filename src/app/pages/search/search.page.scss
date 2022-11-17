@@ -17,3 +17,14 @@ ion-button[shape=circle] {
 .Btn_Type{
     margin: 0px 10px;
 }
+
+page-home {
+    .scroll {
+        height: 100%
+    }
+
+    #map {
+        width: 100%;
+        height: 40%;
+    }
+} 
