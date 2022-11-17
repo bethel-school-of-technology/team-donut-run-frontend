@@ -27,3 +27,10 @@
 
 @import "swiper/scss";
 @import "swiper/scss/free-mode";
+
+// Adds a new shape too ion btns
+ion-button[shape=circle] {
+    --border-radius: 50%;
+    width: 56px;
+    height: 56px;
+}

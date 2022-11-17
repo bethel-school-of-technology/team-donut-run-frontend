@@ -1,15 +1,43 @@
-<ion-toolbar color="primary">
 
+  <div class="Background">
+<ion-grid>
+ 
   <ion-row>
 
-    <div (click)="HomePage()" >
-      <img class="logo" src="assets/logo.svg">
-    </div>
+    <ion-col size="2"  size-Md="1">
+      <div class="dropdown">
+        <button class="dropbtn">
+          <ion-icon name="menu" color="dark" size="medium"></ion-icon>
+        </button>
+        <div class="dropdown-content">
+          <a (click)="ProfilePage()">My Profile</a>
+          <a (click)="MyPlacesPage()">My Places</a>
+          <a (click)="SignInPage()">Sign In</a>
+        </div>
+      </div>
+    </ion-col>
 
-
-      <ion-title>RexFinder</ion-title>
-
+    <ion-col >
+      <div (click)="HomePage()">
+        <img class="logo" src="assets/logo.svg">
+       
+      </div>
+      <div (click)="HomePage()"> <ion-title>
+        <h1 class="Title">
+        REXFINDER
+        </h1>
+      </ion-title></div>
+  
+  
+     
+    </ion-col>
+   <ion-col size="1">
+    <ion-button shape="circle" class="Search">
+    <ion-icon size="large" color="tertiary" name="search"></ion-icon>
+  </ion-button>
+   </ion-col>
+   <ion-col size="1"></ion-col>
   </ion-row>
- 
-</ion-toolbar>
 
+</ion-grid>
+</div> 

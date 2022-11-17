@@ -16,4 +16,19 @@ export class NavbarComponent implements OnInit {
     console.log("I am alive in Jesus!")
     this.navCtrl.navigateForward('home');
   }
+    
+  ProfilePage(){
+    console.log("I am alive in Jesus!")
+    this.navCtrl.navigateForward('my-account');
+  }
+    
+  MyPlacesPage(){
+    console.log("I am alive in Jesus!")
+    this.navCtrl.navigateForward('my-places');
+  }
+   
+  SignInPage(){
+    console.log("I am alive in Jesus!")
+    this.navCtrl.navigateForward('sign-in');
+  }
 }
