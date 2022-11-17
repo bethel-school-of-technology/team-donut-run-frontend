@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SwiperModule } from 'swiper/angular';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,7 +16,8 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     MyPlacesPageRoutingModule,
-    NavbarModule
+    NavbarModule,
+    SwiperModule,
   ],
   declarations: [MyPlacesPage],
 })
