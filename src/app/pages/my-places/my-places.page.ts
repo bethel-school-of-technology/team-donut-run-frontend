@@ -84,7 +84,7 @@ export class MyPlacesPage implements OnInit {
 
   getUnvisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
     this.resultsService
-      .getResultsByGooglePlaceId(googlePlaceId)
+      .getSavedResultsByGooglePlaceId(googlePlaceId)
       .subscribe((result) => {
         this.currentPlaceDetails = result[0];
         this.currentPlaceDetails.types = result[0].types[0];
