@@ -16,6 +16,10 @@ declare var google;
 })
 export class SearchPage implements OnInit {
 
+  // To use to easily switch between mock and API data
+  // TRUE = using Google Data (so, use FALSE most of the time)
+  useAPI: boolean = false;
+
   // To get current geolocation
   position: Position = null;
 
@@ -27,15 +31,11 @@ export class SearchPage implements OnInit {
   // newPlace: PlaceResult = new PlaceResult();
   searchResults: Array<PlaceResult>;
 
-  // To use to easily switch between mock and API data
-  useAPI: boolean = true;
-
   // Inputs for API Nearby Search method
   // For V2, we can let the user choose the radius and number of results?
   searchType: string = 'restaurant';
-  searchRadius: number = 35000; // this is in meters
+  searchRadius: number = 50000; // this is in meters
   // searchLimit: number = 3;
-
 
   // These are the current categories we are going to allow the user to search by
   categoryTypes: Type[] = [
@@ -58,6 +58,7 @@ export class SearchPage implements OnInit {
     { id: 7, type: 'shoe_store', name: 'footsteps-outline', selected: false },
     { id: 8, type: 'shopping_mall', name: 'cart-outline', selected: false },
     { id: 9, type: 'zoo', name: 'paw-outline', selected: false },
+    { id: 9, type: 'concert', name: 'musical-notes-outline', selected: false },
   ];
   selectedType?: Type;
 
@@ -105,7 +106,7 @@ export class SearchPage implements OnInit {
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
-      this.setSearchResults(this.currentLatitude, this.currentLongitude, this.searchType, this.searchRadius);
+      this.setSearchResults(this.currentLatitude, this.currentLongitude, this.selectedType.type, this.searchRadius);
 
     } else {
       // use MOCK endpoints
@@ -123,18 +124,22 @@ export class SearchPage implements OnInit {
 
     let request = {
       location: latLng,
+      // rankBy: 'distance', // Not sure if this is working
       radius: searchRadius,
-      types: [searchType],
-      // rankby: 'distance', // Not sure if this is working
+      // types: [searchType],
+      keyword: searchType
+      // We may want to pivot to keyword since more results may appear?
     };
 
     return new Promise((resolve, reject) => {
       service.nearbySearch(request, function (results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           resolve(results);
+          // console.log("Search Type: ", searchType);
         } else {
           reject(status);
           console.log('Nearby Search error: ', status);
+          // If this yields "ZERO_RESULTS", we may need to set that to a variable to display something else on the page (like a donut shop?!)
         }
       });
     });
@@ -149,14 +154,13 @@ export class SearchPage implements OnInit {
         // Where/when do we limit the number of results we want to display?
         this.searchResults = results;
         console.log("Search Results: ", this.searchResults);
+        // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating 
 
         for (let i = 0; i < 3; i++) {
           results[i].photos &&
             results[i].photos.forEach(photo => {
             this.searchResults[i].photo_reference = photo.getUrl({ maxWidth: 500, maxHeight: 500 });
             // We may also need to add the html_attributions here and to the model as well
-
-          // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating 
           });
         }
       },
@@ -173,6 +177,7 @@ export class SearchPage implements OnInit {
     });
   }
 
+  // To set the category from the icon click on the search page
   onCategorySelect(selectedType: Type): void {
     if (this.selectedType == undefined) {
       this.selectedType = selectedType;
