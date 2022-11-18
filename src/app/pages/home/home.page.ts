@@ -32,7 +32,6 @@ export class HomePage implements OnInit {
   }
 
   SearchPage() {
-    console.log("I am alive in Jesus!")
     this.navCtrl.navigateForward('search');
   }
 }
