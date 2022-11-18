@@ -4,7 +4,6 @@ import { PlaceResult } from 'src/app/models/place-result';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
 import { SwiperOptions } from 'swiper';
-import { Position } from '@capacitor/geolocation';
 import { Type } from 'src/app/models/type';
 
 // import {} from 'googlemaps'; // Not sure if this is needed
@@ -29,7 +28,7 @@ export class SearchPage implements OnInit {
   searchResults: Array<PlaceResult>;
 
   // To use to easily switch between mock and API data
-  useAPI: boolean = false;
+  useAPI: boolean = true;
 
   // Inputs for API Nearby Search method
   // For V2, we can let the user choose the radius and number of results?
@@ -172,6 +171,7 @@ export class SearchPage implements OnInit {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
     });
+  }
 
   onCategorySelect(selectedType: Type): void {
     if (this.selectedType == undefined) {
