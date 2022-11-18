@@ -18,16 +18,27 @@ export class SearchPage implements OnInit {
   currentLongitude: number = null;
   newPlace: PlaceResult = new PlaceResult();
   searchResults: PlaceResult[] = [];
+  //These are the current categories we are going to allow the user to search by
   categoryTypes: Type[] = [
-    { id: 1, type: 'tourist_attraction', name: 'rocket-outline' },
-    { id: 2, type: 'amusement_park', name: 'people-outline' },
-    { id: 3, type: 'restaurant', name: 'restaurant-outline' },
-    { id: 4, type: 'bowling_alley', name: 'tennisball-outline' },
-    { id: 5, type: 'movie_theater', name: 'ticket-outline' },
-    { id: 6, type: 'spa', name: 'bug-outline' },
-    { id: 7, type: 'shoe_store', name: 'footsteps-outline' },
-    { id: 8, type: 'shopping_mall', name: 'cart-outline' },
-    { id: 9, type: 'zoo', name: 'paw-outline' },
+    {
+      id: 1,
+      type: 'tourist_attraction',
+      name: 'rocket-outline',
+      selected: false,
+    },
+    { id: 2, type: 'amusement_park', name: 'people-outline', selected: false },
+    { id: 3, type: 'restaurant', name: 'restaurant-outline', selected: false },
+    {
+      id: 4,
+      type: 'bowling_alley',
+      name: 'tennisball-outline',
+      selected: false,
+    },
+    { id: 5, type: 'movie_theater', name: 'ticket-outline', selected: false },
+    { id: 6, type: 'spa', name: 'bug-outline', selected: false },
+    { id: 7, type: 'shoe_store', name: 'footsteps-outline', selected: false },
+    { id: 8, type: 'shopping_mall', name: 'cart-outline', selected: false },
+    { id: 9, type: 'zoo', name: 'paw-outline', selected: false },
   ];
   selectedType?: Type;
 
@@ -45,7 +56,7 @@ export class SearchPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getGPS();
+    this.getCurrentLocation();
     this.SearchAll();
   }
 
@@ -61,11 +72,11 @@ export class SearchPage implements OnInit {
     this.searchResults = [];
     this.resultsService.getAllResults().subscribe((ReturnedPlaces) => {
       this.searchResults = ReturnedPlaces;
-      console.log(ReturnedPlaces);
+      console.log('Search Results: ', ReturnedPlaces);
     });
   }
 
-  getGPS() {
+  getCurrentLocation() {
     this.geoService.getCurrentPosition().subscribe((result) => {
       this.position = result;
       this.currentLatitude = this.position.coords.latitude;
@@ -75,8 +86,16 @@ export class SearchPage implements OnInit {
     });
   }
 
-  onSelect(type: Type): void {
-    this.selectedType = type;
-    console.log(this.selectedType.type);
+  onCategorySelect(selectedType: Type): void {
+    if (this.selectedType == undefined) {
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    } else {
+      this.selectedType.selected = false;
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    }
   }
 }

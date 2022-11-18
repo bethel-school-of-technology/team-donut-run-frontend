@@ -9,7 +9,7 @@
     <h2>Select a category</h2>
     <ion-row>
         <div *ngFor="let category of categoryTypes">
-        <ion-button class="Btn_Type" color="secondary" shape="circle" (click)="onSelect(category)">
+        <ion-button [class.highlight]="category.selected == true" class="Btn_Type" color="secondary" shape="circle" (click)="onCategorySelect(category)">
           <ion-icon
             size="large"
             color="light"
