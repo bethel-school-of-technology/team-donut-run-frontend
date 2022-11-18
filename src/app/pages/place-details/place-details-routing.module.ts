@@ -6,7 +6,7 @@ import { PlaceDetailsPage } from './place-details.page';
 const routes: Routes = [
   {
     path: '',
-    component: PlaceDetailsPage
+    component: PlaceDetailsPage,
   }
 ];
 

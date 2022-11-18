@@ -18,13 +18,6 @@ ion-button[shape=circle] {
     margin: 0px 10px;
 }
 
-page-home {
-    .scroll {
-        height: 100%
-    }
-
-    #map {
-        width: 100%;
-        height: 40%;
-    }
-} 
+.highlight {
+    border: solid 2px #032b3d ! important;
+}

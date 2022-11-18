@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-places/my-places.module').then( m => m.MyPlacesPageModule)
   },
   {
-    path: 'place-details',
+    path: 'place-details/:id',
     loadChildren: () => import('./pages/place-details/place-details.module').then( m => m.PlaceDetailsPageModule)
   },
   {

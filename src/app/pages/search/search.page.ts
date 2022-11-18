@@ -3,7 +3,9 @@ import { Position } from '@capacitor/geolocation';
 import { PlaceResult } from 'src/app/models/place-result';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
-import SwiperCore, { SwiperOptions } from 'swiper';
+import { SwiperOptions } from 'swiper';
+import { Position } from '@capacitor/geolocation';
+import { Type } from 'src/app/models/type';
 
 // import {} from 'googlemaps'; // Not sure if this is needed
 declare var google;
@@ -35,7 +37,32 @@ export class SearchPage implements OnInit {
   searchRadius: number = 35000; // this is in meters
   // searchLimit: number = 3;
 
-  // What is this used for? To carousel?
+
+  // These are the current categories we are going to allow the user to search by
+  categoryTypes: Type[] = [
+    {
+      id: 1,
+      type: 'tourist_attraction',
+      name: 'rocket-outline',
+      selected: false,
+    },
+    { id: 2, type: 'amusement_park', name: 'people-outline', selected: false },
+    { id: 3, type: 'restaurant', name: 'restaurant-outline', selected: false },
+    {
+      id: 4,
+      type: 'bowling_alley',
+      name: 'tennisball-outline',
+      selected: false,
+    },
+    { id: 5, type: 'movie_theater', name: 'ticket-outline', selected: false },
+    { id: 6, type: 'spa', name: 'bug-outline', selected: false },
+    { id: 7, type: 'shoe_store', name: 'footsteps-outline', selected: false },
+    { id: 8, type: 'shopping_mall', name: 'cart-outline', selected: false },
+    { id: 9, type: 'zoo', name: 'paw-outline', selected: false },
+  ];
+  selectedType?: Type;
+
+ // Used for carousel (which we don't need on the search page)
   config: SwiperOptions = {
     slidesPerView: 3,
     spaceBetween: 20,
@@ -43,26 +70,28 @@ export class SearchPage implements OnInit {
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
-  onSwiper([swiper]) {
-    console.log(swiper);
-  }
-  onSlideChange() {
-    console.log('slide change');
-  }
 
   constructor(
     private resultsService: ResultsService,
     private geoService: GeolocationService
   ) {}
-
+  
   ngOnInit() {
     // To get current user's geolocation on page load
-    this.getGPS();
-    
+    this.getCurrentLocation();
   }
 
+  onSwiper([swiper]) {
+    console.log(swiper);
+  }
+
+  onSlideChange() {
+    console.log('slide change');
+  }
+
+
   // To get current user's geolocation to use in Nearby Search
-  getGPS() {
+  getCurrentLocation() {
     this.geoService.getCurrentPosition().subscribe((result) => {
       this.position = result;
       this.currentLatitude = this.position.coords.latitude;
@@ -71,6 +100,7 @@ export class SearchPage implements OnInit {
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
+  
 
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
@@ -142,5 +172,17 @@ export class SearchPage implements OnInit {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
     });
+
+  onCategorySelect(selectedType: Type): void {
+    if (this.selectedType == undefined) {
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    } else {
+      this.selectedType.selected = false;
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    }
   }
 }

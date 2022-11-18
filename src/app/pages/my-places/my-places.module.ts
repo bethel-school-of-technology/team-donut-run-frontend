@@ -15,7 +15,7 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     MyPlacesPageRoutingModule,
-    NavbarModule
+    NavbarModule,
   ],
   declarations: [MyPlacesPage],
 })
