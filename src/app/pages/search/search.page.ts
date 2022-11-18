@@ -17,7 +17,8 @@ declare var google;
 export class SearchPage implements OnInit {
 
   // To use to easily switch between mock and API data
-  useAPI: boolean = true;
+  // TRUE = using Google Data (so, use FALSE most of the time)
+  useAPI: boolean = false;
 
   // To get current geolocation
   position: Position = null;
