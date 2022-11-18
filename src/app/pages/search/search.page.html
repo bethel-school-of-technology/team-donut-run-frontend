@@ -8,6 +8,14 @@
   <ion-grid>
     <h2>Select a category</h2>
     <ion-row>
+
+      <ion-button class="Btn_Type" color="primary" (click)="toggleDataSource()">
+        Search
+      </ion-button>
+   
+    </ion-row>
+
+    <ion-row>
         <div *ngFor="let category of categoryTypes">
         <ion-button [class.highlight]="category.selected == true" class="Btn_Type" color="secondary" shape="circle" (click)="onCategorySelect(category)">
           <ion-icon
@@ -31,7 +39,7 @@
         <ion-card>
           <img
             alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
+            src="{{place.photo_reference}}"
           />
           <ion-card-header>
             <ion-card-title>{{place.name}}</ion-card-title>
@@ -45,4 +53,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
