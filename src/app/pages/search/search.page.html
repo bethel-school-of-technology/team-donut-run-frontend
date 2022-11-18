@@ -3,57 +3,46 @@
 </ion-header>
 
 <ion-content>
-
   <ion-searchbar placeholder="Search by Zipcode"></ion-searchbar>
-  
-  <ion-grid>
 
+  <ion-grid>
+    <h2>Select a category</h2>
     <ion-row>
-      <div class="Center">
-      <ion-button  class="Btn_Type" color="secondary" shape="circle" > 
-        <ion-icon size="large" color="light" name="fast-food-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="Btn_Type" color="secondary" shape="circle">
-        <ion-icon size="large" color="light" name="rocket-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="Btn_Type" color="secondary" shape="circle">
-        <ion-icon size="large" color="light" name="ticket-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="Btn_Type" color="secondary" shape="circle">
-        <ion-icon size="large" color="light" name="bug-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="Btn_Type" color="secondary" shape="circle">
-        <ion-icon size="large" color="light" name="bonfire-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="Btn_Type" color="secondary" shape="circle">
-        <ion-icon size="large" color="light" name="footsteps-outline"></ion-icon>
-      </ion-button>
-   
-    </div>
+        <div *ngFor="let category of categoryTypes">
+        <ion-button [class.highlight]="category.selected == true" class="Btn_Type" color="secondary" shape="circle" (click)="onCategorySelect(category)">
+          <ion-icon
+            size="large"
+            color="light"
+            name={{category.name}}
+          ></ion-icon>
+        </ion-button>
+      </div>
     </ion-row>
 
     <ion-row>
-  
-       <ion-col  size="6" size-lg="6" size-xs="12" *ngFor="let Place of SearchResults" swiperSlide > 
-          <ion-card>
+      <ion-col
+        size="6"
+        size-lg="6"
+        size-xs="12"
+        *ngFor="let place of searchResults"
+        [routerLink]="['/place-details', place.place_id]"
+        swiperSlide
+      >
+        <ion-card>
+          <img
+            alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          />
+          <ion-card-header>
+            <ion-card-title>{{place.name}}</ion-card-title>
+          </ion-card-header>
 
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-            <ion-card-header>
-              <ion-card-title>{{Place.name}}</ion-card-title>
-            </ion-card-header>
-
-            <ion-card-content>
-              <ion-card-subtitle>{{Place.formatted_address}}</ion-card-subtitle>
-              {{Place.rating}} <ion-icon name="star"></ion-icon>
-            </ion-card-content>
-          </ion-card>
+          <ion-card-content>
+            <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle>
+            {{place.rating}} <ion-icon name="star"></ion-icon>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
- 
-   
     </ion-row>
   </ion-grid>
-
-
-
-
 </ion-content>
