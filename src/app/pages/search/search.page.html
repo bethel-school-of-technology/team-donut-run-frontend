@@ -28,23 +28,27 @@
       <ion-button class="Btn_Type" color="secondary" shape="circle">
         <ion-icon size="large" color="light" name="footsteps-outline"></ion-icon>
       </ion-button>
+
+      <ion-button class="Btn_Type" color="primary" (click)="toggleDataSource()">
+        Search
+      </ion-button>
    
     </div>
     </ion-row>
 
     <ion-row>
   
-       <ion-col  size="6" size-lg="6" size-xs="12" *ngFor="let Place of SearchResults" swiperSlide > 
+       <ion-col  size="6" size-lg="6" size-xs="12" *ngFor="let place of searchResults" swiperSlide > 
           <ion-card>
 
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+            <img alt="Silhouette of mountains" src="{{place.photo_reference}}" />
             <ion-card-header>
-              <ion-card-title>{{Place.name}}</ion-card-title>
+              <ion-card-title>{{place.name}}</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
-              <ion-card-subtitle>{{Place.formatted_address}}</ion-card-subtitle>
-              {{Place.rating}} <ion-icon name="star"></ion-icon>
+              <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle>
+              {{place.rating}} <ion-icon name="star"></ion-icon>
             </ion-card-content>
           </ion-card>
       </ion-col>
@@ -53,17 +57,6 @@
     </ion-row>
   </ion-grid>
 
-  <div id="main">
-    <ion-card id="resultsCard1" *ngFor="let place of places">
-      <h3>{{place.name}}</h3>
-    </ion-card>
-    <!-- <ion-card id="resultsCard2">
-      
-    </ion-card>
-    <ion-card id="resultsCard3">
-      
-    </ion-card> -->
 
-  </div>
 
 </ion-content>
