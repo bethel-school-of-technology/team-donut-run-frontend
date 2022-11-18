@@ -110,7 +110,7 @@ export class SearchPage implements OnInit {
 
     } else {
       // use MOCK endpoints
-      this.searchAll();
+      this.mockSearchAll();
     }
   }
 
@@ -170,7 +170,7 @@ export class SearchPage implements OnInit {
 
 
   ////////// MOCK -- GET ALL RESULTS //////////
-  searchAll() {
+  mockSearchAll() {
     this.resultsService.getAllResults().subscribe((ReturnedPlaces) => {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
