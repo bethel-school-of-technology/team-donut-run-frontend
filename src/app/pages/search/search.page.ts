@@ -15,7 +15,6 @@ declare var google;
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
-
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
   useAPI: boolean = false;
@@ -41,28 +40,29 @@ export class SearchPage implements OnInit {
   categoryTypes: Type[] = [
     {
       id: 1,
-      type: 'tourist_attraction',
+      type: 'Tourist Attraction',
       name: 'rocket-outline',
       selected: false,
     },
-    { id: 2, type: 'amusement_park', name: 'people-outline', selected: false },
-    { id: 3, type: 'restaurant', name: 'restaurant-outline', selected: false },
+    { id: 2, type: 'Amusement Park', name: 'people-outline', selected: false },
+    { id: 3, type: 'Restaurant', name: 'restaurant-outline', selected: false },
     {
       id: 4,
-      type: 'bowling_alley',
+      type: 'Bowling Alley',
       name: 'tennisball-outline',
       selected: false,
     },
-    { id: 5, type: 'movie_theater', name: 'ticket-outline', selected: false },
-    { id: 6, type: 'spa', name: 'bug-outline', selected: false },
-    { id: 7, type: 'shoe_store', name: 'footsteps-outline', selected: false },
-    { id: 8, type: 'shopping_mall', name: 'cart-outline', selected: false },
-    { id: 9, type: 'zoo', name: 'paw-outline', selected: false },
-    { id: 9, type: 'concert', name: 'musical-notes-outline', selected: false },
+    { id: 5, type: 'Movie Theater', name: 'ticket-outline', selected: false },
+    { id: 6, type: 'Spa', name: 'bug-outline', selected: false }
+    //{ id: 7, type: 'Shoe Store', name: 'footsteps-outline', selected: false },
+    //{ id: 8, type: 'Concert', name: 'musical-notes-outline', selected: false }
+    //{ id: 9, type: 'Shopping Mall', name: 'cart-outline', selected: false },
+    //{ id: 10, type: 'Zoo', name: 'paw-outline', selected: false },
+    //{ id: 11, type: 'Concert', name: 'musical-notes-outline', selected: false },
   ];
   selectedType?: Type;
 
- // Used for carousel (which we don't need on the search page)
+  // Used for carousel (which we don't need on the search page)
   config: SwiperOptions = {
     slidesPerView: 3,
     spaceBetween: 20,
@@ -75,7 +75,7 @@ export class SearchPage implements OnInit {
     private resultsService: ResultsService,
     private geoService: GeolocationService
   ) {}
-  
+
   ngOnInit() {
     // To get current user's geolocation on page load
     this.getCurrentLocation();
@@ -89,7 +89,6 @@ export class SearchPage implements OnInit {
     console.log('slide change');
   }
 
-
   // To get current user's geolocation to use in Nearby Search
   getCurrentLocation() {
     this.geoService.getCurrentPosition().subscribe((result) => {
@@ -100,14 +99,17 @@ export class SearchPage implements OnInit {
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
-  
 
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
-      this.setSearchResults(this.currentLatitude, this.currentLongitude, this.selectedType.type, this.searchRadius);
-
+      this.setSearchResults(
+        this.currentLatitude,
+        this.currentLongitude,
+        this.selectedType.type,
+        this.searchRadius
+      );
     } else {
       // use MOCK endpoints
       this.searchAll();
@@ -127,7 +129,7 @@ export class SearchPage implements OnInit {
       // rankBy: 'distance', // Not sure if this is working
       radius: searchRadius,
       // types: [searchType],
-      keyword: searchType
+      keyword: searchType,
       // We may want to pivot to keyword since more results may appear?
     };
 
@@ -153,21 +155,23 @@ export class SearchPage implements OnInit {
       (results: Array<any>) => {
         // Where/when do we limit the number of results we want to display?
         this.searchResults = results;
-        console.log("Search Results: ", this.searchResults);
-        // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating 
+        console.log('Search Results: ', this.searchResults);
+        // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating
 
         for (let i = 0; i < 3; i++) {
           results[i].photos &&
-            results[i].photos.forEach(photo => {
-            this.searchResults[i].photo_reference = photo.getUrl({ maxWidth: 500, maxHeight: 500 });
-            // We may also need to add the html_attributions here and to the model as well
-          });
+            results[i].photos.forEach((photo) => {
+              this.searchResults[i].photo_reference = photo.getUrl({
+                maxWidth: 500,
+                maxHeight: 500,
+              });
+              // We may also need to add the html_attributions here and to the model as well
+            });
         }
       },
-      (status) => console.log("Status: ", status)
+      (status) => console.log('Status: ', status)
     );
   }
-
 
   ////////// MOCK -- GET ALL RESULTS //////////
   searchAll() {
@@ -182,12 +186,14 @@ export class SearchPage implements OnInit {
     if (this.selectedType == undefined) {
       this.selectedType = selectedType;
       this.selectedType.selected = true;
-      console.log('Selected type: ', this.selectedType.type);
+      this.searchType = selectedType.type;
+      console.log('Selected type: ', this.searchType);
     } else {
       this.selectedType.selected = false;
       this.selectedType = selectedType;
       this.selectedType.selected = true;
-      console.log('Selected type: ', this.selectedType.type);
+      this.searchType = selectedType.type;
+      console.log('Selected type: ', this.searchType);
     }
   }
 }
