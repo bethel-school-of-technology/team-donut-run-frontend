@@ -9,7 +9,7 @@ export class PlaceResult {
   website?: string;
   overview?: string;
   photos?: [];
-  photo_reference: string;
+  photo_reference?: string;
   business_status?: string;
 
   constructor(
