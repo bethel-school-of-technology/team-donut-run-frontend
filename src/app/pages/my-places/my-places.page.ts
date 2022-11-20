@@ -187,6 +187,7 @@ export class MyPlacesPage implements OnInit {
 
   ////////// GOOGLE API -- GET MY PLACES & DETAILS //////////
   // This invokes the getDetails call from the Google Places API
+  // This could technically be placed into the Results Service if we wanted to (would probably need to rename for the MyPlaces cards)
   getAPIPlaceDetails(googlePlaceId: string) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')

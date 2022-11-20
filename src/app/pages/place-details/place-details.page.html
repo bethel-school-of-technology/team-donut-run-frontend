@@ -13,7 +13,7 @@
     ></ion-button>
     <img
       alt="Place Details Image"
-      src="https://www.trolleytours.com/wp-content/uploads/2016/06/nashville-ryman-auditorium.jpg"
+      src="{{photoLinkArray[0]}}"
     />
     <ion-card-header class="ion-padding-horizontal">
       <ion-card-title>{{this.placeDetails.name}}</ion-card-title>
@@ -22,6 +22,8 @@
 
     <ion-card-content>
       <p>{{this.placeDetails.formatted_address}}</p>
+      <br>
+      <p>{{placeOverview}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
