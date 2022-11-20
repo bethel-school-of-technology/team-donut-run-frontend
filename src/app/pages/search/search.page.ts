@@ -128,7 +128,8 @@ export class SearchPage implements OnInit {
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
   // GET / Nearby Search (by current geolocation)
-  // This calls the function from the Google API to get the results in a Promise
+  // This calls the function from the Google API to get the results in a Promise  
+  // This could technically be placed into the Results Service if we wanted to 
   nearbySearchByGeolocation(latLng, searchType, searchRadius) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')
