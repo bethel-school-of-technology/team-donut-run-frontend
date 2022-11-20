@@ -100,25 +100,36 @@ export class SearchPage implements OnInit {
     });
   }
 
+  // To set the category from the icon click on the search page
+  onCategorySelect(selectedType: Type): void {
+    if (this.selectedType == undefined) {
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    } else {
+      this.selectedType.selected = false;
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    }
+  }
+
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
-      this.setSearchResults(
-        this.currentLatitude,
-        this.currentLongitude,
-        this.selectedType.type,
-        this.searchRadius
-      );
+      this.setSearchResults(this.currentLatitude, this.currentLongitude, this.selectedType.type, this.searchRadius);
+
     } else {
       // use MOCK endpoints
-      this.searchAll();
+      this.mockSearchAll();
     }
   }
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
   // GET / Nearby Search (by current geolocation)
-  // This calls the function from the Google API to get the results in a Promise
+  // This calls the function from the Google API to get the results in a Promise  
+  // This could technically be placed into the Results Service if we wanted to 
   nearbySearchByGeolocation(latLng, searchType, searchRadius) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')
@@ -174,13 +185,12 @@ export class SearchPage implements OnInit {
   }
 
   ////////// MOCK -- GET ALL RESULTS //////////
-  searchAll() {
+  mockSearchAll() {
     this.resultsService.getAllResults().subscribe((ReturnedPlaces) => {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
     });
   }
-
   // To set the category from the icon click on the search page
   onCategorySelect(selectedType: Type): void {
     if (this.selectedType == undefined) {

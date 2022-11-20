@@ -76,85 +76,55 @@ export class ResultsService {
   ////////////// GOOGLE API ENDPOINTS //////////////// 
   // Moving here for now to merge, then will put in appropriate page files
 
-
-  // GET DETAILS FOR MY PLACES SAVED/VISITED CARDS (limited data)
-  getSavedResultsByGooglePlaceId2(googlePlaceId: string) {
-    var request = {
-      placeId: googlePlaceId,
-      fields: ['place_id', 'name', 'types', 'formatted_address'],
-    };
-
-    // console.log('Request: ', request);
-
-    let service = new google.maps.places.PlacesService(
-      document.getElementById('main').appendChild(document.createElement('div'))
-    );
-
-    service.getDetails(request, callback);
-
-    function callback(result, status) {
-      // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        // console.log('Callback Results: ', result);
-        let currentPlaceDetails2 = result;
-        console.log("Current Place: ", currentPlaceDetails2);
-        // console.log('Status: ', google.maps.places.PlacesServiceStatus);
-        
-        return currentPlaceDetails2;
-      }
-    }
-  }
-
-
   // GET ALL PLACE DETAILS FOR PLACE DETAILS PAGE
   // Full details: place_id, name, types, formatted_address, website, editorial_summary/overview, photos
-  getPlaceDetailsByGooglePlaceId2(googlePlaceId: string) {
-    var request = {
-      placeId: googlePlaceId,
-      fields: [
-        'place_id',
-        'name',
-        'types',
-        'formatted_address',
-        'website',
-        'photos',
-      ],
-      // need to add "editorial_summary" back to this if it'll work?
-    };
+  // getPlaceDetailsByGooglePlaceId2(googlePlaceId: string) {
+  //   var request = {
+  //     placeId: googlePlaceId,
+  //     fields: [
+  //       'place_id',
+  //       'name',
+  //       'types',
+  //       'formatted_address',
+  //       'website',
+  //       'photos',
+  //     ],
+  //     // need to add "editorial_summary" back to this if it'll work?
+  //   };
 
-    console.log('Request: ', request);
+  //   console.log('Request: ', request);
 
-    // let service = new google.maps.places.PlacesService(
-    //   document.getElementById('main').appendChild(document.createElement('div'))
-    // );
+  //   // let service = new google.maps.places.PlacesService(
+  //   //   document.getElementById('main').appendChild(document.createElement('div'))
+  //   // );
 
-    let newPhoto = "";
-    let photoList = [];
+  //   let newPhoto = "";
+  //   let photoList = [];
 
-    let service = new google.maps.places.PlacesService(
-      document.createElement('div')
-    );
+  //   let service = new google.maps.places.PlacesService(
+  //     document.createElement('div')
+  //   );
 
-    service.getDetails(request, callback);
+  //   service.getDetails(request, callback);
 
-    function callback(result, status) {
-      // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        console.log('Callback Results: ', result);
-        // console.log('Status: ', google.maps.places.PlacesServiceStatus);
+  //   function callback(result, status) {
+  //     // "result" is what returns the PlaceResult object, so we need to assign that data to a variable
+  //     if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //       console.log('Callback Results: ', result);
+  //       // console.log('Status: ', google.maps.places.PlacesServiceStatus);
 
-        // Then assign photo URL to variable? How to get the actual photo to use on the page? OR just img/src to the photo links?
-        result.photos &&
-        result.photos.forEach(photo => {
-            newPhoto = photo.getUrl({ maxWidth: 500, maxHeight: 500 });
-            photoList.push(newPhoto);
-            // console.log(photo.getUrl({ maxWidth: 500, maxHeight: 500 }));
-          });
+  //       // Then assign photo URL to variable? How to get the actual photo to use on the page? OR just img/src to the photo links?
+  //       result.photos &&
+  //       result.photos.forEach(photo => {
+  //           newPhoto = photo.getUrl({ maxWidth: 500, maxHeight: 500 });
+  //           photoList.push(newPhoto);
+  //           // console.log(photo.getUrl({ maxWidth: 500, maxHeight: 500 }));
+  //         });
         
-        console.log("Photos: ", photoList);
-      }
-    }
-  }
+  //       console.log("Photos: ", photoList);
+  //     }
+  //   }
+  // }
 
   // // GET / Nearby Search (by current geolocation)
   // nearbySearchByGeolocation(lat: number, lng: number, searchType: string) {
@@ -203,28 +173,28 @@ export class ResultsService {
 
   // GET / Place Photos (for Place Details page)
   // I think we could combine this with the PlaceDetails request AND maybe with the MyPlace Place Details request if it's that easy??
-  getPhotoByPlaceId(placeId: string) {
+  // getPhotoByPlaceId(placeId: string) {
 
-    var request = {
-      placeId: placeId,
-    };
+  //   var request = {
+  //     placeId: placeId,
+  //   };
 
-    let service = new google.maps.places.PlacesService(
-      document.createElement('div')
-    );
+  //   let service = new google.maps.places.PlacesService(
+  //     document.createElement('div')
+  //   );
 
-    service.getDetails(request, callback);
+  //   service.getDetails(request, callback);
 
-    function callback(data, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        data.photos &&
-          // Do we maybe need to limit the number of photos this calls for? Does this add up?
-          data.photos.forEach(photo => {
-            console.log(photo.getUrl({ maxWidth: 500, maxHeight: 500 }));
-          });
-      }
-    }
-  }
+  //   function callback(data, status) {
+  //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+  //       data.photos &&
+  //         // Do we maybe need to limit the number of photos this calls for? Does this add up?
+  //         data.photos.forEach(photo => {
+  //           console.log(photo.getUrl({ maxWidth: 500, maxHeight: 500 }));
+  //         });
+  //     }
+  //   }
+  // }
 }
 
 
