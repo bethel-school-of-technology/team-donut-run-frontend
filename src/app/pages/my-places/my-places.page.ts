@@ -19,7 +19,7 @@ export class MyPlacesPage implements OnInit {
 
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = true;
+  useAPI: boolean = false;
 
   // Place details variable
   myPlaceArray: MyPlace[] = [];
@@ -28,7 +28,6 @@ export class MyPlacesPage implements OnInit {
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
 
-
   // We probably won't need this -- commented out code saves this
   // allSavedPlaces: PlaceResult[] = [];
   
@@ -36,7 +35,7 @@ export class MyPlacesPage implements OnInit {
   myVisitedPlaces: PlaceResult[] = [];
   myUnvisitedPlaces: PlaceResult[] = [];
 
-  // These may need to change for the API
+  // These may need to change for the API?
   // myVisitedPlaces: Array<PlaceResult[]>;
   // myUnvisitedPlaces: Array<PlaceResult[]>;
 
@@ -52,8 +51,6 @@ export class MyPlacesPage implements OnInit {
     // Get all myPlace results for this user
     this.findAllPlacesByUserId(this.currentUserId);
 
-    // Test API results
-    // this.setAPIPlaceDetails('ChIJGVuc4xGGZIgR7fI2E4yqTpU');
   }
 
 
