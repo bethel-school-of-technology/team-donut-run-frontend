@@ -100,17 +100,29 @@ export class SearchPage implements OnInit {
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
-  
+
+  // To set the category from the icon click on the search page
+  onCategorySelect(selectedType: Type): void {
+    if (this.selectedType == undefined) {
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    } else {
+      this.selectedType.selected = false;
+      this.selectedType = selectedType;
+      this.selectedType.selected = true;
+      console.log('Selected type: ', this.selectedType.type);
+    }
+  }
 
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
       this.setSearchResults(this.currentLatitude, this.currentLongitude, this.selectedType.type, this.searchRadius);
-
     } else {
       // use MOCK endpoints
-      this.searchAll();
+      this.mockSearchAll();
     }
   }
 
@@ -170,24 +182,11 @@ export class SearchPage implements OnInit {
 
 
   ////////// MOCK -- GET ALL RESULTS //////////
-  searchAll() {
+  mockSearchAll() {
     this.resultsService.getAllResults().subscribe((ReturnedPlaces) => {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
     });
   }
 
-  // To set the category from the icon click on the search page
-  onCategorySelect(selectedType: Type): void {
-    if (this.selectedType == undefined) {
-      this.selectedType = selectedType;
-      this.selectedType.selected = true;
-      console.log('Selected type: ', this.selectedType.type);
-    } else {
-      this.selectedType.selected = false;
-      this.selectedType = selectedType;
-      this.selectedType.selected = true;
-      console.log('Selected type: ', this.selectedType.type);
-    }
-  }
 }
