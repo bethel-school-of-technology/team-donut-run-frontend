@@ -8,6 +8,7 @@ import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     SignUpPageRoutingModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   declarations: [SignUpPage],
 })
