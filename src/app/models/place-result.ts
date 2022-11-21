@@ -20,7 +20,8 @@ export class PlaceResult {
     rating?: number,
     price_level?: number,
     website?: string,
-    business_status?: string
+    business_status?: string,
+    photo_reference?: string,
   ) {
     this.place_id = place_id;
     this.name = name;
@@ -30,5 +31,6 @@ export class PlaceResult {
     this.price_level = price_level;
     this.website = website;
     this.business_status = business_status;
+    this.photo_reference = photo_reference;
   }
 }

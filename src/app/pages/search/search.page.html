@@ -50,7 +50,7 @@
           <img
             width="100%"
             height="325"
-            alt="Placeholder photo text"
+            alt="{{place.photo_reference}}"
             src="{{place.photo_reference}}"
           />
           <ion-card-header>
@@ -61,10 +61,6 @@
             <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle>
             <ion-row class="ion-padding ion-justify-content-between">
               <div>{{place.rating}} <ion-icon name="star"></ion-icon></div>
-              <div>
-                <ion-icon name="pricetags-sharp"></ion-icon>
-                {{place.price_level}}
-              </div>
             </ion-row>
           </ion-card-content>
         </ion-card>

@@ -126,4 +126,18 @@ export class PlaceDetailsPage implements OnInit {
     );
   }
 
+  savePlaceToMyPlaces() {
+    //get Google Place Id
+    console.log("Google Place Id: ", this.currentPlace_id);
+
+    //get current User Id
+
+    //get current date
+    var today = new Date();
+    console.log(today);
+
+    //has this user visited the current place?
+
+  }
+
 }
