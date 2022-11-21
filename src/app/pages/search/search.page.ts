@@ -191,19 +191,4 @@ export class SearchPage implements OnInit {
       console.log(ReturnedPlaces);
     });
   }
-  // To set the category from the icon click on the search page
-  onCategorySelect(selectedType: Type): void {
-    if (this.selectedType == undefined) {
-      this.selectedType = selectedType;
-      this.selectedType.selected = true;
-      this.searchType = selectedType.type;
-      console.log('Selected type: ', this.searchType);
-    } else {
-      this.selectedType.selected = false;
-      this.selectedType = selectedType;
-      this.selectedType.selected = true;
-      this.searchType = selectedType.type;
-      console.log('Selected type: ', this.searchType);
-    }
-  }
 }
