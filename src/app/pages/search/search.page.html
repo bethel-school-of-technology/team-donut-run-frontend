@@ -3,41 +3,53 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Search by Zipcode"></ion-searchbar>
+  <ion-searchbar
+    class="ion-padding ion-hide"
+    color="light"
+    placeholder="Search by Zipcode"
+  ></ion-searchbar>
 
-  <ion-grid>
-    <h2>Select a category</h2>
-    <ion-row>
-
-      <ion-button class="Btn_Type" color="primary" (click)="toggleDataSource()">
-        Search
-      </ion-button>
-   
-    </ion-row>
-
-    <ion-row>
-        <div *ngFor="let category of categoryTypes">
-        <ion-button [class.highlight]="category.selected == true" class="Btn_Type" color="secondary" shape="circle" (click)="onCategorySelect(category)">
+  <ion-grid class="ion-padding">
+    <ion-row
+      class="ion-padding ion-justify-content-center ion-align-items-center"
+    >
+      <div *ngFor="let category of categoryTypes" class="categoryBoxes">
+        <ion-button
+          [class.highlight]="category.selected == true"
+          class="Btn_Type"
+          color="secondary"
+          shape="circle"
+          (click)="onCategorySelect(category)"
+        >
           <ion-icon
             size="large"
             color="light"
-            name={{category.name}}
+            name="{{category.name}}"
           ></ion-icon>
         </ion-button>
+        <div class="ion-text-center">{{category.type}}</div>
       </div>
     </ion-row>
+    <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
+      <ion-button class="Btn_Type" color="light" (click)="toggleDataSource()">
+        Search
+      </ion-button></ion-row
+    >
 
     <ion-row>
       <ion-col
-        size="6"
-        size-lg="6"
-        size-xs="12"
+        size="12"
+        size-sm="6"
+        size-md="6"
+        size-lg="4"
         *ngFor="let place of searchResults"
         [routerLink]="['/place-details', place.place_id]"
         swiperSlide
       >
         <ion-card>
           <img
+            width="100%"
+            height="325"
             alt="Placeholder photo text"
             src="{{place.photo_reference}}"
           />
@@ -47,8 +59,13 @@
 
           <ion-card-content>
             <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle>
-            {{place.rating}} <ion-icon name="star"></ion-icon>
-            <p>{{place.price_level}}</p>
+            <ion-row class="ion-padding ion-justify-content-between">
+              <div>{{place.rating}} <ion-icon name="star"></ion-icon></div>
+              <div>
+                <ion-icon name="pricetags-sharp"></ion-icon>
+                {{place.price_level}}
+              </div>
+            </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -58,4 +75,5 @@
 <ion-footer>
   <app-footer></app-footer>
 </ion-footer>
+
 </ion-content>

@@ -1,12 +1,22 @@
-.SearchCard{
-    max-height: 300px;
-    max-width: 300px;
-}
-
 ion-button[shape=circle] {
     --border-radius: 50%;
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+}
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+ion-col {
+    border: solid 1px #fff;
+    color: #fff;
+    text-align: center;
+}
+
+.SearchCard {
+    max-height: 300px;
+    max-width: 300px;
 }
 
 .Center{
@@ -15,9 +25,13 @@ ion-button[shape=circle] {
 }
 
 .Btn_Type{
-    margin: 0px 10px;
+    margin: 10px;
 }
 
-.highlight {
-    border: solid 2px #032b3d ! important;
-}
+ .categoryBoxes {
+    min-width: 200px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+ }
