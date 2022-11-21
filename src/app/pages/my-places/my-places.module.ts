@@ -8,6 +8,7 @@ import { MyPlacesPageRoutingModule } from './my-places-routing.module';
 
 import { MyPlacesPage } from './my-places.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     IonicModule,
     MyPlacesPageRoutingModule,
     NavbarModule,
+    FooterModule
   ],
   declarations: [MyPlacesPage],
 })

@@ -8,6 +8,7 @@ import { SignInPageRoutingModule } from './sign-in-routing.module';
 
 import { SignInPage } from './sign-in.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     SignInPageRoutingModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   declarations: [SignInPage],
 })

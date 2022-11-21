@@ -9,13 +9,16 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   declarations: [HomePage],
 })

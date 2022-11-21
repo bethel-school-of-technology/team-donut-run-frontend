@@ -8,6 +8,7 @@ import { MyAccountPageRoutingModule } from './my-account-routing.module';
 
 import { MyAccountPage } from './my-account.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     MyAccountPageRoutingModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   declarations: [MyAccountPage],
 })
