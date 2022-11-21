@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { FooterModule } from './components/footer/navbar.module copy';
 // import { GooglePlaceModule } from 'google.maps';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { NavbarModule } from './components/navbar/navbar.module';
     FormsModule,
     HttpClientModule,
     NavbarModule,
+    FooterModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

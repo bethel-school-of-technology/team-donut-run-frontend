@@ -11,6 +11,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
 
 import { SearchPage } from './search.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from 'src/app/components/footer/navbar.module copy';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
     IonicModule,
     SearchPageRoutingModule,
     SwiperModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   declarations: [SearchPage],
 })
