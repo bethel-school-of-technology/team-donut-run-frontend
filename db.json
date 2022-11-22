@@ -40,7 +40,7 @@
       "visited": false,
       "userId": 4,
       "createdOn": "11/21/22",
-      "googlePlaceId": "ChIJE2FKt1hmZIgRaMGEIR4Qs-0"
+      "googlePlaceId": "ChIJgWNJjVF-ZIgRrL2njmaaUp8"
     }
   ],
 
@@ -167,6 +167,29 @@
       "editorial_summary": {
         "language": "en",
         "overview": "Italian fast-food chain offering thin-crust pizza by the slice, plus pastas & salads."
+      },
+      "business_status": "OPERATIONAL",
+      "photo_reference": "https://source.unsplash.com/random"
+    },
+
+    {
+      "place_id": "ChIJgWNJjVF-ZIgRrL2njmaaUp8",
+      "name": "The Franklin Theatre",
+      "types": [
+        "movie_theater",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formatted_address": "419 Main St, Franklin, TN 37064, USA",
+      "rating": 4.8,
+      "price_level": 2,
+      "opening_hours": {
+        "open_now": false
+      },
+      "website": "https://www.franklintheatre.com/",
+      "editorial_summary": {
+        "language": "en",
+        "overview": "Restored historic movie house with a full bar & concessions hosting a variety of music & drama acts."
       },
       "business_status": "OPERATIONAL",
       "photo_reference": "https://source.unsplash.com/random"
