@@ -4,7 +4,21 @@ ion-card-header.ios {
     flex-flow: column-reverse;
 }
 
-img {
+.Cushion{
+    padding:50 px;
+}
+
+.round{
+    border-radius: 15px;
+    object-fit: cover;
     height: 500px;
-    width: 500px;
+    width: 800px;
+}
+
+.otherPhotos{
+    border-radius: 5px;
+    object-fit: cover;
+    height: 110px;
+    width: 110px; 
+    min-width: 100px;
 }

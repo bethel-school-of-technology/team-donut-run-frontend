@@ -116,7 +116,7 @@ export class PlaceDetailsPage implements OnInit {
         // To get place photos
         this.photoList = results.photos;
         for (let i = 0; i < this.photoLimit; i++) {
-          this.newPhoto = this.photoList[i].getUrl({ maxWidth: 500, maxHeight: 500 }); 
+          this.newPhoto = this.photoList[i].getUrl({ maxWidth: 800, maxHeight: 500 }); 
           this.photoLinkArray.push(this.newPhoto);
         }
         
