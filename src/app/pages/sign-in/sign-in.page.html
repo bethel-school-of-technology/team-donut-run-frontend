@@ -1,8 +1,20 @@
 <ion-header>
-  <app-navbar></app-navbar>
-</ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-back-button color="dark" defaultHref="/"><ion-icon name="chevron-back-outline"></ion-icon></ion-back-button>
+              </ion-buttons>
+              <ion-title></ion-title>
+            </ion-toolbar>
+          </ion-header>
 
 <ion-content>
+  <div class="imgContainer ion-margin ion-padding">
+    <img src="assets/logo.svg" alt="logo">
+    </div>
+  <div class="ion-padding-horizontal ion-text-center">
+    <h1>Sign In Now</h1>
+    <p>Please signin to continue using our app</p>
+  </div>
   <div class="ion-padding ion-margin">
     <form (ngSubmit)="signin()">
       <ion-list>
@@ -10,7 +22,7 @@
           <ion-label position="floating">Email</ion-label>
           <ion-input
             type="email"
-            placeholder="example@gmail.com"
+            placeholder="example@domain.com"
             name="email"
             [(ngModel)]="this.username"
           ></ion-input>
@@ -19,25 +31,24 @@
           <ion-label position="floating">Password</ion-label>
           <ion-input
             type="password"
-            placeholder="*******"
+            placeholder="**********"
             name="password"
             [(ngModel)]="this.password"
           ></ion-input>
         </ion-item>
       </ion-list>
       <div class="ion-text-end">
-        <ion-button fill="clear" color="dark">Forgot Password?</ion-button>
+        <p>Forgot Password?</p>
       </div>
-          <div>
+      <div class="ion-margin-top ion-padding-top">
         <ion-button expand="block" color="tertiary" type="submit" size="large"
           >Sign In</ion-button
         >
-      </div>
+        </div>
     </form>
     <div class="ion-text-center">
-      <ion-button fill="clear" color="dark" href="/sign-up">Don't have an account? Sign Up!</ion-button>
+      <p [routerLink]="['/sign-up']">Don't have an account? Sign Up!</p>
     </div>
   </div>
 </ion-content>
 
-<app-footer></app-footer>
