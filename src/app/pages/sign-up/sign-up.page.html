@@ -14,7 +14,7 @@
     <h1>Sign Up Now</h1>
     <p>Please fill out the details and create an account</p>
   </div>
-  <div class="ion-padding-horizontal">
+  <div class="ion-padding-bottom ion-margin-bottom">
     <form (ngSubmit)="signUp()">
       <ion-item>
         <ion-label position="floating">First Name</ion-label>
@@ -75,9 +75,9 @@
           >Create account</ion-button
         >
       </div>
-    </form>
     <div class="ion-text-center">
       <p [routerLink]="['/sign-in']">Already have an account? Sign-In!</p>
     </div>
+      </form>
   </div>
 </ion-content>
