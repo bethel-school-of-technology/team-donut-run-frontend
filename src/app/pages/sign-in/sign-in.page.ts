@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignInPage implements OnInit {
   username: string = '';
   password: string = '';
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {}
 
@@ -21,9 +26,18 @@ export class SignInPage implements OnInit {
       },
       (error) => {
         console.log('Error: ', error);
-        window.alert('Unsuccessful Login');
+        this.presentAlert();
         this.router.navigateByUrl('/sign-in');
       }
     );
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Login Failed',
+      message: 'Your email or password is incorrect!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }
