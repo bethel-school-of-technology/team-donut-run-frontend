@@ -1,16 +1,18 @@
 <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-back-button color="dark" defaultHref="/"><ion-icon name="chevron-back-outline"></ion-icon></ion-back-button>
-              </ion-buttons>
-              <ion-title></ion-title>
-            </ion-toolbar>
-          </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" defaultHref="/"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
   <div class="imgContainer ion-margin ion-padding">
-    <img src="assets/logo.svg" alt="logo">
-    </div>
+    <img src="assets/logo.svg" alt="logo" />
+  </div>
   <div class="ion-padding-horizontal ion-text-center">
     <h1>Sign In Now</h1>
     <p>Please signin to continue using our app</p>
@@ -19,9 +21,9 @@
     <form (ngSubmit)="signin()">
       <ion-list>
         <ion-item>
-          <ion-label position="floating">Email</ion-label>
+          <ion-label position="floating">Username</ion-label>
           <ion-input
-            type="email"
+            type="username"
             placeholder="example@domain.com"
             name="email"
             [(ngModel)]="this.username"
@@ -44,11 +46,10 @@
         <ion-button expand="block" color="tertiary" type="submit" size="large"
           >Sign In</ion-button
         >
-        </div>
-    <div class="ion-text-center">
-      <p [routerLink]="['/sign-up']">Don't have an account? Sign Up!</p>
-    </div>
-      </form>
+      </div>
+      <div class="ion-text-center">
+        <p [routerLink]="['/sign-up']">Don't have an account? Sign Up!</p>
+      </div>
+    </form>
   </div>
 </ion-content>
-
