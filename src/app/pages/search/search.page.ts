@@ -17,7 +17,7 @@ declare var google;
 export class SearchPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = true;
+  useAPI: boolean = false;
 
   // To get current geolocation
   position: Position = null;
@@ -176,7 +176,6 @@ export class SearchPage implements OnInit {
                 maxWidth: 500,
                 maxHeight: 500,
               });
-              // We may also need to add the html_attributions here and to the model as well
             });
 
           let address = results[0].plus_code.compound_code;

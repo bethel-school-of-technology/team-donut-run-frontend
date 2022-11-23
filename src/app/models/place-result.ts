@@ -8,7 +8,7 @@ export class PlaceResult {
   open_now?: boolean;
   website?: string;
   overview?: string;
-  photos?: [];
+  photos?: string[];
   photo_reference?: string;
   business_status?: string;
 

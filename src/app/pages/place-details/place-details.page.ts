@@ -27,7 +27,7 @@ export class PlaceDetailsPage implements OnInit {
   // Used to get all photo details from response
   photoList: Array<any>;
 
-  // Used to get all URLs for photos
+  // Used to get all URLs for photos (loop through in HTML to get all photos)
   photoLinkArray: string[] = [];
 
   // Use to limit the number of photos we get for each place (keep in mind each photo is 1 call, so 3 photos would be 3 calls)
@@ -90,6 +90,7 @@ export class PlaceDetailsPage implements OnInit {
         'formatted_address',
         'website',
         'photos',
+        // 'editorial_summary'
       ],
       // need to add "editorial_summary" back to this if it'll work?
     };
@@ -115,17 +116,25 @@ export class PlaceDetailsPage implements OnInit {
 
         // To get place photos
         this.photoList = results.photos;
+        let maxPhotoLimit = this.photoList.length; 
+
+        if (this.photoLimit > maxPhotoLimit) {
+          this.photoLimit = maxPhotoLimit;
+        }
+
         for (let i = 0; i < this.photoLimit; i++) {
           this.newPhoto = this.photoList[i].getUrl({ maxWidth: 500, maxHeight: 500 }); 
           this.photoLinkArray.push(this.newPhoto);
         }
         
+        console.log("Max Photos: ", this.photoLimit);
         console.log("Photo Links: ", this.photoLinkArray);
     
       }, (status) => console.log("API Status: ", status)
     );
   }
 
+  // Work on later
   savePlaceToMyPlaces() {
     //get Google Place Id
     console.log("Google Place Id: ", this.currentPlace_id);
