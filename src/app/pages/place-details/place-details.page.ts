@@ -32,6 +32,7 @@ export class PlaceDetailsPage implements OnInit {
 
   // Use to limit the number of photos we get for each place (keep in mind each photo is 1 call, so 3 photos would be 3 calls)
   photoLimit: number = 1;
+  photosExist: boolean = true;
 
   // Placeholder text while editorial_summary is not working
   placeOverview: string = "Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO mlkshk godard pour-over blog tumblr humblebrag. Blue bottle put a bird on it twee prism biodiesel brooklyn. Blue bottle ennui tbh succulents."
@@ -116,20 +117,26 @@ export class PlaceDetailsPage implements OnInit {
 
         // To get place photos
         this.photoList = results.photos;
-        let maxPhotoLimit = this.photoList.length; 
 
-        if (this.photoLimit > maxPhotoLimit) {
-          this.photoLimit = maxPhotoLimit;
-        }
+        if (this.photoList == null || this.photoList == undefined) {
+          console.log("No photos exist");
+          this.photosExist = false;
+        } else {
+          let maxPhotoLimit = this.photoList.length;
 
-        for (let i = 0; i < this.photoLimit; i++) {
-          this.newPhoto = this.photoList[i].getUrl({ maxWidth: 500, maxHeight: 500 }); 
-          this.photoLinkArray.push(this.newPhoto);
+          if (this.photoLimit > maxPhotoLimit) {
+            this.photoLimit = maxPhotoLimit;
+          }
+
+          for (let i = 0; i < this.photoLimit; i++) {
+            this.newPhoto = this.photoList[i].getUrl({ maxWidth: 500, maxHeight: 500 }); 
+            this.photoLinkArray.push(this.newPhoto);
+          }
+          
+          console.log("Max Photos: ", this.photoLimit);
+          console.log("Photo Links: ", this.photoLinkArray);
         }
         
-        console.log("Max Photos: ", this.photoLimit);
-        console.log("Photo Links: ", this.photoLinkArray);
-    
       }, (status) => console.log("API Status: ", status)
     );
   }
