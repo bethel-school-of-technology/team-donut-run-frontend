@@ -136,7 +136,13 @@ export class MyPlacesPage implements OnInit {
           this.currentPlaceDetails = results;
           let typesArray: Array<any> = results.types;
           this.currentPlaceDetails.types = typesArray[0];
+
+          let photoList: Array<any> = this.currentPlaceDetails.photos;
+          let placePhoto = photoList[0].getUrl({ maxWidth: 500, maxHeight: 500 });
+          this.currentPlaceDetails.photo_reference = placePhoto;
+
           console.log("API Current Place Details: ", this.currentPlaceDetails);
+
           this.myVisitedPlaces.push(this.currentPlaceDetails);
   
         }, (status) => console.log("API Status: ", status)
@@ -163,8 +169,14 @@ export class MyPlacesPage implements OnInit {
         (results: PlaceResult) => {
           this.currentPlaceDetails = results;
           let typesArray: Array<any> = results.types;
-          this.currentPlaceDetails.types = typesArray[0];          
+          this.currentPlaceDetails.types = typesArray[0];     
+          
+          let photoList: Array<any> = this.currentPlaceDetails.photos;
+          let placePhoto = photoList[0].getUrl({ maxWidth: 500, maxHeight: 500 });
+          this.currentPlaceDetails.photo_reference = placePhoto;
+
           console.log("API Current Place Details: ", this.currentPlaceDetails);
+
           this.myUnvisitedPlaces.push(this.currentPlaceDetails);
 
         }, (status) => console.log("API Status: ", status)
@@ -195,7 +207,12 @@ export class MyPlacesPage implements OnInit {
 
     var request = {
       placeId: googlePlaceId,
-      fields: ['place_id', 'name', 'types', 'formatted_address'],
+      fields: [
+        'place_id', 
+        'name', 
+        'types', 
+        'formatted_address',
+        'photos'],
     };
 
     return new Promise((resolve, reject) => {
