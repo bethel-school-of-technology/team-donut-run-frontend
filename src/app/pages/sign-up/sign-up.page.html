@@ -20,59 +20,77 @@
           <p>Please fill out the details and create an account</p>
         </div>
         <div class="ion-padding-bottom ion-margin">
-          <form (ngSubmit)="signUp()">
-            <ion-item>
+          <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+            <ion-item lines="full">
+              <ion-label position="floating">Email<span>*</span></ion-label>
+              <ion-input
+                formControlName="email"
+                type="email"
+                placeholder="example@domain.com"
+              ></ion-input>
+            </ion-item>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.email.errors?.required"
+            >
+              Email is required.
+            </span>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.email.errors?.pattern"
+            >
+              Please provide valid email.
+            </span>
+            <ion-item lines="full">
+              <ion-label position="floating">Username<span>*</span></ion-label>
+              <ion-input formControlName="username" type="text"></ion-input>
+            </ion-item>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.username.errors?.required"
+            >
+              Username is required.
+            </span>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.username.errors?.minlength"
+            >
+              Username must be at least 6 characters.
+            </span>
+            <ion-item lines="full">
+              <ion-label position="floating">Password<span>*</span></ion-label>
+              <ion-input
+                formControlName="password"
+                type="password"
+                placeholder="**********"
+              ></ion-input>
+            </ion-item>
+            <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.password.errors?.required"
+            >
+              Password is required.
+            </span>
+                <span
+              class="error ion-padding"
+              *ngIf="isSubmitted && errorControl.password.errors?.minlength"
+            >
+              Password must be at least 6 characters.
+            </span>
+            <ion-item lines="full">
               <ion-label position="floating">First Name</ion-label>
-              <ion-input
-                placeholder="First Name"
-                type="text"
-                [(ngModel)]="this.newUser.firstName"
-                name="firstName"
-              ></ion-input>
+              <ion-input formControlName="firstName" type="text"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item lines="full">
               <ion-label position="floating">Last Name</ion-label>
-              <ion-input
-                placeholder="Last Name"
-                type="text"
-                [(ngModel)]="this.newUser.lastName"
-                name="lastName"
-              ></ion-input>
+              <ion-input formControlName="lastName" type="text"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item lines="full">
               <ion-label position="floating">Location</ion-label>
               <ion-input
                 placeholder="City, State"
                 type="text"
-                [(ngModel)]="this.newUser.location"
                 name="location"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Email</ion-label>
-              <ion-input
-                type="email"
-                placeholder="example@domain.com"
-                [(ngModel)]="this.newUser.email"
-                name="email"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Username</ion-label>
-              <ion-input
-                type="text"
-                placeholder="Username"
-                [(ngModel)]="this.newUser.username"
-                name="username"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password</ion-label>
-              <ion-input
-                type="password"
-                placeholder="**********"
-                [(ngModel)]="this.newUser.password"
-                name="password"
               ></ion-input>
             </ion-item>
             <div class="ion-margin-top ion-padding-top">
