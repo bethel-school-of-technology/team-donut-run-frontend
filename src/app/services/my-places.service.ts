@@ -6,9 +6,38 @@ import { MyPlace } from '../models/my-place';
   providedIn: 'root',
 })
 export class MyPlacesService {
+  
+  // For MOCK data
   dataSource: string = 'http://localhost:3000/myplaces';
 
+  // For API data
+  apiDataSource: string = "http://localhost:5000/api/myplace";
+
+  tokenKey: string = "myUserToken";
+
   constructor(private http: HttpClient) {}
+
+  ////////////// BACKEND API ENDPOINTS ////////////////
+  // GET / get all current user's my places -- auth
+  getAllCurrentUserPlaces(): Observable<MyPlace[]> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    };
+
+    return this.http.get<MyPlace[]>(`${this.apiDataSource}/user/current`,{ headers: reqHeaders });
+  }
+
+  // GET / a single my place by my place id 
+
+  // GET / a single my place by user id and google place id -- auth
+
+  // POST / create a new saved my place -- auth
+
+  // PUT / update a saved my place with visited boolean -- auth
+
+  // DELETE / delete saved my place -- auth
+
+  ////////////// MOCK DATA TEST ENDPOINTS ////////////////
 
   getAllPlaces(): Observable<MyPlace[]> {
     return this.http.get<MyPlace[]>(this.dataSource);
@@ -31,4 +60,6 @@ export class MyPlacesService {
   deletePlaceByPlaceId(placeId: number): Observable<any> {
     return this.http.delete<any>(this.dataSource + '/' + placeId);
   }
+
+
 }
