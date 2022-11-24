@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,7 +17,9 @@ import { FooterModule } from 'src/app/components/footer/navbar.module copy';
     IonicModule,
     SignUpPageRoutingModule,
     NavbarModule,
-    FooterModule
+    FooterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [SignUpPage],
 })
