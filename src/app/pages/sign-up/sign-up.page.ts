@@ -24,7 +24,7 @@ export class SignUpPage implements OnInit {
 
   ngOnInit(): void {
     this.ionicForm = this.formBuilder.group({
-      //not required
+      //not required fields to sign up
       firstName: [],
       lastName: [],
       email: [
@@ -34,7 +34,7 @@ export class SignUpPage implements OnInit {
           Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
         ],
       ],
-      //required
+      //required fields to sign up
       username: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       location: [],
@@ -48,21 +48,17 @@ export class SignUpPage implements OnInit {
       return false;
     } else {
       this.newUser = this.ionicForm.value;
-      this.signUp();
+      this.authService.signUp(this.newUser).subscribe(
+        () => {
+          this.successfulLoginAlert();
+          this.router.navigate(['sign-in']);
+        },
+        (error) => {
+          this.unsuccessfulLoginAlert();
+          //console.log('Error: ', error);
+        }
+      );
     }
-  }
-
-  signUp() {
-    this.authService.signUp(this.newUser).subscribe(
-      () => {
-        this.successfulLoginAlert();
-        this.router.navigate(['sign-in']);
-      },
-      (error) => {
-        window.alert('User Registration Error');
-        console.log('Error: ', error);
-      }
-    );
   }
 
   async successfulLoginAlert() {
@@ -71,7 +67,16 @@ export class SignUpPage implements OnInit {
       message: 'Your account has been created.',
       buttons: ['OK'],
     });
+    await alert.present();
+    console.log(this.newUser);
+  }
 
+  async unsuccessfulLoginAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'Your account could not be created.',
+      buttons: ['OK'],
+    });
     await alert.present();
   }
 

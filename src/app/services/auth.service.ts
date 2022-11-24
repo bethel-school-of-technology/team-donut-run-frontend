@@ -16,7 +16,6 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   signUp(newUser: User): Observable<any> {
-    console.log(newUser);
     return this.http.post(`${this.authBaseUrl}/signup`, newUser);
   }
 
