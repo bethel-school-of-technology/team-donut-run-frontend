@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPlace } from 'src/app/models/my-place';
 import { PlaceResult } from 'src/app/models/place-result';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
 
@@ -27,9 +29,6 @@ export class MyPlacesPage implements OnInit {
 
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
-
-  // We probably won't need this -- commented out code saves this
-  // allSavedPlaces: PlaceResult[] = [];
   
   // We will use these
   myVisitedPlaces: PlaceResult[] = [];
@@ -39,96 +38,59 @@ export class MyPlacesPage implements OnInit {
   // myVisitedPlaces: Array<PlaceResult[]>;
   // myUnvisitedPlaces: Array<PlaceResult[]>;
 
+  // User variables
+  currentUser: User = new User();
+
   constructor(
     private placesService: MyPlacesService,
-    private resultsService: ResultsService
+    private resultsService: ResultsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     // Get the current userID -- will need to get this from the URL
     this.currentUserId = 4;
 
+    // Get current user
+    this.authService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      console.log("Current User: ", this.currentUser);
+    })
+
     // Get all myPlace results for this user
     this.findAllPlacesByUserId(this.currentUserId);
 
   }
 
-
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
+  // Need to update with API endpoint
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
       console.log('My Place Results: ', this.myPlaceArray);
-      //this.getSavedPlaces(this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
-    //console.log('Get Saved Places Result: ', this.allSavedPlaces);
     console.log('Get Visited Places Result: ', this.myVisitedPlaces);
     console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
   }
 
   // Sorts whether the place has been visited or not
   sortSavedPlacesByUserId(myPlaceArray) {
-
     for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
       let currentMyPlace = this.myPlaceArray[i];
       this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
 
       if (currentMyPlace.visited == true) {
-        // For each visited place in the array, call for the place details
         this.getVisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
 
-        // -- OR -- just put all in one function? (below)
-
-        // this.resultsService
-        //   .getSavedResultsByGooglePlaceId(this.currentGooglePlaceId)
-        //   .subscribe((result) => {
-        //     this.currentPlaceDetails = result[0];
-        //     this.currentPlaceDetails.types = result[0].types[0];
-
-        //     //saves place details to myVisitedPlaces array
-        //     this.myVisitedPlaces.push(this.currentPlaceDetails);
-        //   });
-
-          // let addPlace = this.getCardPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
-
-          // this.myVisitedPlaces.push(addPlace);
-
       } else {
-        // For each unvisited place in the array, call for the place details
         this.getUnvisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
-
-        // -- OR -- just put all in one function? (below)
-
-      //   this.resultsService
-      //     .getSavedResultsByGooglePlaceId(this.currentGooglePlaceId)
-      //     .subscribe((result) => {
-      //       this.currentPlaceDetails = result[0];
-      //       this.currentPlaceDetails.types = result[0].types[0];
-      //       //saves place details to myUnvisitedPlaces array
-      //       this.myUnvisitedPlaces.push(this.currentPlaceDetails);
-      // });
       }
     }
   }
 
-  
-  ////////// MOCK DATA -- GET MY PLACES & DETAILS //////////
-
-  // getCardPlaceDetailsByGooglePlaceId(googlePlaceId): any {
-  //     this.resultsService
-  //     .getSavedResultsByGooglePlaceId(googlePlaceId)
-  //     .subscribe((result) => {
-  //       this.currentPlaceDetails = result[0];
-  //       this.currentPlaceDetails.types = result[0].types[0];
-  //       console.log("Card Results1: ", this.currentPlaceDetails);
-  //     });
-        // I can't get this to return results (FIX?)
-  // }
-
   // Gets Place Details to display on My Places VISITED cards
   getVisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
-    // I think I'll need to add the useAPI boolean results toggle in here?
     if (this.useAPI == true) {
       // use API endpoints
       this.getAPIPlaceDetails(googlePlaceId).then(
@@ -155,7 +117,6 @@ export class MyPlacesPage implements OnInit {
         this.currentPlaceDetails = result[0];
         this.currentPlaceDetails.types = result[0].types[0];
 
-        // Saves place details to myVisitedPlaces array
         this.myVisitedPlaces.push(this.currentPlaceDetails);
       });
     }
@@ -189,7 +150,6 @@ export class MyPlacesPage implements OnInit {
         this.currentPlaceDetails = result[0];
         this.currentPlaceDetails.types = result[0].types[0];
         
-        // Saves place details to myUnvisitedPlaces array
         this.myUnvisitedPlaces.push(this.currentPlaceDetails);
       });
     }
@@ -239,23 +199,7 @@ export class MyPlacesPage implements OnInit {
   //   );
   // }
 
+    ////////// USER METHODS //////////
 
-  // OLD CODE -- DELETE?
-  // getSavedPlaces(myPlaceArray) {
-  //   for (let i = 0; i <= myPlaceArray.length - 1; i++) {
-  //     this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
-  //     //for each googlePlaceId in the array, call for the place details
-  //     this.getAllPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
-  //   }
-  // }
 
-  // getAllPlaceDetailsByGooglePlaceId(googlePlaceId) {
-  //   this.resultsService
-  //     .getResultsByGooglePlaceId(googlePlaceId)
-  //     .subscribe((result) => {
-  //       this.currentPlaceDetails = result[0];
-  //       this.currentPlaceDetails.open_now = result[0].opening_hours.open_now;
-  //       this.allSavedPlaces.push(this.currentPlaceDetails);
-  //     });
-  // }
 }

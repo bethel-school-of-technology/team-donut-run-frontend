@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlaceResult } from 'src/app/models/place-result';
 import { ResultsService } from 'src/app/Services/results.service';
 import { ActivatedRoute } from '@angular/router';
+import { MyPlacesService } from 'src/app/services/my-places.service';
 
 declare var google;
 
@@ -39,7 +40,8 @@ export class PlaceDetailsPage implements OnInit {
 
   constructor(
     private resultsService: ResultsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private myPlacesService: MyPlacesService
   ) {}
 
   ngOnInit() {
