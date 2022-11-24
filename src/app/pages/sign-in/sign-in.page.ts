@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +14,8 @@ export class SignInPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {}
@@ -22,10 +23,12 @@ export class SignInPage implements OnInit {
   signin() {
     this.authService.signIn(this.username, this.password).subscribe(
       (response: any) => {
+        console.log("myUserToken:", response);
+        this.presentToast();
         this.router.navigateByUrl('/home');
       },
       (error) => {
-        console.log('Error: ', error);
+        //console.log('Error: ', error);
         this.presentAlert();
         this.router.navigateByUrl('/sign-in');
       }
@@ -39,5 +42,14 @@ export class SignInPage implements OnInit {
     });
 
     await alert.present();
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Login Successful',
+      duration: 1200,
+      position: 'bottom',
+    });
+
+    await toast.present();
   }
 }
