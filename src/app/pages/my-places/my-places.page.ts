@@ -48,24 +48,38 @@ export class MyPlacesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Get the current userID -- will need to get this from the URL
-    this.currentUserId = 4;
 
-    // Get current user
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-      console.log("Current User: ", this.currentUser);
-    })
+    if (this.useAPI == true) {
+      // user real data & database
+      this.authService.getCurrentUser().subscribe(user => {
+          this.currentUser = user;
+          this.currentUserId = user.userId;
+          console.log("Current User: ", this.currentUser);
+        })
+      this.apiFindAllPlacesByUserId(); 
 
-    // Get all myPlace results for this user
-    this.findAllPlacesByUserId(this.currentUserId);
-
+    } else {
+      // use mock data
+      this.currentUserId = 4;
+      this.mockFindAllPlacesByUserId(this.currentUserId);
+    }
+  
   }
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
-  // Need to update with API endpoint
-  findAllPlacesByUserId(userId) {
+  mockFindAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
+      this.myPlaceArray = result;
+      console.log('My Place Results: ', this.myPlaceArray);
+      this.sortSavedPlacesByUserId(this.myPlaceArray);
+    });
+    console.log('Get Visited Places Result: ', this.myVisitedPlaces);
+    console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
+  }
+
+  // API find all places
+  apiFindAllPlacesByUserId() {
+    this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
       this.myPlaceArray = result;
       console.log('My Place Results: ', this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
