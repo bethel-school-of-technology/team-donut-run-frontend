@@ -58,9 +58,10 @@
           </ion-card-header>
 
           <ion-card-content>
-            <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle>
+            <!-- <ion-card-subtitle>{{place.formatted_address}}</ion-card-subtitle> -->
             <ion-row class="ion-padding ion-justify-content-between">
               <div>{{place.rating}} <ion-icon name="star"></ion-icon></div>
+              {{place.formatted_address}}
             </ion-row>
           </ion-card-content>
         </ion-card>

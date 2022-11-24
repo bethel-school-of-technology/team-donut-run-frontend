@@ -176,8 +176,13 @@ export class SearchPage implements OnInit {
                 maxWidth: 500,
                 maxHeight: 500,
               });
-              // We may also need to add the html_attributions here and to the model as well
             });
+
+          let address = results[0].plus_code.compound_code;
+          let split = address.split(" ", 3);
+          split.shift();
+          address = split.join(" ");
+          this.searchResults[i].formatted_address = address;
         }
       },
       (status) => console.log('Status: ', status)
