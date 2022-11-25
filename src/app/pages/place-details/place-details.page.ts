@@ -3,6 +3,8 @@ import { PlaceResult } from 'src/app/models/place-result';
 import { ResultsService } from 'src/app/Services/results.service';
 import { ActivatedRoute } from '@angular/router';
 import { MyPlacesService } from 'src/app/services/my-places.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 declare var google;
 
@@ -35,23 +37,89 @@ export class PlaceDetailsPage implements OnInit {
   photoLimit: number = 1;
   photosExist: boolean = true;
 
+  // User variables
+  currentUser: User = new User();
+  currentUserId: number;
+  myGooglePlaceIds: string[] = [];
+  userSavedPlace: boolean;
+
   // Placeholder text while editorial_summary is not working
   placeOverview: string = "Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO mlkshk godard pour-over blog tumblr humblebrag. Blue bottle put a bird on it twee prism biodiesel brooklyn. Blue bottle ennui tbh succulents."
 
   constructor(
     private resultsService: ResultsService,
     private activatedRoute: ActivatedRoute,
-    private myPlacesService: MyPlacesService
+    private placesService: MyPlacesService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.getCurrentGooglePlaceId();
+
+    this.authService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      this.currentUserId = user.userId;
+      console.log("Current User: ", this.currentUser);
+    });
+
+    // this.apiFindAllPlacesByUserId();
+    this.checkIfSaved(this.currentPlace_id);
+
+    // Add this to easily toggle between mock and real data
+    // if (this.useAPI == true) {
+    //   // user real data & database
+    //   this.authService.getCurrentUser().subscribe(user => {
+    //       this.currentUser = user;
+    //       this.currentUserId = user.userId;
+    //       console.log("Current User: ", this.currentUser);
+    //     });
+
+    // } else {
+    //   // use mock data
+    //   // this.currentUserId = 4;
+    // }
   }
 
   getCurrentGooglePlaceId() {
     this.currentPlace_id = this.activatedRoute.snapshot.params['id'];
     this.findPlaceDetailsByGooglePlaceId(this.currentPlace_id);
   }
+
+  // Do we first need to get a list of all the saved google place ids and then compare the passed in google id to that list?
+  apiFindAllPlacesByUserId() {
+    this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+      for (let i = 0; i < result.length; i++) {
+        let addId = result[i].googlePlaceId
+        this.myGooglePlaceIds.push(addId);
+      }
+      console.log('Google Place Id Results: ', this.myGooglePlaceIds);
+    });
+  }
+
+  // Find if current place exists in MyPlaces table for the given user
+  // Check for yes and no
+  checkIfSaved(googlePlaceId: string) {
+    this.placesService.getPlaceByUserIdGoogleId(googlePlaceId).subscribe((result) => {
+        console.log("Check Results: ", result);
+        if (result != null || result != undefined) {
+          this.userSavedPlace = true;
+          console.log("Found? ", this.userSavedPlace);
+        } else {
+          this.userSavedPlace = false;
+          console.log("Found? ", this.userSavedPlace);
+        }
+    }, error => {
+      console.log("Check Error: ", error);
+      // I think 404 should return if place isn't found on current user
+      if (error.status === 404) {
+        console.log("Place not found for current user");
+        this.userSavedPlace = false;
+        console.log("Found? ", this.userSavedPlace);
+      }
+    })
+  }
+
+  // if results exist, then display true -- not sure the best way to do this?
 
   // To call service to get place details to display on the page
   findPlaceDetailsByGooglePlaceId(place_id) {
@@ -142,6 +210,7 @@ export class PlaceDetailsPage implements OnInit {
       }, (status) => console.log("API Status: ", status)
     );
   }
+
 
   // Work on later
   savePlaceToMyPlaces() {

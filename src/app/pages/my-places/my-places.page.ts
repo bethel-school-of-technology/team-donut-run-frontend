@@ -25,7 +25,6 @@ export class MyPlacesPage implements OnInit {
 
   // Place details variable
   myPlaceArray: MyPlace[] = [];
-  currentUserId: number;
 
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
@@ -40,6 +39,7 @@ export class MyPlacesPage implements OnInit {
 
   // User variables
   currentUser: User = new User();
+  currentUserId: number;
 
   constructor(
     private placesService: MyPlacesService,
