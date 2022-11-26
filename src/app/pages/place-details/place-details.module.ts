@@ -7,15 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { PlaceDetailsPageRoutingModule } from './place-details-routing.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { PlaceDetailsPage } from './place-details.page';
+import { FooterModule } from "../../components/footer/navbar.module copy";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PlaceDetailsPageRoutingModule,
-    NavbarModule,
-  ],
-  declarations: [PlaceDetailsPage],
+    declarations: [PlaceDetailsPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        PlaceDetailsPageRoutingModule,
+        NavbarModule,
+        FooterModule
+    ]
 })
 export class PlaceDetailsPageModule {}
