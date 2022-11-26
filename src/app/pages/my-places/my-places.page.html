@@ -11,9 +11,8 @@
   <ion-row class="myPlacesRow">
     <ion-slides [options]="visitedSlideOpts">
       <ion-slide
-        *ngFor="let place of myVisitedPlaces"
+        *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]"
         class="visited-slide"
-        routerLink="/details"
       >
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
@@ -29,7 +28,7 @@
       <ion-slide
         *ngFor="let place of myUnvisitedPlaces"
         class="visited-slide"
-        routerLink="/details"
+        [routerLink]="['/place-details', place?.place_id]"
       >
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
@@ -53,7 +52,7 @@
       <ion-slide
         *ngFor="let place of myVisitedPlaces"
         class="visited-slide"
-        routerLink="/details"
+        [routerLink]="['/place-details', place?.place_id]"
       >
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
