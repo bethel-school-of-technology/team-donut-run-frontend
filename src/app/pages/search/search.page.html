@@ -8,7 +8,7 @@
     color="light"
     placeholder="Search by Zipcode"
   ></ion-searchbar>
-    <ion-row class="ion-padding">
+    <ion-row>
       <ion-slides [options]="catSlideOpts" class="ion-padding">
         <ion-slide
           *ngFor="let category of categoryTypes"
@@ -25,14 +25,14 @@
       </ion-slides>
     </ion-row>
     <ion-row
-      class="ion-padding ion-justify-content-center ion-align-items-center"
+      class="ion-justify-content-center ion-align-items-center"
     >
       <ion-button class="btn" color="light" (click)="toggleDataSource()">
         Search
       </ion-button></ion-row
     >
 
-    <ion-text color="dark"><b style="padding-left: 10px">Results</b></ion-text>
+    <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
     <ion-grid>
     <ion-row class="searchResultsRow">
       <ion-col class="searchResultsCardContent" *ngFor="let place of searchResults" size="12" size-sm="6" size-md="6" size-lg="4" size-xl="4">
