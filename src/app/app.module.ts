@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { FooterModule } from './components/footer/navbar.module copy';
+import { SwiperModule } from 'swiper/angular';
 
 // import { GooglePlaceModule } from 'google.maps';
 
@@ -20,7 +21,8 @@ import { FooterModule } from './components/footer/navbar.module copy';
     FormsModule,
     HttpClientModule,
     NavbarModule,
-    FooterModule
+    FooterModule,
+    SwiperModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

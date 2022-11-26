@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MyPlace } from 'src/app/models/my-place';
 import { PlaceResult } from 'src/app/models/place-result';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+// import Swiper core and required modules
+
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation]);
+
 
 // Connected to the index.d.ts file to override missing module import
 // import {} from 'googlemaps';
@@ -12,6 +18,7 @@ declare var google;
   selector: 'app-my-places',
   templateUrl: './my-places.page.html',
   styleUrls: ['./my-places.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MyPlacesPage implements OnInit {
   // To use to easily switch between mock and API data
@@ -48,13 +55,7 @@ export class MyPlacesPage implements OnInit {
     // Get all myPlace results for this user
     this.findAllPlacesByUserId(this.currentUserId);
   }
-  // Used to style the Visited Places Slider
-  visitedSlideOpts = {
-    slidesPerView: 1.5,
-    spaceBetween: 3,
-    freeMode: true,
-  };
-
+  
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
   findAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
