@@ -8,7 +8,7 @@
   <div class="ion-padding-horizontal">
     <h2>My Saved Places</h2>
   </div>
-  <ion-row class="myPlacesRow">
+  <ion-row>
     <ion-slides [options]="visitedSlideOpts">
       <ion-slide
         *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]"
@@ -47,7 +47,7 @@
   <div class="ion-padding-horizontal">
     <h2>My Visited Places</h2>
   </div>
-  <ion-row class="myPlacesRow">
+  <ion-row>
     <ion-slides [options]="visitedSlideOpts">
       <ion-slide
         *ngFor="let place of myVisitedPlaces"
