@@ -11,7 +11,7 @@ export class PlaceResult {
   photos?: string[];
   photo_reference?: string;
   business_status?: string;
-
+  short_address?: string;
   constructor(
     place_id?: string,
     name?: string,
@@ -21,7 +21,7 @@ export class PlaceResult {
     price_level?: number,
     website?: string,
     business_status?: string,
-    photo_reference?: string,
+    photo_reference?: string
   ) {
     this.place_id = place_id;
     this.name = name;
