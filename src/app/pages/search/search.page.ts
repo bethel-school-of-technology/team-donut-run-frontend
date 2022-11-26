@@ -68,6 +68,13 @@ export class SearchPage implements OnInit {
     spaceBetween: 10,
   };
 
+  // Options for search result cards
+  searchResultSlideOpts = {
+    slidesPerView: 1.2,
+    spaceBetween: 10,
+    freeMode: true,
+  };
+
   // To get the local json category data types
   public getJSON(): Observable<any> {
     return this.http.get('./assets/data/categories.json');

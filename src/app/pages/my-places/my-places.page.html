@@ -1,5 +1,11 @@
 <ion-header>
   <app-navbar></app-navbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button> </ion-buttons
+  ></ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -7,13 +13,16 @@
   <div class="ion-padding-horizontal">
     <h2>My Saved Places</h2>
   </div>
-  <ion-card *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
+  <ion-card
+    *ngFor="let place of myVisitedPlaces"
+    [routerLink]="['/place-details', place?.place_id]"
+  >
     <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
+      width="100%"
+      height="325"
+      alt="{{place.photo_reference}}"
+      src="{{place.photo_reference}}"
+    />
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
       <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
@@ -24,13 +33,16 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let place of myUnvisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
+  <ion-card
+    *ngFor="let place of myUnvisitedPlaces"
+    [routerLink]="['/place-details', place?.place_id]"
+  >
     <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
+      width="100%"
+      height="325"
+      alt="{{place.photo_reference}}"
+      src="{{place.photo_reference}}"
+    />
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
       <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
@@ -40,19 +52,21 @@
       <p>{{place.formatted_address}}</p>
     </ion-card-content>
   </ion-card>
-
 
   <!--My Visited Places - found by current UserId-->
   <div class="ion-padding-horizontal">
     <h2>My Visited Places</h2>
   </div>
-  <ion-card *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
+  <ion-card
+    *ngFor="let place of myVisitedPlaces"
+    [routerLink]="['/place-details', place?.place_id]"
+  >
     <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
+      width="100%"
+      height="325"
+      alt="{{place.photo_reference}}"
+      src="{{place.photo_reference}}"
+    />
     <ion-card-header>
       <ion-card-title>{{place.name}} </ion-card-title>
       <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
@@ -65,4 +79,3 @@
 </ion-content>
 
 <app-footer></app-footer>
-

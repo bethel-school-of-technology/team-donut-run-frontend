@@ -17,3 +17,19 @@
 .highlight {
     background-color: var(--ion-color-light-shade);
 }
+
+//new
+.searchResultsRow {
+    max-width: max-content;
+}
+.searchResultsCardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
