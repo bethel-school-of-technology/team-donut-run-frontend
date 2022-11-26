@@ -8,17 +8,23 @@
     color="light"
     placeholder="Search by Zipcode"
   ></ion-searchbar>
-
-  <ion-slides [options]="catSlideOpts" class="ion-padding">
-    <ion-slide *ngFor="let category of categoryTypes" class="categorySlider">
-       <img [src]="category.img"
-          (click)="onCategorySelect(category)"
-        >
-        <div class="category-type" [class.highlight]="category.selected == true">{{category.type}}</div>
-        </ion-slide>
-        </ion-slides>
-
   <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-slides [options]="catSlideOpts" class="ion-padding">
+        <ion-slide
+          *ngFor="let category of categoryTypes"
+          class="categorySlider"
+        >
+          <img [src]="category.img" (click)="onCategorySelect(category)" />
+          <div
+            class="category-type"
+            [class.highlight]="category.selected == true"
+          >
+            {{category.type}}
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
     <ion-row
       class="ion-padding ion-justify-content-center ion-align-items-center"
     >
