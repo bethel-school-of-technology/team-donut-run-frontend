@@ -1,9 +1,4 @@
-
-.btn {
-    margin: 10px;
-}
-
- .categorySlider {
+.categorySlider {
     color: rgb(0, 0, 0);
     width: 150px;
     display: flex;
@@ -19,8 +14,8 @@
 }
 
 //new
-.searchResultsRow {
-    max-width: max-content;
+.searchResultsCard {
+    min-width: 250px;
 }
 .searchResultsCardContent {
     display: flex;
