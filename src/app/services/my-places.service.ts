@@ -61,7 +61,7 @@ export class MyPlacesService {
   }
 
   // DELETE / delete saved my place -- auth
-  deleteMyPlaceByPlaceId(myPlaceId: string): Observable<any> {
+  deleteMyPlaceByPlaceId(myPlaceId: number): Observable<any> {
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     };
