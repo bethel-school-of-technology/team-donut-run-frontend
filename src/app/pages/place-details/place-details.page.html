@@ -3,29 +3,38 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button [routerLink]="['/my-places']">Back</ion-button>
+  <ion-button [routerLink]="['/search']" color="light">Back</ion-button>
 
   <ion-card-title>{{this.placeDetails.name}}</ion-card-title>
   <ion-card-subtitle>{{this.placeDetails.website}}</ion-card-subtitle>
-  
+
   <!-- Keep in mind that this.placeDetails.photo_reference will pull the photo from the mock data BUT photoLinkArray[] will pull the photos from the Google Places data from the .ts file. The *ngIf allows you to toggle between mock and real data so you may just be able to build out the photo carousel using these below? Just note that the mock data only has one photo. -->
   <div *ngIf="useAPI">
     <div *ngIf="photosExist">
       <img alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
     </div>
-
   </div>
   <div *ngIf="!useAPI">
-    <img alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
+    <img
+      alt="{{placeDetails.photo_reference}}"
+      src="{{placeDetails.photo_reference}}"
+    />
   </div>
-  
 
   <p>{{this.placeDetails.formatted_address}}</p>
   <p>{{placeOverview}}</p>
-  <ion-button (click)="savePlaceToMyPlaces()" class="Btn_Type" color="light" shape="circle"
+  <ion-button
+    (click)="savePlaceToMyPlaces()"
+    class="Btn_Type"
+    color="light"
+    shape="circle"
     ><ion-icon size="large" name="heart-outline"></ion-icon
   ></ion-button>
   <ion-button class="Btn_Type" color="light" shape="circle">
     <ion-icon size="large" name="add-circle"></ion-icon
   ></ion-button>
 </ion-content>
+
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>

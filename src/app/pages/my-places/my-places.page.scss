@@ -1,6 +1,24 @@
-
 /* iOS places the subtitle above the title */
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
+}
+//new
+ion-slides {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.visited-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

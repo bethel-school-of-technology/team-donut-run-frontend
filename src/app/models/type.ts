@@ -1,6 +1,6 @@
 export class Type {
-    id: number;
-    type: string;
-    name: string;
-    selected: boolean;
+  id: number;
+  type: string;
+  img: string;
+  selected: boolean;
 }

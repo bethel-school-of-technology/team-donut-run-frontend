@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "type": "Attraction",
+      "img": "/assets/photos/touristattraction.avif",
+      "selected": false
+    },
+    {
+      "id": 2,
+      "type": "Theme Park",
+      "img": "/assets/photos/amusementpark.avif",
+      "selected": false
+    },
+    {
+      "id": 3,
+      "type": "Restaurant",
+      "img": "/assets/photos/restaurant.avif",
+      "selected": false
+    },
+    {
+      "id": 4,
+      "type": "Bowling Alley",
+      "img": "/assets/photos/bowlingalley.avif",
+      "selected": false
+    },
+    {
+      "id": 5,
+      "type": "Movie Theater",
+      "img": "/assets/photos/movietheatre.avif",
+      "selected": false
+    },
+    {
+      "id": 6,
+      "type": "Spa",
+      "img": "/assets/photos/spa.avif",
+      "selected": false
+    },
+    {
+      "id": 7,
+      "type": "Shoe Store",
+      "img": "/assets/photos/shoestore.avif",
+      "selected": false
+    },
+    {
+      "id": 8,
+      "type": "Concert",
+      "img": "/assets/photos/concert.avif",
+      "selected": false
+    },
+    {
+      "id": 9,
+      "type": "Shopping Mall",
+      "img": "/assets/photos/shopping.avif",
+      "selected": false
+    },
+    {
+      "id": 10,
+      "type": "Zoo",
+      "img": "/assets/photos/zoo.avif",
+      "selected": false
+    }
+  ]
+}
