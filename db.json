@@ -93,7 +93,7 @@
         "point_of_interest",
         "establishment"
       ],
-      "formatted_address": "116 5th Ave N, Nashville, TN 37219, USA",
+      "formatted_address": "Nashville, TN",
       "rating": 4.8,
       "price_level": 2,
       "opening_hours": {
@@ -111,7 +111,7 @@
       "place_id": "ChIJE2FKt1hmZIgRaMGEIR4Qs-0",
       "name": "Renaissance Nashville Hotel",
       "types": ["lodging", "point_of_interest", "establishment"],
-      "formatted_address": "611 Commerce St, Nashville, TN 37203, USA",
+      "formatted_address": "Nashville, TN",
       "rating": 4.4,
       "price_level": 3,
       "opening_hours": {
@@ -130,7 +130,7 @@
       "place_id": "ChIJGVuc4xGGZIgR7fI2E4yqTpU",
       "name": "The Loveless Cafe",
       "types": ["cafe", "restaurant", "point_of_interest", "food", "establishment"],
-      "formatted_address": "8400 TN-100, Nashville, TN 37221, USA",
+      "formatted_address": "Nashville, TN",
       "rating": 4.6,
       "price_level": 2,
       "opening_hours": {
@@ -157,7 +157,7 @@
         "point_of_interest",
         "establishment"
       ],
-      "formatted_address": "1800 Galleria Blvd, Franklin, TN 37067, USA",
+      "formatted_address": "Franklin, TN",
       "rating": 3.5,
       "price_level": 1,
       "opening_hours": {
@@ -180,7 +180,7 @@
         "point_of_interest",
         "establishment"
       ],
-      "formatted_address": "419 Main St, Franklin, TN 37064, USA",
+      "formatted_address": "Franklin, TN",
       "rating": 4.8,
       "price_level": 2,
       "opening_hours": {
