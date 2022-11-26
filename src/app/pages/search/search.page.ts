@@ -3,8 +3,9 @@ import { Position } from '@capacitor/geolocation';
 import { PlaceResult } from 'src/app/models/place-result';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ResultsService } from 'src/app/Services/results.service';
-import { SwiperOptions } from 'swiper';
 import { Type } from 'src/app/models/type';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 // import {} from 'googlemaps'; // Not sure if this is needed
 declare var google;
@@ -37,56 +38,39 @@ export class SearchPage implements OnInit {
   // searchLimit: number = 3;
 
   // These are the current categories we are going to allow the user to search by
-  categoryTypes: Type[] = [
-    {
-      id: 1,
-      type: 'Tourist Attraction',
-      name: 'rocket-outline',
-      selected: false,
-    },
-    { id: 2, type: 'Amusement Park', name: 'people-outline', selected: false },
-    { id: 3, type: 'Restaurant', name: 'restaurant-outline', selected: false },
-    {
-      id: 4,
-      type: 'Bowling Alley',
-      name: 'tennisball-outline',
-      selected: false,
-    },
-    { id: 5, type: 'Movie Theater', name: 'ticket-outline', selected: false },
-    { id: 6, type: 'Spa', name: 'bug-outline', selected: false }
-    //{ id: 7, type: 'Shoe Store', name: 'footsteps-outline', selected: false },
-    //{ id: 8, type: 'Concert', name: 'musical-notes-outline', selected: false }
-    //{ id: 9, type: 'Shopping Mall', name: 'cart-outline', selected: false },
-    //{ id: 10, type: 'Zoo', name: 'paw-outline', selected: false },
-    //{ id: 11, type: 'Concert', name: 'musical-notes-outline', selected: false },
-  ];
+  categoryTypes: Type[];
   selectedType?: Type;
-
-  // Used for carousel (which we don't need on the search page)
-  config: SwiperOptions = {
-    slidesPerView: 3,
-    spaceBetween: 20,
-    navigation: true,
-    pagination: { clickable: true },
-    scrollbar: { draggable: true },
-  };
 
   constructor(
     private resultsService: ResultsService,
-    private geoService: GeolocationService
+    private geoService: GeolocationService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     // To get current user's geolocation on page load
     this.getCurrentLocation();
+    // To get the current category types from local json file
+    this.getJSON().subscribe((data) => {
+      this.categoryTypes = data.categories;
+    });
   }
 
-  onSwiper([swiper]) {
-    console.log(swiper);
-  }
+  // Options for the category slider
+  catSlideOpts = {
+    loop: false,
+    effect: 'slide',
 
-  onSlideChange() {
-    console.log('slide change');
+    freeMode: true,
+    freeModeSticky: false,
+
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+  };
+
+  // To get the local json category data types
+  public getJSON(): Observable<any> {
+    return this.http.get('./assets/data/categories.json');
   }
 
   // To get current user's geolocation to use in Nearby Search
@@ -118,8 +102,12 @@ export class SearchPage implements OnInit {
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
-      this.setSearchResults(this.currentLatitude, this.currentLongitude, this.selectedType.type, this.searchRadius);
-
+      this.setSearchResults(
+        this.currentLatitude,
+        this.currentLongitude,
+        this.selectedType.type,
+        this.searchRadius
+      );
     } else {
       // use MOCK endpoints
       this.mockSearchAll();
@@ -128,8 +116,8 @@ export class SearchPage implements OnInit {
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
   // GET / Nearby Search (by current geolocation)
-  // This calls the function from the Google API to get the results in a Promise  
-  // This could technically be placed into the Results Service if we wanted to 
+  // This calls the function from the Google API to get the results in a Promise
+  // This could technically be placed into the Results Service if we wanted to
   nearbySearchByGeolocation(latLng, searchType, searchRadius) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')
@@ -179,9 +167,9 @@ export class SearchPage implements OnInit {
             });
 
           let address = results[0].plus_code.compound_code;
-          let split = address.split(" ", 3);
+          let split = address.split(' ', 3);
           split.shift();
-          address = split.join(" ");
+          address = split.join(' ');
           this.searchResults[i].formatted_address = address;
         }
       },

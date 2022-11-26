@@ -4,34 +4,25 @@
 
 <ion-content>
   <ion-searchbar
-    class="ion-padding ion-hide"
+    class="ion-padding"
     color="light"
     placeholder="Search by Zipcode"
   ></ion-searchbar>
+
+  <ion-slides [options]="catSlideOpts" class="ion-padding">
+    <ion-slide *ngFor="let category of categoryTypes" class="categorySlider">
+       <img [src]="category.img"
+          (click)="onCategorySelect(category)"
+        >
+        <div class="category-type" [class.highlight]="category.selected == true">{{category.type}}</div>
+        </ion-slide>
+        </ion-slides>
 
   <ion-grid class="ion-padding">
     <ion-row
       class="ion-padding ion-justify-content-center ion-align-items-center"
     >
-      <div *ngFor="let category of categoryTypes" class="categoryBoxes">
-        <ion-button
-          [class.highlight]="category.selected == true"
-          class="Btn_Type"
-          color="secondary"
-          shape="circle"
-          (click)="onCategorySelect(category)"
-        >
-          <ion-icon
-            size="large"
-            color="light"
-            name="{{category.name}}"
-          ></ion-icon>
-        </ion-button>
-        <div class="ion-text-center">{{category.type}}</div>
-      </div>
-    </ion-row>
-    <ion-row class="ion-padding ion-justify-content-center ion-align-items-center">
-      <ion-button class="Btn_Type" color="light" (click)="toggleDataSource()">
+      <ion-button class="btn" color="light" (click)="toggleDataSource()">
         Search
       </ion-button></ion-row
     >
@@ -69,8 +60,7 @@
     </ion-row>
   </ion-grid>
 
-<ion-footer>
-  <app-footer></app-footer>
-</ion-footer>
-
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
 </ion-content>
