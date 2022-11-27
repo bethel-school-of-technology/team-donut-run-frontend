@@ -68,6 +68,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
+  // (checking to make sure this is added)
   mockFindAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
@@ -79,6 +80,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // API find all places
+  // (checking to make sure this is added)
   apiFindAllPlacesByUserId() {
     this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
       this.myPlaceArray = result;
