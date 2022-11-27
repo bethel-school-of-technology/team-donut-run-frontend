@@ -49,6 +49,7 @@ export class MyPlacesPage implements OnInit {
 
   ngOnInit() {
 
+    // This needs to be added
     if (this.useAPI == true) {
       // user real data & database
       this.authService.getCurrentUser().subscribe(user => {
