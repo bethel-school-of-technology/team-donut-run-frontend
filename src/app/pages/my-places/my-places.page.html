@@ -17,8 +17,9 @@
       swiperSlide
       *ngFor="let place of myVisitedPlaces"
       class="visited-slide"
+      
     >
-      <ion-card class="cardImgText">
+      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
@@ -35,7 +36,7 @@
       *ngFor="let place of myUnvisitedPlaces"
       class="visited-slide"
     >
-      <ion-card class="cardImgText">
+      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
@@ -61,7 +62,7 @@
       *ngFor="let place of myVisitedPlaces"
       class="visited-slide"
     >
-      <ion-card class="cardImgText">
+      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
