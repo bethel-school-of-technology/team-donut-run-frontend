@@ -217,6 +217,7 @@ export class PlaceDetailsPage implements OnInit {
 
     console.log("New Place Details: ", this.saveNewPlace);
 
+    // Do we want to route to the MyPlaces page or keep on the Place Details page?
     this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(() => {
       if (this.saveNewPlace.visited == true) {
         window.alert("Place saved and marked as visited!");
@@ -238,6 +239,7 @@ export class PlaceDetailsPage implements OnInit {
   removePlacefromMyPlaces() {
     this.placesService.deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId).subscribe(() => {
       window.location.reload();
+      // Do we want to route to the MyPlaces page or keep on the Place Details page?
       window.alert("Place has been removed from saved places list.")
     }, error => {
       console.log("Remove Place Error: ", error);

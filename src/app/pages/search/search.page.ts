@@ -27,6 +27,12 @@ export class SearchPage implements OnInit {
   currentLatitude: number = null;
   currentLongitude: number = null;
 
+  // Used for advanced serach
+  searchCity: string;
+  searchState: string;
+  searchLatitude: number = null;
+  searchLongitude: number = null;
+
   // To display data results
   // newPlace: PlaceResult = new PlaceResult();
   searchResults: Array<PlaceResult>;
@@ -109,6 +115,8 @@ export class SearchPage implements OnInit {
   toggleDataSource() {
     if (this.useAPI == true) {
       // use API endpoints
+
+      // How to differentiate between geolocation and user input? Different method?
       this.setSearchResults(
         this.currentLatitude,
         this.currentLongitude,
@@ -119,6 +127,16 @@ export class SearchPage implements OnInit {
       // use MOCK endpoints
       this.mockSearchAll();
     }
+  }
+
+  ////////// ADVANCED SEARCH BY USER INPUT //////////
+  searchByUserInput() {
+    // get city, state from user input
+    // run through free api to get lat/long
+    // assign lat/long to variables
+    // pass those through the setSearchResults method
+    console.log("City: ", this.searchCity);
+    console.log("State: ", this.searchState);
   }
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
@@ -177,7 +195,7 @@ export class SearchPage implements OnInit {
           let split = address.split(' ', 3);
           split.shift();
           address = split.join(' ');
-          this.searchResults[i].formatted_address = address;
+          this.searchResults[i].short_address = address;
         }
       },
       (status) => console.log('Status: ', status)
@@ -191,4 +209,15 @@ export class SearchPage implements OnInit {
       console.log(ReturnedPlaces);
     });
   }
+
+  stateOptions: string[] = [
+    "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Minor Outlying Islands", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "U.S. Virgin Islands", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+  ];
+
+  // To set the state based on the dropdown
+  setState(ev) {
+    this.searchState = ev.detail.value;
+    console.log("State Set: ", this.searchState);
+  }
+
 }

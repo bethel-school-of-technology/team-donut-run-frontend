@@ -37,6 +37,28 @@
     </ion-button>
   </ion-row>
 
+  <div>
+    <form (ngSubmit)="searchByUserInput()">
+      <ion-list>
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-input type="city" name="city" [(ngModel)]="this.searchCity"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>State</ion-label>
+          <ion-select interface="popover" placeholder="Select State"  (ionChange)="setState($event)">
+            <ion-select-option *ngFor="let state of stateOptions" [value]="state" >{{state}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-button class="btn" color="light" type="submit">
+      Advanced Search
+    </ion-button>
+    </form>
+  </div>
+
+  <br>
+
   <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
   <ion-grid>
     <ion-row class="searchResultsRow">
