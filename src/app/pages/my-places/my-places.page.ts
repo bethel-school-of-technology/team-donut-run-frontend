@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MyPlace } from 'src/app/models/my-place';
-import { PlaceResult } from 'src/app/models/place-result';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { PlaceResult } from 'src/app/models/place-result';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+// import Swiper core and required modules
+
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation]);
 
 // Connected to the index.d.ts file to override missing module import
 // import {} from 'googlemaps';
@@ -15,6 +20,7 @@ declare var google;
   selector: 'app-my-places',
   templateUrl: './my-places.page.html',
   styleUrls: ['./my-places.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class MyPlacesPage implements OnInit {
