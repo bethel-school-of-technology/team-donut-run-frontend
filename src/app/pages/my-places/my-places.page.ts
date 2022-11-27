@@ -67,6 +67,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
+  // Making sure this saves
   mockFindAllPlacesByUserId(userId) {
     this.placesService.getPlacesByUserId(userId).subscribe((result) => {
       this.myPlaceArray = result;
@@ -78,6 +79,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // API find all places
+  // Making sure this saves
   apiFindAllPlacesByUserId() {
     this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
       this.myPlaceArray = result;
@@ -89,6 +91,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // Sorts whether the place has been visited or not
+  // Making sure this saves
   sortSavedPlacesByUserId(myPlaceArray) {
     for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
       let currentMyPlace = this.myPlaceArray[i];
@@ -104,6 +107,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // Gets Place Details to display on My Places VISITED cards
+  // Making sure this saves
   getVisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
     if (this.useAPI == true) {
       // use API endpoints
@@ -137,6 +141,7 @@ export class MyPlacesPage implements OnInit {
   }
 
   // Gets Place Details to display on My Places UNVISITED cards (aka, just Saved)
+  // Making sure this saves
   getUnvisitedPlaceDetailsByGooglePlaceId(googlePlaceId) {
     if (this.useAPI == true) {
       // use API endpoints
