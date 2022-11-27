@@ -1,19 +1,31 @@
-.categorySlider {
-    color: rgb(0, 0, 0);
-    width: 150px;
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+
+#swiperCard {
     display: flex;
     flex-direction: column;
- }
-.category-type {
-    background-color: var(--ion-color-light);
-    width: 100%;
-    padding: 2%;
 }
-.highlight {
-    background-color: var(--ion-color-light-shade);
+.swiper {
+    width: 100%;
+    padding-bottom: 40px;
 }
 
-//new
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+.categoryRow {
+    height: 100px;
+}
 .searchResultsCard {
     min-width: 250px;
 }
