@@ -3,66 +3,78 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--My Saved Places - found by current UserId-->
-  <div class="ion-padding-horizontal">
-    <h2>My Saved Places</h2>
-  </div>
-  <ion-card *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
-    <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
-    <ion-card-header>
-      <ion-card-title>{{place.name}} </ion-card-title>
-      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
-    </ion-card-header>
+  <!--Back Button-->
+  <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+  <!--My Saved Places Carousel-->
+  <h3 class="ion-padding-horizontal">My Saved Places</h3>
+  <swiper
+    [grabCursor]="true"
+    [slidesPerView]="'auto'"
+    class="mySwiper"
+  >
+    <!--Loops through visited places-->
+    <ng-template
+      swiperSlide
+      *ngFor="let place of myVisitedPlaces"
+      class="visited-slide"
+    >
+      <ion-card class="cardImgText">
+        <div class="placesPhoto">
+          <img [src]="place.photo_reference" />
+        </div>
+        <div class="cardText">
+          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
+          <ion-text color="dark"> {{ place.types }} </ion-text>
+          <ion-text> {{ place.formatted_address }} </ion-text>
+        </div>
+      </ion-card>
+    </ng-template>
+    <!--Loops through unvisited places-->
+    <ng-template
+      swiperSlide
+      *ngFor="let place of myUnvisitedPlaces"
+      class="visited-slide"
+    >
+      <ion-card class="cardImgText">
+        <div class="placesPhoto">
+          <img [src]="place.photo_reference" />
+        </div>
+        <div class="cardText">
+          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
+          <ion-text color="dark"> {{ place.types }} </ion-text>
+          <ion-text> {{ place.formatted_address }} </ion-text>
+        </div>
+      </ion-card>
+    </ng-template>
+  </swiper>
 
-    <ion-card-content>
-      <p>{{place.formatted_address}}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngFor="let place of myUnvisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
-    <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
-    <ion-card-header>
-      <ion-card-title>{{place.name}} </ion-card-title>
-      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p>{{place.formatted_address}}</p>
-    </ion-card-content>
-  </ion-card>
-
-
-  <!--My Visited Places - found by current UserId-->
-  <div class="ion-padding-horizontal">
-    <h2>My Visited Places</h2>
-  </div>
-  <ion-card *ngFor="let place of myVisitedPlaces" [routerLink]="['/place-details', place?.place_id]">
-    <img
-            width="100%"
-            height="325"
-            alt="{{place.photo_reference}}"
-            src="{{place.photo_reference}}"
-          />
-    <ion-card-header>
-      <ion-card-title>{{place.name}} </ion-card-title>
-      <ion-card-subtitle>{{place.types}}</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p>{{place.formatted_address}}</p>
-    </ion-card-content>
-  </ion-card>
+  <!--My Visited Places Carousel-->
+  <h3 class="ion-padding-horizontal">My Visited Places</h3>
+  <swiper
+    [grabCursor]="true"
+    [slidesPerView]="'auto'"
+    class="mySwiper"
+  >
+    <!--Loops through visited places-->
+    <ng-template
+      swiperSlide
+      *ngFor="let place of myVisitedPlaces"
+      class="visited-slide"
+    >
+      <ion-card class="cardImgText">
+        <div class="placesPhoto">
+          <img [src]="place.photo_reference" />
+        </div>
+        <div class="cardText">
+          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
+          <ion-text color="dark"> {{ place.types }} </ion-text>
+          <ion-text> {{ place.formatted_address }} </ion-text>
+        </div>
+      </ion-card>
+    </ng-template>
+  </swiper>
 </ion-content>
 
-<app-footer></app-footer>
-
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>

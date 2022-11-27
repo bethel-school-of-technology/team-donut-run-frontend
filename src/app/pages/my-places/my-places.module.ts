@@ -9,6 +9,7 @@ import { MyPlacesPageRoutingModule } from './my-places-routing.module';
 import { MyPlacesPage } from './my-places.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { FooterModule } from 'src/app/components/footer/navbar.module copy';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FooterModule } from 'src/app/components/footer/navbar.module copy';
     IonicModule,
     MyPlacesPageRoutingModule,
     NavbarModule,
-    FooterModule
+    FooterModule,
+    SwiperModule,
   ],
   declarations: [MyPlacesPage],
 })

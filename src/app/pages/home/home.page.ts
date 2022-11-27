@@ -30,8 +30,7 @@ export class HomePage implements OnInit {
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
-
-  SearchPage() {
+   SearchPage() {
     this.navCtrl.navigateForward('search');
   }
 }
