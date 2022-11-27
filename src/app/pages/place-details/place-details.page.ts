@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaceResult } from 'src/app/models/place-result';
 import { ResultsService } from 'src/app/Services/results.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyPlacesService } from 'src/app/services/my-places.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
+import { MyPlace } from 'src/app/models/my-place';
 
 declare var google;
 
@@ -20,20 +23,25 @@ export class PlaceDetailsPage implements OnInit {
 
   // Place details variables
   placeDetails: PlaceResult = new PlaceResult();
-  currentPlace_id: string = '';
+  currentGooglePlaceId: string = '';
 
-  // Place photos
+  // Used for place photos
   newPhoto = "";
-
-  // Used to get all photo details from response
   photoList: Array<any>;
-
-  // Used to get all URLs for photos (loop through in HTML to get all photos)
   photoLinkArray: string[] = [];
 
   // Use to limit the number of photos we get for each place (keep in mind each photo is 1 call, so 3 photos would be 3 calls)
   photoLimit: number = 1;
   photosExist: boolean = true;
+
+  // User & My Place variables
+  currentUser: User = new User();
+  currentUserId: number;
+  myGooglePlaceIds: string[] = [];
+  userSavedPlace: boolean;
+  // currentMyPlaceId: number; // We may not need this
+  currentMyPlace: MyPlace = new MyPlace();
+  saveNewPlace: MyPlace = new MyPlace();
 
   // Placeholder text while editorial_summary is not working
   placeOverview: string = "Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO mlkshk godard pour-over blog tumblr humblebrag. Blue bottle put a bird on it twee prism biodiesel brooklyn. Blue bottle ennui tbh succulents."
@@ -41,18 +49,73 @@ export class PlaceDetailsPage implements OnInit {
   constructor(
     private resultsService: ResultsService,
     private activatedRoute: ActivatedRoute,
-    private myPlacesService: MyPlacesService
+    private placesService: MyPlacesService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.getCurrentGooglePlaceId();
+
+    this.authService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      this.currentUserId = user.userId;
+      // console.log("Current User: ", this.currentUser);
+    });
+
+    this.checkIfSaved(this.currentGooglePlaceId);
+
+    // Add this to easily toggle between mock and real data
+    // if (this.useAPI == true) {
+    //   // user real data & database
+    //   this.authService.getCurrentUser().subscribe(user => {
+    //       this.currentUser = user;
+    //       this.currentUserId = user.userId;
+    //       console.log("Current User: ", this.currentUser);
+    //     });
+
+    // } else {
+    //   // use mock data
+    //   // this.currentUserId = 4;
+    // }
   }
 
   getCurrentGooglePlaceId() {
-    this.currentPlace_id = this.activatedRoute.snapshot.params['id'];
-    this.findPlaceDetailsByGooglePlaceId(this.currentPlace_id);
+    this.currentGooglePlaceId = this.activatedRoute.snapshot.params['id'];
+    this.findPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
   }
 
+  // I don't think we need this after all!
+  // Do we first need to get a list of all the saved google place ids and then compare the passed in google id to that list?
+  // apiFindAllPlacesByUserId() {
+  //   this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+  //     for (let i = 0; i < result.length; i++) {
+  //       let addId = result[i].googlePlaceId
+  //       this.myGooglePlaceIds.push(addId);
+  //     }
+  //     console.log('Google Place Id Results: ', this.myGooglePlaceIds);
+  //   });
+  // }
+
+  // Find if current place exists in MyPlaces table for the given user
+  checkIfSaved(googlePlaceId: string) {
+    this.placesService.getPlaceByUserIdGoogleId(googlePlaceId).subscribe((result) => {
+        if (result == null || result == undefined) {
+          this.userSavedPlace = false;
+          this.currentMyPlace = null;
+          console.log(`Did not find place = ${this.userSavedPlace}`);
+        } else {
+          this.userSavedPlace = true;
+          this.currentMyPlace = result;
+          console.log(`Found place ${this.currentMyPlace.myPlaceId} = ${this.userSavedPlace}`);
+        }
+    }, error => {
+      console.log("Check if Saved Error: ", error);
+      // Not sure if we should handle any specific errors here, like 404 or 401 for unauthorized and route to sign in?
+    })
+  }
+
+  
   // To call service to get place details to display on the page
   findPlaceDetailsByGooglePlaceId(place_id) {
     if (this.useAPI == true) {
@@ -65,7 +128,7 @@ export class PlaceDetailsPage implements OnInit {
       .subscribe((result) => {
         this.placeDetails = result[0];
         //printing results
-        console.log("Mock Place Details: ", this.placeDetails);
+        // console.log("Mock Place Details: ", this.placeDetails);
         //save overview to place model
         this.placeDetails.overview = result[0].editorial_summary.overview;
         //save photo reference to place model
@@ -143,19 +206,84 @@ export class PlaceDetailsPage implements OnInit {
     );
   }
 
-  // Work on later
+
+  // If user has NOT already saved a place
+  // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
-    //get Google Place Id
-    console.log("Google Place Id: ", this.currentPlace_id);
+    console.log("Going to add to My Places");
+    // var today = new Date(); // I think this is set automatically
+    this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
+    this.saveNewPlace.createdOn = "Placeholder"; // this will autosave as a date on the backend
 
-    //get current User Id
+    console.log("New Place Details: ", this.saveNewPlace);
 
-    //get current date
-    var today = new Date();
-    console.log(today);
+    this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(() => {
+      if (this.saveNewPlace.visited == true) {
+        window.alert("Place saved and marked as visited!");
+      } else {
+        window.alert("Place saved!");
+      }
+     
+      window.location.reload();
+    }, error => {
+      console.log("Save Place Error: ", error);
+      // if (error.status === 401 || error.status === 403) {
+      //   this.router.navigate(['signin'])};
+    });
 
-    //has this user visited the current place?
+  }
 
+  // If user HAS already saved a place
+  // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
+  removePlacefromMyPlaces() {
+    this.placesService.deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId).subscribe(() => {
+      window.location.reload();
+      window.alert("Place has been removed from saved places list.")
+    }, error => {
+      console.log("Remove Place Error: ", error);
+      if (error.status === 401) {
+        this.router.navigate(['signin']);
+      }
+    })
+  }
+
+  toggleVisited() {    
+    if (this.userSavedPlace == false) {
+      // saved false, visited false
+      // save place AND mark as visited
+      this.saveNewPlace.visited = true;
+      this.savePlaceToMyPlaces();
+
+    } else if (this.userSavedPlace == true && this.currentMyPlace.visited == false) {
+      // saved true, visited false
+      // mark as visited
+      this.currentMyPlace.visited = true;
+      this.placesService.updateMyPlace(this.currentMyPlace).subscribe(() => {
+        window.alert("Place has been marked as visited!");
+        // window.location.reload();
+      }, error => {
+        window.alert("Unable to mark as visited.")
+        console.log("Update Place Error: ", error);
+        // if (error.status === 401) {
+        //   this.router.navigate(['signin']);
+        // }
+      });
+
+    } else if (this.userSavedPlace == true && this.currentMyPlace.visited == true) {
+      // saved true, visited true
+      // mark visited as false
+      this.currentMyPlace.visited = false;
+      this.placesService.updateMyPlace(this.currentMyPlace).subscribe(() => {
+        window.alert("Place has been removed as visited!");
+        // window.location.reload();
+      }, error => {
+        window.alert("Unable to mark as visited.")
+        console.log("Update Place Error: ", error);
+        // if (error.status === 401) {
+        //   this.router.navigate(['signin']);
+        // }
+      });
+    }
   }
 
 }

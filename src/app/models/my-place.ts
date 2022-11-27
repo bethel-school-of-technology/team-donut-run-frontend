@@ -1,16 +1,16 @@
 import { User } from "./user";
 
 export class MyPlace {
-  myPlaceId: number;
-  visited: boolean;
+  myPlaceId?: number;
+  visited?: boolean;
   userId?: User['userId'];
   user?: User;
-  createdOn: string;
-  googlePlaceId: string;
+  createdOn?: string;
+  googlePlaceId?: string;
 
   constructor(
-    googlePlaceId: string,
-    myPlaceId: number,
+    myPlaceId?: number,
+    googlePlaceId?: string,
     visited?: boolean,
     userId?: User['userId'],
     user?: User,

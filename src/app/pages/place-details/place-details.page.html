@@ -3,6 +3,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button [routerLink]="['/my-places']">Back</ion-button>
+  <p *ngIf="userSavedPlace">You've already saved this place!</p>
   <ion-button [routerLink]="['/search']" color="light">Back</ion-button>
 
   <ion-card-title>{{this.placeDetails.name}}</ion-card-title>
@@ -23,16 +25,27 @@
 
   <p>{{this.placeDetails.formatted_address}}</p>
   <p>{{placeOverview}}</p>
-  <ion-button
-    (click)="savePlaceToMyPlaces()"
-    class="Btn_Type"
-    color="light"
-    shape="circle"
-    ><ion-icon size="large" name="heart-outline"></ion-icon
-  ></ion-button>
-  <ion-button class="Btn_Type" color="light" shape="circle">
-    <ion-icon size="large" name="add-circle"></ion-icon
-  ></ion-button>
+
+  <ion-button *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" color="light" shape="circle">
+      <ion-icon size="large" name="heart-outline"></ion-icon>
+  </ion-button>
+
+  <ion-button *ngIf="userSavedPlace" (click)="removePlacefromMyPlaces()" class="Btn_Type" color="light" shape="circle">
+    <ion-icon size="large" name="close-circle-outline"></ion-icon>
+  </ion-button>
+
+  <ion-button *ngIf="!userSavedPlace" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
+    <ion-icon size="large" name="add-circle"></ion-icon>
+  </ion-button>
+
+  <ion-button *ngIf="userSavedPlace && !currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
+    <ion-icon size="large" name="add-circle"></ion-icon>
+  </ion-button>
+  
+  <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
+    <ion-icon size="large" name="pin-outline"></ion-icon>
+  </ion-button>
+
 </ion-content>
 
   <ion-footer>

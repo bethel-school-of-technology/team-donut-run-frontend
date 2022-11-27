@@ -27,15 +27,47 @@ export class MyPlacesService {
     return this.http.get<MyPlace[]>(`${this.apiDataSource}/user/current`,{ headers: reqHeaders });
   }
 
-  // GET / a single my place by my place id 
+  // GET / a single my place by my place id -- NO auth
+  // I'm not sure we'll actually use this?
+  getMyPlaceByMyPlaceId(myPlaceId: string): Observable<MyPlace> {
+    return this.http.get<MyPlace>(`${this.apiDataSource}/${myPlaceId}`);
+  }
 
-  // GET / a single my place by user id and google place id -- auth
+  // GET / a single my place by current user and google place id -- auth
+  getPlaceByUserIdGoogleId(googlePlaceId: string): Observable<MyPlace> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    };
+
+    return this.http.get<MyPlace>(`${this.apiDataSource}/find/current-user/${googlePlaceId}`, { headers: reqHeaders });
+  }
 
   // POST / create a new saved my place -- auth
+  saveNewMyPlace(newPlace: MyPlace): Observable<MyPlace> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    };
+
+    return this.http.post<MyPlace>(this.apiDataSource, newPlace, { headers: reqHeaders });
+  }
 
   // PUT / update a saved my place with visited boolean -- auth
+  updateMyPlace(editPlace: MyPlace): Observable<MyPlace> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    };
+
+    return this.http.put<MyPlace>(`${this.apiDataSource}/edit/${editPlace.myPlaceId}`, editPlace, { headers: reqHeaders });
+  }
 
   // DELETE / delete saved my place -- auth
+  deleteMyPlaceByPlaceId(myPlaceId: number): Observable<any> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    };
+
+    return this.http.delete<any>(`${this.apiDataSource}/${myPlaceId}`, { headers: reqHeaders });
+  }
 
   ////////////// MOCK DATA TEST ENDPOINTS ////////////////
 
