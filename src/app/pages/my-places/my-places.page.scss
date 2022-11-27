@@ -1,6 +1,29 @@
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
 
 /* iOS places the subtitle above the title */
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
+}
+
+.visited-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .cardImgText {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .cardText {
+        display: flex;
+        padding: 10px;      
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        }
 }
