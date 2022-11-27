@@ -8,36 +8,47 @@
     color="light"
     placeholder="Search by Zipcode"
   ></ion-searchbar>
-
-    <ion-row>
-      <ion-slides [options]="catSlideOpts" class="ion-padding">
-        <ion-slide
-          *ngFor="let category of categoryTypes"
-          class="categorySlider"
-        >
-          <img [src]="category.img"(click)="onCategorySelect(category)" />
-          <div
-            class="category-type"
-            [class.highlight]="category.selected == true"
-          >
-            {{category.type}}
-          </div>
-        </ion-slide>
-      </ion-slides>
-    </ion-row>
-    <ion-row
-      class="ion-justify-content-center ion-align-items-center"
+  <!--Categories New-->
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+  <swiper
+    [effect]="'coverflow'"
+    [grabCursor]="true"
+    [centeredSlides]="true"
+    [slidesPerView]="3"
+    [coverflowEffect]="{
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true
+    }"
+    [pagination]="true"
+    class="mySwiper"
+  >
+    <ng-template swiperSlide *ngFor="let category of categoryTypes"
+      ><img [src]="category.img" (click)="onCategorySelect(category)" /></ng-template
     >
-      <ion-button class="btn" color="light" (click)="toggleDataSource()">
-        Search
-      </ion-button>
-      </ion-row
-    >
+  </swiper>
+  </ion-row>
 
-    <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
-    <ion-grid>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-button class="btn" color="light" (click)="toggleDataSource()">
+      Search
+    </ion-button>
+  </ion-row>
+
+  <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
+  <ion-grid>
     <ion-row class="searchResultsRow">
-      <ion-col class="searchResultsCardContent" *ngFor="let place of searchResults" size="12" size-sm="6" size-md="6" size-lg="4" size-xl="4">
+      <ion-col
+        class="searchResultsCardContent"
+        *ngFor="let place of searchResults"
+        size="12"
+        size-sm="6"
+        size-md="6"
+        size-lg="4"
+        size-xl="4"
+      >
         <ion-card
           class="searchResultsCard"
           [routerLink]="['/place-details', place.place_id]"
@@ -55,13 +66,11 @@
             </span>
           </ion-card-content>
         </ion-card>
-        </ion-col>
+      </ion-col>
     </ion-row>
-    </ion-grid>
+  </ion-grid>
 </ion-content>
 
-  <ion-footer>
-    <app-footer></app-footer>
-  </ion-footer>
-  
-
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>
