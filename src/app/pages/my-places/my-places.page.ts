@@ -5,11 +5,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PlaceResult } from 'src/app/models/place-result';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-// import Swiper core and required modules
 
+// import Swiper core and required modules
+import SwiperCore, { Pagination, Navigation} from 'swiper';
 // install Swiper modules
-SwiperCore.use([Pagination, Navigation]);
+SwiperCore.use([Pagination]);
 
 // Connected to the index.d.ts file to override missing module import
 // import {} from 'googlemaps';
@@ -22,9 +22,7 @@ declare var google;
   styleUrls: ['./my-places.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-
 export class MyPlacesPage implements OnInit {
-
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
   useAPI: boolean = false;
@@ -34,7 +32,7 @@ export class MyPlacesPage implements OnInit {
 
   currentGooglePlaceId: string = '';
   currentPlaceDetails: PlaceResult = new PlaceResult();
-  
+
   // We will use these
   myVisitedPlaces: PlaceResult[] = [];
   myUnvisitedPlaces: PlaceResult[] = [];
@@ -54,23 +52,25 @@ export class MyPlacesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-
     if (this.useAPI == true) {
       // user real data & database
-      this.authService.getCurrentUser().subscribe(user => {
-          this.currentUser = user;
-          this.currentUserId = user.userId;
-          console.log("Current User: ", this.currentUser);
-        })
-      this.apiFindAllPlacesByUserId(); 
-
+      this.authService.getCurrentUser().subscribe((user) => {
+        this.currentUser = user;
+        this.currentUserId = user.userId;
+        console.log('Current User: ', this.currentUser);
+      });
+      this.apiFindAllPlacesByUserId();
     } else {
       // use mock data
       this.currentUserId = 4;
       this.mockFindAllPlacesByUserId(this.currentUserId);
     }
-  
   }
+  breakpoints = {
+    320: { slidesPerView: 1, spaceBetween: 10 },
+    990: { slidesPerView: 2, spaceBetween: 10 },
+    1651: { slidesPerView: 3, spaceBetween: 10 },
+  };
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
   mockFindAllPlacesByUserId(userId) {
@@ -102,7 +102,6 @@ export class MyPlacesPage implements OnInit {
 
       if (currentMyPlace.visited == true) {
         this.getVisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
-
       } else {
         this.getUnvisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
       }
@@ -120,25 +119,28 @@ export class MyPlacesPage implements OnInit {
           this.currentPlaceDetails.types = typesArray[0];
 
           let photoList: Array<any> = this.currentPlaceDetails.photos;
-          let placePhoto = photoList[0].getUrl({ maxWidth: 500, maxHeight: 500 });
+          let placePhoto = photoList[0].getUrl({
+            maxWidth: 500,
+            maxHeight: 500,
+          });
           this.currentPlaceDetails.photo_reference = placePhoto;
 
-          console.log("API Current Place Details: ", this.currentPlaceDetails);
+          console.log('API Current Place Details: ', this.currentPlaceDetails);
 
           this.myVisitedPlaces.push(this.currentPlaceDetails);
-  
-        }, (status) => console.log("API Status: ", status)
+        },
+        (status) => console.log('API Status: ', status)
       );
     } else {
       // use MOCK endpoints
       this.resultsService
-      .getSavedResultsByGooglePlaceId(googlePlaceId)
-      .subscribe((result) => {
-        this.currentPlaceDetails = result[0];
-        this.currentPlaceDetails.types = result[0].types[0];
+        .getSavedResultsByGooglePlaceId(googlePlaceId)
+        .subscribe((result) => {
+          this.currentPlaceDetails = result[0];
+          this.currentPlaceDetails.types = result[0].types[0];
 
-        this.myVisitedPlaces.push(this.currentPlaceDetails);
-      });
+          this.myVisitedPlaces.push(this.currentPlaceDetails);
+        });
     }
   }
 
@@ -150,32 +152,33 @@ export class MyPlacesPage implements OnInit {
         (results: PlaceResult) => {
           this.currentPlaceDetails = results;
           let typesArray: Array<any> = results.types;
-          this.currentPlaceDetails.types = typesArray[0];     
-          
+          this.currentPlaceDetails.types = typesArray[0];
+
           let photoList: Array<any> = this.currentPlaceDetails.photos;
-          let placePhoto = photoList[0].getUrl({ maxWidth: 500, maxHeight: 500 });
+          let placePhoto = photoList[0].getUrl({
+            maxWidth: 500,
+            maxHeight: 500,
+          });
           this.currentPlaceDetails.photo_reference = placePhoto;
 
-          console.log("API Current Place Details: ", this.currentPlaceDetails);
+          console.log('API Current Place Details: ', this.currentPlaceDetails);
 
           this.myUnvisitedPlaces.push(this.currentPlaceDetails);
-
-        }, (status) => console.log("API Status: ", status)
+        },
+        (status) => console.log('API Status: ', status)
       );
     } else {
       // use MOCK endpoints
       this.resultsService
-      .getSavedResultsByGooglePlaceId(googlePlaceId)
-      .subscribe((result) => {
-        this.currentPlaceDetails = result[0];
-        this.currentPlaceDetails.types = result[0].types[0];
-        
-        this.myUnvisitedPlaces.push(this.currentPlaceDetails);
-      });
-    }
-    
-  }
+        .getSavedResultsByGooglePlaceId(googlePlaceId)
+        .subscribe((result) => {
+          this.currentPlaceDetails = result[0];
+          this.currentPlaceDetails.types = result[0].types[0];
 
+          this.myUnvisitedPlaces.push(this.currentPlaceDetails);
+        });
+    }
+  }
 
   ////////// GOOGLE API -- GET MY PLACES & DETAILS //////////
   // This invokes the getDetails call from the Google Places API
@@ -187,22 +190,16 @@ export class MyPlacesPage implements OnInit {
 
     var request = {
       placeId: googlePlaceId,
-      fields: [
-        'place_id', 
-        'name', 
-        'types', 
-        'formatted_address',
-        'photos'],
+      fields: ['place_id', 'name', 'types', 'formatted_address', 'photos'],
     };
 
     return new Promise((resolve, reject) => {
       service.getDetails(request, function (results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK)
-        {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
           resolve(results);
         } else {
-          reject (status);
-          console.log("Place Details Response Error: ", status);
+          reject(status);
+          console.log('Place Details Response Error: ', status);
         }
       });
     });
@@ -214,12 +211,10 @@ export class MyPlacesPage implements OnInit {
   //     (results: PlaceResult) => {
   //       this.currentPlaceDetails = results;
   //       console.log("API Current Place Details: ", this.currentPlaceDetails);
-        
+
   //     }, (status) => console.log("API Status: ", status)
   //   );
   // }
 
-    ////////// USER METHODS //////////
-
-
+  ////////// USER METHODS //////////
 }

@@ -3,23 +3,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--Back Button-->
+<!--Back Button-->
   <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+
   <!--My Saved Places Carousel-->
   <h3 class="ion-padding-horizontal">My Saved Places</h3>
   <swiper
-    [grabCursor]="true"
-    [slidesPerView]="'auto'"
     class="mySwiper"
+    [spaceBetween]="10"
+    [breakpoints]="breakpoints"
+    [pagination]="true"
   >
     <!--Loops through visited places-->
     <ng-template
       swiperSlide
       *ngFor="let place of myVisitedPlaces"
       class="visited-slide"
-      
     >
-      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
+      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
@@ -36,7 +37,7 @@
       *ngFor="let place of myUnvisitedPlaces"
       class="visited-slide"
     >
-      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
+      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
@@ -52,9 +53,11 @@
   <!--My Visited Places Carousel-->
   <h3 class="ion-padding-horizontal">My Visited Places</h3>
   <swiper
-    [grabCursor]="true"
-    [slidesPerView]="'auto'"
     class="mySwiper"
+    [spaceBetween]="10"
+    [breakpoints]="breakpoints"
+    [pagination]="true"
+  >
   >
     <!--Loops through visited places-->
     <ng-template
@@ -62,7 +65,7 @@
       *ngFor="let place of myVisitedPlaces"
       class="visited-slide"
     >
-      <ion-card class="cardImgText" [routerLink]="['/place-details', place?.place_id]">
+      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
         <div class="placesPhoto">
           <img [src]="place.photo_reference" />
         </div>
