@@ -31,11 +31,35 @@
   </swiper>
   </ion-row>
 
+  <p *ngIf="this.selectedType">Selected category: {{this.selectedType.type}}</p>
+
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-button class="btn" color="light" (click)="toggleDataSource()">
       Search
     </ion-button>
   </ion-row>
+
+  <div>
+    <form (ngSubmit)="searchByUserInput()">
+      <ion-list>
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-input placeholder="Enter City Name" type="city" name="city" [(ngModel)]="this.searchCity"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>State</ion-label>
+          <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState" (ionChange)="setState($event)">
+            <ion-select-option *ngFor="let state of stateOptions" [value]="state" >{{state}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-button class="btn" color="light" type="submit">
+      Advanced Search
+    </ion-button>
+    </form>
+  </div>
+
+  <br>
 
   <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
   <ion-grid>
