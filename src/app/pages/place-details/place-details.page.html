@@ -1,30 +1,57 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <app-navbar></app-navbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-button [routerLink]="['/my-places']">Back</ion-button>
-  <p *ngIf="userSavedPlace">You've already saved this place!</p>
-  <ion-button [routerLink]="['/search']" color="light">Back</ion-button>
+ <div class="Cushion">
+<ion-grid>
+  <ion-row> 
+    <ion-col  size-xs="11" size-sm="11" size-md="8" size-lg="8" size-xl="6">
+      <div class="ion-hide-sm-down" *ngIf="useAPI">
+        <div *ngIf="Round box-shadow">
+          <img alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
+        </div>
+      </div>
+      <div *ngIf="!useAPI">
+        <img class="Round box-shadow" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
+      </div>
+    </ion-col>
 
-  <ion-card-title>{{this.placeDetails.name}}</ion-card-title>
-  <ion-card-subtitle>{{this.placeDetails.website}}</ion-card-subtitle>
+    
 
-  <!-- Keep in mind that this.placeDetails.photo_reference will pull the photo from the mock data BUT photoLinkArray[] will pull the photos from the Google Places data from the .ts file. The *ngIf allows you to toggle between mock and real data so you may just be able to build out the photo carousel using these below? Just note that the mock data only has one photo. -->
-  <div *ngIf="useAPI">
+    <ion-col class="ion-hide-sm-down ion-padding-vertical"  size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="1">
+      <div *ngIf="useAPI">
     <div *ngIf="photosExist">
-      <img alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
+      <img class="ion-margin box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
+      <img class="ion-margin box-shadow"alt="{{photoLinkArray[1]}}" src="{{photoLinkArray[1]}}" />
+      <img class="ion-margin box-shadow" alt="{{photoLinkArray[2]}}" src="{{photoLinkArray[2]}}" />
+      <img class="ion-margin box-shadow" alt="{{photoLinkArray[3]}}" src="{{photoLinkArray[3]}}" />
     </div>
   </div>
   <div *ngIf="!useAPI">
-    <img
-      alt="{{placeDetails.photo_reference}}"
-      src="{{placeDetails.photo_reference}}"
-    />
+        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
+        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
+        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
+        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
   </div>
+   </ion-col>
 
-  <p>{{this.placeDetails.formatted_address}}</p>
-  <p>{{placeOverview}}</p>
+    <ion-col class="ion-margin-horizontal" size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="3">
+      <h3>{{this.placeDetails.name}}</h3>
+      <p>{{this.placeDetails.formatted_address}}</p>
+      <ion-card-subtitle>{{this.placeDetails.website}}</ion-card-subtitle>
+      <p>{{placeOverview}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+
+
+
+<!-- Kendals code Waiting to inplement together
+<p *ngIf="userSavedPlace">You've already saved this place!</p>
+<ion-button [routerLink]="['/search']" color="light">Back</ion-button>
 
   <ion-button *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" color="light" shape="circle">
       <ion-icon size="large" name="heart-outline"></ion-icon>
@@ -44,8 +71,7 @@
   
   <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
     <ion-icon size="large" name="pin-outline"></ion-icon>
-  </ion-button>
-
+  </ion-button> </ion-grid> -->
 </ion-content>
 
   <ion-footer>

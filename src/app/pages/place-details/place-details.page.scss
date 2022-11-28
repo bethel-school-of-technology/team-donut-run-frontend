@@ -1,10 +1,53 @@
-/* iOS places the subtitle above the title */
-ion-card-header.ios {
-    display: flex;
-    flex-flow: column-reverse;
-}
 
-img {
+  
+ .MarginZero{
+   margin:0px;
+   padding:0px;
+ }
+  
+ .button{
+    color:#bdc6c9;
+ }
+  
+//  .btn_red{
+//   color: #c7908f;
+//   --ionicon-stroke-width: 40px;
+//  }
+  
+//  .btn_green{
+//     color: #81b586;
+//     --ionicon-stroke-width: 40px;
+//  }
+  
+ .Center{
+    margin-left: auto;
+    margin-right:auto
+} 
+    .Cushion{
+    padding:40 px;
+ }
+  
+ .Round{
+    border-radius: 15px;
+    object-fit: cover;
     height: 500px;
-    width: 500px;
+    width: 100%;
+    margin-top: 12px;
+ }
+  
+ .otherPhotos{
+    border-radius: 5px;
+    object-fit: cover;
+    height: 110px;
+    width: 110px;
+ 
+    margin-left: 15px;
+ }
+
+ .box-shadow{
+    border-radius: 15px;
+	box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4)  ; 
+	-webkit-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4)  ; 
+	-moz-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4)  ; 
 }
+ 
