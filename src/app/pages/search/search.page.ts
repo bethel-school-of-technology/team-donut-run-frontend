@@ -129,34 +129,6 @@ export class SearchPage implements OnInit {
     }
   }
 
-  ////////// ADVANCED SEARCH BY USER INPUT //////////
-  searchByUserInput() {
-    // get city, state from user input
-    if (this.searchCity == undefined || this.searchState == undefined) {
-      console.log("City or state is undefined. Unable to complete search.")
-      // console.log("City: ", this.searchCity);
-      // console.log("State: ", this.searchState);
-      // May need to run a window alert for user to validate inputs
-    } else {
-      // run through free api to get lat/long
-      this.geoService.getLocationData(this.searchCity, this.searchState).subscribe(result => {
-        if (result == null || result == undefined || result.length == 0) {
-          console.log("City does not exist for selected state.");
-          // Add window alert that city state combination did not return any results and to try again (i.e. city does not exist in that state)
-        } else {
-          this.searchLatitude = result[0].lat;
-          this.searchLongitude = result[0].lon;
-          console.log("Result: ", this.searchLatitude, this.searchLongitude);
-        }
-      }, error => {
-        console.log("Error: ", error);
-      });
-      // assign lat/long to variables
-      // pass those through the setSearchResults method
-    }
-  
-  }
-
   ////////// GOOGLE API -- GET ALL RESULTS //////////
   // GET / Nearby Search (by current geolocation)
   // This calls the function from the Google API to get the results in a Promise
@@ -201,6 +173,7 @@ export class SearchPage implements OnInit {
         // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating
 
         for (let i = 0; i < 3; i++) {
+          // Maybe add error handling that if the photo isn't available, we skip it?
           results[i].photos &&
             results[i].photos.forEach((photo) => {
               this.searchResults[i].photo_reference = photo.getUrl({
@@ -209,16 +182,75 @@ export class SearchPage implements OnInit {
               });
             });
 
-          let address = results[0].plus_code.compound_code;
-          let split = address.split(' ', 3);
-          split.shift();
-          address = split.join(' ');
-          this.searchResults[i].short_address = address;
+          if (results[i].plus_code == null || results[i].plus_code == undefined) {
+            // Need to do something here to get an address -- maybe use the geolocation api?
+            // this.searchResults[i].short_address = ""
+            console.log("Address not available.")
+          } else {
+            // I NEED TO FIX THIS FOR CITIES/STATES WITH A SPACE (LIKE LOS ANGELES)
+            let address = results[i].plus_code.compound_code;
+            let split = address.split(' ', 3);
+            split.shift();
+            address = split.join(' ');
+            this.searchResults[i].short_address = address;
+          }
         }
       },
       (status) => console.log('Status: ', status)
     );
   }
+
+  ////////// ADVANCED SEARCH BY USER INPUT //////////
+  searchByUserInput() {
+    // 1. Get city, state from user input
+    if (this.searchCity == undefined || this.searchState == undefined) {
+      console.log("City or state is undefined. Unable to complete search.")
+      // console.log("City: ", this.searchCity);
+      // console.log("State: ", this.searchState);
+      // May need to run a window alert for user to validate inputs
+    } else {
+    // 2. Run through free api to get lat/long
+      this.geoService.getLocationData(this.searchCity, this.searchState).subscribe(result => {
+        if (result == null || result == undefined || result.length == 0) {
+          console.log("City does not exist for selected state.");
+          // Add window alert that city state combination did not return any results and to try again (i.e. city does not exist in that state)
+        } else {
+          this.searchLatitude = result[0].lat;
+          this.searchLongitude = result[0].lon;
+          console.log("Result: ", this.searchLatitude, this.searchLongitude);
+
+          // 3. Pass lat/long through the setSearchResults method
+          if (this.useAPI == true) {
+            // use API data
+            this.setSearchResults(
+              this.searchLatitude,
+              this.searchLongitude,
+              this.selectedType.type,
+              this.searchRadius
+            );
+          } else {
+            // use MOCK data (doesn't care about user input)
+            this.mockSearchAll();
+            console.log("Using mock data, advanced search not available.");
+          }
+        }
+      }, error => {
+        console.log("Error: ", error);
+      });
+      
+    }
+  }
+
+  stateOptions: string[] = [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+  ];
+
+  // To set the state based on the dropdown
+  setState(event) {
+    this.searchState = event.detail.value;
+    console.log("State Set: ", this.searchState);
+  }
+
 
   ////////// MOCK -- GET ALL RESULTS //////////
   mockSearchAll() {
@@ -228,14 +260,7 @@ export class SearchPage implements OnInit {
     });
   }
 
-  stateOptions: string[] = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
-  ];
 
-  // To set the state based on the dropdown
-  setState(ev) {
-    this.searchState = ev.detail.value;
-    console.log("State Set: ", this.searchState);
-  }
+  
 
 }

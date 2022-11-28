@@ -31,6 +31,8 @@
   </swiper>
   </ion-row>
 
+  <p *ngIf="this.selectedType">Selected category: {{this.selectedType.type}}</p>
+
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-button class="btn" color="light" (click)="toggleDataSource()">
       Search
