@@ -1,7 +1,7 @@
-import { MyPlaces } from './my-place';
+import { MyPlace } from './my-place';
 
 describe('MyPlaces', () => {
   it('should create an instance', () => {
-    expect(new MyPlaces()).toBeTruthy();
+    expect(new MyPlace()).toBeTruthy();
   });
 });
