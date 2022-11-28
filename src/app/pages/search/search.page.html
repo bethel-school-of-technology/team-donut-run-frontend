@@ -42,11 +42,11 @@
       <ion-list>
         <ion-item>
           <ion-label>City</ion-label>
-          <ion-input type="city" name="city" [(ngModel)]="this.searchCity"></ion-input>
+          <ion-input placeholder="Enter City Name" type="city" name="city" [(ngModel)]="this.searchCity"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>State</ion-label>
-          <ion-select interface="popover" placeholder="Select State"  (ionChange)="setState($event)">
+          <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState" (ionChange)="setState($event)">
             <ion-select-option *ngFor="let state of stateOptions" [value]="state" >{{state}}</ion-select-option>
           </ion-select>
         </ion-item>

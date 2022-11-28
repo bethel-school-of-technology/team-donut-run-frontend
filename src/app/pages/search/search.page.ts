@@ -39,7 +39,7 @@ export class SearchPage implements OnInit {
 
   // Inputs for API Nearby Search method
   // For V2, we can let the user choose the radius and number of results?
-  searchType: string = 'restaurant';
+  // searchType: string = 'restaurant';
   searchRadius: number = 50000; // this is in meters
   // searchLimit: number = 3;
 
@@ -132,11 +132,29 @@ export class SearchPage implements OnInit {
   ////////// ADVANCED SEARCH BY USER INPUT //////////
   searchByUserInput() {
     // get city, state from user input
-    // run through free api to get lat/long
-    // assign lat/long to variables
-    // pass those through the setSearchResults method
-    console.log("City: ", this.searchCity);
-    console.log("State: ", this.searchState);
+    if (this.searchCity == undefined || this.searchState == undefined) {
+      console.log("City or state is undefined. Unable to complete search.")
+      // console.log("City: ", this.searchCity);
+      // console.log("State: ", this.searchState);
+      // May need to run a window alert for user to validate inputs
+    } else {
+      // run through free api to get lat/long
+      this.geoService.getLocationData(this.searchCity, this.searchState).subscribe(result => {
+        if (result == null || result == undefined || result.length == 0) {
+          console.log("City does not exist for selected state.");
+          // Add window alert that city state combination did not return any results and to try again (i.e. city does not exist in that state)
+        } else {
+          this.searchLatitude = result[0].lat;
+          this.searchLongitude = result[0].lon;
+          console.log("Result: ", this.searchLatitude, this.searchLongitude);
+        }
+      }, error => {
+        console.log("Error: ", error);
+      });
+      // assign lat/long to variables
+      // pass those through the setSearchResults method
+    }
+  
   }
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
@@ -211,7 +229,7 @@ export class SearchPage implements OnInit {
   }
 
   stateOptions: string[] = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
   ];
 
   // To set the state based on the dropdown
