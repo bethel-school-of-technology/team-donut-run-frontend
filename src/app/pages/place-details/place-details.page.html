@@ -4,19 +4,6 @@
 
 
 <ion-content [fullscreen]="true">
-  <div class="Cushion">
-    <ion-grid>
-      <ion-row>
-        <ion-col size-xs="11" size-sm="11" size-md="10" size-lg="5" size-xl="5">
-          <div class="ion-hide-sm-down" *ngIf="useAPI">
-            <img class="Round box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
-          </div>
-          <div *ngIf="!useAPI">
-            <img class=" ion-margin-start Round box-shadow" alt="{{placeDetails.photo_reference}}"
-              src="{{placeDetails.photo_reference}}" />
-          </div>
-        </ion-col>
-
 
 
         <ion-col class="ion-hide-sm-down " size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">

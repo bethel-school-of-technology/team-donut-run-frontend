@@ -1,30 +1,49 @@
-.categorySlider {
-    color: rgb(0, 0, 0);
-    width: 150px;
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+
+#swiperCard {
     display: flex;
     flex-direction: column;
- }
-.category-type {
-    background-color: var(--ion-color-light);
-    width: 100%;
-    padding: 2%;
 }
-.highlight {
-    background-color: var(--ion-color-light-shade);
+.swiper {
+    width: 100%;
+    padding-bottom: 40px;
+}
+.swiper-slide img {
+    display: block;
+    width: 100%;
 }
 
-//new
-.searchResultsCard {
-    min-width: 250px;
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
 }
 .searchResultsCardContent {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    .info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
+
+.card {
+    width: 300px;
+}
+.placesPhoto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+img {
+    width: auto;
+    height: 200px;
+}
+.cardText {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    text-align: left;
+}
+
