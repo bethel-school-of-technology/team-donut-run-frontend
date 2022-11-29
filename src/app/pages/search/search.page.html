@@ -76,16 +76,10 @@
   <br />
 
   <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
-  <ion-grid>
     <ion-row class="searchResultsRow">
       <ion-col
         class="searchResultsCardContent"
         *ngFor="let place of searchResults"
-        size="12"
-        size-sm="12"
-        size-md="6"
-        size-lg="4"
-        size-xl="4"
       >
         <ion-card
           class="card"
@@ -108,7 +102,6 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
 </ion-content>
 
 <ion-footer>
