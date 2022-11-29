@@ -10,25 +10,25 @@
   ></ion-searchbar>
   <!--Categories New-->
   <ion-row class="ion-justify-content-center ion-align-items-center">
-  <swiper
-    [effect]="'coverflow'"
-    [grabCursor]="true"
-    [centeredSlides]="true"
-    [slidesPerView]="3"
-    [coverflowEffect]="{
+    <swiper
+      [effect]="'coverflow'"
+      [grabCursor]="true"
+      [centeredSlides]="true"
+      [slidesPerView]="3"
+      [coverflowEffect]="{
       rotate: 50,
       stretch: 0,
       depth: 100,
       modifier: 1,
       slideShadows: true
     }"
-    [pagination]="true"
-    class="mySwiper"
-  >
-    <ng-template swiperSlide *ngFor="let category of categoryTypes"
-      ><img [src]="category.img" (click)="onCategorySelect(category)" /></ng-template
+      [pagination]="true"
+      class="mySwiper"
     >
-  </swiper>
+      <ng-template swiperSlide *ngFor="let category of categoryTypes"
+        ><img [src]="category.img" (click)="onCategorySelect(category)"
+      /></ng-template>
+    </swiper>
   </ion-row>
 
   <p *ngIf="this.selectedType">Selected category: {{this.selectedType.type}}</p>
@@ -44,22 +44,36 @@
       <ion-list>
         <ion-item>
           <ion-label>City</ion-label>
-          <ion-input placeholder="Enter City Name" type="city" name="city" [(ngModel)]="this.searchCity"></ion-input>
+          <ion-input
+            placeholder="Enter City Name"
+            type="city"
+            name="city"
+            [(ngModel)]="this.searchCity"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>State</ion-label>
-          <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState" (ionChange)="setState($event)">
-            <ion-select-option *ngFor="let state of stateOptions" [value]="state" >{{state}}</ion-select-option>
+          <ion-select
+            interface="popover"
+            placeholder="Select State"
+            (ngModel)="this.searchState"
+            (ionChange)="setState($event)"
+          >
+            <ion-select-option
+              *ngFor="let state of stateOptions"
+              [value]="state"
+              >{{state}}</ion-select-option
+            >
           </ion-select>
         </ion-item>
-    </ion-list>
-    <ion-button class="btn" color="light" type="submit">
-      Advanced Search
-    </ion-button>
+      </ion-list>
+      <ion-button class="btn" color="light" type="submit">
+        Advanced Search
+      </ion-button>
     </form>
   </div>
 
-  <br>
+  <br />
 
   <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
   <ion-grid>
@@ -68,17 +82,19 @@
         class="searchResultsCardContent"
         *ngFor="let place of searchResults"
         size="12"
-        size-sm="6"
+        size-sm="12"
         size-md="6"
         size-lg="4"
         size-xl="4"
       >
         <ion-card
-          class="searchResultsCard"
+          class="card"
           [routerLink]="['/place-details', place.place_id]"
         >
-          <img [src]="place.photo_reference" />
-          <ion-card-content class="info">
+          <div class="placesPhoto">
+            <img [src]="place.photo_reference" />
+          </div>
+          <ion-card-content class="cardText">
             <ion-text color="dark"><b>{{place.name }}</b></ion-text>
             <span>
               <ion-icon name="star" color="secondary"></ion-icon>
