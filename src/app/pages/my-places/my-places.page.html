@@ -8,14 +8,14 @@
 
   <!--My Saved Places Carousel-->
   <h3 class="ion-padding-horizontal">My Saved Places</h3>
-  <swiper
+  <swiper 
     class="mySwiper"
     [spaceBetween]="10"
     [breakpoints]="breakpoints"
     [pagination]="true"
   >
     <!--Loops through visited places-->
-    <ng-template
+    <ng-template 
       swiperSlide
       *ngFor="let place of myVisitedPlaces"
       class="visited-slide"
