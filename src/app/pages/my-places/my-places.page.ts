@@ -67,9 +67,9 @@ export class MyPlacesPage implements OnInit {
     }
   }
   breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 10 },
-    990: { slidesPerView: 2, spaceBetween: 10 },
-    1651: { slidesPerView: 3, spaceBetween: 10 },
+    320: { slidesPerView: 1, spaceBetween: 5 },
+    768: { slidesPerView: 2, spaceBetween: 5 },
+    1430: { slidesPerView: 3, spaceBetween: 5 },
   };
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
