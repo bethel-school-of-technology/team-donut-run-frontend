@@ -32,6 +32,8 @@ export class SearchPage implements OnInit {
   searchState: string;
   searchLatitude: number = null;
   searchLongitude: number = null;
+  resultLatitude: number = null;
+  resultLongitude: number = null;
 
   // To display data results
   // newPlace: PlaceResult = new PlaceResult();
@@ -113,19 +115,22 @@ export class SearchPage implements OnInit {
 
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
-    if (this.useAPI == true) {
-      // use API endpoints
-
-      // How to differentiate between geolocation and user input? Different method?
-      this.setSearchResults(
-        this.currentLatitude,
-        this.currentLongitude,
-        this.selectedType.type,
-        this.searchRadius
-      );
+    if (this.selectedType == null) {
+      window.alert('Please select a category.');
+      console.log('Type not selected');
     } else {
-      // use MOCK endpoints
-      this.mockSearchAll();
+      if (this.useAPI == true) {
+        // use API endpoints
+        this.setSearchResults(
+          this.currentLatitude,
+          this.currentLongitude,
+          this.selectedType.type,
+          this.searchRadius
+        );
+      } else {
+        // use MOCK endpoints
+        this.mockSearchAll();
+      }
     }
   }
 
@@ -155,7 +160,6 @@ export class SearchPage implements OnInit {
         } else {
           reject(status);
           console.log('Nearby Search error: ', status);
-          // If this yields "ZERO_RESULTS", we may need to set that to a variable to display something else on the page (like a donut shop?!)
         }
       });
     });
@@ -182,75 +186,140 @@ export class SearchPage implements OnInit {
               });
             });
 
-          if (results[i].plus_code == null || results[i].plus_code == undefined) {
-            // Need to do something here to get an address -- maybe use the geolocation api?
-            // this.searchResults[i].short_address = ""
-            console.log("Address not available.")
+          if (
+            results[i].plus_code == null ||
+            results[i].plus_code == undefined
+          ) {
+            // Will/does this happen often enough that we need to handle it?
+            console.log('Address not available.');
           } else {
-            // I NEED TO FIX THIS FOR CITIES/STATES WITH A SPACE (LIKE LOS ANGELES)
             let address = results[i].plus_code.compound_code;
-            let split = address.split(' ', 3);
-            split.shift();
-            address = split.join(' ');
-            this.searchResults[i].short_address = address;
+            let split = address.split(/ (.*)/);
+            this.searchResults[i].short_address = split[1];
           }
         }
       },
-      (status) => console.log('Status: ', status)
+      (status) => {
+        if (status == "ZERO_RESULTS") {
+        // If this yields "ZERO_RESULTS", set this.searchResults to be a donut shop with a note that says "Sorry, no results, but here's a donut shop" LOL
+
+        window.alert("No places found for current selection.");
+      }
+        console.log('Status: ', status)
+      }
     );
   }
 
   ////////// ADVANCED SEARCH BY USER INPUT //////////
   searchByUserInput() {
-    // 1. Get city, state from user input
-    if (this.searchCity == undefined || this.searchState == undefined) {
-      console.log("City or state is undefined. Unable to complete search.")
-      // console.log("City: ", this.searchCity);
-      // console.log("State: ", this.searchState);
-      // May need to run a window alert for user to validate inputs
+    if (this.selectedType == null) {
+      window.alert('Please select a category.');
+      console.log('Type not selected');
     } else {
-    // 2. Run through free api to get lat/long
-      this.geoService.getLocationData(this.searchCity, this.searchState).subscribe(result => {
-        if (result == null || result == undefined || result.length == 0) {
-          console.log("City does not exist for selected state.");
-          // Add window alert that city state combination did not return any results and to try again (i.e. city does not exist in that state)
-        } else {
-          this.searchLatitude = result[0].lat;
-          this.searchLongitude = result[0].lon;
-          console.log("Result: ", this.searchLatitude, this.searchLongitude);
+      if (this.searchCity == undefined || this.searchState == undefined) {
+        window.alert("Please enter both city and state for advanced search.")
+        console.log('City or state is undefined. Unable to complete search.');
+      } else {
+        this.geoService
+          .getLocationData(this.searchCity, this.searchState)
+          .subscribe(
+            (result) => {
+              if (result == null || result == undefined || result.length == 0) {
+                window.alert("City does not exist for selected state.");
+                console.log('City does not exist for selected state.');
+              } else {
+                this.searchLatitude = result[0].lat;
+                this.searchLongitude = result[0].lon;
+                console.log(
+                  'Result: ',
+                  this.searchLatitude,
+                  this.searchLongitude
+                );
 
-          // 3. Pass lat/long through the setSearchResults method
-          if (this.useAPI == true) {
-            // use API data
-            this.setSearchResults(
-              this.searchLatitude,
-              this.searchLongitude,
-              this.selectedType.type,
-              this.searchRadius
-            );
-          } else {
-            // use MOCK data (doesn't care about user input)
-            this.mockSearchAll();
-            console.log("Using mock data, advanced search not available.");
-          }
-        }
-      }, error => {
-        console.log("Error: ", error);
-      });
-      
+                if (this.useAPI == true) {
+                  // use API data
+                  this.setSearchResults(
+                    this.searchLatitude,
+                    this.searchLongitude,
+                    this.selectedType.type,
+                    this.searchRadius
+                  );
+                } else {
+                  // use MOCK data (doesn't care about user input)
+                  this.mockSearchAll();
+                  console.log(
+                    'Using mock data, advanced search not available.'
+                  );
+                }
+              }
+            },
+            (error) => {
+              console.log('Error: ', error);
+            }
+          );
+      }
     }
   }
 
   stateOptions: string[] = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'District of Columbia',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
   ];
 
   // To set the state based on the dropdown
   setState(event) {
     this.searchState = event.detail.value;
-    console.log("State Set: ", this.searchState);
+    console.log('State Set: ', this.searchState);
   }
-
 
   ////////// MOCK -- GET ALL RESULTS //////////
   mockSearchAll() {
@@ -259,8 +328,4 @@ export class SearchPage implements OnInit {
       console.log(ReturnedPlaces);
     });
   }
-
-
-  
-
 }
