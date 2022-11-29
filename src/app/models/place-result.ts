@@ -12,6 +12,9 @@ export class PlaceResult {
   photo_reference?: string;
   business_status?: string;
   short_address?: string;
+  latitude?: number;
+  longitude?: number;
+  
   constructor(
     place_id?: string,
     name?: string,
