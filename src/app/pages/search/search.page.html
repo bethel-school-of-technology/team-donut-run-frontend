@@ -3,13 +3,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar
-    class="ion-padding"
-    color="light"
-    placeholder="Search by Zipcode"
-  ></ion-searchbar>
   <!--Categories New-->
-  <ion-row class="ion-justify-content-center ion-align-items-center">
+  <ion-row class="ion-justify-content-center ion-align-items-center ion-margin">
     <swiper
       [effect]="'coverflow'"
       [grabCursor]="true"
@@ -31,7 +26,7 @@
     </swiper>
   </ion-row>
 
-  <p *ngIf="this.selectedType">Selected category: {{this.selectedType.type}}</p>
+  <p class="ion-padding" *ngIf="this.selectedType">Selected category: {{this.selectedType.type}}</p>
 
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-button class="btn" color="light" (click)="toggleDataSource()">
