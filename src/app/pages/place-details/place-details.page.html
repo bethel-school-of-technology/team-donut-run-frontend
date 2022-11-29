@@ -4,50 +4,70 @@
 
 
 <ion-content [fullscreen]="true">
- <div class="Cushion">
-<ion-grid>
-  <ion-row> 
-    <ion-col  size-xs="11" size-sm="11" size-md="10" size-lg="10" size-xl="5">
-      <div class="ion-hide-sm-down" *ngIf="useAPI">
-          <img class="Round box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
-      </div>
-      <div *ngIf="!useAPI">
-        <img class=" ion-margin-start Round box-shadow" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
-      </div>
-    </ion-col>
+  <div class="Cushion">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="11" size-sm="11" size-md="10" size-lg="5" size-xl="5">
+          <div class="ion-hide-sm-down" *ngIf="useAPI">
+            <img class="Round box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
+          </div>
+          <div *ngIf="!useAPI">
+            <img class=" ion-margin-start Round box-shadow" alt="{{placeDetails.photo_reference}}"
+              src="{{placeDetails.photo_reference}}" />
+          </div>
+        </ion-col>
 
-    
 
-    <ion-col class="ion-hide-sm-down ion-padding-start"  size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
-      <div *ngIf="useAPI">
-    <div *ngIf="photosExist">
-      <img class="ion-margin box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
-      <img class="ion-margin box-shadow"alt="{{photoLinkArray[1]}}" src="{{photoLinkArray[1]}}" />
-      <img class="ion-margin box-shadow" alt="{{photoLinkArray[2]}}" src="{{photoLinkArray[2]}}" />
-      <img class="ion-margin box-shadow" alt="{{photoLinkArray[3]}}" src="{{photoLinkArray[3]}}" />
-    </div>
+
+        <ion-col class="ion-hide-sm-down " size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
+          <div *ngIf="useAPI">
+            <div class="ion-margin-top" *ngIf="photosExist">
+              <img class="ion-margin box-shadow" alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
+              <img class="ion-margin box-shadow" alt="{{photoLinkArray[1]}}" src="{{photoLinkArray[1]}}" />
+              <img class="ion-margin box-shadow" alt="{{photoLinkArray[2]}}" src="{{photoLinkArray[2]}}" />
+              <img class="ion-margin box-shadow" alt="{{photoLinkArray[3]}}" src="{{photoLinkArray[3]}}" />
+            </div>
+          </div>
+          <div class="ion-margin-top" *ngIf="!useAPI">
+            <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}"
+              src="{{placeDetails.photo_reference}}" />
+            <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}"
+              src="{{placeDetails.photo_reference}}" />
+            <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}"
+              src="{{placeDetails.photo_reference}}" />
+            <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}"
+              src="{{placeDetails.photo_reference}}" />
+          </div>
+        </ion-col>
+
+        <ion-col class="ion-margin-horizontal ion-margin-top" size-xs="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
+          <div class="ion-padding-horizontal">
+         
+              <ion-col size="auto">
+                <h3 class="Title ion-no-margin ion-no-padding">{{this.placeDetails.name}}</h3>
+              </ion-col>
+           
+         
+              <ion-row>
+              
+                  <p class="Text2 ion-no-margin ion-no-padding">{{this.placeDetails.formatted_address}}</p>
+              
+                <ion-col class="ion-no-padding" size="auto">
+                  <ion-icon class=" logo" name="star" color="secondary"></ion-icon>
+                  <ion-text  class="logo" size="large" color="secondary"> {{ this.placeDetails.rating }} </ion-text>
+              
+                  <ion-icon class="logo" name="logo-usd" color="secondary"></ion-icon>
+                  <ion-text  class="logo" color="secondary"> {{ this.placeDetails.price_level }} </ion-text>
+                </ion-col>
+              </ion-row>
+              <p class="Text">{{placeOverview}}</p>
+              <ion-card-subtitle><a href="{{this.placeDetails.website}}" class="Website">{{this.placeDetails.website}}</a>
+              </ion-card-subtitle>
+              </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  <div class="ion-margin-end" *ngIf="!useAPI">
-        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
-        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
-        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
-        <img class="ion-margin-bottom box-shadow otherPhotos" alt="{{placeDetails.photo_reference}}" src="{{placeDetails.photo_reference}}" />
-  </div>
-   </ion-col>
-
-    <ion-col class="ion-margin-horizontal" size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
-   <div class="ion-padding-horizontal">
-    <ion-title color="primary" size="large" class="Title ion-no-margin ion-no-padding">{{this.placeDetails.name}}</ion-title>
-    <p>{{this.placeDetails.formatted_address}}</p>
-    <p>{{placeOverview}}</p>
-    <ion-card-subtitle>{{this.placeDetails.website}}</ion-card-subtitle>
-   </div>  
-    </ion-col>
-  </ion-row>
-</ion-grid>
-</div>
-
-
 
 <!-- Kendals code Waiting to inplement together
 <p *ngIf="userSavedPlace">You've already saved this place!</p>
