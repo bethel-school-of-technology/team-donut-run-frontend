@@ -44,7 +44,7 @@
     },
     {
       "id": 8,
-      "type": "Concert",
+      "type": "Music Venue",
       "img": "/assets/photos/concert.avif",
       "selected": false
     },
