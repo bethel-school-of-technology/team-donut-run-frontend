@@ -1,3 +1,11 @@
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+
+#swiperCard {
+    display: flex;
+    flex-direction: column;}
+    
 .MarginZero {
    margin: 0px;
    padding: 0px;
@@ -66,7 +74,34 @@
    height: 110px;
    width: 110px;
 
-   margin-left: 40px;
+ 
+}
+
+
+#swiperCard {
+   display: flex;
+   flex-direction: column;
+  
+}
+.swiper {
+   height: 100%;
+   width: 100%;
+   padding-bottom: 40px;
+}
+.card {
+
+   min-width: 100%;
+   min-height: 100%;
+   border-radius: 15px;
+  
+}
+
+.swiper-slide {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden
+   
 }
 
 .box-shadow {
@@ -76,6 +111,7 @@
    -moz-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.logo{
-   // margin-bottom: -2px;
+.clear{
+   background-color: white;
+   margin-left: 40px;
 }
