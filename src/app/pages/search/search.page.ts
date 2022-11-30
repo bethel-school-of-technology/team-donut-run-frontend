@@ -6,6 +6,7 @@ import { ResultsService } from 'src/app/Services/results.service';
 import { Type } from 'src/app/models/type';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 // import {} from 'googlemaps'; // Not sure if this is needed
 declare var google;
@@ -52,35 +53,25 @@ export class SearchPage implements OnInit {
   constructor(
     private resultsService: ResultsService,
     private geoService: GeolocationService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    // To get current user's geolocation on page load
-    this.getCurrentLocation();
     // To get the current category types from local json file
     this.getJSON().subscribe((data) => {
       this.categoryTypes = data.categories;
     });
+    // To get current user's geolocation on page load
+    this.getCurrentLocation();
   }
 
-  // Options for the category slider
-  catSlideOpts = {
-    loop: false,
-    effect: 'slide',
-
-    freeMode: true,
-    freeModeSticky: false,
-
-    slidesPerView: 'auto',
-    spaceBetween: 10,
-  };
-
-  // Options for search result cards
-  searchResultSlideOpts = {
-    slidesPerView: 1.2,
-    spaceBetween: 10,
-    freeMode: true,
+  breakpoints = {
+    100: { slideaPerView: 1.5, spaceBetween: 5},
+    320: { slidesPerView: 2, spaceBetween: 10 },
+    768: { slidesPerView: 3.5, spaceBetween: 10 },
+    1000: { slidesPerView: 4.5, spaceBetween: 10 },
+    1100: { slidesPerView: 5, spaceBetween: 10 }
   };
 
   // To get the local json category data types
@@ -116,7 +107,7 @@ export class SearchPage implements OnInit {
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
     if (this.selectedType == null) {
-      window.alert('Please select a category.');
+      this.selectCategoryAlert();
       console.log('Type not selected');
     } else {
       if (this.useAPI == true) {
@@ -200,12 +191,12 @@ export class SearchPage implements OnInit {
         }
       },
       (status) => {
-        if (status == "ZERO_RESULTS") {
-        // If this yields "ZERO_RESULTS", set this.searchResults to be a donut shop with a note that says "Sorry, no results, but here's a donut shop" LOL
+        if (status == 'ZERO_RESULTS') {
+          // If this yields "ZERO_RESULTS", set this.searchResults to be a donut shop with a note that says "Sorry, no results, but here's a donut shop" LOL
 
-        window.alert("No places found for current selection.");
-      }
-        console.log('Status: ', status)
+          this.zeroResultsFoundAlert();
+        }
+        console.log('Status: ', status);
       }
     );
   }
@@ -213,20 +204,20 @@ export class SearchPage implements OnInit {
   ////////// ADVANCED SEARCH BY USER INPUT //////////
   searchByUserInput() {
     if (this.selectedType == null) {
-      window.alert('Please select a category.');
+      this.selectCategoryAlert();
       console.log('Type not selected');
     } else {
       if (this.searchCity == undefined || this.searchState == undefined) {
-        window.alert("Please enter both city and state for advanced search.")
-        console.log('City or state is undefined. Unable to complete search.');
+        this.cityOrStateMissingAlert();
+        //console.log('City or state is undefined. Unable to complete search.');
       } else {
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
           .subscribe(
             (result) => {
               if (result == null || result == undefined || result.length == 0) {
-                window.alert("City does not exist for selected state.");
-                console.log('City does not exist for selected state.');
+                this.cityDoesNotExistAlert();
+                //console.log('City does not exist for selected state.');
               } else {
                 this.searchLatitude = result[0].lat;
                 this.searchLongitude = result[0].lon;
@@ -328,4 +319,42 @@ export class SearchPage implements OnInit {
       console.log(ReturnedPlaces);
     });
   }
+
+  /////////  ALERTS ///////////
+  async selectCategoryAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'Please select a category',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async zeroResultsFoundAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'No results found',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async cityDoesNotExistAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'City does not exist for selected state',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async cityOrStateMissingAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'City and/or state missing for advanced search',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 }
+
