@@ -1,32 +1,124 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <app-navbar></app-navbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-button [routerLink]="['/my-places']">Back to My Places</ion-button>
-  <ion-button [routerLink]="['/search']" color="light">Back to Search</ion-button>
-
-  <p *ngIf="userSavedPlace">You've already saved this place!</p>
-
-  <ion-card-title>{{this.placeDetails.name}}</ion-card-title>
-  <ion-card-subtitle>{{this.placeDetails.website}}</ion-card-subtitle>
-
-  <!-- Keep in mind that this.placeDetails.photo_reference will pull the photo from the mock data BUT photoLinkArray[] will pull the photos from the Google Places data from the .ts file. The *ngIf allows you to toggle between mock and real data so you may just be able to build out the photo carousel using these below? Just note that the mock data only has one photo. -->
-  <div *ngIf="useAPI">
-    <div *ngIf="photosExist">
-      <img alt="{{photoLinkArray[0]}}" src="{{photoLinkArray[0]}}" />
-    </div>
+  <div class="Cushion">
+  
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-toolbar>
+    
+            <ion-buttons slot="start">
+              <ion-back-button defaultHref="home"></ion-back-button>
+            </ion-buttons>
+          </ion-toolbar>
+     
+      </ion-col>
+      <ion-col class="ion-float-end  ">
+    
+        <p *ngIf="userSavedPlace">You've already saved this place!</p>
+    
+    
+        <ion-button *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" color="light" shape="circle">
+          <ion-icon size="large" name="heart-outline"></ion-icon>
+        </ion-button>
+    
+        <ion-button *ngIf="userSavedPlace" (click)="removePlacefromMyPlaces()" class="Btn_Type" color="light"
+          shape="circle">
+          <ion-icon size="large" name="close-circle-outline"></ion-icon>
+        </ion-button>
+    
+        <ion-button *ngIf="!userSavedPlace" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
+          <ion-icon size="large" name="add-circle"></ion-icon>
+        </ion-button>
+    
+        <ion-button *ngIf="userSavedPlace && !currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type"
+          color="light" shape="circle">
+          <ion-icon size="large" name="add-circle"></ion-icon>
+        </ion-button>
+    
+        <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type"
+          color="light" shape="circle">
+          <ion-icon size="large" name="pin-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+     </ion-row>
+      <ion-row>
+        <ion-col  size-xs="11" size-sm="11" size-md="5" size-lg="5" size-xl="5">
+          <div class="ion-hide-sm-down">
+            <img class=" ion-margin-start Round box-shadow" alt="{{ChosenPhoto}}" src="{{ChosenPhoto}}" /> 
+        </div>
+        <div class="ion-hide-sm-up">
+               
+      
+          <swiper
+          [spaceBetween]="30"
+          [effect]="'coverflow'"
+          [grabCursor]="true"
+          [centeredSlides]="true"
+          [slidesPerView]="1"
+          [effect]="'cards'"
+          [pagination]="true"
+          class="mySwiper"
+        >
+         <ng-template swiperSlide *ngFor="let photo of photoLinkArray">
+          <img class="card " [src]= "photo"/>
+        </ng-template>
+      </swiper>
+ 
   </div>
-  <div *ngIf="!useAPI">
-    <img
-      alt="{{placeDetails.photo_reference}}"
-      src="{{placeDetails.photo_reference}}"
-    />
+    
+
+
+   
+        </ion-col>
+
+        <ion-col class="ion-hide-sm-down" size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
+    
+            <div class="ion-margin-top" *ngIf="photosExist"> 
+              <button *ngFor="let photo of photoLinkArray" class="ion-margin-button clear" (click) ="PhotoClick(photo) ">
+              <img   class="ion-margin-bottom box-shadow otherPhotos" alt="{{photo}}" src="{{photo}}" />
+            </button>
+       
+            </div>
+  
+     
+        </ion-col>
+
+        <ion-col class="ion-margin-horizontal ion-margin-top" size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+          <div class="ion-padding-horizontal">
+
+            <ion-col size="auto">
+              <h3 class="Title ion-no-margin ion-no-padding">{{this.placeDetails.name}}</h3>
+            </ion-col>
+            <ion-col size="2">  </ion-col>
+            <ion-row>
+
+              <p class="Text2 ion-no-margin ion-no-padding">{{this.placeDetails.formatted_address}}</p>
+
+              <ion-col class="ion-no-padding" size="auto">
+               
+              </ion-col>
+            </ion-row>
+            <p class="Text">{{placeOverview}}</p>
+            <ion-card-subtitle><a href="{{this.placeDetails.website}}" class="Website">{{this.placeDetails.website}}</a>
+            </ion-card-subtitle>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 
-  <p>{{this.placeDetails.formatted_address}}</p>
-  <p>{{placeOverview}}</p>
 
+  <!-- Kendals
+    
+    <p *ngIf="userSavedPlace">You've already saved this place!</p>
+             
+              
   <ion-button *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" color="light" shape="circle">
       <ion-icon size="large" name="heart-outline"></ion-icon>
   </ion-button>
@@ -45,10 +137,8 @@
   
   <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()" class="Btn_Type" color="light" shape="circle">
     <ion-icon size="large" name="pin-outline"></ion-icon>
-  </ion-button>
+  </ion-button> </ion-col> -->
 
+
+  <app-footer></app-footer>
 </ion-content>
-
-  <ion-footer>
-    <app-footer></app-footer>
-  </ion-footer>

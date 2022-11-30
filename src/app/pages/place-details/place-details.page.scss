@@ -1,10 +1,117 @@
-/* iOS places the subtitle above the title */
-ion-card-header.ios {
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+
+#swiperCard {
     display: flex;
-    flex-flow: column-reverse;
+    flex-direction: column;}
+    
+.MarginZero {
+   margin: 0px;
+   padding: 0px;
 }
 
-img {
-    height: 500px;
-    width: 500px;
+.button {
+   color: #bdc6c9;
+}
+
+//  .btn_red{
+//   color: #c7908f;
+//   --ionicon-stroke-width: 40px;
+//  }
+
+//  .btn_green{
+//     color: #81b586;
+//     --ionicon-stroke-width: 40px;
+//  }
+
+.Center {
+   margin-left: auto;
+   margin-right: auto
+}
+
+.Text {
+
+   color: black;
+   font-size: large
+}
+
+.Text2 {
+
+   color:#8EB2B4;
+   font-size: large;
+
+}
+
+.SubText {
+
+   color: #919077;
+   font-size: large;
+}
+
+.Title {
+   font-weight: bolder;
+   color: #667a99;
+   font-size: 24px;
+
+}
+
+.Cushion {
+   padding: 40 px;
+}
+
+.Round {
+   border-radius: 15px;
+   object-fit: cover;
+   height: 500px;
+   width: 100%;
+   margin-top: 12px;
+}
+
+.otherPhotos {
+   border-radius: 5px;
+   object-fit: cover;
+   height: 110px;
+   width: 110px;
+
+ 
+}
+
+
+#swiperCard {
+   display: flex;
+   flex-direction: column;
+  
+}
+.swiper {
+   height: 100%;
+   width: 100%;
+   padding-bottom: 40px;
+}
+.card {
+
+   min-width: 100%;
+   min-height: 100%;
+   border-radius: 15px;
+  
+}
+
+.swiper-slide {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden
+   
+}
+
+.box-shadow {
+   border-radius: 15px;
+   box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+   -webkit-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+   -moz-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.clear{
+   background-color: white;
+   margin-left: 40px;
 }

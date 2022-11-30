@@ -29,9 +29,10 @@ export class PlaceDetailsPage implements OnInit {
   newPhoto = "";
   photoList: Array<any>;
   photoLinkArray: string[] = [];
+  ChosenPhoto ="";
 
   // Use to limit the number of photos we get for each place (keep in mind each photo is 1 call, so 3 photos would be 3 calls)
-  photoLimit: number = 1;
+  photoLimit: number = 2;
   photosExist: boolean = true;
 
   // User & My Place variables
@@ -78,11 +79,26 @@ export class PlaceDetailsPage implements OnInit {
     //   // use mock data
     //   // this.currentUserId = 4;
     // }
+    
+  
+
   }
+  
+    // Options for the category slider
+    catSlideOpts = {
+      loop: false,
+      effect: 'slide',
+  
+      freeMode: true,
+      freeModeSticky: false,
+  
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+    };
 
   getCurrentGooglePlaceId() {
-    this.currentGooglePlaceId = this.activatedRoute.snapshot.params['id'];
-    this.findPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
+  this.currentGooglePlaceId = this.activatedRoute.snapshot.params['id'];
+  this.findPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
   }
 
   // I don't think we need this after all!
@@ -121,11 +137,13 @@ export class PlaceDetailsPage implements OnInit {
     if (this.useAPI == true) {
       // use API endpoints
       this.setAPIPlaceDetails(place_id);
-
+      //placed here until we make everything async 
+      this.ChosenPhoto = this.photoLinkArray[0];
     } else {
       // use MOCK endpoints
       this.resultsService.getSavedResultsByGooglePlaceId(place_id)
       .subscribe((result) => {
+        this.ChosenPhoto =
         this.placeDetails = result[0];
         //printing results
         // console.log("Mock Place Details: ", this.placeDetails);
@@ -135,6 +153,13 @@ export class PlaceDetailsPage implements OnInit {
         // this.placeDetails.photo_reference = result[0].photos[0].photo_reference;
         //save open now to place model
         this.placeDetails.open_now = result[0].opening_hours.open_now;
+        // adding mock photos to the list 
+       ;
+        this.photoLinkArray.push("https://images.unsplash.com/photo-1669702055322-4813687f30c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80");
+        this.photoLinkArray.push("https://plus.unsplash.com/premium_photo-1663945117081-69c28d66820c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
+        this.photoLinkArray.push("https://images.unsplash.com/photo-1669817683129-869ca3c0bd3d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60")
+        this.photoLinkArray.push("https://images.unsplash.com/photo-1669721166543-de1035adc9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80")
+        this.ChosenPhoto = this.photoLinkArray[0]
       });
     }
   }
@@ -287,5 +312,10 @@ export class PlaceDetailsPage implements OnInit {
       });
     }
   }
+  PhotoClick(photo){
+    this.ChosenPhoto = photo;
+    console.log(photo)
+  }
+  
 
 }

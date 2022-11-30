@@ -8,6 +8,12 @@ import { PlaceDetailsPageRoutingModule } from './place-details-routing.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { PlaceDetailsPage } from './place-details.page';
 import { FooterModule } from "../../components/footer/navbar.module copy";
+import { SwiperModule } from 'swiper/angular';
+
+import SwiperCore, { EffectCards, Navigation, Pagination } from "swiper";
+
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation]);
 
 @NgModule({
     declarations: [PlaceDetailsPage],
@@ -17,7 +23,8 @@ import { FooterModule } from "../../components/footer/navbar.module copy";
         IonicModule,
         PlaceDetailsPageRoutingModule,
         NavbarModule,
-        FooterModule
+        FooterModule,
+        SwiperModule
     ]
 })
 export class PlaceDetailsPageModule {}
