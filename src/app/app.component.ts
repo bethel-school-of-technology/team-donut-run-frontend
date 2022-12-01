@@ -7,7 +7,6 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  menuType: string = 'reveal';
   constructor(public navCtrl: NavController) {}
 
   ngOnInit() {}
