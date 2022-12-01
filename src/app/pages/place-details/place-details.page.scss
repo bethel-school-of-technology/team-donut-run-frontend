@@ -115,9 +115,23 @@
 .SwiperContainer{
    height:400px;
    img {
-      width: auto;
-      height: 600px;
+      width: 700px;
+      height: 800px;
       object-fit: cover;
-      border-radius:15px
+      border-radius:15px;
+
+      border-radius: 15px;
+      box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+      -webkit-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
   }
+}
+
+.Btn_Type{
+   --box-shadow:none;  
+   --background: rgba(0,0,0,0);
+   padding-bottom: 35px;
+   --background-activated:rgba(0,0,0,0);
+   --background-hover: rgba(0,0,0,0);
+   --ripple-color: rgba(0,0,0,0);
 }
