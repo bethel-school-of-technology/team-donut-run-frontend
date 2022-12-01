@@ -5,16 +5,16 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PlaceResult } from 'src/app/models/place-result';
 import { MyPlacesService } from 'src/app/services/my-places.service';
 import { ResultsService } from 'src/app/Services/results.service';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Navigation} from 'swiper';
+import SwiperCore, { Pagination, Navigation } from 'swiper';
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
 // Connected to the index.d.ts file to override missing module import
 // import {} from 'googlemaps';
 declare var google;
-
 
 @Component({
   selector: 'app-my-places',
@@ -44,6 +44,7 @@ export class MyPlacesPage implements OnInit {
   // User variables
   currentUser: User = new User();
   currentUserId: number;
+  items = [];
 
   constructor(
     private placesService: MyPlacesService,
@@ -65,12 +66,22 @@ export class MyPlacesPage implements OnInit {
       this.currentUserId = 4;
       this.mockFindAllPlacesByUserId(this.currentUserId);
     }
+    this.generateItems();
   }
-  breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 5 },
-    768: { slidesPerView: 2, spaceBetween: 5 },
-    1430: { slidesPerView: 3, spaceBetween: 5 },
-  };
+
+  private generateItems() {
+    const count = this.items.length + 1;
+    for (let i = 0; i < 50; i++) {
+      this.items.push(`Item ${count + i}`);
+    }
+  }
+
+  onIonInfinite(ev) {
+    this.generateItems();
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
 
   // This will be used for both mock and API data since it's pulling the user info and My Places from the backend/database
   mockFindAllPlacesByUserId(userId) {

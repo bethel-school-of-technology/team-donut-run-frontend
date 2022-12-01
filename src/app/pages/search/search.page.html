@@ -5,21 +5,30 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="12">
-        <swiper [effect]="'coverflow'" [grabCursor]="true" [breakpoints]="breakpoints" [centeredSlides]="true"
+
+      <ion-col>
+        <swiper
+          [effect]="'coverflow'"
+          [grabCursor]="true"
+          [breakpoints]="breakpoints"
+          [centeredSlides]="true"
           [coverflowEffect]="{
         rotate: 25,
         stretch: 0,
         depth: 100,
         modifier: 1,
         slideShadows: true
-      }" [pagination]="true" class="mySwiper">
-          <ng-template swiperSlide *ngFor="let category of categoryTypes"><img [src]="category.img"
-              (click)="onCategorySelect(category)" /></ng-template>
+
+      }"
+          [pagination]="true"
+          class="mySwiper"
+        >
+          <ng-template swiperSlide *ngFor="let category of categoryTypes"
+            ><img [src]="category.img" (click)="onCategorySelect(category)"
+          /></ng-template>
         </swiper>
       </ion-col>
     </ion-row>
-
     <ion-row class="ion-justify-content-center ion-align-items-center">
       <ion-col size="12" sizeXs="6" sizeSm="6" sizeMd="4">
         <h4 class="ion-padding">Selected category:</h4>
@@ -59,22 +68,36 @@
               <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState"
                 (ionChange)="setState($event)">
                 <ion-select-option *ngFor="let state of stateOptions" [value]="state">{{state}}</ion-select-option>
+
               </ion-select>
             </ion-item>
           </ion-list>
           <ion-button class="btn" color="light" type="submit">
             Search
+
           </ion-button>
         </form>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
+      <ion-col>
+        <h3 color="dark" class="ion-padding">Results</h3>
+      </ion-col>
     </ion-row>
     <ion-row class="searchResultsRow">
-      <ion-col class="searchResultsContainer" size-xs="12" sizeMd="6" sizeLg="4" *ngFor="let place of searchResults">
-        <ion-card class="card" [routerLink]="['/place-details', place.place_id]">
+      <ion-col
+        class="searchResultsContainer"
+        size-xs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="4"
+        *ngFor="let place of searchResults"
+      >
+        <ion-card
+          class="card"
+          [routerLink]="['/place-details', place.place_id]"
+        >
           <div class="cardPhotoContainer">
             <img [src]="place.photo_reference" />
           </div>
