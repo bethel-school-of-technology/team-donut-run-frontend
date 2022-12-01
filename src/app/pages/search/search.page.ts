@@ -68,7 +68,7 @@ export class SearchPage implements OnInit {
 
   breakpoints = {
     100: { slideaPerView: 1.5, spaceBetween: 5},
-    320: { slidesPerView: 2, spaceBetween: 10 },
+    320: { slidesPerView: 2.5, spaceBetween: 10 },
     768: { slidesPerView: 3.5, spaceBetween: 10 },
     1000: { slidesPerView: 4.5, spaceBetween: 10 },
     1100: { slidesPerView: 5, spaceBetween: 10 }

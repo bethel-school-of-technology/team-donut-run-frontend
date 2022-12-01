@@ -30,6 +30,7 @@
 }
 .card {
     width: 100%;
+    max-width: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +57,5 @@
 //To see columns when styling
 ion-col {
     //background-color: #436d68;
-    border: solid 1px #fff;
-    color: #fff;
-    text-align: center;
+    border: solid 1px rgb(0, 149, 172);
 }
