@@ -4,104 +4,112 @@
 
 <ion-content>
   <ion-grid>
-  <ion-row
-    class="ion-justify-content-center ion-align-items-center"
-  >
-    <ion-col size="12">
-      <swiper
-        [effect]="'coverflow'"
-        [grabCursor]="true"
-        [breakpoints]="breakpoints"
-        [centeredSlides]="true"
-        [coverflowEffect]="{
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col>
+        <swiper
+          [effect]="'coverflow'"
+          [grabCursor]="true"
+          [breakpoints]="breakpoints"
+          [centeredSlides]="true"
+          [coverflowEffect]="{
         rotate: 25,
         stretch: 0,
         depth: 100,
         modifier: 1,
         slideShadows: true
       }"
-        [pagination]="true"
-        class="mySwiper"
-      >
-        <ng-template swiperSlide *ngFor="let category of categoryTypes"
-          ><img [src]="category.img" (click)="onCategorySelect(category)"
-        /></ng-template>
-      </swiper>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col size="12">
-      <p class="ion-padding">
-        Selected category:
-        <span *ngIf="this.selectedType">{{this.selectedType.type}}</span>
-      </p>
-    </ion-col>
-    <ion-col>
-      <ion-button color="light" (click)="toggleDataSource()">
-        Search
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  <ion-row
-    class="ion-justify-content-center ion-align-items-center"
-  >
-    <ion-col>
-      <form (ngSubmit)="searchByUserInput()">
-        <ion-list>
-          <ion-item>
-            <ion-label>City</ion-label>
-            <ion-input
-              placeholder="Enter City Name"
-              type="city"
-              name="city"
-              [(ngModel)]="this.searchCity"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>State</ion-label>
-            <ion-select
-              interface="popover"
-              placeholder="Select State"
-              (ngModel)="this.searchState"
-              (ionChange)="setState($event)"
-            >
-              <ion-select-option
-                *ngFor="let state of stateOptions"
-                [value]="state"
-                >{{state}}</ion-select-option
-              >
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <ion-button class="btn" color="light" type="submit">
-          Advanced Search
+          [pagination]="true"
+          class="mySwiper"
+        >
+          <ng-template swiperSlide *ngFor="let category of categoryTypes"
+            ><img [src]="category.img" (click)="onCategorySelect(category)"
+          /></ng-template>
+        </swiper>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="12" sizeXs="6" sizeSm="6" sizeMd="4">
+        <h4 class="ion-padding">Selected category:</h4>
+      </ion-col>
+       <ion-col size="12" sizeXs="6" sizeSm="6" sizeMd="5">
+        <p *ngIf="this.selectedType">{{this.selectedType.type}}</p>
+      </ion-col>
+      <ion-col size="12" sizeMd="3">
+        <ion-button class="btn" color="light" (click)="toggleDataSource()">
+          Search
         </ion-button>
-      </form>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-text color="dark"><b class="ion-padding">Results</b></ion-text>
-  </ion-row>
-  <ion-row class="searchResultsRow">
-    <ion-col class="searchResultsContainer" size-xs="12" sizeMd="6" sizeLg="4" *ngFor="let place of searchResults">
-      <ion-card class="card" [routerLink]="['/place-details', place.place_id]">
-        <div class="cardPhotoContainer">
-          <img [src]="place.photo_reference" />
-        </div>
-        <ion-card-content class="cardText">
-          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
-          <span>
-            <ion-icon name="star" color="secondary"></ion-icon>
-            <ion-text color="secondary"> {{ place.rating }} </ion-text>
-          </span>
-          <span>
-            <ion-icon name="location-outline"></ion-icon>
-            {{place.short_address }}
-          </span>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col>
+        <form (ngSubmit)="searchByUserInput()" class="ion-padding">
+          <ion-list>
+            <ion-item>
+              <ion-label>City</ion-label>
+              <ion-input
+                placeholder="Enter City Name"
+                type="city"
+                name="city"
+                [(ngModel)]="this.searchCity"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>State</ion-label>
+              <ion-select
+                interface="popover"
+                placeholder="Select State"
+                (ngModel)="this.searchState"
+                (ionChange)="setState($event)"
+              >
+                <ion-select-option
+                  *ngFor="let state of stateOptions"
+                  [value]="state"
+                  >{{state}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-button class="btn" color="light" type="submit">
+            Advanced Search
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3 color="dark" class="ion-padding">Results</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row class="searchResultsRow">
+      <ion-col
+        class="searchResultsContainer"
+        size-xs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="4"
+        *ngFor="let place of searchResults"
+      >
+        <ion-card
+          class="card"
+          [routerLink]="['/place-details', place.place_id]"
+        >
+          <div class="cardPhotoContainer">
+            <img [src]="place.photo_reference" />
+          </div>
+          <ion-card-content class="cardText">
+            <ion-text color="dark"><b>{{place.name }}</b></ion-text>
+            <span>
+              <ion-icon name="star" color="secondary"></ion-icon>
+              <ion-text color="secondary"> {{ place.rating }} </ion-text>
+            </span>
+            <span>
+              <ion-icon name="location-outline"></ion-icon>
+              {{place.short_address }}
+            </span>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
 
