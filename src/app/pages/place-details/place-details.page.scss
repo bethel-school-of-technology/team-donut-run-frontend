@@ -62,9 +62,9 @@
 
 .Round {
    border-radius: 15px;
-   object-fit: cover;
-   height: 500px;
-   width: 100%;
+   // object-fit: cover;
+   max-height: 500px;
+   width: auto;
    margin-top: 12px;
 }
 
@@ -114,4 +114,10 @@
 .clear{
    background-color: white;
    margin-left: 40px;
+}
+
+.kendall-test {
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
 }

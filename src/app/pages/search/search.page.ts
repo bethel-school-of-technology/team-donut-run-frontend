@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Position } from '@capacitor/geolocation';
 import { PlaceResult } from 'src/app/models/place-result';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -33,8 +33,8 @@ export class SearchPage implements OnInit {
   searchState: string;
   searchLatitude: number = null;
   searchLongitude: number = null;
-  resultLatitude: number = null;
-  resultLongitude: number = null;
+  // resultLatitude: number = null;
+  // resultLongitude: number = null;
 
   // To display data results
   // newPlace: PlaceResult = new PlaceResult();
@@ -45,6 +45,7 @@ export class SearchPage implements OnInit {
   // searchType: string = 'restaurant';
   searchRadius: number = 50000; // this is in meters
   // searchLimit: number = 3;
+  useAdvSearch: boolean = false;
 
   // These are the current categories we are going to allow the user to search by
   categoryTypes: Type[];
@@ -123,6 +124,21 @@ export class SearchPage implements OnInit {
         this.mockSearchAll();
       }
     }
+  }
+  
+  // @ViewChild('listenerOut', { static: true }) listenerOut: ElementRef;
+
+  // To switch to using Advanced Search
+  toggleAdvancedSearch = (event) => {
+    if (this.useAdvSearch == true) {
+      this.useAdvSearch = false;
+    } else if (this.useAdvSearch == false) {
+      this.useAdvSearch = true;
+    }
+    // const nativeEl = this.listenerOut;
+
+    console.log("Advanced Search: ", this.useAdvSearch);
+    // console.log("Native El: ", nativeEl);
   }
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
