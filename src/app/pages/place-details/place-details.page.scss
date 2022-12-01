@@ -56,23 +56,24 @@
 
 }
 
-.Cushion {
-   padding: 40 px;
-}
+
 
 .Round {
    border-radius: 15px;
    object-fit: cover;
    height: 500px;
    width: 100%;
-   margin-top: 12px;
+   margin-top: 12 px;
+   margin-bottom:4px
 }
 
 .otherPhotos {
    border-radius: 5px;
    object-fit: cover;
    height: 110px;
-   width: 110px;
+   min-width: 110px;
+   max-width: 110px;
+  
 
  
 }
@@ -88,13 +89,7 @@
    width: 100%;
    padding-bottom: 40px;
 }
-.card {
 
-   min-width: 100%;
-   min-height: 100%;
-   border-radius: 15px;
-  
-}
 
 .swiper-slide {
    display: flex;
@@ -113,5 +108,16 @@
 
 .clear{
    background-color: white;
-   margin-left: 40px;
+   padding-bottom: -2px;
+}
+
+.card {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   img {
+           width: auto;
+           height: 600px;
+           object-fit: cover;
+       }
 }
