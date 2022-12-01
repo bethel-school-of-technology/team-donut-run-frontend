@@ -56,23 +56,24 @@
 
 }
 
-.Cushion {
-   padding: 40 px;
-}
+
 
 .Round {
    border-radius: 15px;
-   // object-fit: cover;
-   max-height: 500px;
-   width: auto;
-   margin-top: 12px;
+   object-fit: cover;
+   height: 500px;
+   width: 100%;
+   margin-top: 12 px;
+   margin-bottom:4px
 }
 
 .otherPhotos {
    border-radius: 5px;
    object-fit: cover;
    height: 110px;
-   width: 110px;
+   min-width: 110px;
+   max-width: 110px;
+  
 
  
 }
@@ -88,13 +89,7 @@
    width: 100%;
    padding-bottom: 40px;
 }
-.card {
 
-   min-width: 100%;
-   min-height: 100%;
-   border-radius: 15px;
-  
-}
 
 .swiper-slide {
    display: flex;
@@ -113,11 +108,31 @@
 
 .clear{
    background-color: white;
-   margin-left: 40px;
+   padding-bottom: -2px;
 }
 
-.kendall-test {
-   display: flex;
-  flex-wrap: wrap;
-  justify-content: right;
+
+.SwiperContainer{
+   height:400px;
+   img {
+      width: 700px;
+      height: 800px;
+      object-fit: cover;
+      border-radius:15px;
+
+      border-radius: 15px;
+      box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+      -webkit-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.4);
+  }
 }
+
+.Btn_Type{
+   --box-shadow:none;  
+   --background: rgba(0,0,0,0);
+   padding-bottom: 35px;
+   --background-activated:rgba(0,0,0,0);
+   --background-hover: rgba(0,0,0,0);
+   --ripple-color: rgba(0,0,0,0);
+}
+
