@@ -111,13 +111,13 @@
    padding-bottom: -2px;
 }
 
-.card {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+
+.SwiperContainer{
+   height:400px;
    img {
-           width: auto;
-           height: 600px;
-           object-fit: cover;
-       }
+      width: auto;
+      height: 600px;
+      object-fit: cover;
+      border-radius:15px
+  }
 }
