@@ -3,80 +3,65 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<!--Back Button-->
-  <ion-button [routerLink]="['/']" color="light">Back</ion-button>
-
-  <!--My Saved Places Carousel-->
-  <h3 class="ion-padding-horizontal">My Saved Places</h3>
-  <swiper 
-    class="mySwiper"
-    [spaceBetween]="10"
-    [breakpoints]="breakpoints"
-    [pagination]="true"
-  >
+  <ion-grid>
+    <!--Back Button-->
+    <ion-row>
+      <ion-col>
+      <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+    </ion-col>
+    </ion-row>
+    <!--My Saved Places Carousel-->
+    <ion-row>
+      <ion-col>
+      <h3 class="ion-padding-horizontal">My Saved Places</h3>
+    </ion-col>
+    </ion-row>
     <!--Loops through visited places-->
-    <ng-template 
-      swiperSlide
-      *ngFor="let place of myVisitedPlaces"
-      class="visited-slide"
-    >
-      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
-        <div class="placesPhoto">
-          <img [src]="place.photo_reference" />
-        </div>
-        <div class="cardText">
-          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
-          <ion-text color="primary"> {{ place.types }} </ion-text>
-          <ion-text> {{ place.formatted_address }} </ion-text>
-        </div>
-      </ion-card>
-    </ng-template>
-    <!--Loops through unvisited places-->
-    <ng-template
-      swiperSlide
-      *ngFor="let place of myUnvisitedPlaces"
-      class="visited-slide"
-    >
-      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
-        <div class="placesPhoto">
-          <img [src]="place.photo_reference" />
-        </div>
-        <div class="cardText">
-          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
-          <ion-text color="primary"> {{ place.types }} </ion-text>
-          <ion-text> {{ place.formatted_address }} </ion-text>
-        </div>
-      </ion-card>
-    </ng-template>
-  </swiper>
+    <ion-row>
+      <ion-col>
+      <ion-list>
+        <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-avatar slot="start">
+            <img [src]="place.photo_reference" alt="avatar" />
+          </ion-avatar>
+          <ion-label>{{ place.name }}</ion-label>
+        </ion-item>
+        <!--Loops through unvisited places-->
+        <ion-item *ngFor="let place of myUnvisitedPlaces; let index">
+          <ion-avatar slot="start">
+            <img [src]="place.photo_reference" alt="avatar" />
+          </ion-avatar>
+          <ion-label>{{ place.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
 
-  <!--My Visited Places Carousel-->
-  <h3 class="ion-padding-horizontal">My Visited Places</h3>
-  <swiper
-    class="mySwiper"
-    [spaceBetween]="10"
-    [breakpoints]="breakpoints"
-    [pagination]="true"
-  >
-  >
-    <!--Loops through visited places-->
-    <ng-template
-      swiperSlide
-      *ngFor="let place of myVisitedPlaces"
-      class="visited-slide"
-    >
-      <ion-card class="card" [routerLink]="['/place-details', place?.place_id]">
-        <div class="placesPhoto">
-          <img [src]="place.photo_reference" />
-        </div>
-        <div class="cardText">
-          <ion-text color="dark"><b>{{place.name }}</b></ion-text>
-          <ion-text color="primary"> {{ place.types }} </ion-text>
-          <ion-text> {{ place.formatted_address }} </ion-text>
-        </div>
-      </ion-card>
-    </ng-template>
-  </swiper>
+    <!--My Visited Places Carousel-->
+    <ion-row>
+      <ion-col>
+      <h3 class="ion-padding-horizontal">My Visited Places</h3>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <ion-list>
+        <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-avatar slot="start">
+            <img [src]="place.photo_reference" alt="avatar" />
+          </ion-avatar>
+          <ion-label>{{ place.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>

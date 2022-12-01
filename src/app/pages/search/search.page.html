@@ -29,17 +29,15 @@
       </swiper>
     </ion-col>
   </ion-row>
-  <ion-row
-    class="ion-align-items-center ion-justify-content-center"
-  >
-    <ion-col>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="12">
       <p class="ion-padding">
         Selected category:
         <span *ngIf="this.selectedType">{{this.selectedType.type}}</span>
       </p>
     </ion-col>
     <ion-col>
-      <ion-button class="btn" color="light" (click)="toggleDataSource()">
+      <ion-button color="light" (click)="toggleDataSource()">
         Search
       </ion-button>
     </ion-col>
