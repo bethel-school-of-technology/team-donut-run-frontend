@@ -3,13 +3,13 @@ export class DonutShop {
     donutShopName?: string;
     donutShopAddress?: string;
     donutShopWebsite?: string;
-    donutShopImage?: string;
+    donutShopCityState?: string;
 
-    constructor(donutShopId?: string, donutShopName?: string, donutShopAddress?: string, donutShopWebsite?: string, donutShopImage?: string) {
+    constructor(donutShopId?: string, donutShopName?: string, donutShopAddress?: string, donutShopWebsite?: string, donutShopCityState?: string) {
         this.donutShopId = donutShopId;
         this.donutShopName = donutShopName;
         this.donutShopAddress = donutShopAddress;
         this.donutShopWebsite = donutShopWebsite;
-        this.donutShopImage = donutShopImage;
+        this.donutShopCityState = donutShopCityState;
     }
 }

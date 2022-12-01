@@ -6,11 +6,16 @@
 
 <ion-content>
   <ion-card>
-    <ion-title>If you are ever in the area, may we suggest the following donut shop</ion-title>
+    <h4>If you are ever in the area of</h4>
+    <h2>{{currentDonutShop.donutShopCityState}}</h2>
+    <h4>May we suggest the following donut shop?</h4>
     <ion-item-divider></ion-item-divider>
-    <img src="{{currentDonutShop.donutShopImage}}"><br>
-    <ion-text>{{currentDonutShop.donutShopName}}</ion-text><br>
-    <ion-text>{{currentDonutShop.donutShopAddress}}</ion-text><br>
-    <ion-text><a href="{{currentDonutShop.donutShopWebsite}}"></a></ion-text>
+    <img src="../../../assets/photos/shayna-douglas-CQvFD9HrDyY-unsplash.jpg"><br>
+    <p>
+      {{currentDonutShop.donutShopName}}<br>
+      {{currentDonutShop.donutShopAddress}}<br>
+      {{currentDonutShop.donutShopCityState}}
+    </p>
+    <p><a href={{currentDonutShop.donutShopWebsite}}>Visit their website</a></p>
   </ion-card>  
 </ion-content>
