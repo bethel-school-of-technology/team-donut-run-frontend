@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { User } from './models/user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,15 @@ import { MenuController, NavController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {}
 
-  ngOnInit() {}
+  // User variable
+  currentUser: User = new User();
+
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController, private authService: AuthService,) { }
+
+  ngOnInit() {
+    this.CheckCurrentUser();
+  }
 
   HomePage() {
     this.closeMenu();
@@ -37,6 +45,26 @@ export class AppComponent {
 
   closeMenu() {
     this.menuCtrl.close();
+  }
+
+  CheckCurrentUser() {
+    // user real data & database
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.currentUser = user;
+      if (this.currentUser) {
+        //public boolean observable used to modify dropdown menu.
+        this.authService.active$ = this.authService.GetUserActiveState("active");
+      }
+      console.log('Current User: ', this.currentUser);
+      console.log(this.currentUser.username)
+    });
+  }
+
+  SignOut() {
+    this.authService.signout();
+    //change public boolean to false and modify dropdown menu.
+    this.authService.active$ = this.authService.GetUserActiveState("");
+    this.SignInPage();
   }
 }
 

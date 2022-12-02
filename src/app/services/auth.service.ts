@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
 
@@ -16,8 +16,10 @@ export class AuthService {
   userBaseUrl: string = "http://localhost:5000/api/user";
 
   tokenKey: string = 'myUserToken';
+  //variable used to modify dropdown menu
+  public active$!: Observable<boolean>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ////////////// AUTH ENDPOINTS ////////////////
 
@@ -28,7 +30,7 @@ export class AuthService {
 
   // POST / sign IN existing user
   signIn(username: string, password: string): Observable<any> {
-       return this.http.post(`${this.authBaseUrl}/signin`, {username, password}, {responseType: 'text'})
+    return this.http.post(`${this.authBaseUrl}/signin`, { username, password }, { responseType: 'text' })
       .pipe(tap((response: any) => {
         localStorage.setItem('myUserToken', response);
       }));
@@ -52,6 +54,16 @@ export class AuthService {
     };
 
     return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders });
+  }
+
+  //method used to modify dropdown menu.
+  GetUserActiveState(state: string): Observable<boolean> {
+    if (state === "active") {
+      return of(true);
+    }
+    else {
+      return of(false);
+    }
   }
 
   // PUT / edit user by user id

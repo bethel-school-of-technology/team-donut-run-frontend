@@ -25,6 +25,8 @@ export class SignInPage implements OnInit {
       (response: any) => {
         console.log("myUserToken:", response);
         this.presentToast();
+        //use this public boolean observable to add current user to menu template.
+        this.authService.active$ = this.authService.GetUserActiveState("active");
         this.router.navigateByUrl('/home');
       },
       (error) => {
