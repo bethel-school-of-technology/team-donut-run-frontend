@@ -1,5 +1,10 @@
 <ion-app>
-  <ion-menu contentId="main-content">
+  <ion-menu
+    contentId="main-content"
+    side="end"
+    swipe-gesture="true"
+    type="overlay"
+  >
     <ion-header>
       <ion-toolbar color="tertiary">
         <ion-title>Menu</ion-title>
@@ -35,7 +40,6 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      Tap the button in the toolbar to open the menu.
       <ion-router-outlet id="main"></ion-router-outlet>
     </ion-content>
   </div>
