@@ -1,6 +1,7 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center">
+
       <ion-col>
         <swiper
           [effect]="'coverflow'"
@@ -13,6 +14,7 @@
         depth: 100,
         modifier: 1,
         slideShadows: true
+
       }"
           [pagination]="true"
           class="mySwiper"
@@ -30,47 +32,50 @@
       <ion-col size="12" sizeXs="6" sizeSm="6" sizeMd="5">
         <p *ngIf="this.selectedType">{{this.selectedType.type}}</p>
       </ion-col>
-      <ion-col size="12" sizeMd="3">
+
+      <ion-col *ngIf="!this.useAdvSearch" size="12" sizeMd="3">
         <ion-button class="btn" color="light" (click)="toggleDataSource()">
           Search
         </ion-button>
+        <p>Searching by current location.</p>
       </ion-col>
     </ion-row>
+
     <ion-row class="ion-justify-content-center ion-align-items-center">
       <ion-col>
-        <form (ngSubmit)="searchByUserInput()" class="ion-padding">
+        <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
+          <ion-accordion value="advsearch">
+            <ion-item slot="header" color="light">
+              <ion-label>Advanced Search</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">Search by City, State</div>
+          </ion-accordion>
+        </ion-accordion-group>
+
+        <form *ngIf="this.useAdvSearch" (ngSubmit)="searchByUserInput()">
           <ion-list>
             <ion-item>
               <ion-label>City</ion-label>
-              <ion-input
-                placeholder="Enter City Name"
-                type="city"
-                name="city"
-                [(ngModel)]="this.searchCity"
-              ></ion-input>
+              <ion-input placeholder="Enter City Name" type="city" name="city" [(ngModel)]="this.searchCity">
+              </ion-input>
             </ion-item>
             <ion-item>
               <ion-label>State</ion-label>
-              <ion-select
-                interface="popover"
-                placeholder="Select State"
-                (ngModel)="this.searchState"
-                (ionChange)="setState($event)"
-              >
-                <ion-select-option
-                  *ngFor="let state of stateOptions"
-                  [value]="state"
-                  >{{state}}</ion-select-option
-                >
+              <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState"
+                (ionChange)="setState($event)">
+                <ion-select-option *ngFor="let state of stateOptions" [value]="state">{{state}}</ion-select-option>
+
               </ion-select>
             </ion-item>
           </ion-list>
           <ion-button class="btn" color="light" type="submit">
-            Advanced Search
+            Search
+
           </ion-button>
         </form>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col>
         <h3 color="dark" class="ion-padding">Results</h3>

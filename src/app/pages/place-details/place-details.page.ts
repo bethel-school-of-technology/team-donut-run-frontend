@@ -137,8 +137,9 @@ export class PlaceDetailsPage implements OnInit {
     if (this.useAPI == true) {
       // use API endpoints
       this.setAPIPlaceDetails(place_id);
-      //placed here until we make everything async 
-      this.ChosenPhoto = this.photoLinkArray[0];
+
+      // Placed here until we make everything async 
+      // this.ChosenPhoto = this.photoLinkArray[0];
     } else {
       // use MOCK endpoints
       this.resultsService.getSavedResultsByGooglePlaceId(place_id)
@@ -199,8 +200,8 @@ export class PlaceDetailsPage implements OnInit {
     });
   }
 
-  setAPIPlaceDetails(googlePlaceId) {
-    this.getAPIPlaceDetails(googlePlaceId).then(
+  async setAPIPlaceDetails(googlePlaceId) {
+    await this.getAPIPlaceDetails(googlePlaceId).then(
       (results: PlaceResult) => {
         this.placeDetails = results;
         console.log("API Place Details: ", this.placeDetails);
@@ -222,6 +223,8 @@ export class PlaceDetailsPage implements OnInit {
             this.newPhoto = this.photoList[i].getUrl({ maxWidth: 500, maxHeight: 500 }); 
             this.photoLinkArray.push(this.newPhoto);
           }
+
+          this.ChosenPhoto = this.photoLinkArray[0];
           
           console.log("Max Photos: ", this.photoLimit);
           console.log("Photo Links: ", this.photoLinkArray);
@@ -312,9 +315,10 @@ export class PlaceDetailsPage implements OnInit {
       });
     }
   }
+
   PhotoClick(photo){
     this.ChosenPhoto = photo;
-    console.log(photo)
+    console.log("Chosen Photo: ", photo)
   }
   
 
