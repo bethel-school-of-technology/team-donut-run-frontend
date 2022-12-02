@@ -126,19 +126,12 @@ export class SearchPage implements OnInit {
     }
   }
   
-  // @ViewChild('listenerOut', { static: true }) listenerOut: ElementRef;
 
   // To switch to using Advanced Search
   toggleAdvancedSearch = (event) => {
-    if (this.useAdvSearch == true) {
-      this.useAdvSearch = false;
-    } else if (this.useAdvSearch == false) {
-      this.useAdvSearch = true;
-    }
-    // const nativeEl = this.listenerOut;
+    this.useAdvSearch = !this.useAdvSearch;
 
     console.log("Advanced Search: ", this.useAdvSearch);
-    // console.log("Native El: ", nativeEl);
   }
 
   ////////// GOOGLE API -- GET ALL RESULTS //////////
