@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { User } from './models/user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,31 @@ import { MenuController, NavController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {}
+  currentUser: User = {};
+  currentUserId: number;
+  userExists: boolean;
 
-  ngOnInit() {}
+  constructor(
+    public navCtrl: NavController, 
+    public menuCtrl: MenuController,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      this.currentUserId = user.userId;
+      this.userExists = true;
+      console.log("User Exists: ", this.userExists);
+    }, error => {
+      this.userExists = false;
+      console.log("User Exists: ", this.userExists);
+      console.log("User Error: ", error);
+      if (error.status === 401 || error.status === 403) {
+          console.log("reload")
+        };
+    });
+  }
 
   HomePage() {
     this.navCtrl.navigateForward('home');
@@ -28,6 +52,16 @@ export class AppComponent {
 
   SearchPage() {
     this.navCtrl.navigateForward('search');
+  }
+
+  SignOut() {
+    this.authService.signout();
+    console.log("User Signed Out");
+    window.location.reload();
+  }
+
+  SignUp() {
+    this.navCtrl.navigateForward('sign-up');
   }
 
   openMenu() {

@@ -1,22 +1,23 @@
 <ion-app>
-  <ion-menu
-    contentId="main-content"
-    side="end"
-    swipe-gesture="true"
-    type="overlay"
-  >
+  <ion-menu contentId="main-content" side="end" swipe-gesture="true" type="overlay">
     <ion-header>
       <ion-toolbar color="tertiary">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"
-      ><ion-list>
+    <ion-content class="ion-padding">
+      <ion-list *ngIf="(currentUser | json) != '{}' ">
         <ion-item (click)="ProfilePage()">My Profile</ion-item>
         <ion-item (click)="MyPlacesPage()">My Places</ion-item>
+        <ion-item (click)="SignOut()">Sign Out</ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="(currentUser | json) == '{}' ">
+        <ion-item (click)="SignUp()">Sign Up</ion-item>
         <ion-item (click)="SignInPage()">Sign In</ion-item>
-      </ion-list></ion-content
-    >
+      </ion-list>
+
+    </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header>

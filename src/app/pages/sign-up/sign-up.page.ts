@@ -55,7 +55,7 @@ export class SignUpPage implements OnInit {
         },
         (error) => {
           this.unsuccessfulLoginAlert();
-          //console.log('Error: ', error);
+          console.log('Sign Up Error: ', error);
         }
       );
     }

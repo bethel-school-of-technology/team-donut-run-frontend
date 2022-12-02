@@ -24,16 +24,35 @@ export class SignInPage implements OnInit {
     this.authService.signIn(this.username, this.password).subscribe(
       (response: any) => {
         console.log("myUserToken:", response);
-        this.presentToast();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home').then(() => {
+          this.presentToast().then(() => {
+            window.location.reload();
+          });
+        });
       },
       (error) => {
-        //console.log('Error: ', error);
+        console.log('Sign In Error: ', error);
         this.presentAlert();
         this.router.navigateByUrl('/sign-in');
       }
     );
   }
+
+  // TESTING RELOAD OPTIONS
+  // let currentUrl = this.router.url
+  // this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() => {
+  //   this.router.navigate([currentUrl]);
+  //   console.log(currentUrl);
+  // })
+
+  // reloadComponent() {
+  //   let currentUrl = this.router.url;
+  //       this.router.routeReuseStrategy.shouldReuseRoute = () =>; false;
+  //       this.router.onSameUrlNavigation = 'reload';
+  //       this.router.navigate([currentUrl]);
+  //   }
+
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Login Failed',

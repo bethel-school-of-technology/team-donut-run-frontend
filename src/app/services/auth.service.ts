@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -51,7 +51,16 @@ export class AuthService {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     };
 
-    return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders });
+    return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders })
+      // .pipe(catchError(error => {
+      //   let errorMsg: string;
+      //   if (error.error instanceof ErrorEvent) {
+      //     errorMsg = `Error: ${error.error.message}`;
+      //   } else {
+      //     errorMsg = `Error: ${error.message}`;
+      //   }
+      //   return throwError(errorMsg);
+      // }));
   }
 
   // PUT / edit user by user id

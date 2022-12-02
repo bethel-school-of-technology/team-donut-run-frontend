@@ -79,9 +79,6 @@ export class PlaceDetailsPage implements OnInit {
     //   // use mock data
     //   // this.currentUserId = 4;
     // }
-    
-  
-
   }
   
     // Options for the category slider
@@ -256,8 +253,8 @@ export class PlaceDetailsPage implements OnInit {
       window.location.reload();
     }, error => {
       console.log("Save Place Error: ", error);
-      // if (error.status === 401 || error.status === 403) {
-      //   this.router.navigate(['signin'])};
+      if (error.status === 401 || error.status === 403) {
+        this.router.navigate(['signin'])};
     });
 
   }
@@ -271,7 +268,7 @@ export class PlaceDetailsPage implements OnInit {
       window.alert("Place has been removed from saved places list.")
     }, error => {
       console.log("Remove Place Error: ", error);
-      if (error.status === 401) {
+      if (error.status === 401 || error.status === 403) {
         this.router.navigate(['signin']);
       }
     })
@@ -294,9 +291,9 @@ export class PlaceDetailsPage implements OnInit {
       }, error => {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
-        // if (error.status === 401) {
-        //   this.router.navigate(['signin']);
-        // }
+        if (error.status === 401 || error.status === 403) {
+          this.router.navigate(['signin']);
+        }
       });
 
     } else if (this.userSavedPlace == true && this.currentMyPlace.visited == true) {
@@ -309,9 +306,9 @@ export class PlaceDetailsPage implements OnInit {
       }, error => {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
-        // if (error.status === 401) {
-        //   this.router.navigate(['signin']);
-        // }
+        if (error.status === 401 || error.status === 403) {
+          this.router.navigate(['signin']);
+        }
       });
     }
   }
