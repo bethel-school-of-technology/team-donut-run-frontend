@@ -36,21 +36,26 @@ export class AppComponent {
   }
 
   HomePage() {
+    this.closeMenu();
     this.navCtrl.navigateForward('home');
   }
   ProfilePage() {
+    this.closeMenu();
     this.navCtrl.navigateForward('my-account');
   }
 
   MyPlacesPage() {
+    this.closeMenu();
     this.navCtrl.navigateForward('my-places');
   }
 
   SignInPage() {
+    this.closeMenu();
     this.navCtrl.navigateForward('sign-in');
   }
 
   SearchPage() {
+    this.closeMenu();
     this.navCtrl.navigateForward('search');
   }
 
@@ -70,10 +75,6 @@ export class AppComponent {
 
   closeMenu() {
     this.menuCtrl.close();
-  }
-
-  toggleMenu() {
-    this.menuCtrl.toggle();
   }
 }
 
