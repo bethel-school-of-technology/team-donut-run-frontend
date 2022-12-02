@@ -62,6 +62,8 @@ export class PlaceDetailsPage implements OnInit {
       this.currentUser = user;
       this.currentUserId = user.userId;
       // console.log("Current User: ", this.currentUser);
+    }, error => {
+      console.log("Current User Error: ", error);
     });
 
     this.checkIfSaved(this.currentGooglePlaceId);
@@ -236,13 +238,11 @@ export class PlaceDetailsPage implements OnInit {
   // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
     console.log("Going to add to My Places");
-    // var today = new Date(); // I think this is set automatically
     this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
     this.saveNewPlace.createdOn = "Placeholder"; // this will autosave as a date on the backend
 
     console.log("New Place Details: ", this.saveNewPlace);
 
-    // Do we want to route to the MyPlaces page or keep on the Place Details page?
     this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(() => {
       if (this.saveNewPlace.visited == true) {
         window.alert("Place saved and marked as visited!");
@@ -254,7 +254,7 @@ export class PlaceDetailsPage implements OnInit {
     }, error => {
       console.log("Save Place Error: ", error);
       if (error.status === 401 || error.status === 403) {
-        this.router.navigate(['signin'])};
+        this.router.navigate(['sign-in'])};
     });
 
   }
@@ -267,15 +267,18 @@ export class PlaceDetailsPage implements OnInit {
       // Do we want to route to the MyPlaces page or keep on the Place Details page?
       window.alert("Place has been removed from saved places list.")
     }, error => {
+      // This should theoretically never throw
       console.log("Remove Place Error: ", error);
       if (error.status === 401 || error.status === 403) {
-        this.router.navigate(['signin']);
+        this.router.navigate(['sign-in']);
       }
     })
   }
 
   toggleVisited() {    
-    if (this.userSavedPlace == false) {
+    if (this.currentUser.username == undefined) {
+      this.router.navigate(['sign-in']);
+    } else if (this.userSavedPlace == false) {
       // saved false, visited false
       // save place AND mark as visited
       this.saveNewPlace.visited = true;
@@ -292,7 +295,7 @@ export class PlaceDetailsPage implements OnInit {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
         if (error.status === 401 || error.status === 403) {
-          this.router.navigate(['signin']);
+          this.router.navigate(['sign-in']);
         }
       });
 
@@ -307,7 +310,7 @@ export class PlaceDetailsPage implements OnInit {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
         if (error.status === 401 || error.status === 403) {
-          this.router.navigate(['signin']);
+          this.router.navigate(['sign-in']);
         }
       });
     }
