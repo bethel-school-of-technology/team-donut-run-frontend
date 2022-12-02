@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {}
 
   ngOnInit() {}
 
@@ -28,6 +28,18 @@ export class AppComponent {
 
   SearchPage() {
     this.navCtrl.navigateForward('search');
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
+  }
+
+  closeMenu() {
+    this.menuCtrl.close();
+  }
+
+  toggleMenu() {
+    this.menuCtrl.toggle();
   }
 }
 
