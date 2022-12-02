@@ -43,7 +43,8 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
-  },  {
+  },
+  {
     path: 'terms-services',
     loadChildren: () => import('./pages/terms-services/terms-services.module').then( m => m.TermsServicesPageModule)
   },
