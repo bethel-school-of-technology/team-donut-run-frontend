@@ -28,10 +28,14 @@ export class SignInPage implements OnInit {
     this.authService.signIn(this.username, this.password).subscribe(
       (response: any) => {
         console.log("myUserToken:", response);
-        this.presentToast();
+        // this.presentToast();
         //use this public boolean observable to add current user to menu template.
         this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home').then(() => {
+          this.presentToast().then(() => {
+            window.location.reload();
+          })
+        });
       },
       (error) => {
         console.log('Error: ', error);
