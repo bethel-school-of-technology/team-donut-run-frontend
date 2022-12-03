@@ -59,8 +59,8 @@ export class PlaceDetailsPage implements OnInit {
     this.getCurrentGooglePlaceId();
 
     this.authService.getCurrentUser().subscribe((response: any) => {
-      // this.currentUser = user;
-      // this.currentUserId = user.userId;
+      this.currentUser = response;
+      this.currentUserId = response.userId;
       console.log("Current User: ", response);
     }, error => {
       console.log("Current User Error: ", error);
