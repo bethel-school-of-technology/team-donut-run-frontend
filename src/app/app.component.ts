@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { User } from './models/user';
 import { AuthService } from './services/auth.service';
+import { MenuService } from './services/menu.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   // User variable
   currentUser: User = new User();
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController, private authService: AuthService,) { }
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public menuService: MenuService, private authService: AuthService) { }
 
   ngOnInit() {
     this.CheckCurrentUser();
@@ -38,6 +39,11 @@ export class AppComponent {
     this.navCtrl.navigateForward('sign-in');
   }
 
+  SignUpPage() {
+    this.closeMenu();
+    this.navCtrl.navigateForward('sign-up');
+  }
+
   SearchPage() {
     this.closeMenu();
     this.navCtrl.navigateForward('search');
@@ -53,7 +59,7 @@ export class AppComponent {
       this.currentUser = user;
       if (this.currentUser) {
         //public boolean observable used to modify dropdown menu.
-        this.authService.active$ = this.authService.GetUserActiveState("active");
+        this.menuService.active$ = this.menuService.GetUserActiveState("active");
       }
       console.log('Current User: ', this.currentUser);
       console.log(this.currentUser.username)
@@ -63,7 +69,7 @@ export class AppComponent {
   SignOut() {
     this.authService.signout();
     //change public boolean to false and modify dropdown menu.
-    this.authService.active$ = this.authService.GetUserActiveState("");
+    this.menuService.active$ = this.menuService.GetUserActiveState("");
     this.SignInPage();
   }
 }
