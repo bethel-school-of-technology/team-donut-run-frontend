@@ -58,29 +58,15 @@ export class PlaceDetailsPage implements OnInit {
   ngOnInit() {
     this.getCurrentGooglePlaceId();
 
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-      this.currentUserId = user.userId;
-      // console.log("Current User: ", this.currentUser);
+    this.authService.getCurrentUser().subscribe((response: any) => {
+      this.currentUser = response;
+      this.currentUserId = response.userId;
+      console.log("Current User: ", response);
+    }, error => {
+      console.log("Current User Error: ", error);
     });
 
-    this.checkIfSaved(this.currentGooglePlaceId);
-
-    // Add this to easily toggle between mock and real data
-    // if (this.useAPI == true) {
-    //   // user real data & database
-    //   this.authService.getCurrentUser().subscribe(user => {
-    //       this.currentUser = user;
-    //       this.currentUserId = user.userId;
-    //       console.log("Current User: ", this.currentUser);
-    //     });
-
-    // } else {
-    //   // use mock data
-    //   // this.currentUserId = 4;
-    // }
-    
-  
+    this.checkIfSaved(this.currentGooglePlaceId);  
 
   }
   
@@ -100,18 +86,6 @@ export class PlaceDetailsPage implements OnInit {
   this.currentGooglePlaceId = this.activatedRoute.snapshot.params['id'];
   this.findPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
   }
-
-  // I don't think we need this after all!
-  // Do we first need to get a list of all the saved google place ids and then compare the passed in google id to that list?
-  // apiFindAllPlacesByUserId() {
-  //   this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
-  //     for (let i = 0; i < result.length; i++) {
-  //       let addId = result[i].googlePlaceId
-  //       this.myGooglePlaceIds.push(addId);
-  //     }
-  //     console.log('Google Place Id Results: ', this.myGooglePlaceIds);
-  //   });
-  // }
 
   // Find if current place exists in MyPlaces table for the given user
   checkIfSaved(googlePlaceId: string) {
@@ -138,24 +112,15 @@ export class PlaceDetailsPage implements OnInit {
       // use API endpoints
       this.setAPIPlaceDetails(place_id);
 
-      // Placed here until we make everything async 
-      // this.ChosenPhoto = this.photoLinkArray[0];
     } else {
       // use MOCK endpoints
       this.resultsService.getSavedResultsByGooglePlaceId(place_id)
       .subscribe((result) => {
         this.ChosenPhoto =
         this.placeDetails = result[0];
-        //printing results
-        // console.log("Mock Place Details: ", this.placeDetails);
-        //save overview to place model
         this.placeDetails.overview = result[0].editorial_summary.overview;
-        //save photo reference to place model
-        // this.placeDetails.photo_reference = result[0].photos[0].photo_reference;
-        //save open now to place model
         this.placeDetails.open_now = result[0].opening_hours.open_now;
         // adding mock photos to the list 
-       ;
         this.photoLinkArray.push("https://images.unsplash.com/photo-1669702055322-4813687f30c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80");
         this.photoLinkArray.push("https://plus.unsplash.com/premium_photo-1663945117081-69c28d66820c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60");
         this.photoLinkArray.push("https://images.unsplash.com/photo-1669817683129-869ca3c0bd3d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60")
@@ -167,7 +132,7 @@ export class PlaceDetailsPage implements OnInit {
 
    ////////// GOOGLE API -- GET PLACE DETAILS //////////
   // This invokes the getDetails call from the Google Places API
-  // This could technically be placed into the Results Service if we wanted to 
+  // Could this technically be placed into the Results Service if we wanted to?
   getAPIPlaceDetails(googlePlaceId: string) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')
@@ -256,8 +221,8 @@ export class PlaceDetailsPage implements OnInit {
       window.location.reload();
     }, error => {
       console.log("Save Place Error: ", error);
-      // if (error.status === 401 || error.status === 403) {
-      //   this.router.navigate(['signin'])};
+      if (error.status === 401 || error.status === 403) {
+        this.router.navigate(['sign-in'])};
     });
 
   }
@@ -271,9 +236,8 @@ export class PlaceDetailsPage implements OnInit {
       window.alert("Place has been removed from saved places list.")
     }, error => {
       console.log("Remove Place Error: ", error);
-      if (error.status === 401) {
-        this.router.navigate(['signin']);
-      }
+      if (error.status === 401 || error.status === 403) {
+        this.router.navigate(['sign-in'])};
     })
   }
 
@@ -294,9 +258,8 @@ export class PlaceDetailsPage implements OnInit {
       }, error => {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
-        // if (error.status === 401) {
-        //   this.router.navigate(['signin']);
-        // }
+        if (error.status === 401 || error.status === 403) {
+          this.router.navigate(['sign-in'])};
       });
 
     } else if (this.userSavedPlace == true && this.currentMyPlace.visited == true) {
@@ -309,9 +272,8 @@ export class PlaceDetailsPage implements OnInit {
       }, error => {
         window.alert("Unable to mark as visited.")
         console.log("Update Place Error: ", error);
-        // if (error.status === 401) {
-        //   this.router.navigate(['signin']);
-        // }
+        if (error.status === 401 || error.status === 403) {
+          this.router.navigate(['sign-in'])};
       });
     }
   }
