@@ -49,12 +49,6 @@ export class AppComponent {
     this.navCtrl.navigateForward('search');
   }
 
-  SignOut() {
-    this.authService.signout();
-    console.log("User Signed Out");
-    this.SignInPage();
-  }
-
   closeMenu() {
     this.menuCtrl.close();
   }
