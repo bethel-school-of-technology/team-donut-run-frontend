@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
-import { User } from './models/user';
 import { AuthService } from './services/auth.service';
 import { MenuService } from './services/menu.service';
 
@@ -12,7 +11,7 @@ import { MenuService } from './services/menu.service';
 export class AppComponent {
 
   // User variable
-  currentUser: User = new User();
+  currentUser: string = '';
 
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public menuService: MenuService, private authService: AuthService) { }
 
@@ -56,20 +55,19 @@ export class AppComponent {
   CheckCurrentUser() {
     // user real data & database
     this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
+      this.currentUser = user.username;
       if (this.currentUser) {
         //public boolean observable used to modify dropdown menu.
-        this.menuService.active$ = this.menuService.GetUserActiveState("active");
+        this.menuService.active$ = this.menuService.GetUserActiveState("active",this.currentUser);
       }
       console.log('Current User: ', this.currentUser);
-      console.log(this.currentUser.username)
     });
   }
 
   SignOut() {
     this.authService.signout();
-    //change public boolean to false and modify dropdown menu.
-    this.menuService.active$ = this.menuService.GetUserActiveState("");
+    //change active state to false and remove currentUser to modify dropdown menu.
+    this.menuService.active$ = this.menuService.GetUserActiveState("","");
     this.SignInPage();
   }
 }

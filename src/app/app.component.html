@@ -9,7 +9,7 @@
       <ion-list>
         <!-- public boolean observable used to modify dropdown menu. -->
         <ng-template [ngIf]="this.menuService.active$ | async" [ngIfElse]="signedOut">
-          <h4>Welcome {{currentUser.username}}</h4>
+          <h4>Welcome {{this.menuService.currentUser}}</h4>
           <ion-item (click)="ProfilePage()">My Profile</ion-item>
           <ion-item (click)="MyPlacesPage()">My Places</ion-item>
           <ion-item (click)="SignOut()">Sign Out</ion-item>

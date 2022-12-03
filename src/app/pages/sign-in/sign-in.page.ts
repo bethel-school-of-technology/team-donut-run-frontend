@@ -10,8 +10,10 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./sign-in.page.scss'],
 })
 export class SignInPage implements OnInit {
+
   username: string = '';
   password: string = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -28,7 +30,7 @@ export class SignInPage implements OnInit {
         console.log("myUserToken:", response);
         this.presentToast();
         //use this public boolean observable to add current user to menu template.
-        this.menuService.active$ = this.menuService.GetUserActiveState("active");
+        this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
         this.router.navigateByUrl('/home');
       },
       (error) => {
