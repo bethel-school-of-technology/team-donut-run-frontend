@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,11 @@ import { MenuController, NavController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {}
+  constructor(
+    public navCtrl: NavController, 
+    public menuCtrl: MenuController,
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {}
 
@@ -33,6 +38,12 @@ export class AppComponent {
   SearchPage() {
     this.closeMenu();
     this.navCtrl.navigateForward('search');
+  }
+
+  SignOut() {
+    this.authService.signout();
+    console.log("User Signed Out");
+    this.SignInPage();
   }
 
   closeMenu() {

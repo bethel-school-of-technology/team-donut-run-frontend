@@ -28,7 +28,7 @@ export class SignInPage implements OnInit {
         this.router.navigateByUrl('/home');
       },
       (error) => {
-        //console.log('Error: ', error);
+        console.log('Error: ', error);
         this.presentAlert();
         this.router.navigateByUrl('/sign-in');
       }

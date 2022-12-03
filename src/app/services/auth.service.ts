@@ -46,12 +46,20 @@ export class AuthService {
   // GET / get one user by user id
 
   // GET / get CURRENT user
-  getCurrentUser(): Observable<User> {
-    let reqHeaders = {
-      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
-    };
-
-    return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders });
+  getCurrentUser(): Observable<any> {
+    if (localStorage.getItem(this.tokenKey) != null) {
+      let reqHeaders = {
+        Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+      };
+      console.log("Headers: ", localStorage.getItem(this.tokenKey));
+  
+      return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders });
+    } 
+    else {
+       console.error("No users signed in; not able to find a current user.");
+       return;
+    }
+    
   }
 
   // PUT / edit user by user id
