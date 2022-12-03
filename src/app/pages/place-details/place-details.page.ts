@@ -19,7 +19,7 @@ export class PlaceDetailsPage implements OnInit {
 
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = true;
+  useAPI: boolean = false;
 
   // Place details variables
   placeDetails: PlaceResult = new PlaceResult();
