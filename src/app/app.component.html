@@ -1,23 +1,26 @@
 <ion-app>
-  <ion-menu
-    contentId="main-content"
-    side="end"
-    swipe-gesture="true"
-    type="overlay"
-  >
+  <ion-menu contentId="main-content" side="end" swipe-gesture="true" type="overlay">
     <ion-header>
       <ion-toolbar color="tertiary">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"
-      ><ion-list>
-        <ion-item (click)="ProfilePage()">My Profile</ion-item>
-        <ion-item (click)="MyPlacesPage()">My Places</ion-item>
-        <ion-item (click)="SignInPage()">Sign In</ion-item>
-        <ion-item (click)="SignOut()">Sign Out</ion-item>
-      </ion-list></ion-content
-    >
+
+    <ion-content class="ion-padding">
+      <ion-list>
+        <!-- public boolean observable used to modify dropdown menu. -->
+        <ng-template [ngIf]="this.menuService.active$ | async" [ngIfElse]="signedOut">
+          <h4>Welcome {{this.menuService.currentUser}}</h4>
+          <ion-item (click)="ProfilePage()">My Profile</ion-item>
+          <ion-item (click)="MyPlacesPage()">My Places</ion-item>
+          <ion-item (click)="SignOut()">Sign Out</ion-item>
+        </ng-template>
+        <ng-template #signedOut>
+          <ion-item (click)="SignInPage()">Sign In</ion-item>
+          <ion-item (click)="SignUpPage()">Sign Up</ion-item>
+        </ng-template>
+      </ion-list>
+    </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header>

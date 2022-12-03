@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,13 +10,16 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./sign-in.page.scss'],
 })
 export class SignInPage implements OnInit {
+
   username: string = '';
   password: string = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    public menuService: MenuService
   ) {}
 
   ngOnInit() {}
@@ -25,6 +29,8 @@ export class SignInPage implements OnInit {
       (response: any) => {
         console.log("myUserToken:", response);
         this.presentToast();
+        //use this public boolean observable to add current user to menu template.
+        this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
         this.router.navigateByUrl('/home');
       },
       (error) => {

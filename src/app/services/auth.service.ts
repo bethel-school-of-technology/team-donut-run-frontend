@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
 
@@ -16,8 +16,9 @@ export class AuthService {
   userBaseUrl: string = "http://localhost:5000/api/user";
 
   tokenKey: string = 'myUserToken';
+  
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ////////////// AUTH ENDPOINTS ////////////////
 
@@ -28,7 +29,7 @@ export class AuthService {
 
   // POST / sign IN existing user
   signIn(username: string, password: string): Observable<any> {
-       return this.http.post(`${this.authBaseUrl}/signin`, {username, password}, {responseType: 'text'})
+    return this.http.post(`${this.authBaseUrl}/signin`, { username, password }, { responseType: 'text' })
       .pipe(tap((response: any) => {
         localStorage.setItem('myUserToken', response);
       }));
@@ -67,6 +68,7 @@ export class AuthService {
     // }
     
   }
+
 
   // PUT / edit user by user id
 
