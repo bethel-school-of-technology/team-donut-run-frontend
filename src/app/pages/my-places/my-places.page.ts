@@ -58,7 +58,7 @@ export class MyPlacesPage implements OnInit {
       this.authService.getCurrentUser().subscribe((user) => {
         this.currentUser = user;
         this.currentUserId = user.userId;
-        console.log('Current User: ', this.currentUser);
+        // console.log('Current User: ', this.currentUser);
       });
       this.apiFindAllPlacesByUserId();
     } else {
@@ -98,11 +98,11 @@ export class MyPlacesPage implements OnInit {
   apiFindAllPlacesByUserId() {
     this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
       this.myPlaceArray = result;
-      console.log('My Place Results: ', this.myPlaceArray);
+      // console.log('My Place Results: ', this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
-    console.log('Get Visited Places Result: ', this.myVisitedPlaces);
-    console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
+    // console.log('Get Visited Places Result: ', this.myVisitedPlaces);
+    // console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
   }
 
   // Sorts whether the place has been visited or not
@@ -136,7 +136,7 @@ export class MyPlacesPage implements OnInit {
           });
           this.currentPlaceDetails.photo_reference = placePhoto;
 
-          console.log('API Current Place Details: ', this.currentPlaceDetails);
+          // console.log('API Current Place Details: ', this.currentPlaceDetails);
 
           this.myVisitedPlaces.push(this.currentPlaceDetails);
         },
@@ -172,7 +172,7 @@ export class MyPlacesPage implements OnInit {
           });
           this.currentPlaceDetails.photo_reference = placePhoto;
 
-          console.log('API Current Place Details: ', this.currentPlaceDetails);
+          // console.log('API Current Place Details: ', this.currentPlaceDetails);
 
           this.myUnvisitedPlaces.push(this.currentPlaceDetails);
         },
@@ -227,5 +227,4 @@ export class MyPlacesPage implements OnInit {
   //   );
   // }
 
-  ////////// USER METHODS //////////
 }

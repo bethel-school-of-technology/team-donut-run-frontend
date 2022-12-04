@@ -14,6 +14,7 @@ export class PlaceResult {
   short_address?: string;
   latitude?: number;
   longitude?: number;
+  user_ratings_total?: number;
   
   constructor(
     place_id?: string,
@@ -24,7 +25,8 @@ export class PlaceResult {
     price_level?: number,
     website?: string,
     business_status?: string,
-    photo_reference?: string
+    photo_reference?: string,
+    user_ratings_total?: number
   ) {
     this.place_id = place_id;
     this.name = name;
@@ -35,5 +37,6 @@ export class PlaceResult {
     this.website = website;
     this.business_status = business_status;
     this.photo_reference = photo_reference;
+    this.user_ratings_total = user_ratings_total
   }
 }

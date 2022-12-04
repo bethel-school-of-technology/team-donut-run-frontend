@@ -40,7 +40,9 @@ export class AppComponent {
 
   SignInPage() {
     this.closeMenu();
-    this.navCtrl.navigateForward('sign-in');
+    this.navCtrl.navigateForward('sign-in').then(() => {
+      window.location.reload();
+    });;
   }
 
   SignUpPage() {
@@ -71,7 +73,7 @@ export class AppComponent {
               this.currentUser
             );
           }
-          console.log('Current User: ', this.currentUser);
+          console.log('Current User (from App Component): ', this.currentUser);
         } else {
           console.log('No active user signed in.');
         }
