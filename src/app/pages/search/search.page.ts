@@ -51,8 +51,6 @@ export class SearchPage implements OnInit {
   categoryTypes: Type[];
   selectedType?: Type;
 
-  weightedArray: Array<any>;
-
   constructor(
     private resultsService: ResultsService,
     private geoService: GeolocationService,
@@ -186,7 +184,7 @@ export class SearchPage implements OnInit {
         // Limit length of search results to pre-determined limit
         if (this.searchResults.length > this.searchLimit) {
           this.searchResults.length = this.searchLimit;
-          console.log(this.searchResults.length);
+          // console.log(this.searchResults.length);
         } 
 
         console.log('Search Results: ', this.searchResults);
