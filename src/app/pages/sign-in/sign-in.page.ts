@@ -32,9 +32,7 @@ export class SignInPage implements OnInit {
         //use this public boolean observable to add current user to menu template.
         this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
         this.router.navigateByUrl('/home').then(() => {
-          this.presentToast().then(() => {
-            window.location.reload();
-          })
+          this.presentToast()
         });
       },
       (error) => {

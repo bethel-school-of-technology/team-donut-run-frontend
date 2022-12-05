@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, of } from 'rxjs';
+import { EMPTY, Observable, of, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
 
@@ -15,6 +15,8 @@ export class AuthService {
   userBaseUrl: string = 'http://localhost:5000/api/user';
 
   tokenKey: string = 'myUserToken';
+
+  public currentUser$ = new Subject<User>();
 
   constructor(private http: HttpClient) {}
 
@@ -73,7 +75,15 @@ export class AuthService {
     }
   }
 
-  // PUT / edit user by user id
+  // PUT / edit user by current user route.
+  editCurrentUser(edittedUser: User): Observable<User> {
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    }
+    return this.http.put<User>(`${this.userBaseUrl}/current/edit`, edittedUser, {
+      headers: reqHeaders,
+    });
+  }
 
   // DELETE / delete user by user id
 }

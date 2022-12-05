@@ -1,6 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-title> 
+    <h2>Account Details</h2>
+  </ion-title>
+</ion-header>
 <ion-content>
   <div class="Cushion">
-    <ion-title> Account Details</ion-title>
     <ion-item>
       <ion-grid>
         <ion-row>
@@ -37,12 +41,11 @@
             <p>{{this.currentUser.location}}</p>
           </ion-text>
         </ion-row>
-        
+
       </ion-grid>
     </ion-item>
   </div>
-
-
-
-
-  <app-footer></app-footer>
+  <div class="ion-text-center">
+    <ion-button [routerLink]="['/edit-account']">Edit Details</ion-button>
+  </div>
+</ion-content>
