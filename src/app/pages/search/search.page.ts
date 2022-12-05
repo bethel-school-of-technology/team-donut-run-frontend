@@ -144,8 +144,8 @@ export class SearchPage implements OnInit {
 
     let request = {
       location: latLng,
-      // rankBy: google.maps.places.RankBy.DISTANCE, 
-      radius: searchRadius,
+      rankBy: google.maps.places.RankBy.DISTANCE, 
+      // radius: searchRadius,
       // types: [searchType],
       keyword: searchType,
       // We may want to pivot to keyword since more results may appear?
