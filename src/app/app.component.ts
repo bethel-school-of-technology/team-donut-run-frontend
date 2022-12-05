@@ -10,11 +10,15 @@ import { MenuService } from './services/menu.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
   // User variable
   currentUser: string = '';
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public menuService: MenuService, private authService: AuthService) { }
+  constructor(
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
+    public menuService: MenuService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.CheckCurrentUser();
@@ -36,7 +40,9 @@ export class AppComponent {
 
   SignInPage() {
     this.closeMenu();
-    this.navCtrl.navigateForward('sign-in');
+    this.navCtrl.navigateForward('sign-in').then(() => {
+      window.location.reload();
+    });;
   }
 
   SignUpPage() {
@@ -55,21 +61,33 @@ export class AppComponent {
 
   CheckCurrentUser() {
     // user real data & database
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user.username;
-      if (this.currentUser) {
-        //public boolean observable used to modify dropdown menu.
-        this.menuService.active$ = this.menuService.GetUserActiveState("active",this.currentUser);
+    this.authService.getCurrentUser().subscribe(
+      (response) => {
+        if (response != null) {
+          this.currentUser = response.username;
+
+          if (this.currentUser) {
+            // Public boolean observable used to modify dropdown menu.
+            this.menuService.active$ = this.menuService.GetUserActiveState(
+              'active',
+              this.currentUser
+            );
+          }
+          console.log('Current User (from App Component): ', this.currentUser);
+        } else {
+          console.log('No active user signed in.');
+        }
+      },
+      (error) => {
+        console.log('Check Current User Error: ', error);
       }
-      console.log('Current User: ', this.currentUser);
-    });
+    );
   }
 
   SignOut() {
     this.authService.signout();
     //change active state to false and remove currentUser to modify dropdown menu.
-    this.menuService.active$ = this.menuService.GetUserActiveState("","");
+    this.menuService.active$ = this.menuService.GetUserActiveState('', '');
     this.SignInPage();
   }
 }
-

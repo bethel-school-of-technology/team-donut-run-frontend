@@ -4,24 +4,41 @@
     <ion-item>
       <ion-grid>
         <ion-row>
-      <ion-text> <h5> Username: </h5><p> {{username}}</p> </ion-text>
-    </ion-row>
-    <ion-row>
-      
-      <ion-text> <h5> Email:</h5> <p> {{email}}</p></ion-text>
-    </ion-row>
-    <ion-row>
-      <ion-text> <h5>First Name: </h5> <p>{{firstName}}</p></ion-text>
-    </ion-row>
-    <ion-row>
-     
-      <ion-text> <h5> Last Name:</h5> <p> {{lastName}} </p></ion-text>
-    </ion-row>
-    <ion-row>
- 
-      <ion-text><h5> My Location: </h5> <p>{{location}}</p></ion-text>
-    </ion-row>
-    </ion-grid>
+          <ion-text>
+            <h5> Username: </h5>
+            <p> {{this.currentUser.username}}</p>
+          </ion-text>
+        </ion-row>
+        <ion-row>
+
+          <ion-text>
+            <h5> Email:</h5>
+            <p> {{this.currentUser.email}}</p>
+          </ion-text>
+        </ion-row>
+
+        <ion-row *ngIf="this.currentUser.firstName">
+          <ion-text>
+            <h5>First Name: </h5>
+            <p>{{this.currentUser.firstName}}</p>
+          </ion-text>
+        </ion-row>
+
+        <ion-row *ngIf="this.currentUser.lastName">
+          <ion-text>
+            <h5> Last Name:</h5>
+            <p> {{this.currentUser.lastName}} </p>
+          </ion-text>
+        </ion-row>
+
+        <ion-row *ngIf="this.currentUser.location">
+          <ion-text>
+            <h5> My Location: </h5>
+            <p>{{this.currentUser.location}}</p>
+          </ion-text>
+        </ion-row>
+        
+      </ion-grid>
     </ion-item>
   </div>
 
