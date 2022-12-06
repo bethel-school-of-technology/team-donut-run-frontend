@@ -200,6 +200,33 @@
       },
       "business_status": "OPERATIONAL",
       "photo_reference": "https://images.unsplash.com/photo-1669573234406-00c9e3f6ab34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
+    },
+    {
+      "place_id": "ChIJUfhVrKB5ZIgRdSNJy8Ng4ew",
+      "name": "Sbarro",
+      "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "store",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formatted_address": "1800 Galleria Blvd, Franklin, TN 37067, USA",
+      "short_address": "Franklin, TN",
+      "rating": 3.5,
+      "price_level": 1,
+      "opening_hours": {
+        "open_now": false
+      },
+      "website": "https://sbarro.com/",
+      "editorial_summary": {
+        "language": "en",
+        "overview": "Italian fast-food chain offering thin-crust pizza by the slice, plus pastas & salads."
+      },
+      "business_status": "OPERATIONAL",
+      "photo_reference": "https://images.unsplash.com/photo-1669564020582-0f54ada97c8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
     }
   ]
 }

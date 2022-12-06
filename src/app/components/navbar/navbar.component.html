@@ -17,27 +17,27 @@
       </div>
     </ion-col>
 
-    <ion-col >
+    <ion-col size="8">
       <div (click)="HomePage()">
         <img class="logo" src="assets/logo.svg">
        
       </div>
-      <div (click)="HomePage()"> <ion-title>
+      <div (click)="HomePage()"> 
         <h1 class="Title">
         REXFINDER
         </h1>
-      </ion-title></div>
+     </div>
   
   
      
     </ion-col>
-   <ion-col size="1">
-    <div (click)="SearchPage()">
-    <ion-button shape="circle" class="Search">
+   <ion-col size="2">
+    <div class="ion-float-end" (click)="SearchPage()">
+    <button   class="Search">
     <ion-icon size="large" color="tertiary" name="search"></ion-icon>
-  </ion-button></div>
+  </button></div>
    </ion-col>
-   <ion-col size="1"></ion-col>
+   
   </ion-row>
 
 </ion-grid>
