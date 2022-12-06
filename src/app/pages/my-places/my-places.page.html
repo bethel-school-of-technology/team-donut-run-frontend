@@ -52,7 +52,7 @@
             <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
           <!--Loops through unvisited places-->
@@ -63,7 +63,7 @@
             <ion-label class="ion-padding"  [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -89,7 +89,7 @@
             <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>

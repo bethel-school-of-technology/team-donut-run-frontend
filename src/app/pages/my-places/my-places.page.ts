@@ -9,6 +9,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -25,7 +26,7 @@ declare var google;
 export class MyPlacesPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = false;
+  useAPI: boolean = true;
 
   // Place details variable
   myPlaceArray: MyPlace[] = [];
@@ -68,6 +69,7 @@ export class MyPlacesPage implements OnInit {
       this.authService.getCurrentUser().subscribe((user) => {
         this.currentUser = user;
         this.currentUserId = user.userId;
+        this.authService.currentUser$.next(user);
         // console.log('Current User: ', this.currentUser);
       });
       this.apiFindAllPlacesByUserId();
@@ -79,6 +81,14 @@ export class MyPlacesPage implements OnInit {
 
     this.typeFilterOptions = [];
     this.generateItems();
+
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+    
+    this.placesService.myPlaceArray$.subscribe(array => {
+      this.myPlaceArray = array;
+    });
   }
 
   private generateItems() {
@@ -109,11 +119,13 @@ export class MyPlacesPage implements OnInit {
   // API find all places
   apiFindAllPlacesByUserId() {
     this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
-      this.myPlaceArray = result;
+      // this.myPlaceArray = result;
+      this.placesService.myPlaceArray$.next(result);
       // console.log('My Place Results: ', this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
 
+    // To use in filtering
     this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
     this.originalVisitedPlaces = this.myVisitedPlaces;
     
