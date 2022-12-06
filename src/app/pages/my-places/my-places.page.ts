@@ -26,7 +26,7 @@ declare var google;
 export class MyPlacesPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = true;
+  useAPI: boolean = false;
 
   // Place details variable
   myPlaceArray: MyPlace[] = [];
