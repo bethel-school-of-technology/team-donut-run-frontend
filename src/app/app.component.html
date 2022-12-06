@@ -1,5 +1,10 @@
 <ion-app>
-  <ion-menu contentId="main-content" side="end" swipe-gesture="true" type="overlay">
+  <ion-menu
+    contentId="main-content"
+    side="end"
+    swipe-gesture="true"
+    type="overlay"
+  >
     <ion-header>
       <ion-toolbar color="tertiary">
         <ion-title>Menu</ion-title>
@@ -9,8 +14,11 @@
     <ion-content class="ion-padding">
       <ion-list>
         <!-- public boolean observable used to modify dropdown menu. -->
-        <ng-template [ngIf]="this.menuService.active$ | async" [ngIfElse]="signedOut">
-          <h4>Welcome {{this.menuService.currentUser}}</h4>
+        <ng-template
+          [ngIf]="this.menuService.active$ | async"
+          [ngIfElse]="signedOut"
+        >
+          <h4>Welcome {{ this.menuService.currentUser }}</h4>
           <ion-item (click)="ProfilePage()">My Profile</ion-item>
           <ion-item (click)="MyPlacesPage()">My Places</ion-item>
           <ion-item (click)="SignOut()">Sign Out</ion-item>
@@ -27,18 +35,18 @@
       <ion-toolbar>
         <div class="navbarContainer">
           <div (click)="HomePage()">
-            <img class="logo" src="assets/logo.svg" />
-          </div>
-          <div (click)="HomePage()">
-            <p class="text">REXFINDER</p>
-          </div>
-          <div class="searchBtnContainer" (click)="SearchPage()">
-            <button class="search">
-              <ion-icon size="large" color="tertiary" name="search"></ion-icon>
-            </button>
+            <img class="logo" src="assets/logo/mainLogo.png" />
           </div>
         </div>
         <ion-buttons slot="end">
+          <div class="searchBtnContainer" (click)="SearchPage()">
+            <button class="search">
+              <ion-icon
+                id="searchIcon"
+                name="search"
+              ></ion-icon>
+            </button>
+          </div>
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
