@@ -65,7 +65,6 @@ export class PlaceDetailsPage implements OnInit {
           console.log('Current User Id: ', this.currentUserId);
 
           this.checkIfSaved(this.currentGooglePlaceId);
-          
         } else {
           console.log('No active user signed in.');
         }
@@ -221,31 +220,37 @@ export class PlaceDetailsPage implements OnInit {
   // If user has NOT already saved a place
   // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
-    console.log('Going to add to My Places');
-    // var today = new Date(); // I think this is set automatically
-    this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
-    this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
+    if (this.currentUserId != undefined) {
+      console.log('Going to add to My Places');
+      // var today = new Date(); // I think this is set automatically
+      this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
+      this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
 
-    console.log('New Place Details: ', this.saveNewPlace);
+      console.log('New Place Details: ', this.saveNewPlace);
 
-    // Do we want to route to the MyPlaces page or keep on the Place Details page?
-    this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(
-      () => {
-        if (this.saveNewPlace.visited == true) {
-          window.alert('Place saved and marked as visited!');
-        } else {
-          window.alert('Place saved!');
+      // Do we want to route to the MyPlaces page or keep on the Place Details page?
+      this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(
+        () => {
+          if (this.saveNewPlace.visited == true) {
+            window.alert('Place saved and marked as visited!');
+          } else {
+            window.alert('Place saved!');
+          }
+          // Is there another way besides reloading the page?
+          window.location.reload();
+        },
+        (error) => {
+          console.log('Save Place Error: ', error);
+          if (error.status === 401 || error.status === 403) {
+            this.router.navigate(['sign-in']);
+          }
         }
-
-        window.location.reload();
-      },
-      (error) => {
-        console.log('Save Place Error: ', error);
-        if (error.status === 401 || error.status === 403) {
-          this.router.navigate(['sign-in']);
-        }
-      }
-    );
+      );
+    } else {
+      // Add window alert here that the user needs to sign in to visit
+      window.alert('Please sign in to save place.');
+      // this.router.navigate(['sign-in']);
+    }
   }
 
   // If user HAS already saved a place
@@ -269,6 +274,7 @@ export class PlaceDetailsPage implements OnInit {
   }
 
   toggleVisited() {
+    if (this.currentUserId != undefined) {
     if (this.userSavedPlace == false) {
       // saved false, visited false
       // save place AND mark as visited
@@ -315,6 +321,11 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     }
+  } else {
+    // Add window alert here that the user needs to sign in to visit
+    window.alert("Please sign in to mark place as visited and save.");
+    // this.router.navigate(['sign-in']);
+  }
   }
 
   PhotoClick(photo) {
