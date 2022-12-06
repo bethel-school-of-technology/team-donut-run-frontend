@@ -34,18 +34,18 @@
     </ion-row>
     <ion-row *ngIf="!this.useAdvSearch">
       <ion-col size="12" class="signedOutSearchContainer">
-        <ion-button class="btn" color="primary" (click)="toggleDataSource()">
+        <ion-button class="btn ion-no-margin" color="primary" (click)="toggleDataSource()">
           Search
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!this.useAdvSearch">
       <ion-col size="12" class="signedOutSearchContainer">
-      <p >Searching by current location.</p>
+      <i class="ion-no-margin">Searching by current location.</i>
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-top">
       <ion-col>
         <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
           <ion-accordion value="advsearch">
@@ -60,7 +60,7 @@
           <ion-list>
             <ion-item>
               <ion-label>City</ion-label>
-              <ion-input
+              <ion-input class="ion-text-end"
                 placeholder="Enter City Name"
                 slot="end"
                 type="city"
@@ -86,7 +86,7 @@
             </ion-item>
           </ion-list>
           <div class="ion-float-right">
-          <ion-button class="btn" color="primary" type="submit">
+          <ion-button class="btn ion-margin-top" color="primary" type="submit">
             Search
           </ion-button>
           </div>
@@ -96,7 +96,7 @@
 
     <ion-row>
       <ion-col>
-        <h3>Results</h3>
+        <h3 class="ion-no-margin ion-padding-top">Results</h3>
       </ion-col>
     </ion-row>
     <ion-row class="searchResultsRow">
