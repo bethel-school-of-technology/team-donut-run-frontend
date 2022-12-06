@@ -6,6 +6,35 @@
         <ion-button [routerLink]="['/']" color="light">Back</ion-button>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-accordion-group (ionChange)="useFilter()">
+          <ion-accordion value="filterPlaces">
+            <ion-item slot="header" color="light">
+              <ion-label>Filter</ion-label>
+            </ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
+        <!-- <button (click)="setFilterOptions()">Set Filter Options</button> -->
+        <ion-item-group  *ngIf="this.usefilterPlaces">
+          <form (ngSubmit)="filterMyPlaces()">
+            <ion-list>
+              <ion-item>
+                <ion-label>Filter by Place Type</ion-label>
+                <ion-select interface="popover" placeholder="Select Type" (ngModel)="this.filterValue"
+                  (ionChange)="setTypeFilter($event)">
+                  <ion-select-option *ngFor="let option of typeFilterOptions" [value]="option">{{option}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <ion-button class="btn" color="light" type="submit">Apply</ion-button>
+          </form>
+          <ion-button (click)="clearFilter()" class="btn" color="light" type="submit">Clear Filter</ion-button>
+        </ion-item-group>
+      </ion-col>
+    </ion-row>
+
     <!--My Saved Places Carousel-->
     <ion-row>
       <ion-col>
