@@ -45,7 +45,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
@@ -56,7 +56,7 @@
             </ion-label>
           </ion-item>
           <!--Loops through unvisited places-->
-          <ion-item *ngFor="let place of myUnvisitedPlaces; let index">
+          <ion-item *ngFor="let place of myUnvisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
@@ -82,7 +82,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>

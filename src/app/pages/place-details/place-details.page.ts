@@ -238,7 +238,7 @@ export class PlaceDetailsPage implements OnInit {
           }
           
           this.checkIfSaved(this.currentGooglePlaceId);
-          this.apiFindAllPlacesByUserId();
+          // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           console.log('Save Place Error: ', error);
@@ -274,7 +274,7 @@ export class PlaceDetailsPage implements OnInit {
       );
 
     this.checkIfSaved(this.currentGooglePlaceId);
-    this.apiFindAllPlacesByUserId();
+    // this.apiFindAllPlacesByUserId();
   }
 
   toggleVisited() {
@@ -296,7 +296,7 @@ export class PlaceDetailsPage implements OnInit {
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
           window.alert('Place has been marked as visited!');
-          this.apiFindAllPlacesByUserId();
+          // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           window.alert('Unable to mark as visited.');
@@ -317,7 +317,7 @@ export class PlaceDetailsPage implements OnInit {
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
           window.alert('Place has been removed as visited!');
-          this.apiFindAllPlacesByUserId();
+          // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           window.alert('Unable to mark as visited.');
