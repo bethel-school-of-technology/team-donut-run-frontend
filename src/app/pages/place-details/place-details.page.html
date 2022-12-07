@@ -3,12 +3,74 @@
 
     <ion-grid>
       <ion-row>
+        <ion-col> 
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button defaultHref="home"></ion-back-button>
           </ion-buttons>
         </ion-toolbar>
-      </ion-row>
+    
+      </ion-col>
+      <ion-col>
+      <div class="lowerButtons ion-float-end ion-hide-lg-up ">
+        <p *ngIf="userSavedPlace">
+          You've already saved this place!
+        </p>
+
+        <ion-button
+          *ngIf="!userSavedPlace"
+          (click)="savePlaceToMyPlaces()"
+          class="Btn_Type"
+          shape="circle"
+        >
+          <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button
+          *ngIf="userSavedPlace"
+          (click)="removePlacefromMyPlaces()"
+          class="Btn_Type"
+          shape="circle"
+          
+        >
+          <ion-icon
+       
+            size="large"
+            color="primary"
+            name="close-circle-outline"
+          ></ion-icon>
+        </ion-button>
+
+        <ion-button
+          *ngIf="!userSavedPlace"
+          (click)="toggleVisited()"
+          class="Btn_Type"
+          shape="circle"
+        >
+          <ion-icon size="large"  color="secondary" name="add-circle"></ion-icon>
+        </ion-button>
+
+        <ion-button
+          *ngIf="userSavedPlace && !currentMyPlace.visited"
+          (click)="toggleVisited()"
+          class="Btn_Type"
+          shape="circle"
+        >
+          <ion-icon size="large" color="primary" name="add-circle"></ion-icon>
+        </ion-button>
+
+        <ion-button
+          *ngIf="userSavedPlace && currentMyPlace.visited"
+          (click)="toggleVisited()"
+          class="Btn_Type"
+          shape="circle"
+        >
+          <ion-icon size="large" color="secondary" name="pin-outline"></ion-icon>
+        </ion-button>
+      </div> 
+    </ion-col>
+    </ion-row>
+
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="5" size-lg="5" size-xl="5">
           <div class="ion-hide-md-down">
@@ -70,11 +132,11 @@
           size-lg=""
           size-xl=""
         >
-          <ion-row
-            ><div class="ion-margin-end">
+          <ion-row>
+            <div class="ion-margin-end ion-no-margin ion-no-padding">
               <ion-row>
                 <!-- will add mouse over Text at some point  -->
-                <ion-col size-md="8" size="auto">
+                <ion-col class="ion-no-margin ion-no-padding" size-md="8" size="auto">
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
@@ -83,14 +145,17 @@
                   </p>
                 </ion-col>
                 <ion-col
-                  class=""
-                  size-sm="auto"
-                  size-md="12"
-                  size-lg="12"
+                  class=" ion-hide-lg-down"
+                  size-xs="12"
+                  size-sm="12"
+                  size-md=""
+                  size-lg=""
                   size-xl=""
                 >
-                  <div class="ion-float-end ion-hide-md-down">
-                    <p *ngIf="this.userSavedPlace">
+
+                  <div class="no-margin-buttons ion-float-md-end ">
+                    <p *ngIf="userSavedPlace">
+
                       You've already saved this place!
                     </p>
 
@@ -100,7 +165,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" name="heart-outline"></ion-icon>
+                      <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -108,9 +173,12 @@
                       (click)="removePlacefromMyPlaces()"
                       class="Btn_Type"
                       shape="circle"
+                      
                     >
                       <ion-icon
+                   
                         size="large"
+                        color="primary"
                         name="close-circle-outline"
                       ></ion-icon>
                     </ion-button>
@@ -121,7 +189,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" name="add-circle"></ion-icon>
+                      <ion-icon size="large"  color="secondary" name="add-circle"></ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -130,7 +198,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" name="add-circle"></ion-icon>
+                      <ion-icon size="large" color="primary" name="add-circle"></ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -139,7 +207,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" name="pin-outline"></ion-icon>
+                      <ion-icon size="large" color="secondary" name="pin-outline"></ion-icon>
                     </ion-button>
                   </div> </ion-col
               ></ion-row>

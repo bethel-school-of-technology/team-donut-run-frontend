@@ -38,7 +38,7 @@
 
 .Text2 {
 
-   color:#8EB2B4;
+   color: #FF9800;
    font-size: large;
 
 }
@@ -51,7 +51,7 @@
 
 .Title {
    font-weight: bolder;
-   color: #667a99;
+   color:#D73210;
    font-size: 24px;
 
 }
@@ -70,9 +70,9 @@
 .otherPhotos {
    border-radius: 5px;
    object-fit: cover;
-   height: 110px;
-   min-width: 110px;
-   max-width: 110px;
+   height: 108px;
+   min-width: 108px;
+   max-width: 108px;
   
 
  
@@ -134,5 +134,11 @@
    --background-activated:rgba(0,0,0,0);
    --background-hover: rgba(0,0,0,0);
    --ripple-color: rgba(0,0,0,0);
+   ion-icon{
+      --ionicon-stroke-width: 50px;
+   }
 }
 
+.lowerButtons{
+   margin-top: 8px
+}
