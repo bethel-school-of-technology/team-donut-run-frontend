@@ -222,7 +222,7 @@ export class PlaceDetailsPage implements OnInit {
   // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
     if (this.currentUserId != undefined) {
-      console.log('Going to add to My Places');
+      // console.log('Going to add to My Places');
       this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
       this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
       
@@ -231,10 +231,10 @@ export class PlaceDetailsPage implements OnInit {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
             this.userSavedPlace = true;
-            window.alert('Place saved and marked as visited!');
+            // window.alert('Place saved and marked as visited!');
           } else {
             this.userSavedPlace = true;
-            window.alert('Place saved!');
+            // window.alert('Place saved!');
           }
           
           this.checkIfSaved(this.currentGooglePlaceId);
@@ -258,12 +258,14 @@ export class PlaceDetailsPage implements OnInit {
   // If user HAS already saved a place
   // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
   removePlacefromMyPlaces() {
+    
     this.placesService
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
+          this.currentMyPlace.visited = false;
           this.userSavedPlace = false;
-          window.alert('Place has been removed from saved places list.');
+          // window.alert('Place has been removed from saved places list.');
         },
         (error) => {
           console.log('Remove Place Error: ', error);
@@ -295,7 +297,7 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = true");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been marked as visited!');
+          // window.alert('Place has been marked as visited!');
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
@@ -316,7 +318,7 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = false");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been removed as visited!');
+          // window.alert('Place has been removed as visited!');
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {

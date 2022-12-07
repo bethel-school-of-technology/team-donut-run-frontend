@@ -104,7 +104,7 @@
         </ion-col>
 
         <ion-col
-          class="ion-hide-md-down ion-margin-horizontal"
+          class="ion-hide-md-down ion-padding-horizontal"
           size-xs="12"
           size-sm="12"
           size-md="auto"
@@ -125,18 +125,41 @@
         </ion-col>
 
         <ion-col
-          class="ion-margin-horizontal ion-margin-top"
+          class="ion-padding-horizontal ion-margin-top"
           size-xs="12"
           size-sm="12"
           size-md=""
           size-lg=""
           size-xl=""
         >
-          <ion-row>
+        
+        <ion-row>
             <div class="ion-margin-end ion-no-margin ion-no-padding">
+
+              <ion-row class="ion-margin-bottom">
+                <ion-col class="ion-float-start">
+
+                  <ion-button *ngIf="!this.userSavedPlace"
+                  (click)="savePlaceToMyPlaces()" class="changeBtn ion-text-uppercase ion-margin-end" color="primary"><ion-icon color="light" name="heart-outline"></ion-icon><span class="btnText">Save</span></ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace"
+                  (click)="removePlacefromMyPlaces()" class="changeBtn ion-text-uppercase ion-margin-end" color="tertiary"><ion-icon color="light" name="close-circle-outline"></ion-icon><span class="btnText">Saved</span></ion-button>
+
+                  <ion-button *ngIf="!this.userSavedPlace"
+                  (click)="toggleVisited()" class="changeBtn ion-text-uppercase" color="primary"><ion-icon color="light" name="add-circle"></ion-icon><span class="btnText">Visit</span></ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && !this.currentMyPlace.visited"
+                  (click)="toggleVisited()" class="changeBtn ion-text-uppercase" color="primary"><ion-icon color="light" name="add-circle"></ion-icon><span class="btnText">Visit</span></ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && this.currentMyPlace.visited"
+                  (click)="toggleVisited()" class="changeBtn ion-text-uppercase" color="tertiary"><ion-icon color="light" name="pin-outline"></ion-icon><span class="btnText">Visited</span></ion-button>
+
+                </ion-col>
+              </ion-row>  
+
               <ion-row>
                 <!-- will add mouse over Text at some point  -->
-                <ion-col class="ion-no-margin ion-no-padding" size-md="8" size="auto">
+                <ion-col class="ion-no-margin ion-no-padding">
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
