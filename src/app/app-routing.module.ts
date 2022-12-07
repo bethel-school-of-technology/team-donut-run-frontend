@@ -5,7 +5,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'error',
     pathMatch: 'full'
   },
   {
@@ -51,7 +51,12 @@ const routes: Routes = [
   {
     path: 'donut-shop',
     loadChildren: () => import('./pages/donut-shop/donut-shop.module').then( m => m.DonutShopPageModule)
+  },
+  {
+    path: 'error',
+    loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   }
+
 ];
 
 @NgModule({
