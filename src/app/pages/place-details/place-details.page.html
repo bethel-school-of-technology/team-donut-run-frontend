@@ -90,12 +90,12 @@
                   size-xl=""
                 >
                   <div class="ion-float-end ion-hide-md-down">
-                    <p *ngIf="userSavedPlace">
+                    <p *ngIf="this.userSavedPlace">
                       You've already saved this place!
                     </p>
 
                     <ion-button
-                      *ngIf="!userSavedPlace"
+                      *ngIf="!this.userSavedPlace"
                       (click)="savePlaceToMyPlaces()"
                       class="Btn_Type"
                       shape="circle"
@@ -104,7 +104,7 @@
                     </ion-button>
 
                     <ion-button
-                      *ngIf="userSavedPlace"
+                      *ngIf="this.userSavedPlace"
                       (click)="removePlacefromMyPlaces()"
                       class="Btn_Type"
                       shape="circle"
@@ -116,7 +116,7 @@
                     </ion-button>
 
                     <ion-button
-                      *ngIf="!userSavedPlace"
+                      *ngIf="!this.userSavedPlace"
                       (click)="toggleVisited()"
                       class="Btn_Type"
                       shape="circle"
@@ -125,7 +125,7 @@
                     </ion-button>
 
                     <ion-button
-                      *ngIf="userSavedPlace && !currentMyPlace.visited"
+                      *ngIf="this.userSavedPlace && !this.currentMyPlace.visited"
                       (click)="toggleVisited()"
                       class="Btn_Type"
                       shape="circle"
@@ -134,7 +134,7 @@
                     </ion-button>
 
                     <ion-button
-                      *ngIf="userSavedPlace && currentMyPlace.visited"
+                      *ngIf="this.userSavedPlace && this.currentMyPlace.visited"
                       (click)="toggleVisited()"
                       class="Btn_Type"
                       shape="circle"
