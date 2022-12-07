@@ -1,7 +1,6 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center">
-
       <ion-col>
         <swiper
           [effect]="'coverflow'"
@@ -14,7 +13,6 @@
         depth: 100,
         modifier: 1,
         slideShadows: true
-
       }"
           [pagination]="true"
           class="mySwiper"
@@ -25,19 +23,30 @@
         </swiper>
       </ion-col>
     </ion-row>
+    <div class="ion-padding">
     <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="12" sizeXs="12" >
-        <h4 class="ion-padding">Selected category: <span *ngIf="this.selectedType" >{{this.selectedType.type}}</span></h4>
+
+      <ion-col size="12" sizeXs="12">
+        <h4>
+          Selected category:
+          <span class="selectedType" *ngIf="this.selectedType">{{this.selectedType.type}}</span>
+        </h4>
       </ion-col>
-      <ion-col *ngIf="!this.useAdvSearch" size="12" sizeMd="3">
-        <ion-button class="btn" color="light" (click)="toggleDataSource()">
+    </ion-row>
+    <ion-row *ngIf="!this.useAdvSearch">
+      <ion-col size="12" class="signedOutSearchContainer">
+        <ion-button class="btn ion-no-margin" color="primary" (click)="toggleDataSource()">
           Search
         </ion-button>
-        <p>Searching by current location.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!this.useAdvSearch">
+      <ion-col size="12" class="signedOutSearchContainer">
+      <i class="ion-no-margin">Searching by current location.</i>
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-top">
       <ion-col>
         <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
           <ion-accordion value="advsearch">
@@ -52,29 +61,43 @@
           <ion-list>
             <ion-item>
               <ion-label>City</ion-label>
-              <ion-input placeholder="Enter City Name" type="city" name="city" [(ngModel)]="this.searchCity">
+              <ion-input class="ion-text-end"
+                placeholder="Enter City Name"
+                slot="end"
+                type="city"
+                name="city"
+                [(ngModel)]="this.searchCity"
+              >
               </ion-input>
             </ion-item>
             <ion-item>
               <ion-label>State</ion-label>
-              <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState"
-                (ionChange)="setState($event)">
-                <ion-select-option *ngFor="let state of stateOptions" [value]="state">{{state}}</ion-select-option>
-
+              <ion-select
+                interface="popover"
+                placeholder="Select State"
+                (ngModel)="this.searchState"
+                (ionChange)="setState($event)"
+              >
+                <ion-select-option
+                  *ngFor="let state of stateOptions"
+                  [value]="state"
+                  >{{state}}</ion-select-option
+                >
               </ion-select>
             </ion-item>
           </ion-list>
-          <ion-button class="btn" color="light" type="submit">
+          <div class="ion-float-right">
+          <ion-button class="btn ion-margin-top" color="primary" type="submit">
             Search
-
           </ion-button>
+          </div>
         </form>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <h3 color="dark" class="ion-padding">Results</h3>
+        <h3 class="ion-no-margin ion-padding-top">Results</h3>
       </ion-col>
     </ion-row>
     <ion-row class="searchResultsRow">
@@ -97,7 +120,9 @@
             <ion-text color="dark"><b>{{place.name }}</b></ion-text>
             <span>
               <ion-icon name="star" color="secondary"></ion-icon>
-              <ion-text color="secondary"> {{ place.rating }} ({{place.user_ratings_total}}) </ion-text>
+              <ion-text color="secondary">
+                {{ place.rating }} ({{place.user_ratings_total}})
+              </ion-text>
             </span>
             <span>
               <ion-icon name="location-outline"></ion-icon>
@@ -107,6 +132,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    </div>
   </ion-grid>
 </ion-content>
 
