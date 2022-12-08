@@ -19,8 +19,9 @@
           [ngIfElse]="signedOut"
         >
           <h4>Welcome {{ this.menuService.currentUser }}</h4>
-          <ion-item (click)="ProfilePage()">My Profile</ion-item>
           <ion-item (click)="MyPlacesPage()">My Places</ion-item>
+          <ion-item (click)="MyExperiencesPage()">My Experiences</ion-item>
+          <ion-item (click)="ProfilePage()">My Profile</ion-item>
           <ion-item (click)="SignOut()">Sign Out</ion-item>
         </ng-template>
         <ng-template #signedOut>

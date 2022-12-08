@@ -51,7 +51,20 @@ const routes: Routes = [
   {
     path: 'donut-shop',
     loadChildren: () => import('./pages/donut-shop/donut-shop.module').then( m => m.DonutShopPageModule)
+  },
+  {
+    path: 'my-experiences',
+    loadChildren: () => import('./pages/my-experiences/my-experiences.module').then( m => m.MyExperiencesPageModule)
+  },
+  {
+    path: 'experience-details/:id',
+    loadChildren: () => import('./pages/experience-details/experience-details.module').then( m => m.ExperienceDetailsPageModule)
+  },  {
+    path: 'create-experience',
+    loadChildren: () => import('./pages/create-experience/create-experience.module').then( m => m.CreateExperiencePageModule)
   }
+
+
 ];
 
 @NgModule({

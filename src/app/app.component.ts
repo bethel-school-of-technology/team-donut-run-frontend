@@ -38,6 +38,11 @@ export class AppComponent {
     this.navCtrl.navigateForward('my-places');
   }
 
+  MyExperiencesPage() {
+    this.closeMenu();
+    this.navCtrl.navigateForward('my-experiences');
+  }
+
   SignInPage() {
     this.closeMenu();
     this.navCtrl.navigateForward('sign-in');
