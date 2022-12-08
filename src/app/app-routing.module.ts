@@ -5,7 +5,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'error',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -55,7 +55,11 @@ const routes: Routes = [
   {
     path: 'error',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
-  }
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
+  },
 
 ];
 
