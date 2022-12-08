@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Position } from '@capacitor/geolocation';
 import { PlaceResult } from 'src/app/models/place-result';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -6,6 +6,7 @@ import { ResultsService } from 'src/app/Services/results.service';
 import { Type } from 'src/app/models/type';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 // import {} from 'googlemaps'; // Not sure if this is needed
 declare var google;
@@ -32,8 +33,8 @@ export class SearchPage implements OnInit {
   searchState: string;
   searchLatitude: number = null;
   searchLongitude: number = null;
-  resultLatitude: number = null;
-  resultLongitude: number = null;
+  // resultLatitude: number = null;
+  // resultLongitude: number = null;
 
   // To display data results
   // newPlace: PlaceResult = new PlaceResult();
@@ -43,7 +44,8 @@ export class SearchPage implements OnInit {
   // For V2, we can let the user choose the radius and number of results?
   // searchType: string = 'restaurant';
   searchRadius: number = 50000; // this is in meters
-  // searchLimit: number = 3;
+  searchLimit: number = 3;
+  useAdvSearch: boolean = false;
 
   // These are the current categories we are going to allow the user to search by
   categoryTypes: Type[];
@@ -52,35 +54,25 @@ export class SearchPage implements OnInit {
   constructor(
     private resultsService: ResultsService,
     private geoService: GeolocationService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    // To get current user's geolocation on page load
-    this.getCurrentLocation();
     // To get the current category types from local json file
     this.getJSON().subscribe((data) => {
       this.categoryTypes = data.categories;
     });
+    // To get current user's geolocation on page load
+    this.getCurrentLocation();
   }
 
-  // Options for the category slider
-  catSlideOpts = {
-    loop: false,
-    effect: 'slide',
-
-    freeMode: true,
-    freeModeSticky: false,
-
-    slidesPerView: 'auto',
-    spaceBetween: 10,
-  };
-
-  // Options for search result cards
-  searchResultSlideOpts = {
-    slidesPerView: 1.2,
-    spaceBetween: 10,
-    freeMode: true,
+  breakpoints = {
+    100: { slideaPerView: 1.5, spaceBetween: 5 },
+    320: { slidesPerView: 2.5, spaceBetween: 10 },
+    768: { slidesPerView: 3.5, spaceBetween: 10 },
+    1000: { slidesPerView: 4.5, spaceBetween: 10 },
+    1100: { slidesPerView: 5, spaceBetween: 10 },
   };
 
   // To get the local json category data types
@@ -116,7 +108,7 @@ export class SearchPage implements OnInit {
   // To switch from using the API data to the mock data (set boolean above)
   toggleDataSource() {
     if (this.selectedType == null) {
-      window.alert('Please select a category.');
+      this.selectCategoryAlert();
       console.log('Type not selected');
     } else {
       if (this.useAPI == true) {
@@ -134,6 +126,13 @@ export class SearchPage implements OnInit {
     }
   }
 
+  // To switch to using Advanced Search
+  toggleAdvancedSearch = (event) => {
+    this.useAdvSearch = !this.useAdvSearch;
+
+    console.log('Advanced Search: ', this.useAdvSearch);
+  };
+
   ////////// GOOGLE API -- GET ALL RESULTS //////////
   // GET / Nearby Search (by current geolocation)
   // This calls the function from the Google API to get the results in a Promise
@@ -145,8 +144,8 @@ export class SearchPage implements OnInit {
 
     let request = {
       location: latLng,
-      // rankBy: 'distance', // Not sure if this is working
-      radius: searchRadius,
+      rankBy: google.maps.places.RankBy.DISTANCE, 
+      // radius: searchRadius,
       // types: [searchType],
       keyword: searchType,
       // We may want to pivot to keyword since more results may appear?
@@ -168,44 +167,59 @@ export class SearchPage implements OnInit {
   // This calls the promise to set the variable we can use in the HTML
   setSearchResults(lat, long, searchType, searchRadius) {
     let latLng = new google.maps.LatLng(lat, long);
+    this.searchResults = [];
 
     this.nearbySearchByGeolocation(latLng, searchType, searchRadius).then(
       (results: Array<any>) => {
         // Where/when do we limit the number of results we want to display?
-        this.searchResults = results;
-        console.log('Search Results: ', this.searchResults);
-        // V2 -- See about limiting results if not OPERATIONAL and/or having better searching/sorting by rating
+        results.forEach(p => {
+          if (p.user_ratings_total > 100 && p.rating > 4) {
+            this.searchResults.push(p);
+          }
+        });
 
-        for (let i = 0; i < 3; i++) {
-          // Maybe add error handling that if the photo isn't available, we skip it?
-          results[i].photos &&
-            results[i].photos.forEach((photo) => {
-              this.searchResults[i].photo_reference = photo.getUrl({
-                maxWidth: 500,
-                maxHeight: 500,
-              });
-            });
+        // Sort results list descending by weighted_value
+        this.searchResults.sort((a, b) => b.rating - a.rating);
+
+        // Limit length of search results to pre-determined limit
+        if (this.searchResults.length > this.searchLimit) {
+          this.searchResults.length = this.searchLimit;
+          // console.log(this.searchResults.length);
+        } 
+
+        console.log('Search Results: ', this.searchResults);
+
+        // Get photo and short_address
+        this.searchResults.forEach(sr => {
+          let placeId = sr.place_id;
+          let foundPlace = results.find((p) => p.place_id === placeId);
+          sr.photo_reference = foundPlace.photos[0].getUrl({
+            maxWidth: 500,
+            maxHeight: 500,
+          });
 
           if (
-            results[i].plus_code == null ||
-            results[i].plus_code == undefined
+            foundPlace.plus_code == null ||
+            foundPlace.plus_code == undefined
           ) {
             // Will/does this happen often enough that we need to handle it?
+            sr.short_address = "Address not available.";
             console.log('Address not available.');
           } else {
-            let address = results[i].plus_code.compound_code;
+            let address = foundPlace.plus_code.compound_code;
             let split = address.split(/ (.*)/);
-            this.searchResults[i].short_address = split[1];
+            sr.short_address = split[1];
           }
-        }
+
+        })
       },
       (status) => {
-        if (status == "ZERO_RESULTS") {
-        // If this yields "ZERO_RESULTS", set this.searchResults to be a donut shop with a note that says "Sorry, no results, but here's a donut shop" LOL
+        if (status == 'ZERO_RESULTS') {
+          // If this yields "ZERO_RESULTS", set this.searchResults to be a donut shop with a note that says "Sorry, no results, but here's a donut shop" LOL
 
-        window.alert("No places found for current selection.");
-      }
-        console.log('Status: ', status)
+          this.zeroResultsFoundAlert();
+        }
+        console.log('Status: ', status);
       }
     );
   }
@@ -213,20 +227,20 @@ export class SearchPage implements OnInit {
   ////////// ADVANCED SEARCH BY USER INPUT //////////
   searchByUserInput() {
     if (this.selectedType == null) {
-      window.alert('Please select a category.');
+      this.selectCategoryAlert();
       console.log('Type not selected');
     } else {
       if (this.searchCity == undefined || this.searchState == undefined) {
-        window.alert("Please enter both city and state for advanced search.")
-        console.log('City or state is undefined. Unable to complete search.');
+        this.cityOrStateMissingAlert();
+        //console.log('City or state is undefined. Unable to complete search.');
       } else {
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
           .subscribe(
             (result) => {
               if (result == null || result == undefined || result.length == 0) {
-                window.alert("City does not exist for selected state.");
-                console.log('City does not exist for selected state.');
+                this.cityDoesNotExistAlert();
+                //console.log('City does not exist for selected state.');
               } else {
                 this.searchLatitude = result[0].lat;
                 this.searchLongitude = result[0].lon;
@@ -327,5 +341,42 @@ export class SearchPage implements OnInit {
       this.searchResults = ReturnedPlaces;
       console.log(ReturnedPlaces);
     });
+  }
+
+  /////////  ALERTS ///////////
+  async selectCategoryAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'Please select a category',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async zeroResultsFoundAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'No results found',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async cityDoesNotExistAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'City does not exist for selected state',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async cityOrStateMissingAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'City and/or state missing for advanced search',
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

@@ -43,7 +43,8 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
-  },  {
+  },
+  {
     path: 'terms-services',
     loadChildren: () => import('./pages/terms-services/terms-services.module').then( m => m.TermsServicesPageModule)
   },
@@ -52,11 +53,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/meet-the-team/meet-the-team.module').then( m => m.MeetTheTeamPageModule)
   },
   {
-    path: 'meet-the-team',
-    loadChildren: () => import('./pages/meet-the-team/meet-the-team.module').then( m => m.MeetTheTeamPageModule)
+    path: 'donut-shop',
+    loadChildren: () => import('./pages/donut-shop/donut-shop.module').then( m => m.DonutShopPageModule)
   },
-
-
+  {
+    path: 'error',
+    loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
+  },
 ];
 
 @NgModule({

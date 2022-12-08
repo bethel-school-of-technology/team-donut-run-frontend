@@ -27,4 +27,7 @@ import { SwiperModule } from 'swiper/angular';
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+}
+
