@@ -39,7 +39,6 @@ export class PlaceDetailsPage implements OnInit {
   currentUserId: number;
   myGooglePlaceIds: string[] = [];
   userSavedPlace: boolean;
-  // currentMyPlaceId: number; // We may not need this
   currentMyPlace: MyPlace = new MyPlace();
   saveNewPlace: MyPlace = new MyPlace();
 
@@ -75,6 +74,8 @@ export class PlaceDetailsPage implements OnInit {
         console.log('Current User Error: ', error);
       }
     );
+
+    this.apiFindAllPlacesByUserId();
   }
 
   // Options for the category slider
@@ -100,7 +101,6 @@ export class PlaceDetailsPage implements OnInit {
       (result) => {
         if (result == null || result == undefined) {
           this.userSavedPlace = false;
-          this.currentMyPlace = null;
           console.log(`Found place = ${this.userSavedPlace}`);
         } else {
           this.userSavedPlace = true;
@@ -201,13 +201,14 @@ export class PlaceDetailsPage implements OnInit {
             this.photoLimit = maxPhotoLimit;
           }
 
-          for (let i = 0; i < this.photoLimit; i++) {
-            this.newPhoto = this.photoList[i].getUrl({
-              maxWidth: 500,
-              maxHeight: 500,
-            });
-            this.photoLinkArray.push(this.newPhoto);
-          }
+          // COMMENTING OUT TO LIMIT REQUESTS
+          // for (let i = 0; i < this.photoLimit; i++) {
+          //   this.newPhoto = this.photoList[i].getUrl({
+          //     maxWidth: 500,
+          //     maxHeight: 500,
+          //   });
+          //   this.photoLinkArray.push(this.newPhoto);
+          // }
 
           this.ChosenPhoto = this.photoLinkArray[0];
 
@@ -224,23 +225,23 @@ export class PlaceDetailsPage implements OnInit {
   savePlaceToMyPlaces() {
     if (this.currentUserId != undefined) {
       console.log('Going to add to My Places');
-      // var today = new Date(); // I think this is set automatically
       this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
       this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
-      console.log('New Place Details: ', this.saveNewPlace);
-
-      // Do we want to route to the MyPlaces page or keep on the Place Details page?
+      
       this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(
-        () => {
+        (result) => {
+          console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
+
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
           }
-          // Is there another way besides reloading the page?
-          //window.location.reload();
+          this.checkIfSaved(this.currentGooglePlaceId);
+          // this.apiFindAllPlacesByUserId();
+
         },
         (error) => {
           console.log('Save Place Error: ', error);
@@ -250,10 +251,11 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     } else {
-      // Add window alert here that the user needs to sign in to visit
       this.signInToSavePlaceAlert();
       //this.router.navigate(['sign-in']);
+
     }
+
   }
 
   // If user HAS already saved a place
@@ -274,54 +276,58 @@ export class PlaceDetailsPage implements OnInit {
           }
         }
       );
+
+    this.checkIfSaved(this.currentGooglePlaceId);
+    // this.apiFindAllPlacesByUserId();
   }
 
   toggleVisited() {
     if (this.currentUserId != undefined) {
-      if (this.userSavedPlace == false) {
-        // saved false, visited false
-        // save place AND mark as visited
-        this.saveNewPlace.visited = true;
-        this.savePlaceToMyPlaces();
-      } else if (
-        this.userSavedPlace == true &&
-        this.currentMyPlace.visited == false
-
-      ) {
-        // saved true, visited false
-        // mark as visited
-        this.currentMyPlace.visited = true;
-        this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
-          () => {
-            this.placeMarkedAsVisitedAlert();
-            // window.location.reload();
-          },
-          (error) => {
-            this.unableToMarkAsVisitedAlert();
-            console.log('Update Place Error: ', error);
-            if (error.status === 401 || error.status === 403) {
-              this.router.navigate(['sign-in']);
-            }
+    if (this.userSavedPlace == false) {
+      // saved false, visited false
+      // save place AND mark as visited
+      this.saveNewPlace.visited = true;
+      this.savePlaceToMyPlaces();
+      console.log("Saved AND Visited = true");
+    } else if (
+      this.userSavedPlace == true &&
+      this.currentMyPlace.visited == false
+    ) {
+      // saved true, visited false
+      // mark as visited
+      this.currentMyPlace.visited = true;
+      console.log("Visited = true");
+      this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
+        () => {
+          this.placeMarkedAsVisitedAlert();
+          // this.apiFindAllPlacesByUserId();
+        },
+        (error) => {
+          this.unableToMarkAsVisitedAlert();
+          console.log('Update Place Error: ', error);
+          if (error.status === 401 || error.status === 403) {
+            this.router.navigate(['sign-in']);
           }
-        );
-      } else if (
-        this.userSavedPlace == true &&
-        this.currentMyPlace.visited == true
-      ) {
-        // saved true, visited true
-        // mark visited as false
-        this.currentMyPlace.visited = false;
-        this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
-          () => {
-            this.placeRemovedFromVisitedAlert();
-            // window.location.reload();
-          },
-          (error) => {
-            this.unableToMarkAsVisitedAlert();
-            console.log('Update Place Error: ', error);
-            if (error.status === 401 || error.status === 403) {
-              this.router.navigate(['sign-in']);
-            }
+        }
+      );
+    } else if (
+      this.userSavedPlace == true &&
+      this.currentMyPlace.visited == true
+    ) {
+      // saved true, visited true
+      // mark visited as false
+      this.currentMyPlace.visited = false;
+      console.log("Visited = false");
+      this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
+        () => {
+          this.placeRemovedFromVisitedAlert();
+          // this.apiFindAllPlacesByUserId();
+        },
+        (error) => {
+          this.unableToMarkAsVisitedAlert();
+          console.log('Update Place Error: ', error);
+          if (error.status === 401 || error.status === 403) {
+            this.router.navigate(['sign-in']);
           }
         );
       }
@@ -336,7 +342,14 @@ export class PlaceDetailsPage implements OnInit {
     this.ChosenPhoto = photo;
     console.log('Chosen Photo: ', photo);
   }
-
+  
+    // To send data back to My Places page
+  apiFindAllPlacesByUserId() {
+    this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+      this.placesService.myPlaceArray$.next(result);
+    });
+   }
+   
   //Sign in Alerts
   async signInToVisitPlaceAlert() {
     const alert = await this.alertController.create({
@@ -415,5 +428,5 @@ export class PlaceDetailsPage implements OnInit {
       buttons: ['OK'],
     });
      await alert.present();
-  }
+   }
 }

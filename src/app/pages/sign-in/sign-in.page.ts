@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',

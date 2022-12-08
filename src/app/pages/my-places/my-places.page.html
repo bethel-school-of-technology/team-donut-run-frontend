@@ -45,25 +45,25 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
             <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
           <!--Loops through unvisited places-->
-          <ion-item *ngFor="let place of myUnvisitedPlaces; let index">
+          <ion-item *ngFor="let place of myUnvisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
             <ion-label class="ion-padding"  [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -82,14 +82,14 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
             <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
