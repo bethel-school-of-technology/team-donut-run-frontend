@@ -40,7 +40,7 @@
                   </ion-select>
                 </ion-item>
               </ion-list>
-              <ion-button *ngIf="this.searchCity && this.searchState" class="btn ion-margin-top" color="primary"
+              <ion-button *ngIf="this.searchCity && this.searchState && !this.firstPlaceSet" class="btn ion-margin-top" color="primary"
                 type="submit">
                 Set Location
               </ion-button>
@@ -67,7 +67,6 @@
             </form>
 
             <ion-row *ngIf="this.openFirst" class="searchResultsRow">
-              <h4 *ngIf="this.searchResults">Select ONE</h4>
               <ion-col class="searchResultsContainer" size-xs="12" sizeSm="12" sizeMd="6" sizeLg="4"
                 *ngFor="let place of searchResults">
                 <ion-card class="card">
@@ -89,12 +88,12 @@
                     <br>
                     <span>
                       <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
-                      <ion-fab-button size="small" *ngIf="this.firstPlace != place.place_id"
-                        (click)="setFirstPlace(place.place_id)">
+                      <ion-fab-button size="small" *ngIf="this.firstPlaceId != place.place_id"
+                        (click)="setFirstPlace(place.place_id, place.name)">
                         <ion-icon name="add"></ion-icon>
                       </ion-fab-button>
-                      <ion-fab-button *ngIf="this.firstPlace == place.place_id" size="small" color="tertiary"
-                        (click)="this.firstPlace = null">
+                      <ion-fab-button *ngIf="this.firstPlaceId == place.place_id" size="small" color="tertiary"
+                        (click)="unsetFirstPlace()">
                         <ion-icon name="checkmark"></ion-icon>
                       </ion-fab-button>
                     </span>
@@ -104,10 +103,8 @@
               </ion-col>
             </ion-row>
 
-            <!-- Add a button to add a second place and make open first false -->
-
             <!-- START SECOND PLACE SELECTION -->
-            <ion-button *ngIf="this.firstPlaceSet" class="btn ion-margin-top" color="primary" (click)="toggleFirstPlace($event)">
+            <ion-button *ngIf="this.firstPlaceSet && !this.openSecond && !this.secondPlaceSet" class="btn ion-margin-top" color="primary" (click)="toggleFirstPlace($event)">
               Add Second Place
             </ion-button>
             <ion-accordion-group *ngIf="this.firstPlaceSet && !this.openFirst" (ionChange)="toggleSecondPlace($event)">
@@ -117,7 +114,7 @@
                 </ion-item>
               </ion-accordion>
             </ion-accordion-group>
-            <form *ngIf="this.openSecond" (ngSubmit)="searchByString()">
+            <form *ngIf="this.openSecond && !this.openFirst" (ngSubmit)="searchByString()">
               <ion-item>
                 <ion-label>Place #2 Type</ion-label>
                 <ion-input class="ion-text-end" placeholder="Enter Type" slot="end" type="place" name="secondPlace"
@@ -129,8 +126,7 @@
               </ion-button>
             </form>
 
-            <ion-row *ngIf="this.openSecond" class="searchResultsRow">
-              <h4 *ngIf="this.searchResults">Select ONE</h4>
+            <ion-row *ngIf="this.openSecond && !this.openFirst" class="searchResultsRow">
               <ion-col class="searchResultsContainer" size-xs="12" sizeSm="12" sizeMd="6" sizeLg="4"
                 *ngFor="let place of searchResults">
                 <ion-card class="card">
@@ -152,12 +148,12 @@
                     <br>
                     <span>
                       <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
-                      <ion-fab-button size="small" *ngIf="this.secondPlace != place.place_id"
-                        (click)="setSecondPlace(place.place_id)">
+                      <ion-fab-button size="small" *ngIf="this.secondPlaceId != place.place_id"
+                        (click)="setSecondPlace(place.place_id, place.name)">
                         <ion-icon name="add"></ion-icon>
                       </ion-fab-button>
-                      <ion-fab-button *ngIf="this.secondPlace == place.place_id" size="small" color="tertiary"
-                        (click)="this.secondPlace = null">
+                      <ion-fab-button *ngIf="this.secondPlaceId == place.place_id" size="small" color="tertiary"
+                        (click)="unsetSecondPlace()">
                         <ion-icon name="checkmark"></ion-icon>
                       </ion-fab-button>
                     </span>
@@ -167,6 +163,12 @@
               </ion-col>
             </ion-row>
 
+          </ion-list>
+
+          <ion-list>
+            <p *ngIf="this.firstPlaceName">Place #1: {{this.firstPlaceName}}</p>
+            <p *ngIf="this.secondPlaceName">Place #1: {{this.secondPlaceName}}</p>
+            <p *ngIf="this.thirdPlaceName">Place #1: {{this.thirdPlaceName}}</p>
           </ion-list>
           <ion-button class="btn" color="light" type="submit">Create New Experience</ion-button>
         </form>

@@ -23,15 +23,18 @@ export class CreateExperiencePage implements OnInit {
 
   // Experience variables
   newExperience: Experience = new Experience();
-  firstPlace: string;
+  firstPlaceId: string;
+  firstPlaceName: string;
   firstPlaceSet: boolean;
   openFirst: boolean;
 
-  secondPlace: string;
+  secondPlaceId: string;
+  secondPlaceName: string;
   secondPlaceSet: boolean;
   openSecond: boolean;
 
-  thirdPlace: string;
+  thirdPlaceId: string;
+  thirdPlaceName: string;
   thirdPlaceSet: boolean;
   openThird: boolean;
 
@@ -79,22 +82,44 @@ export class CreateExperiencePage implements OnInit {
   }
 
   // Set the places for the experience
-  setFirstPlace(googlePlaceId: string) {
-    this.firstPlace = googlePlaceId;
+
+  setFirstPlace(googlePlaceId: string, name: string) {
+    this.firstPlaceId = googlePlaceId;
+    this.firstPlaceName = name;
     this.firstPlaceSet = true;
-    console.log("First Place: ", this.firstPlace);
+    console.log("First Place: ", this.firstPlaceId);
   }
 
-  setSecondPlace(googlePlaceId: string) {
-    this.secondPlace = googlePlaceId;
+  unsetFirstPlace() {
+    this.firstPlaceId = null;
+    this.firstPlaceName = null;
+    this.firstPlaceSet = false;
+  }
+
+  setSecondPlace(googlePlaceId: string, name: string) {
+    this.secondPlaceId = googlePlaceId;
+    this.secondPlaceName = name;
     this.secondPlaceSet = true;
-    console.log("Second Place: ", this.secondPlace);
+    console.log("Second Place: ", this.secondPlaceId);
   }
 
-  setThirdPlace(googlePlaceId: string) {
-    this.thirdPlace = googlePlaceId;
+  unsetSecondPlace() {
+    this.secondPlaceId = null;
+    this.secondPlaceName = null;
+    this.secondPlaceSet = false;
+  }
+
+  setThirdPlace(googlePlaceId: string, name: string) {
+    this.thirdPlaceId = googlePlaceId;
+    this.thirdPlaceName = name;
     this.thirdPlaceSet = true;
-    console.log("Third Place: ", this.thirdPlace);
+    console.log("Third Place: ", this.thirdPlaceId);
+  }
+
+  unsetThirdPlace() {
+    this.thirdPlaceId = null;
+    this.thirdPlaceName = null;
+    this.thirdPlaceSet = false;
   }
 
   toggleFirstPlace = (event) => {
@@ -112,9 +137,9 @@ export class CreateExperiencePage implements OnInit {
   // CREATE/SUBMIT new experience
   createNewExperience() {
     if (this.currentUser != undefined) {
-      this.newExperience.firstGooglePlaceId = this.firstPlace;
-      this.newExperience.secondGooglePlaceId = this.secondPlace;
-      this.newExperience.thirdGooglePlaceId = this.thirdPlace;
+      this.newExperience.firstGooglePlaceId = this.firstPlaceId;
+      this.newExperience.secondGooglePlaceId = this.secondPlaceId;
+      this.newExperience.thirdGooglePlaceId = this.thirdPlaceId;
       // Do we need to do this to set the other form items or does that happen automatically with data binding on submit?
       console.log("New Experience: ", this.newExperience);
       // Call create experience method from service
@@ -218,6 +243,22 @@ export class CreateExperiencePage implements OnInit {
       if (this.searchCity == undefined || this.searchState == undefined) {
         this.cityOrStateMissingAlert();
       } else {
+
+        this.firstPlaceId = "";
+        this.firstPlaceSet = false;
+        this.openFirst = false;
+
+        this.secondPlaceId = "";
+        this.secondPlaceSet = false;
+        this.openSecond = false;
+
+        this.thirdPlaceId = "";
+        this.thirdPlaceSet = false;
+        this.openThird = false;
+
+        this.searchString = "";
+        this.searchResults = [];
+
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
           .subscribe(
