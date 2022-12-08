@@ -1,15 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"
-        ><ion-icon name="chevron-back-outline"></ion-icon
-      ></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-grid>
+    <!--Back Button-->
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+      </ion-col>
+    </ion-row>
+
     <ion-row>
       <ion-col>
         <ion-accordion-group (ionChange)="useFilter()">
@@ -102,6 +99,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-    <app-footer></app-footer>
 </ion-content>
+
+<ion-footer>
+  <app-footer></app-footer>
+</ion-footer>

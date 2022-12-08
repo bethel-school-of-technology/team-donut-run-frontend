@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { FooterModule } from './components/footer/footer.module';
+import { FooterModule } from './components/footer/navbar.module copy';
 import { SwiperModule } from 'swiper/angular';
 
 // import { GooglePlaceModule } from 'google.maps';
