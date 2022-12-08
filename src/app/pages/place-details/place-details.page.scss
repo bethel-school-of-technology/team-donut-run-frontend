@@ -143,5 +143,67 @@
 }
 
 .lowerButtons{
-   margin-top: 8px
+   position: relative;
+   top: 500px
+}
+
+@media only screen and (min-width: 768px) {.lowerButtons{
+   position: relative;
+   top: 638px
+}}
+// @media only screen and (min-width: 576px) {.lowerButtons{
+//    position: relative;
+//    top: 400px
+// }}
+
+.Saved:hover {
+
+   position: absolute;
+   top: -90%;
+   overflow: visible;
+   font-weight: 700;
+   color: #D73210;
+   animation: fadeInUp;
+ 
+   animation-duration: 2s;
+   /* don't forget to set a duration! */
+
+}
+
+.Saved2:hover {
+
+   position: absolute;
+   top: -90%;
+   overflow: visible;
+   font-weight: 700;
+   color:  #FF9800;
+   animation: fadeInUp;
+ 
+   animation-duration: 2s;
+   /* don't forget to set a duration! */
+
+}
+
+.Saved {
+
+   position: absolute;
+   color: #d7311000;
+
+}
+
+.Saved2 {
+
+   position: absolute;
+   color: #d7311000;
+
+}
+
+ion-button {
+   --overflow: visible;
+
+}
+
+ion-toolbar {
+
+   --background: #dcdcdc00;
 }

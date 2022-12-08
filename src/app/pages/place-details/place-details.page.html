@@ -68,7 +68,7 @@
     </ion-row>
 
       <ion-row>
-        <ion-col size-xs="12" size-sm="12" size-md="5" size-lg="5" size-xl="5">
+        <ion-col size-xs="12" size-sm="12" size-md="" size-lg="5" size-xl="5">
           <div class="ion-hide-md-down">
 
             <img
@@ -124,14 +124,14 @@
           class="ion-margin-horizontal ion-margin-top"
           size-xs="12"
           size-sm="12"
-          size-md=""
+          size-md="12"
           size-lg=""
-          size-xl=""
+          size-xl="5"
         >
           <ion-row>
             <div class="ion-margin-end ion-no-margin ion-no-padding">
               <ion-row>
-                <!-- will add mouse over Text at some point  -->
+            
                 <ion-col class="ion-no-margin ion-no-padding" size-md="8" size="auto">
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
@@ -144,17 +144,20 @@
                   class=" ion-hide-lg-down"
                   size-xs="12"
                   size-sm="12"
-                  size-md=""
+                  size-md="12"
                   size-lg=""
                   size-xl=""
                 >
+       
                   <div class="no-margin-buttons ion-float-md-end ">
-                    <ion-button title="Save Place"
+
+                    <ion-button class="ion-no-padding"
                       *ngIf="!userSavedPlace"
                       (click)="savePlaceToMyPlaces()"
                       class="Btn_Type"
                       shape="circle"
-                    >
+                    ><span class="Saved"> Save Place </span>
+               
                       <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
                     </ion-button>
 
@@ -165,12 +168,14 @@
                       shape="circle"
                       
                     >
+                    <span class="Saved"> Unsave Place </span>
                       <ion-icon
                    
                         size="large"
                         color="primary"
                         name="heart"
-                      ></ion-icon>
+                      >
+                    </ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -179,6 +184,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
+                    <span class="Saved2"> Mark Visted </span>
                       <ion-icon size="large"  color="secondary" name="add-circle-outline"></ion-icon>
                     </ion-button>
 
@@ -188,6 +194,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
+                    <span class="Saved2"> Mark Visited </span>
                       <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
                     </ion-button>
 
@@ -197,6 +204,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
+                    <span class="Saved2"> Mark Unvisited </span>
                       <ion-icon size="large" color="secondary" name="add-circle"></ion-icon>
                     </ion-button>
                   </div> </ion-col
