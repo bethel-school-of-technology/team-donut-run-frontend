@@ -9,7 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 
-import { FooterModule } from 'src/app/components/footer/navbar.module copy';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
