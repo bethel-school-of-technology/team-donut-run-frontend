@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlaceDetailsPageRoutingModule } from './place-details-routing.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { PlaceDetailsPage } from './place-details.page';
-import { FooterModule } from "../../components/footer/navbar.module copy";
+import { FooterModule } from "../../components/footer/footer.module";
 import { SwiperModule } from 'swiper/angular';
 
 import SwiperCore, { EffectCards, Navigation, Pagination } from "swiper";
