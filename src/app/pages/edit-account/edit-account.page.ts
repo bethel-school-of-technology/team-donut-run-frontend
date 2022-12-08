@@ -28,7 +28,7 @@ export class EditAccountPage implements OnInit {
   onSubmit() {
     this.authService.editCurrentUser(this.currentUser).subscribe(response => {
       console.log(response);
-      this.authService.currentUser$.next(this.currentUser);
+      this.authService.currentUser$.next(response);
       //use this public boolean observable to add current user to menu template.
       this.menuService.active$ = this.menuService.GetUserActiveState("active", this.currentUser.username);
       window.alert("Edited User Successfully");
