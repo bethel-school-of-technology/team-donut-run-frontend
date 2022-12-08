@@ -54,11 +54,11 @@
                 </ion-item>
               </ion-accordion>
             </ion-accordion-group>
-            <form *ngIf="this.openFirst" (ngSubmit)="searchByString()">
+            <form *ngIf="this.openFirst" (ngSubmit)="this.firstSearchResults = searchByString(this.firstSearchString)">
               <ion-item>
                 <ion-label>Place #1 Type</ion-label>
                 <ion-input class="ion-text-end" placeholder="Enter Type" slot="end" type="place" name="firstPlace"
-                  [(ngModel)]="this.searchString">
+                  [(ngModel)]="this.firstSearchString">
                 </ion-input>
               </ion-item>
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
@@ -68,7 +68,7 @@
 
             <ion-row *ngIf="this.openFirst" class="searchResultsRow">
               <ion-col class="searchResultsContainer" size-xs="12" sizeSm="12" sizeMd="6" sizeLg="4"
-                *ngFor="let place of searchResults">
+                *ngFor="let place of this.firstSearchResults">
                 <ion-card class="card">
                   <div class="cardPhotoContainer">
                     <img [src]="place.photo_reference" />
@@ -114,11 +114,11 @@
                 </ion-item>
               </ion-accordion>
             </ion-accordion-group>
-            <form *ngIf="this.openSecond && !this.openFirst" (ngSubmit)="searchByString()">
+            <form *ngIf="this.openSecond && !this.openFirst" (ngSubmit)="this.secondSearchResults = searchByString(this.secondSearchString)">
               <ion-item>
                 <ion-label>Place #2 Type</ion-label>
                 <ion-input class="ion-text-end" placeholder="Enter Type" slot="end" type="place" name="secondPlace"
-                  [(ngModel)]="this.searchString">
+                  [(ngModel)]="this.secondSearchString">
                 </ion-input>
               </ion-item>
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
@@ -128,7 +128,7 @@
 
             <ion-row *ngIf="this.openSecond && !this.openFirst" class="searchResultsRow">
               <ion-col class="searchResultsContainer" size-xs="12" sizeSm="12" sizeMd="6" sizeLg="4"
-                *ngFor="let place of searchResults">
+                *ngFor="let place of this.secondSearchResults">
                 <ion-card class="card">
                   <div class="cardPhotoContainer">
                     <img [src]="place.photo_reference" />
@@ -174,11 +174,11 @@
                 </ion-item>
               </ion-accordion>
             </ion-accordion-group>
-            <form *ngIf="this.openThird && !this.openSecond && !this.openFirst" (ngSubmit)="searchByString()">
+            <form *ngIf="this.openThird && !this.openSecond && !this.openFirst" (ngSubmit)="this.thirdSearchResults = searchByString(this.thirdSearchString)">
               <ion-item>
                 <ion-label>Place #3 Type</ion-label>
                 <ion-input class="ion-text-end" placeholder="Enter Type" slot="end" type="place" name="secondPlace"
-                  [(ngModel)]="this.searchString">
+                  [(ngModel)]="this.thirdSearchString">
                 </ion-input>
               </ion-item>
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
@@ -188,7 +188,7 @@
 
             <ion-row *ngIf="this.openThird && !this.openFirst && !this.openSecond" class="searchResultsRow">
               <ion-col class="searchResultsContainer" size-xs="12" sizeSm="12" sizeMd="6" sizeLg="4"
-                *ngFor="let place of searchResults">
+                *ngFor="let place of this.thirdSearchResults">
                 <ion-card class="card">
                   <div class="cardPhotoContainer">
                     <img [src]="place.photo_reference" />

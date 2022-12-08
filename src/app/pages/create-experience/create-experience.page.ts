@@ -27,21 +27,27 @@ export class CreateExperiencePage implements OnInit {
   firstPlaceName: string;
   firstPlaceSet: boolean;
   openFirst: boolean;
+  firstSearchResults: Array<PlaceResult>;
+  firstSearchString: string;
 
   secondPlaceId: string;
   secondPlaceName: string;
   secondPlaceSet: boolean;
   openSecond: boolean;
+  secondSearchResults: Array<PlaceResult>;
+  secondSearchString: string;
 
   thirdPlaceId: string;
   thirdPlaceName: string;
   thirdPlaceSet: boolean;
   openThird: boolean;
+  thirdSearchResults: Array<PlaceResult>;
+  thirdSearchString: string;
 
   // Search and place variables
-  searchString: string;
-  searchResults: Array<PlaceResult>;
-  searchRadius: number = 50000; // this is in meters
+  // searchString: string;
+  // searchResults: Array<PlaceResult>;
+  // searchRadius: number = 50000; // this is in meters
   searchLimit: number = 3;
   searchCity: string;
   searchState: string;
@@ -69,15 +75,17 @@ export class CreateExperiencePage implements OnInit {
     });
   }
 
-  searchByString() {
-    console.log("Search String: ", this.searchString);
+  searchByString(searchString: string): Array<PlaceResult> {
+    console.log("Search String: ", searchString);
 
-    this.setSearchResults(
+    let searchResults = this.setSearchResults(
       this.searchLatitude,
       this.searchLongitude,
-      this.searchString,
-      this.searchRadius
+      searchString
     );
+
+    console.log("String Search Results: ", searchResults);
+    return searchResults;
 
   }
 
@@ -149,7 +157,7 @@ export class CreateExperiencePage implements OnInit {
     }
   }
 
-  nearbySearchByGeolocation(latLng, searchString, searchRadius) {
+  nearbySearchByGeolocation(latLng, searchString) {
     var service = new google.maps.places.PlacesService(
       document.createElement('div')
     );
@@ -174,32 +182,29 @@ export class CreateExperiencePage implements OnInit {
     });
   }
 
-  setSearchResults(lat, long, searchString, searchRadius) {
+  setSearchResults(lat, long, searchString): Array<PlaceResult> {
     let latLng = new google.maps.LatLng(lat, long);
-    this.searchResults = [];
+    let searchResults = [];
 
-    this.nearbySearchByGeolocation(latLng, searchString, searchRadius).then(
+    this.nearbySearchByGeolocation(latLng, searchString).then(
       (results: Array<any>) => {
-        // Where/when do we limit the number of results we want to display?
         results.forEach(p => {
           if (p.user_ratings_total > 100 && p.rating > 4) {
-            this.searchResults.push(p);
+            searchResults.push(p);
           }
         });
 
         // Sort results list descending by weighted_value
-        this.searchResults.sort((a, b) => b.rating - a.rating);
+        searchResults.sort((a, b) => b.rating - a.rating);
 
         // Limit length of search results to pre-determined limit
-        if (this.searchResults.length > this.searchLimit) {
-          this.searchResults.length = this.searchLimit;
+        if (searchResults.length > this.searchLimit) {
+          searchResults.length = this.searchLimit;
           // console.log(this.searchResults.length);
         } 
 
-        console.log('Search Results: ', this.searchResults);
-
         // Get photo and short_address
-        this.searchResults.forEach(sr => {
+        searchResults.forEach(sr => {
           let placeId = sr.place_id;
           let foundPlace = results.find((p) => p.place_id === placeId);
 
@@ -223,6 +228,10 @@ export class CreateExperiencePage implements OnInit {
           }
 
         })
+
+        console.log('Search Results: ', searchResults);
+
+        // return searchResults;
       },
       (status) => {
         if (status == 'ZERO_RESULTS') {
@@ -231,8 +240,11 @@ export class CreateExperiencePage implements OnInit {
           this.zeroResultsFoundAlert();
         }
         console.log('Status: ', status);
+        // return null;
       }
     );
+
+    return searchResults;
   }
 
   setLocationInput() {
@@ -247,17 +259,20 @@ export class CreateExperiencePage implements OnInit {
         this.firstPlaceId = "";
         this.firstPlaceSet = false;
         this.openFirst = false;
+        this.firstSearchResults = [];
+        this.firstSearchString = "";
 
         this.secondPlaceId = "";
         this.secondPlaceSet = false;
         this.openSecond = false;
+        this.secondSearchResults = [];
+        this.secondSearchString = "";
 
         this.thirdPlaceId = "";
         this.thirdPlaceSet = false;
         this.openThird = false;
-
-        this.searchString = "";
-        this.searchResults = [];
+        this.thirdSearchResults = [];
+        this.thirdSearchString = "";
 
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
