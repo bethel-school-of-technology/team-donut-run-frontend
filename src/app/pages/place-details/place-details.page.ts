@@ -6,6 +6,7 @@ import { MyPlacesService } from 'src/app/services/my-places.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
 import { MyPlace } from 'src/app/models/my-place';
+import { AlertController } from '@ionic/angular';
 
 declare var google;
 
@@ -50,7 +51,8 @@ export class PlaceDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private placesService: MyPlacesService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -230,15 +232,16 @@ export class PlaceDetailsPage implements OnInit {
         (result) => {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
+
+            this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
-            window.alert('Place saved and marked as visited!');
           } else {
+            this.placeSavedAlert();
             this.userSavedPlace = true;
-            window.alert('Place saved!');
           }
-          
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
+
         },
         (error) => {
           console.log('Save Place Error: ', error);
@@ -248,9 +251,9 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     } else {
-      // Add window alert here that the user needs to sign in to visit
-      window.alert('Please sign in to save place.');
-      this.router.navigate(['sign-in']);
+      this.signInToSavePlaceAlert();
+      //this.router.navigate(['sign-in']);
+
     }
 
   }
@@ -262,8 +265,9 @@ export class PlaceDetailsPage implements OnInit {
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
+          // Do we want to route to the MyPlaces page or keep on the Place Details page?
+          this.placeRemovedFromSavedAlert();
           this.userSavedPlace = false;
-          window.alert('Place has been removed from saved places list.');
         },
         (error) => {
           console.log('Remove Place Error: ', error);
@@ -295,11 +299,11 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = true");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been marked as visited!');
+          this.placeMarkedAsVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
-          window.alert('Unable to mark as visited.');
+          this.unableToMarkAsVisitedAlert();
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -316,34 +320,113 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = false");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been removed as visited!');
+          this.placeRemovedFromVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
-          window.alert('Unable to mark as visited.');
+          this.unableToMarkAsVisitedAlert();
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
           }
-        }
-      );
+        );
+      }
+    } else {
+      // Add window alert here that the user needs to sign in to visit
+      this.signInToVisitPlaceAlert();
+      //this.router.navigate(['sign-in']);
     }
-  } else {
-    // Add window alert here that the user needs to sign in to visit
-    window.alert("Please sign in to mark place as visited and save.");
-    this.router.navigate(['sign-in']);
-  }
   }
 
   PhotoClick(photo) {
     this.ChosenPhoto = photo;
     console.log('Chosen Photo: ', photo);
   }
-
-  // To send data back to My Places page
+  
+    // To send data back to My Places page
   apiFindAllPlacesByUserId() {
     this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
       this.placesService.myPlaceArray$.next(result);
     });
+   }
+   
+  //Sign in Alerts
+  async signInToVisitPlaceAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Please sign in to visit a place!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
+
+  async signInToSavePlaceAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Please sign in to save a place!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  //Place Saved and Visited Alerts
+  async placeSavedAndVisitedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Place saved and marked as visited!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+  async placeSavedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Place saved!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async placeRemovedFromSavedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Place has been removed from saved places list!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async placeMarkedAsVisitedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Place has been marked as visited!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async unableToMarkAsVisitedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Unable to mark place as visited!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async placeRemovedFromVisitedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Place has been removed from visited places list!',
+      buttons: ['OK'],
+    });
+     await alert.present();
+   }
 }

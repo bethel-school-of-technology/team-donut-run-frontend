@@ -47,7 +47,7 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-top">
-      <ion-col>
+      <ion-col class="advancedSearchForm">
         <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
           <ion-accordion value="advsearch">
             <ion-item slot="header" color="light">
@@ -86,8 +86,8 @@
               </ion-select>
             </ion-item>
           </ion-list>
-          <div class="ion-float-right">
-          <ion-button class="btn ion-margin-top" color="primary" type="submit">
+          <div class="advanButtonContainer">
+          <ion-button class="btn" color="primary" type="submit">
             Search
           </ion-button>
           </div>
