@@ -328,9 +328,9 @@ export class PlaceDetailsPage implements OnInit {
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
-          }
+          }}
         );
-      }
+        }
     } else {
       // Add window alert here that the user needs to sign in to visit
       this.signInToVisitPlaceAlert();
