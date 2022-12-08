@@ -13,61 +13,57 @@
       </ion-col>
       <ion-col>
       <div class="lowerButtons ion-float-end ion-hide-lg-up ">
-        <p *ngIf="userSavedPlace">
-          You've already saved this place!
-        </p>
+          <ion-button title="Save Place"
+            *ngIf="!userSavedPlace"
+            (click)="savePlaceToMyPlaces()"
+            class="Btn_Type"
+            shape="circle"
+          >
+            <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
+          </ion-button>
 
-        <ion-button
-          *ngIf="!userSavedPlace"
-          (click)="savePlaceToMyPlaces()"
-          class="Btn_Type"
-          shape="circle"
-        >
-          <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
-        </ion-button>
+          <ion-button
+            *ngIf="userSavedPlace"
+            (click)="removePlacefromMyPlaces()"
+            class="Btn_Type"
+            shape="circle"
+            
+          >
+            <ion-icon
+         
+              size="large"
+              color="primary"
+              name="heart"
+            ></ion-icon>
+          </ion-button>
 
-        <ion-button
-          *ngIf="userSavedPlace"
-          (click)="removePlacefromMyPlaces()"
-          class="Btn_Type"
-          shape="circle"
-          
-        >
-          <ion-icon
-       
-            size="large"
-            color="primary"
-            name="close-circle-outline"
-          ></ion-icon>
-        </ion-button>
+          <ion-button
+            *ngIf="!userSavedPlace"
+            (click)="toggleVisited()"
+            class="Btn_Type"
+            shape="circle"
+          >
+            <ion-icon size="large"  color="secondary" name="add-circle-outline"></ion-icon>
+          </ion-button>
 
-        <ion-button
-          *ngIf="!userSavedPlace"
-          (click)="toggleVisited()"
-          class="Btn_Type"
-          shape="circle"
-        >
-          <ion-icon size="large"  color="secondary" name="add-circle"></ion-icon>
-        </ion-button>
+          <ion-button
+            *ngIf="userSavedPlace && !currentMyPlace.visited"
+            (click)="toggleVisited()"
+            class="Btn_Type"
+            shape="circle"
+          >
+            <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
+          </ion-button>
 
-        <ion-button
-          *ngIf="userSavedPlace && !currentMyPlace.visited"
-          (click)="toggleVisited()"
-          class="Btn_Type"
-          shape="circle"
-        >
-          <ion-icon size="large" color="primary" name="add-circle"></ion-icon>
-        </ion-button>
-
-        <ion-button
-          *ngIf="userSavedPlace && currentMyPlace.visited"
-          (click)="toggleVisited()"
-          class="Btn_Type"
-          shape="circle"
-        >
-          <ion-icon size="large" color="secondary" name="pin-outline"></ion-icon>
-        </ion-button>
-      </div> 
+          <ion-button
+            *ngIf="userSavedPlace && currentMyPlace.visited"
+            (click)="toggleVisited()"
+            class="Btn_Type"
+            shape="circle"
+          >
+            <ion-icon size="large" color="secondary" name="add-circle"></ion-icon>
+          </ion-button>
+        </div> 
     </ion-col>
     </ion-row>
 
@@ -153,11 +149,7 @@
                   size-xl=""
                 >
                   <div class="no-margin-buttons ion-float-md-end ">
-                    <p *ngIf="userSavedPlace">
-                      You've already saved this place!
-                    </p>
-
-                    <ion-button
+                    <ion-button title="Save Place"
                       *ngIf="!userSavedPlace"
                       (click)="savePlaceToMyPlaces()"
                       class="Btn_Type"
@@ -177,7 +169,7 @@
                    
                         size="large"
                         color="primary"
-                        name="close-circle-outline"
+                        name="heart"
                       ></ion-icon>
                     </ion-button>
 
@@ -187,7 +179,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large"  color="secondary" name="add-circle"></ion-icon>
+                      <ion-icon size="large"  color="secondary" name="add-circle-outline"></ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -196,7 +188,7 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" color="primary" name="add-circle"></ion-icon>
+                      <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
                     </ion-button>
 
                     <ion-button
@@ -205,12 +197,12 @@
                       class="Btn_Type"
                       shape="circle"
                     >
-                      <ion-icon size="large" color="secondary" name="pin-outline"></ion-icon>
+                      <ion-icon size="large" color="secondary" name="add-circle"></ion-icon>
                     </ion-button>
                   </div> </ion-col
               ></ion-row>
 
-              <ion-row> </ion-row>
+              
               <p class="Text">{{placeOverview}}</p>
               <ion-card-subtitle
                 ><a

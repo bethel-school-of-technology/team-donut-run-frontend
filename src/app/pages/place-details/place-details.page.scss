@@ -128,6 +128,7 @@
 }
 
 .Btn_Type{
+   position:sticky;
    --box-shadow:none;  
    --background: rgba(0,0,0,0);
    padding-bottom: 35px;
@@ -137,6 +138,8 @@
    ion-icon{
       --ionicon-stroke-width: 50px;
    }
+
+
 }
 
 .lowerButtons{
