@@ -3,136 +3,51 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col> 
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref="home"></ion-back-button>
-          </ion-buttons>
-        </ion-toolbar>
-    
-      </ion-col>
-      <ion-col>
-      <div class="lowerButtons ion-float-end ion-hide-lg-up ">
-          <ion-button title="Save Place"
-            *ngIf="!userSavedPlace"
-            (click)="savePlaceToMyPlaces()"
-            class="Btn_Type"
-            shape="circle"
-          >
-            <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
-          </ion-button>
+        <ion-col>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-back-button defaultHref="home"></ion-back-button>
+            </ion-buttons>
+          </ion-toolbar>
 
-          <ion-button
-            *ngIf="userSavedPlace"
-            (click)="removePlacefromMyPlaces()"
-            class="Btn_Type"
-            shape="circle"
-            
-          >
-            <ion-icon
-         
-              size="large"
-              color="primary"
-              name="heart"
-            ></ion-icon>
-          </ion-button>
+        </ion-col>
 
-          <ion-button
-            *ngIf="!userSavedPlace"
-            (click)="toggleVisited()"
-            class="Btn_Type"
-            shape="circle"
-          >
-            <ion-icon size="large"  color="secondary" name="add-circle-outline"></ion-icon>
-          </ion-button>
-
-          <ion-button
-            *ngIf="userSavedPlace && !currentMyPlace.visited"
-            (click)="toggleVisited()"
-            class="Btn_Type"
-            shape="circle"
-          >
-            <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
-          </ion-button>
-
-          <ion-button
-            *ngIf="userSavedPlace && currentMyPlace.visited"
-            (click)="toggleVisited()"
-            class="Btn_Type"
-            shape="circle"
-          >
-            <ion-icon size="large" color="secondary" name="add-circle"></ion-icon>
-          </ion-button>
-        </div> 
-    </ion-col>
-    </ion-row>
+      </ion-row>
 
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="" size-lg="5" size-xl="5">
           <div class="ion-hide-md-down">
 
-            <img
-              class="ion-margin Round box-shadow"
-              alt="{{ChosenPhoto}}"
-              src="{{ChosenPhoto}}"
-            />
+            <img class="ion-margin Round box-shadow" alt="{{ChosenPhoto}}" src="{{ChosenPhoto}}" />
           </div>
           <div class="ion-hide-md-up">
-            <swiper
-              [spaceBetween]="30"
-              [effect]="'coverflow'"
-              [grabCursor]="true"
-              [centeredSlides]="true"
-              [slidesPerView]="1"
-              [effect]="'cards'"
-              [pagination]="true"
-              class="mySwiper"
-            >
-              <ng-template
-                swiperSlide
-                class="card"
-                *ngFor="let photo of photoLinkArray"
-              >
+            <swiper [spaceBetween]="30" [effect]="'coverflow'" [grabCursor]="true" [centeredSlides]="true"
+              [slidesPerView]="1" [effect]="'cards'" [pagination]="true" class="mySwiper">
+              <ng-template swiperSlide class="card" *ngFor="let photo of photoLinkArray">
                 <div class="SwiperContainer"><img [src]="photo" /></div>
               </ng-template>
             </swiper>
           </div>
         </ion-col>
 
-        <ion-col
-          class="ion-hide-md-down ion-margin-horizontal"
-          size-xs="12"
-          size-sm="12"
-          size-md="auto"
-          size-lg="auto"
-          size-xl="auto"
-        >
+        <ion-col class="ion-hide-md-down ion-margin-horizontal" size-xs="12" size-sm="12" size-md="auto" size-lg="auto"
+          size-xl="auto">
           <ion-row *ngFor="let photo of photoLinkArray">
             <div class="ion-margin-top" *ngIf="photosExist">
               <button class="clear" (click)="PhotoClick(photo) ">
-                <img
-                  class="box-shadow otherPhotos"
-                  alt="{{photo}}"
-                  src="{{photo}}"
-                />
+                <img class="box-shadow otherPhotos" alt="{{photo}}" src="{{photo}}" />
               </button>
             </div>
           </ion-row>
         </ion-col>
 
-        <ion-col
-          class="ion-margin-horizontal ion-margin-top"
-          size-xs="12"
-          size-sm="12"
-          size-md="12"
-          size-lg=""
-          size-xl="5"
-        >
+        <ion-col class="ion-margin-horizontal ion-margin-top" size-xs="12" size-sm="12" size-md="12" size-lg=""
+          size-xl="5">
           <ion-row>
             <div class="ion-margin-end ion-no-margin ion-no-padding">
               <ion-row>
-            
-                <ion-col class="ion-no-margin ion-no-padding" size-md="8" size="auto">
+
+                <ion-col class="ion-no-margin ion-no-padding" size-md="" size-sm="auto" size="auto">
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
@@ -140,84 +55,75 @@
                     {{this.placeDetails.formatted_address}}
                   </p>
                 </ion-col>
-                <ion-col
-                  class=" ion-hide-lg-down"
-                  size-xs="12"
-                  size-sm="12"
-                  size-md="12"
-                  size-lg=""
-                  size-xl=""
-                >
-       
+                <ion-col class=" ion-hide-lg-down" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+                  <!-- Desktop buttons  -->
                   <div class="no-margin-buttons ion-float-md-end ">
 
-                    <ion-button class="ion-no-padding"
-                      *ngIf="!userSavedPlace"
-                      (click)="savePlaceToMyPlaces()"
-                      class="Btn_Type"
-                      shape="circle"
-                    ><span class="Saved"> Save Place </span>
-               
-                      <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
+                    <ion-button class="ion-no-padding" *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" shape="circle">
+                    <span class="Saved"> Save Place </span>
+                    <ion-icon size="large" color="primary" name="heart-outline"></ion-icon>
                     </ion-button>
 
-                    <ion-button
-                      *ngIf="userSavedPlace"
-                      (click)="removePlacefromMyPlaces()"
-                      class="Btn_Type"
-                      shape="circle"
-                      
-                    >
-                    <span class="Saved"> Unsave Place </span>
-                      <ion-icon
-                   
-                        size="large"
-                        color="primary"
-                        name="heart"
-                      >
-                    </ion-icon>
+                    <ion-button *ngIf="userSavedPlace" (click)="removePlacefromMyPlaces()" class="Btn_Type"
+                      shape="circle">
+                      <span class="Saved"> Unsave Place </span>
+                      <ion-icon size="large" color="primary" name="heart">
+                      </ion-icon>
                     </ion-button>
 
-                    <ion-button
-                      *ngIf="!userSavedPlace"
-                      (click)="toggleVisited()"
-                      class="Btn_Type"
-                      shape="circle"
-                    >
-                    <span class="Saved2"> Mark Visted </span>
-                      <ion-icon size="large"  color="secondary" name="add-circle-outline"></ion-icon>
-                    </ion-button>
-
-                    <ion-button
-                      *ngIf="userSavedPlace && !currentMyPlace.visited"
-                      (click)="toggleVisited()"
-                      class="Btn_Type"
-                      shape="circle"
-                    >
-                    <span class="Saved2"> Mark Visited </span>
+                    <ion-button *ngIf="!userSavedPlace" (click)="toggleVisited()" class="Btn_Type" shape="circle">
+                      <span class="Saved2"> Mark Visted </span>
                       <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
                     </ion-button>
 
-                    <ion-button
-                      *ngIf="userSavedPlace && currentMyPlace.visited"
-                      (click)="toggleVisited()"
-                      class="Btn_Type"
-                      shape="circle"
-                    >
-                    <span class="Saved2"> Mark Unvisited </span>
+                    <ion-button *ngIf="userSavedPlace && !currentMyPlace.visited" (click)="toggleVisited()"
+                      class="Btn_Type" shape="circle">
+                      <span class="Saved2"> Mark Visited </span>
+                      <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
+                    </ion-button>
+
+                    <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()"
+                      class="Btn_Type " shape="circle">
+                      <span class="Saved2"> Mark Unvisited </span>
                       <ion-icon size="large" color="secondary" name="add-circle"></ion-icon>
                     </ion-button>
-                  </div> </ion-col
-              ></ion-row>
+                  </div>
+                  </ion-col>
+             
+ 
+                <!-- Mobile buttons -->
+                <ion-col class="ion-hide-lg-up" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+                <div class="Centered ">
+                  
+                  <ion-button  *ngIf="!this.userSavedPlace" (click)="savePlaceToMyPlaces()"
+                    class="changeBtn MobileButtons ion-text-uppercase ion-margin-end" color="primary"><ion-icon
+                      color="light" name="heart-outline"></ion-icon><span class="btnText">Save</span></ion-button>
 
-              
+                  <ion-button *ngIf="this.userSavedPlace" (click)="removePlacefromMyPlaces()"
+                    class="changeBtn MobileButtons ion-text-uppercase ion-margin-end" color="secondary"><ion-icon
+                      color="light" name="close-circle-outline"></ion-icon><span
+                      class="btnText">Saved</span></ion-button>
+
+                  <ion-button *ngIf="!this.userSavedPlace" (click)="toggleVisited()"
+                    class="changeBtn MobileButtons ion-text-uppercase " color="primary"><ion-icon color="light"
+                      name="add-circle"></ion-icon><span class="btnText MobileButtons">Visit</span></ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && !this.currentMyPlace.visited" (click)="toggleVisited()"
+                    class="changeBtn ion-text-uppercase MobileButtons" color="primary"><ion-icon color="light"
+                      name="add-circle"></ion-icon><span class="btnTex MobileButtons">Visit</span></ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && this.currentMyPlace.visited" (click)="toggleVisited()"
+                    class="changeBtn ion-text-uppercase MobileButtons" color="secondary"><ion-icon color="light"
+                      name="pin-outline"></ion-icon><span class="btnText MobileButtons">Visited</span>
+                  </ion-button>
+                </div>
+                </ion-col>
+              </ion-row>
+             
+       
               <p class="Text">{{placeOverview}}</p>
-              <ion-card-subtitle
-                ><a
-                  href="{{this.placeDetails.website}}"
-                  class="ion-no-margin ion-no-padding"
-                  >{{this.placeDetails.website}}</a
-                >
+              <ion-card-subtitle><a href="{{this.placeDetails.website}}"
+                  class="ion-no-margin ion-no-padding">{{this.placeDetails.website}}</a>
               </ion-card-subtitle>
             </div>
           </ion-row>

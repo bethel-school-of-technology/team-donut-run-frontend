@@ -15,16 +15,6 @@
    color: #bdc6c9;
 }
 
-//  .btn_red{
-//   color: #c7908f;
-//   --ionicon-stroke-width: 40px;
-//  }
-
-//  .btn_green{
-//     color: #81b586;
-//     --ionicon-stroke-width: 40px;
-//  }
-
 .Center {
    margin-left: auto;
    margin-right: auto
@@ -55,7 +45,6 @@
    font-size: 24px;
 
 }
-
 
 
 .Round {
@@ -128,7 +117,7 @@
 }
 
 .Btn_Type{
-   position:sticky;
+   // position:sticky;
    --box-shadow:none;  
    --background: rgba(0,0,0,0);
    padding-bottom: 35px;
@@ -142,19 +131,15 @@
 
 }
 
-.lowerButtons{
-   position: relative;
-   top: 500px
+.MobileButtons{
+
 }
 
-@media only screen and (min-width: 768px) {.lowerButtons{
-   position: relative;
-   top: 638px
-}}
-// @media only screen and (min-width: 576px) {.lowerButtons{
-//    position: relative;
-//    top: 400px
-// }}
+.Centered{
+// margin-left:50%;
+text-align: center;
+
+}
 
 .Saved:hover {
 

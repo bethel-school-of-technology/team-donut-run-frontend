@@ -232,9 +232,9 @@ export class PlaceDetailsPage implements OnInit {
       this.placesService.saveNewMyPlace(this.saveNewPlace).subscribe(
         () => {
           if (this.saveNewPlace.visited == true) {
-            window.alert('Place saved and marked as visited!');
+            // window.alert('Place saved and marked as visited!');
           } else {
-            window.alert('Place saved!');
+            // window.alert('Place saved!');
           }
           // Is there another way besides reloading the page?
           window.location.reload();
@@ -248,7 +248,7 @@ export class PlaceDetailsPage implements OnInit {
       );
     } else {
       // Add window alert here that the user needs to sign in to visit
-      window.alert('Please sign in to save place.');
+      // window.alert('Please sign in to save place.');
       // this.router.navigate(['sign-in']);
     }
   }
@@ -262,7 +262,7 @@ export class PlaceDetailsPage implements OnInit {
         () => {
           window.location.reload();
           // Do we want to route to the MyPlaces page or keep on the Place Details page?
-          window.alert('Place has been removed from saved places list.');
+          // window.alert('Place has been removed from saved places list.');
         },
         (error) => {
           console.log('Remove Place Error: ', error);
@@ -289,11 +289,11 @@ export class PlaceDetailsPage implements OnInit {
       this.currentMyPlace.visited = true;
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been marked as visited!');
+          // window.alert('Place has been marked as visited!');
           // window.location.reload();
         },
         (error) => {
-          window.alert('Unable to mark as visited.');
+          // window.alert('Unable to mark as visited.');
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -309,11 +309,11 @@ export class PlaceDetailsPage implements OnInit {
       this.currentMyPlace.visited = false;
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
-          window.alert('Place has been removed as visited!');
+          // window.alert('Place has been removed as visited!');
           // window.location.reload();
         },
         (error) => {
-          window.alert('Unable to mark as visited.');
+          // window.alert('Unable to mark as visited.');
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -323,7 +323,7 @@ export class PlaceDetailsPage implements OnInit {
     }
   } else {
     // Add window alert here that the user needs to sign in to visit
-    window.alert("Please sign in to mark place as visited and save.");
+    // window.alert("Please sign in to mark place as visited and save.");
     // this.router.navigate(['sign-in']);
   }
   }
