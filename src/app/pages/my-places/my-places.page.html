@@ -17,20 +17,36 @@
           </ion-accordion>
         </ion-accordion-group>
         <!-- <button (click)="setFilterOptions()">Set Filter Options</button> -->
-        <ion-item-group  *ngIf="this.usefilterPlaces">
+        <ion-item-group *ngIf="this.usefilterPlaces">
           <form (ngSubmit)="filterMyPlaces()">
             <ion-list>
               <ion-item>
                 <ion-label>Filter by Place Type</ion-label>
-                <ion-select interface="popover" placeholder="Select Type" (ngModel)="this.filterValue"
-                  (ionChange)="setTypeFilter($event)">
-                  <ion-select-option *ngFor="let option of typeFilterOptions" [value]="option">{{option}}</ion-select-option>
+                <ion-select
+                  interface="popover"
+                  placeholder="Select Type"
+                  (ngModel)="this.filterValue"
+                  (ionChange)="setTypeFilter($event)"
+                >
+                  <ion-select-option
+                    *ngFor="let option of typeFilterOptions"
+                    [value]="option"
+                    >{{option}}</ion-select-option
+                  >
                 </ion-select>
               </ion-item>
             </ion-list>
-            <ion-button class="btn" color="light" type="submit">Apply</ion-button>
+            <ion-button class="btn" color="light" type="submit"
+              >Apply</ion-button
+            >
           </form>
-          <ion-button (click)="clearFilter()" class="btn" color="light" type="submit">Clear Filter</ion-button>
+          <ion-button
+            (click)="clearFilter()"
+            class="btn"
+            color="light"
+            type="submit"
+            >Clear Filter</ion-button
+          >
         </ion-item-group>
       </ion-col>
     </ion-row>
@@ -49,7 +65,10 @@
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
               <p class="types"><b>Type:</b> {{place.types[0]}}</p>
@@ -60,7 +79,10 @@
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding"  [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
               <p class="types"><b>Type:</b> {{place.types[0]}}</p>
@@ -86,7 +108,10 @@
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
               <p class="types"><b>Type:</b> {{place.types[0]}}</p>
@@ -99,5 +124,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-    <app-footer></app-footer>
+  <app-footer></app-footer>
 </ion-content>
