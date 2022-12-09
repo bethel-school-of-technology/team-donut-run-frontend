@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
 
  async DonutPage() {
     this.DonutRun();
-    await this.delay(2000);
+    await this.delay(1000);
     this.animatePlay = false
 
     this.navCtrl.navigateForward('donut-shop');
