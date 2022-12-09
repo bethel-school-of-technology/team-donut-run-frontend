@@ -11,7 +11,7 @@ import { MenuService } from './services/menu.service';
 })
 export class AppComponent {
   // User variable
-  currentUserName: string = '';
+  currentUser: string = '';
 
   constructor(
     public navCtrl: NavController,
@@ -62,17 +62,17 @@ export class AppComponent {
     this.authService.getCurrentUser().subscribe(
       (response) => {
         if (response != null) {
-          this.currentUserName = response.username;
+          this.currentUser = response.username;
           this.authService.currentUser$.next(response);
 
-          if (this.currentUserName) {
+          if (this.currentUser) {
             // Public boolean observable used to modify dropdown menu.
             this.menuService.active$ = this.menuService.GetUserActiveState(
               'active',
-              this.currentUserName
+              this.currentUser
             );
           }
-          console.log('Current User (from App Component): ', this.currentUserName);
+          console.log('Current User (from App Component): ', this.currentUser);
         } else {
           console.log('No active user signed in.');
         }
