@@ -69,3 +69,9 @@ ion-col {
 .selectedType {
     padding-left: 5px;
 }
+
+.advanButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

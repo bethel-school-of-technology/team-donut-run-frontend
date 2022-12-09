@@ -17,20 +17,36 @@
           </ion-accordion>
         </ion-accordion-group>
         <!-- <button (click)="setFilterOptions()">Set Filter Options</button> -->
-        <ion-item-group  *ngIf="this.usefilterPlaces">
+        <ion-item-group *ngIf="this.usefilterPlaces">
           <form (ngSubmit)="filterMyPlaces()">
             <ion-list>
               <ion-item>
                 <ion-label>Filter by Place Type</ion-label>
-                <ion-select interface="popover" placeholder="Select Type" (ngModel)="this.filterValue"
-                  (ionChange)="setTypeFilter($event)">
-                  <ion-select-option *ngFor="let option of typeFilterOptions" [value]="option">{{option}}</ion-select-option>
+                <ion-select
+                  interface="popover"
+                  placeholder="Select Type"
+                  (ngModel)="this.filterValue"
+                  (ionChange)="setTypeFilter($event)"
+                >
+                  <ion-select-option
+                    *ngFor="let option of typeFilterOptions"
+                    [value]="option"
+                    >{{option}}</ion-select-option
+                  >
                 </ion-select>
               </ion-item>
             </ion-list>
-            <ion-button class="btn" color="light" type="submit">Apply</ion-button>
+            <ion-button class="btn" color="light" type="submit"
+              >Apply</ion-button
+            >
           </form>
-          <ion-button (click)="clearFilter()" class="btn" color="light" type="submit">Clear Filter</ion-button>
+          <ion-button
+            (click)="clearFilter()"
+            class="btn"
+            color="light"
+            type="submit"
+            >Clear Filter</ion-button
+          >
         </ion-item-group>
       </ion-col>
     </ion-row>
@@ -45,25 +61,31 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
           <!--Loops through unvisited places-->
-          <ion-item *ngFor="let place of myUnvisitedPlaces; let index">
+          <ion-item *ngFor="let place of myUnvisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding"  [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -82,14 +104,17 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of myVisitedPlaces; let index">
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
             <div class="photoContainer">
               <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
             </div>
-            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+            <ion-label
+              class="ion-padding"
+              [routerLink]="['/place-details', place.place_id]"
+            >
               <h2>{{ place.name }}</h2>
               <p>{{place.formatted_address}}</p>
-              <p class="types">Type: {{place.types[0]}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -99,8 +124,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
-
-<ion-footer>
   <app-footer></app-footer>
-</ion-footer>
+</ion-content>

@@ -9,6 +9,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -56,6 +57,9 @@ export class MyPlacesPage implements OnInit {
   filteredVisitedPlaces: PlaceResult[] = [];
   filteredUnvisitedPlaces: PlaceResult[] = [];
 
+  // Testing subscribe method
+  testResult: any;
+
   constructor(
     private placesService: MyPlacesService,
     private resultsService: ResultsService,
@@ -68,6 +72,7 @@ export class MyPlacesPage implements OnInit {
       this.authService.getCurrentUser().subscribe((user) => {
         this.currentUser = user;
         this.currentUserId = user.userId;
+        this.authService.currentUser$.next(user);
         // console.log('Current User: ', this.currentUser);
       });
       this.apiFindAllPlacesByUserId();
@@ -79,6 +84,14 @@ export class MyPlacesPage implements OnInit {
 
     this.typeFilterOptions = [];
     this.generateItems();
+
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+    
+    this.placesService.myPlaceArray$.subscribe(array => {
+      this.myPlaceArray = array;
+    });
   }
 
   private generateItems() {
@@ -87,6 +100,27 @@ export class MyPlacesPage implements OnInit {
       this.items.push(`Item ${count + i}`);
     }
   }
+
+  ionViewWillEnter() {
+      // this.myPlaceArray = [];
+
+    // if (this.useAPI == true) {
+    //   // this.myPlaceArray = [];
+    //   // console.log("TEST: ", this.myPlaceArray);
+    //   this.apiFindAllPlacesByUserId();
+    // }
+  }
+
+  // ngOnDestroy() {
+    // this.myPlaceArray = [];
+    // this.testResult.unsubscribe();
+    // console.log("LEAVE ARRAY: ", this.myPlaceArray);
+    // for (let place in this.myUnvisitedPlaces) { delete this.myUnvisitedPlaces[place];}
+  // }
+
+  // trackByPlace (index: number, place: any) {
+  //   return place.myPlaceId;
+  // }
 
   onIonInfinite(ev) {
     this.generateItems();
@@ -108,15 +142,17 @@ export class MyPlacesPage implements OnInit {
 
   // API find all places
   apiFindAllPlacesByUserId() {
-    this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
-      this.myPlaceArray = result;
+    this.testResult = this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+      // this.myPlaceArray = result;
+      this.placesService.myPlaceArray$.next(result);
       // console.log('My Place Results: ', this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
 
+    // To use in filtering
     this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
     this.originalVisitedPlaces = this.myVisitedPlaces;
-    
+
     // console.log('Original Visited Places Result: ', this.originalVisitedPlaces);
     // console.log('Original Unvisited Places Result: ', this.originalUnvisitedPlaces);
   }

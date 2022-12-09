@@ -1,6 +1,5 @@
 <ion-content [fullscreen]="true">
   <div class="Cushion">
-
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -12,13 +11,16 @@
 
         </ion-col>
 
+
       </ion-row>
 
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="" size-lg="5" size-xl="5">
           <div class="ion-hide-md-down">
 
+
             <img class="ion-margin Round box-shadow" alt="{{ChosenPhoto}}" src="{{ChosenPhoto}}" />
+
           </div>
           <div class="ion-hide-md-up">
             <swiper [spaceBetween]="30" [effect]="'coverflow'" [grabCursor]="true" [centeredSlides]="true"
@@ -47,7 +49,9 @@
             <div class="ion-margin-end ion-no-margin ion-no-padding">
               <ion-row>
 
+
                 <ion-col class="ion-no-margin ion-no-padding" size-md="" size-sm="auto" size="auto">
+
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
@@ -55,6 +59,7 @@
                     {{this.placeDetails.formatted_address}}
                   </p>
                 </ion-col>
+
                 <ion-col class=" ion-hide-md-down" size-xs="12" size-sm="12" size-md="" size-lg="" size-xl="">
                   <!-- Desktop buttons  -->
                   <div class="ion-float-md-end ">
@@ -80,6 +85,7 @@
                       class="Btn_Type" shape="circle">
                       <span class="Saved2"> Mark Visited </span>
                       <ion-icon size="large" color="secondary" name="add-circle-outline"></ion-icon>
+
                     </ion-button>
 
                     <ion-button *ngIf="userSavedPlace && currentMyPlace.visited" (click)="toggleVisited()"

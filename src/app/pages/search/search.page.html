@@ -24,117 +24,125 @@
       </ion-col>
     </ion-row>
     <div class="ion-padding">
-    <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="12" sizeXs="12">
-        <h4>
-          Selected category:
-          <span class="selectedType" *ngIf="this.selectedType">{{this.selectedType.type}}</span>
-        </h4>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="!this.useAdvSearch">
-      <ion-col size="12" class="signedOutSearchContainer">
-        <ion-button class="btn ion-no-margin" color="primary" (click)="toggleDataSource()">
-          Search
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="!this.useAdvSearch">
-      <ion-col size="12" class="signedOutSearchContainer">
-      <i class="ion-no-margin">Searching by current location.</i>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-top">
-      <ion-col>
-        <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
-          <ion-accordion value="advsearch">
-            <ion-item slot="header" color="light">
-              <ion-label>Advanced Search</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">Search by City, State</div>
-          </ion-accordion>
-        </ion-accordion-group>
-
-        <form *ngIf="this.useAdvSearch" (ngSubmit)="searchByUserInput()">
-          <ion-list>
-            <ion-item>
-              <ion-label>City</ion-label>
-              <ion-input class="ion-text-end"
-                placeholder="Enter City Name"
-                slot="end"
-                type="city"
-                name="city"
-                [(ngModel)]="this.searchCity"
-              >
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>State</ion-label>
-              <ion-select
-                interface="popover"
-                placeholder="Select State"
-                (ngModel)="this.searchState"
-                (ionChange)="setState($event)"
-              >
-                <ion-select-option
-                  *ngFor="let state of stateOptions"
-                  [value]="state"
-                  >{{state}}</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <div class="ion-float-right">
-          <ion-button class="btn ion-margin-top" color="primary" type="submit">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="12" sizeXs="12">
+          <h4>
+            Selected category:
+            <span class="selectedType" *ngIf="this.selectedType"
+              >{{this.selectedType.type}}</span
+            >
+          </h4>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!this.useAdvSearch">
+        <ion-col size="12" class="signedOutSearchContainer">
+          <ion-button
+            class="btn ion-no-margin"
+            color="primary"
+            (click)="toggleDataSource()"
+          >
             Search
           </ion-button>
-          </div>
-        </form>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!this.useAdvSearch">
+        <ion-col size="12" class="signedOutSearchContainer">
+          <i class="ion-no-margin">Searching by current location.</i>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <h3 class="ion-no-margin ion-padding-top">Results</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row class="searchResultsRow">
-      <ion-col
-        class="searchResultsContainer"
-        size-xs="12"
-        sizeSm="12"
-        sizeMd="6"
-        sizeLg="4"
-        *ngFor="let place of searchResults"
+      <ion-row
+        class="ion-justify-content-center ion-align-items-center ion-padding-top"
       >
-        <ion-card
-          class="card"
-          [routerLink]="['/place-details', place.place_id]"
+        <ion-col class="advancedSearchForm">
+          <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
+            <ion-accordion value="advsearch">
+              <ion-item slot="header" color="light">
+                <ion-label>Advanced Search</ion-label>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                Search by City, State
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+
+          <form *ngIf="this.useAdvSearch" (ngSubmit)="searchByUserInput()">
+            <ion-list>
+              <ion-item>
+                <ion-label>City</ion-label>
+                <ion-input
+                  class="ion-text-end"
+                  placeholder="Enter City Name"
+                  slot="end"
+                  type="city"
+                  name="city"
+                  [(ngModel)]="this.searchCity"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>State</ion-label>
+                <ion-select
+                  interface="popover"
+                  placeholder="Select State"
+                  (ngModel)="this.searchState"
+                  (ionChange)="setState($event)"
+                >
+                  <ion-select-option
+                    *ngFor="let state of stateOptions"
+                    [value]="state"
+                    >{{state}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <div class="advanButtonContainer">
+              <ion-button class="btn" color="primary" type="submit">
+                Search
+              </ion-button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h3 class="ion-no-margin ion-padding-top">Results</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row class="searchResultsRow">
+        <ion-col
+          class="searchResultsContainer"
+          size-xs="12"
+          sizeSm="12"
+          sizeMd="6"
+          sizeLg="4"
+          *ngFor="let place of searchResults"
         >
-          <div class="cardPhotoContainer">
-            <img [src]="place.photo_reference" />
-          </div>
-          <ion-card-content class="cardText">
-            <ion-text color="dark"><b>{{place.name }}</b></ion-text>
-            <span>
-              <ion-icon name="star" color="secondary"></ion-icon>
-              <ion-text color="secondary">
-                {{ place.rating }} ({{place.user_ratings_total}})
-              </ion-text>
-            </span>
-            <span>
-              <ion-icon name="location-outline"></ion-icon>
-              {{place.short_address }}
-            </span>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+          <ion-card
+            class="card"
+            [routerLink]="['/place-details', place.place_id]"
+          >
+            <div class="cardPhotoContainer">
+              <img [src]="place.photo_reference" />
+            </div>
+            <ion-card-content class="cardText">
+              <ion-text color="dark"><b>{{place.name }}</b></ion-text>
+              <span>
+                <ion-icon name="star" color="secondary"></ion-icon>
+                <ion-text color="secondary">
+                  {{ place.rating }} ({{place.user_ratings_total}})
+                </ion-text>
+              </span>
+              <span>
+                <ion-icon name="location-outline"></ion-icon>
+                {{place.short_address }}
+              </span>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
     </div>
   </ion-grid>
-</ion-content>
-
-<ion-footer>
   <app-footer></app-footer>
-</ion-footer>
+</ion-content>

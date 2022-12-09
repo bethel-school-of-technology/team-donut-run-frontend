@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DonutShopPageRoutingModule } from './donut-shop-routing.module';
 
 import { DonutShopPage } from './donut-shop.page';
+import { FooterModule } from "../../components/footer/footer.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DonutShopPageRoutingModule
-  ],
-  declarations: [DonutShopPage]
+    declarations: [DonutShopPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DonutShopPageRoutingModule,
+        FooterModule
+    ]
 })
 export class DonutShopPageModule {}
