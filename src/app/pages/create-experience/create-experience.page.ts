@@ -149,10 +149,14 @@ export class CreateExperiencePage implements OnInit {
       this.newExperience.secondGooglePlaceId = this.secondPlaceId;
       this.newExperience.thirdGooglePlaceId = this.thirdPlaceId;
       // Do we need to do this to set the other form items or does that happen automatically with data binding on submit?
-      console.log("New Experience: ", this.newExperience);
+      // console.log("New Experience: ", this.newExperience);
       // Call create experience method from service
+      this.expService.createNewExperience(this.newExperience).subscribe(result => {
+        console.log("New Experience Result: ", result);
+        // Navigate to experience details page
+      });
     } else {
-      window.alert('Please sign in to save place.');
+      window.alert('Please sign in to create experience.');
       this.router.navigate(['sign-in']);
     }
   }
@@ -285,13 +289,13 @@ export class CreateExperiencePage implements OnInit {
                 this.searchLongitude = result[0].lon;
 
                 this.searchCity = this.searchCity.charAt(0).toUpperCase() + this.searchCity.slice(1);
-                this.newExperience.experienceLocation = `${this.searchCity}, ${this.searchState}`;
+                this.newExperience.experienceUserLocation = `${this.searchCity}, ${this.searchState}`;
                 // console.log(
                 //   'Result: ',
                 //   this.searchLatitude,
                 //   this.searchLongitude
                 // );
-                console.log("Set Location: ", this.newExperience.experienceLocation);
+                console.log("Set Location: ", this.newExperience.experienceUserLocation);
 
                 // if (this.useAPI == true) {
                 //   // use API data

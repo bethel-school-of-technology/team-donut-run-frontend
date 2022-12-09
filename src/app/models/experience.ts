@@ -7,11 +7,15 @@ export class Experience {
     completed?: boolean;
     experienceTitle?: string;
     experienceNotes?: string;
-    experienceLocation?: string;
+    experienceUserLocation?: string;
     createdOn?: string; // may take this out
     firstGooglePlaceId?: string;
     secondGooglePlaceId?: string;
     thirdGooglePlaceId?: string;
+    firstPlaceName?: string;
+    secondPlaceName?: string;
+    thirdPlaceName?: string;
+
 
     constructor(
         experienceId?: number,
@@ -20,7 +24,7 @@ export class Experience {
         completed?: boolean,
         experienceTitle?: string,
         experienceNotes?: string,
-        experienceLocation?: string,
+        experienceUserLocation?: string,
         createdOn?: string, // may take this out
         firstGooglePlaceId?: string,
         secondGooglePlaceId?: string,
@@ -32,7 +36,7 @@ export class Experience {
         this.completed = completed;
         this.experienceTitle = experienceTitle;
         this.experienceNotes = experienceNotes;
-        this.experienceLocation = experienceLocation;
+        this.experienceUserLocation = experienceUserLocation;
         this.createdOn = createdOn;
         this.firstGooglePlaceId = firstGooglePlaceId;
         this.secondGooglePlaceId = secondGooglePlaceId;

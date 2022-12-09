@@ -20,6 +20,22 @@
       </ion-col>
     </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-card *ngFor="let exp of this.myExperiencesArray">
+            <h2>{{exp.experienceTitle}}</h2>
+            <p>{{exp.experienceNotes}}</p>
+            <p>{{exp.experienceUserLocation}}</p>
+            <p>Created On: {{exp.createdOn}}</p>
+            <p>Place 1: {{exp.firstGooglePlaceId}}</p>
+            <p>Place 2: {{exp.secondGooglePlaceId}}</p>
+            <p>Place 3: {{exp.thirdGooglePlaceId}}</p>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
 
 
   </ion-grid>
