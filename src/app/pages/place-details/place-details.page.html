@@ -55,9 +55,9 @@
                     {{this.placeDetails.formatted_address}}
                   </p>
                 </ion-col>
-                <ion-col class=" ion-hide-lg-down" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+                <ion-col class=" ion-hide-md-down" size-xs="12" size-sm="12" size-md="" size-lg="" size-xl="">
                   <!-- Desktop buttons  -->
-                  <div class="no-margin-buttons ion-float-md-end ">
+                  <div class="ion-float-md-end ">
 
                     <ion-button class="ion-no-padding" *ngIf="!userSavedPlace" (click)="savePlaceToMyPlaces()" class="Btn_Type" shape="circle">
                     <span class="Saved"> Save Place </span>
@@ -92,7 +92,7 @@
              
  
                 <!-- Mobile buttons -->
-                <ion-col class="ion-hide-lg-up" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+                <ion-col class="ion-hide-md-up" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
                 <div class="Centered ">
                   
                   <ion-button  *ngIf="!this.userSavedPlace" (click)="savePlaceToMyPlaces()"
