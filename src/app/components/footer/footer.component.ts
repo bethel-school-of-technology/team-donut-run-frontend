@@ -7,12 +7,12 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController) {}
 
   ngOnInit() {}
-  
-  TermsPage(){
-    console.log()
+
+  TermsPage() {
+    console.log();
     this.navCtrl.navigateForward('terms-services');
-  }}
+  }
+}
