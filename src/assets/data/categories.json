@@ -3,61 +3,55 @@
     {
       "id": 1,
       "type": "Attraction",
-      "img": "/assets/photos/touristattraction.avif",
+      "img": "/assets/photos/attraction.png",
       "selected": false
     },
     {
       "id": 2,
-      "type": "Theme Park",
-      "img": "/assets/photos/amusementpark.avif",
+      "type": "Boutique",
+      "img": "/assets/photos/boutique.png",
       "selected": false
     },
     {
       "id": 3,
-      "type": "Restaurant",
-      "img": "/assets/photos/restaurant.avif",
+      "type": "Hiking",
+      "img": "/assets/photos/hiking.png",
       "selected": false
     },
     {
       "id": 4,
-      "type": "Bowling Alley",
-      "img": "/assets/photos/bowlingalley.avif",
+      "type": "Restaurant",
+      "img": "/assets/photos/restaurant.png",
       "selected": false
     },
     {
       "id": 5,
-      "type": "Movie Theater",
-      "img": "/assets/photos/movietheatre.avif",
+      "type": "Bowling Alley",
+      "img": "/assets/photos/bowling.png",
       "selected": false
     },
     {
       "id": 6,
       "type": "Spa",
-      "img": "/assets/photos/spa.avif",
+      "img": "/assets/photos/spa.png",
       "selected": false
     },
     {
       "id": 7,
-      "type": "Shoe Store",
-      "img": "/assets/photos/shoestore.avif",
+      "type": "Concert",
+      "img": "/assets/photos/concert.png",
       "selected": false
     },
     {
       "id": 8,
-      "type": "Music Venue",
-      "img": "/assets/photos/concert.avif",
+      "type": "Sports",
+      "img": "/assets/photos/sports.png",
       "selected": false
     },
     {
       "id": 9,
-      "type": "Shopping Mall",
-      "img": "/assets/photos/shopping.avif",
-      "selected": false
-    },
-    {
-      "id": 10,
-      "type": "Zoo",
-      "img": "/assets/photos/zoo.avif",
+      "type": "Movie Theater",
+      "img": "/assets/photos/movietheatre.png",
       "selected": false
     }
   ]
