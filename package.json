@@ -29,6 +29,7 @@
     "@googlemaps/js-api-loader": "^1.15.1",
     "@ionic/angular": "^6.3.7",
     "@types/googlemaps": "^3.43.3",
+    "animate.css": "^4.1.1",
     "ionicons": "^6.0.3",
     "rxjs": "~6.6.0",
     "swiper": "^8.4.5",

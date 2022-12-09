@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SearchPageRoutingModule } from './search-routing.module';
 import { SearchPage } from './search.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
-import { FooterModule } from 'src/app/components/footer/navbar.module copy';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 import { SwiperModule } from 'swiper/angular';
 
 // import Swiper core and required modules

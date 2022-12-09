@@ -4,19 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MeetTheTeamPageRoutingModule } from './meet-the-team-routing.module';
+import { ErrorPageRoutingModule } from './error-routing.module';
 
-import { MeetTheTeamPage } from './meet-the-team.page';
+import { ErrorPage } from './error.page';
 import { FooterModule } from "../../components/footer/footer.module";
 
+
 @NgModule({
-    declarations: [MeetTheTeamPage],
+    declarations: [ErrorPage],
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        MeetTheTeamPageRoutingModule,
+        ErrorPageRoutingModule,
+        IonicModule,
         FooterModule
     ]
 })
-export class MeetTheTeamPageModule {}
+export class ErrorPageModule {}
