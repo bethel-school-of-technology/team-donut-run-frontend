@@ -49,6 +49,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/terms-services/terms-services.module').then( m => m.TermsServicesPageModule)
   },
   {
+    path: 'meet-the-team',
+    loadChildren: () => import('./pages/meet-the-team/meet-the-team.module').then( m => m.MeetTheTeamPageModule)
+  },
+  {
     path: 'donut-shop',
     loadChildren: () => import('./pages/donut-shop/donut-shop.module').then( m => m.DonutShopPageModule)
   },
@@ -60,7 +64,6 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
-
 ];
 
 @NgModule({
