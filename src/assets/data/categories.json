@@ -2,14 +2,14 @@
   "categories": [
     {
       "id": 1,
-      "type": "Attraction",
-      "img": "/assets/photos/attraction.png",
+      "type": "Coffee Shop",
+      "img": "/assets/photos/coffeeshop.png",
       "selected": false
     },
     {
       "id": 2,
-      "type": "Boutique",
-      "img": "/assets/photos/boutique.png",
+      "type": "Attraction",
+      "img": "/assets/photos/attraction.png",
       "selected": false
     },
     {
@@ -20,38 +20,44 @@
     },
     {
       "id": 4,
-      "type": "Restaurant",
-      "img": "/assets/photos/restaurant.png",
-      "selected": false
-    },
-    {
-      "id": 5,
       "type": "Bowling Alley",
       "img": "/assets/photos/bowling.png",
       "selected": false
     },
     {
+      "id": 5,
+      "type": "Restaurant",
+      "img": "/assets/photos/restaurant.png",
+      "selected": false
+    },
+    {
       "id": 6,
-      "type": "Spa",
-      "img": "/assets/photos/spa.png",
+      "type": "Movie Theater",
+      "img": "/assets/photos/movietheatre.png",
       "selected": false
     },
     {
       "id": 7,
+      "type": "Boutique",
+      "img": "/assets/photos/boutique.png",
+      "selected": false
+    },
+    {
+      "id": 8,
       "type": "Concert",
       "img": "/assets/photos/concert.png",
       "selected": false
     },
     {
-      "id": 8,
-      "type": "Sports",
-      "img": "/assets/photos/sports.png",
+      "id": 9,
+      "type": "Spa",
+      "img": "/assets/photos/spa.png",
       "selected": false
     },
     {
-      "id": 9,
-      "type": "Movie Theater",
-      "img": "/assets/photos/movietheatre.png",
+      "id": 10,
+      "type": "Sports",
+      "img": "/assets/photos/sports.png",
       "selected": false
     }
   ]
