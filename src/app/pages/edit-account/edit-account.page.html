@@ -14,7 +14,7 @@
       <ion-col>
         <div class="ion-padding-horizontal ion-text-center">
           <h1>Update User Details</h1>
-          <p>Please fill out the details to edit your account</p>
+          <p>Modify the details to edit your account</p>
         </div>
         <div class="ion-padding-bottom ion-margin">
           <form (ngSubmit)="onSubmit()">
@@ -40,8 +40,7 @@
                 <ion-input name="location" type="text" [(ngModel)]="currentUser.location"></ion-input>
               </ion-item>     
             </ion-list>
-            <div class= " ion-text-center ion-margin-top" *ngIf="this.currentUser.username && this.currentUser.email">
-              
+            <div class= " ion-text-center ion-margin-top">
               <ion-button type="submit">Submit Changes</ion-button>
             </div>
           </form>

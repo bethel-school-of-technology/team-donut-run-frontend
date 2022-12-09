@@ -1,20 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-title> 
-    <h2>Account Details</h2>
-  </ion-title>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <div class="Cushion">
     <ion-item>
       <ion-grid>
+
+        <div class="ion-padding-horizontal ion-text-center">
+          <h1>Account Details</h1>
+        </div>
+
         <ion-row>
           <ion-text>
             <h5> Username: </h5>
             <p> {{this.currentUser.username}}</p>
           </ion-text>
         </ion-row>
+        
         <ion-row>
-
           <ion-text>
             <h5> Email:</h5>
             <p> {{this.currentUser.email}}</p>

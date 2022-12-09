@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterState, RouterStateSnapshot } from '@angular/router';
+import { Router} from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -29,8 +29,8 @@ export class EditAccountPage implements OnInit {
     this.authService.editCurrentUser(this.currentUser).subscribe(response => {
       console.log(response);
       this.authService.currentUser$.next(response);
-      //use this public boolean observable to add current user to menu template.
-      this.menuService.active$ = this.menuService.GetUserActiveState("active", this.currentUser.username);
+      //add current user to menu template.
+      this.menuService.currentUser = response.username;
       window.alert("Edited User Successfully");
       this.router.navigateByUrl('/my-account');
     }, error => {
