@@ -71,7 +71,7 @@
             >
               Password is required.
             </span>
-                <span
+            <span
               class="error ion-padding"
               *ngIf="isSubmitted && errorControl.password.errors?.minlength"
             >
@@ -112,4 +112,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <app-footer></app-footer>
 </ion-content>

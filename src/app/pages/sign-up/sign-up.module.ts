@@ -8,7 +8,7 @@ import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
-import { FooterModule } from 'src/app/components/footer/navbar.module copy';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MeetTheTeamPageRoutingModule } from './meet-the-team-routing.module';
 
 import { MeetTheTeamPage } from './meet-the-team.page';
+import { FooterModule } from "../../components/footer/footer.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MeetTheTeamPageRoutingModule
-  ],
-  declarations: [MeetTheTeamPage]
+    declarations: [MeetTheTeamPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        MeetTheTeamPageRoutingModule,
+        FooterModule
+    ]
 })
 export class MeetTheTeamPageModule {}
