@@ -7,28 +7,27 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController) {}
 
   ngOnInit() {}
-  
-  HomePage(){
+
+  HomePage() {
     this.navCtrl.navigateForward('home');
   }
-    
-  ProfilePage(){
+
+  ProfilePage() {
     this.navCtrl.navigateForward('my-account');
   }
-    
-  MyPlacesPage(){
+
+  MyPlacesPage() {
     this.navCtrl.navigateForward('my-places');
   }
-   
-  SignInPage(){
+
+  SignInPage() {
     this.navCtrl.navigateForward('sign-in');
   }
 
-  SearchPage(){
+  SearchPage() {
     this.navCtrl.navigateForward('search');
   }
 }

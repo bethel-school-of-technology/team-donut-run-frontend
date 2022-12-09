@@ -8,15 +8,19 @@ import { EditAccountPageRoutingModule } from './edit-account-routing.module';
 
 import { EditAccountPage } from './edit-account.page';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { FooterModule } from "../../components/footer/footer.module";
+
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    EditAccountPageRoutingModule,
-    NavbarModule
-  ],
-  declarations: [EditAccountPage],
+    declarations: [EditAccountPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        EditAccountPageRoutingModule,
+        NavbarModule,
+        IonicModule,
+        FooterModule
+    ]
 })
 export class EditAccountPageModule {}

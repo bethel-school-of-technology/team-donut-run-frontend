@@ -19,35 +19,35 @@
 
         <ion-row>
           <ion-text>
-            <h5> Username: </h5>
-            <p> {{this.currentUser.username}}</p>
+            <h5>Username:</h5>
+            <p>{{this.currentUser.username}}</p>
           </ion-text>
         </ion-row>
         
         <ion-row>
           <ion-text>
-            <h5> Email:</h5>
-            <p> {{this.currentUser.email}}</p>
+            <h5>Email:</h5>
+            <p>{{this.currentUser.email}}</p>
           </ion-text>
         </ion-row>
 
         <ion-row *ngIf="this.currentUser.firstName">
           <ion-text>
-            <h5>First Name: </h5>
+            <h5>First Name:</h5>
             <p>{{this.currentUser.firstName}}</p>
           </ion-text>
         </ion-row>
 
         <ion-row *ngIf="this.currentUser.lastName">
           <ion-text>
-            <h5> Last Name:</h5>
-            <p> {{this.currentUser.lastName}} </p>
+            <h5>Last Name:</h5>
+            <p>{{this.currentUser.lastName}}</p>
           </ion-text>
         </ion-row>
 
         <ion-row *ngIf="this.currentUser.location">
           <ion-text>
-            <h5> My Location: </h5>
+            <h5>My Location:</h5>
             <p>{{this.currentUser.location}}</p>
           </ion-text>
         </ion-row>
