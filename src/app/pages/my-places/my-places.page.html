@@ -3,63 +3,101 @@
     <!--Back Button-->
     <ion-row>
       <ion-col>
-      <ion-button [routerLink]="['/']" color="light">Back</ion-button>
-    </ion-col>
+        <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+      </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-accordion-group (ionChange)="useFilter()">
+          <ion-accordion value="filterPlaces">
+            <ion-item slot="header" color="light">
+              <ion-label>Filter</ion-label>
+            </ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
+        <!-- <button (click)="setFilterOptions()">Set Filter Options</button> -->
+        <ion-item-group  *ngIf="this.usefilterPlaces">
+          <form (ngSubmit)="filterMyPlaces()">
+            <ion-list>
+              <ion-item>
+                <ion-label>Filter by Place Type</ion-label>
+                <ion-select interface="popover" placeholder="Select Type" (ngModel)="this.filterValue"
+                  (ionChange)="setTypeFilter($event)">
+                  <ion-select-option *ngFor="let option of typeFilterOptions" [value]="option">{{option}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <ion-button class="btn" color="light" type="submit">Apply</ion-button>
+          </form>
+          <ion-button (click)="clearFilter()" class="btn" color="light" type="submit">Clear Filter</ion-button>
+        </ion-item-group>
+      </ion-col>
+    </ion-row>
+
     <!--My Saved Places Carousel-->
     <ion-row>
       <ion-col>
-      <h3 class="ion-padding-horizontal">My Saved Places</h3>
-    </ion-col>
+        <h3 class="ion-padding-horizontal">My Saved Places</h3>
+      </ion-col>
     </ion-row>
     <!--Loops through visited places-->
     <ion-row>
       <ion-col>
-      <ion-list>
-        <ion-item *ngFor="let place of myVisitedPlaces; let index">
-          <ion-avatar slot="start">
-            <img [src]="place.photo_reference" alt="avatar" />
-          </ion-avatar>
-          <ion-label>{{ place.name }}</ion-label>
-        </ion-item>
-        <!--Loops through unvisited places-->
-        <ion-item *ngFor="let place of myUnvisitedPlaces; let index">
-          <ion-avatar slot="start">
-            <img [src]="place.photo_reference" alt="avatar" />
-          </ion-avatar>
-          <ion-label>{{ place.name }}</ion-label>
-        </ion-item>
-      </ion-list>
-      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+        <ion-list>
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
+            <div class="photoContainer">
+              <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
+            </div>
+            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+              <h2>{{ place.name }}</h2>
+              <p>{{place.formatted_address}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
+            </ion-label>
+          </ion-item>
+          <!--Loops through unvisited places-->
+          <ion-item *ngFor="let place of myUnvisitedPlaces; let i = index;">
+            <div class="photoContainer">
+              <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
+            </div>
+            <ion-label class="ion-padding"  [routerLink]="['/place-details', place.place_id]">
+              <h2>{{ place.name }}</h2>
+              <p>{{place.formatted_address}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-col>
     </ion-row>
 
     <!--My Visited Places Carousel-->
     <ion-row>
       <ion-col>
-      <h3 class="ion-padding-horizontal">My Visited Places</h3>
-    </ion-col>
+        <h3 class="ion-padding-horizontal">My Visited Places</h3>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-      <ion-list>
-        <ion-item *ngFor="let place of myVisitedPlaces; let index">
-          <ion-avatar slot="start">
-            <img [src]="place.photo_reference" alt="avatar" />
-          </ion-avatar>
-          <ion-label>{{ place.name }}</ion-label>
-        </ion-item>
-      </ion-list>
-      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+        <ion-list>
+          <ion-item *ngFor="let place of myVisitedPlaces; let i = index;">
+            <div class="photoContainer">
+              <ion-img [src]="place.photo_reference" alt="avatar"></ion-img>
+            </div>
+            <ion-label class="ion-padding" [routerLink]="['/place-details', place.place_id]">
+              <h2>{{ place.name }}</h2>
+              <p>{{place.formatted_address}}</p>
+              <p class="types"><b>Type:</b> {{place.types[0]}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-col>
     </ion-row>
   </ion-grid>
+    <app-footer></app-footer>
 </ion-content>
-
-<ion-footer>
-  <app-footer></app-footer>
-</ion-footer>

@@ -40,9 +40,7 @@ export class AppComponent {
 
   SignInPage() {
     this.closeMenu();
-    this.navCtrl.navigateForward('sign-in').then(() => {
-      window.location.reload();
-    });;
+    this.navCtrl.navigateForward('sign-in');
   }
 
   SignUpPage() {

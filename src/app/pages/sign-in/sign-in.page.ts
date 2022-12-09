@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +19,6 @@ export class SignInPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
-    private toastController: ToastController,
     public menuService: MenuService
   ) {}
 
@@ -32,17 +32,20 @@ export class SignInPage implements OnInit {
         //use this public boolean observable to add current user to menu template.
         this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
         this.router.navigateByUrl('/home').then(() => {
-          this.presentToast()
+          this.loginSuccessfulAlert();
+          // .then(() => {
+          //   window.location.reload();
+          // })
         });
       },
       (error) => {
         console.log('Error: ', error);
-        this.presentAlert();
+        this.loginFailedAlert();
         this.router.navigateByUrl('/sign-in');
       }
     );
   }
-  async presentAlert() {
+  async loginFailedAlert() {
     const alert = await this.alertController.create({
       header: 'Login Failed',
       message: 'Your email or password is incorrect!',
@@ -51,13 +54,12 @@ export class SignInPage implements OnInit {
 
     await alert.present();
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Login Successful',
-      duration: 1200,
-      position: 'bottom',
-    });
-
-    await toast.present();
+  async loginSuccessfulAlert() {
+     const alert = await this.alertController.create({
+       header: 'Login Successful',
+       message: 'You have been signed in!',
+       buttons: ['OK'],
+     });
+     await alert.present();
   }
 }

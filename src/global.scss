@@ -33,7 +33,11 @@
 @import 'swiper/scss/scrollbar';
 @import 'swiper/scss/zoom';
 @import '@ionic/angular/css/ionic-swiper';
+@import 'animate.css';
 
+* {
+  font-family: 'Nunito', sans-serif !important;
+}
 
 // Adds a new shape too ion btns
 ion-button[shape=circle] {
@@ -41,3 +45,5 @@ ion-button[shape=circle] {
     width: 56px;
     height: 56px;
 }
+
+

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { FooterModule } from './components/footer/navbar.module copy';
+import { FooterModule } from './components/footer/footer.module';
 import { SwiperModule } from 'swiper/angular';
 
 // import { GooglePlaceModule } from 'google.maps';
@@ -28,6 +28,6 @@ import { SwiperModule } from 'swiper/angular';
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  
+
 }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MyPlace } from '../models/my-place';
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,8 @@ export class MyPlacesService {
   apiDataSource: string = "http://localhost:5000/api/myplace";
 
   tokenKey: string = "myUserToken";
+
+  public myPlaceArray$ = new Subject<MyPlace[]>;
 
   constructor(private http: HttpClient) {}
 

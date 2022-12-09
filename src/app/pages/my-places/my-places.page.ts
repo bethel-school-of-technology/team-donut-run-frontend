@@ -9,6 +9,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -36,6 +37,8 @@ export class MyPlacesPage implements OnInit {
   // We will use these
   myVisitedPlaces: PlaceResult[] = [];
   myUnvisitedPlaces: PlaceResult[] = [];
+  originalVisitedPlaces: PlaceResult[] = [];
+  originalUnvisitedPlaces: PlaceResult[] = [];
 
   // These may need to change for the API?
   // myVisitedPlaces: Array<PlaceResult[]>;
@@ -45,6 +48,17 @@ export class MyPlacesPage implements OnInit {
   currentUser: User = new User();
   currentUserId: number;
   items = [];
+
+  // To filter saved places
+  usefilterPlaces: boolean = false;
+  filterValue: string;
+  typeFilterOptions: string[];
+  locationFilterOptions: string[];
+  filteredVisitedPlaces: PlaceResult[] = [];
+  filteredUnvisitedPlaces: PlaceResult[] = [];
+
+  // Testing subscribe method
+  testResult: any;
 
   constructor(
     private placesService: MyPlacesService,
@@ -58,6 +72,7 @@ export class MyPlacesPage implements OnInit {
       this.authService.getCurrentUser().subscribe((user) => {
         this.currentUser = user;
         this.currentUserId = user.userId;
+        this.authService.currentUser$.next(user);
         // console.log('Current User: ', this.currentUser);
       });
       this.apiFindAllPlacesByUserId();
@@ -66,7 +81,17 @@ export class MyPlacesPage implements OnInit {
       this.currentUserId = 4;
       this.mockFindAllPlacesByUserId(this.currentUserId);
     }
+
+    this.typeFilterOptions = [];
     this.generateItems();
+
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+    
+    this.placesService.myPlaceArray$.subscribe(array => {
+      this.myPlaceArray = array;
+    });
   }
 
   private generateItems() {
@@ -75,6 +100,27 @@ export class MyPlacesPage implements OnInit {
       this.items.push(`Item ${count + i}`);
     }
   }
+
+  ionViewWillEnter() {
+      // this.myPlaceArray = [];
+
+    // if (this.useAPI == true) {
+    //   // this.myPlaceArray = [];
+    //   // console.log("TEST: ", this.myPlaceArray);
+    //   this.apiFindAllPlacesByUserId();
+    // }
+  }
+
+  // ngOnDestroy() {
+    // this.myPlaceArray = [];
+    // this.testResult.unsubscribe();
+    // console.log("LEAVE ARRAY: ", this.myPlaceArray);
+    // for (let place in this.myUnvisitedPlaces) { delete this.myUnvisitedPlaces[place];}
+  // }
+
+  // trackByPlace (index: number, place: any) {
+  //   return place.myPlaceId;
+  // }
 
   onIonInfinite(ev) {
     this.generateItems();
@@ -96,13 +142,19 @@ export class MyPlacesPage implements OnInit {
 
   // API find all places
   apiFindAllPlacesByUserId() {
-    this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
-      this.myPlaceArray = result;
+    this.testResult = this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+      // this.myPlaceArray = result;
+      this.placesService.myPlaceArray$.next(result);
       // console.log('My Place Results: ', this.myPlaceArray);
       this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
-    // console.log('Get Visited Places Result: ', this.myVisitedPlaces);
-    // console.log('Get Unvisited Places Result: ', this.myUnvisitedPlaces);
+
+    // To use in filtering
+    this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
+    this.originalVisitedPlaces = this.myVisitedPlaces;
+
+    // console.log('Original Visited Places Result: ', this.originalVisitedPlaces);
+    // console.log('Original Unvisited Places Result: ', this.originalUnvisitedPlaces);
   }
 
   // Sorts whether the place has been visited or not
@@ -127,14 +179,16 @@ export class MyPlacesPage implements OnInit {
         (results: PlaceResult) => {
           this.currentPlaceDetails = results;
           let typesArray: Array<any> = results.types;
-          this.currentPlaceDetails.types = typesArray[0];
+          this.currentPlaceDetails.types = typesArray;
+          // this.currentPlaceDetails.types = typesArray[0];
 
-          let photoList: Array<any> = this.currentPlaceDetails.photos;
-          let placePhoto = photoList[0].getUrl({
-            maxWidth: 500,
-            maxHeight: 500,
-          });
-          this.currentPlaceDetails.photo_reference = placePhoto;
+          // COMMENTING OUT BC IT RACKS UP API CALLS FAST
+          // let photoList: Array<any> = this.currentPlaceDetails.photos;
+          // let placePhoto = photoList[0].getUrl({
+          //   maxWidth: 500,
+          //   maxHeight: 500,
+          // });
+          // this.currentPlaceDetails.photo_reference = placePhoto;
 
           // console.log('API Current Place Details: ', this.currentPlaceDetails);
 
@@ -163,14 +217,16 @@ export class MyPlacesPage implements OnInit {
         (results: PlaceResult) => {
           this.currentPlaceDetails = results;
           let typesArray: Array<any> = results.types;
-          this.currentPlaceDetails.types = typesArray[0];
+          this.currentPlaceDetails.types = typesArray;
+          // this.currentPlaceDetails.types = typesArray[0];
 
-          let photoList: Array<any> = this.currentPlaceDetails.photos;
-          let placePhoto = photoList[0].getUrl({
-            maxWidth: 500,
-            maxHeight: 500,
-          });
-          this.currentPlaceDetails.photo_reference = placePhoto;
+          // COMMENTING OUT BC IT RACKS UP API CALLS FAST
+          // let photoList: Array<any> = this.currentPlaceDetails.photos;
+          // let placePhoto = photoList[0].getUrl({
+          //   maxWidth: 500,
+          //   maxHeight: 500,
+          // });
+          // this.currentPlaceDetails.photo_reference = placePhoto;
 
           // console.log('API Current Place Details: ', this.currentPlaceDetails);
 
@@ -227,4 +283,73 @@ export class MyPlacesPage implements OnInit {
   //   );
   // }
 
+  ////////// FILTER MY PLACES //////////
+  useFilter() {
+    this.usefilterPlaces = !this.usefilterPlaces;
+    console.log("Use Filtered Places: ", this.usefilterPlaces);
+
+    if (this.usefilterPlaces == true && this.typeFilterOptions.length == 0) {
+      this.setFilterOptions();
+    }
+  }
+
+  // Loop through all saved places to compile filter option list
+  // WHERE TO PUT THIS ON INIT?
+  setFilterOptions() {
+    // this.typeFilterOptions = [];
+    // this.locationFilterOptions = []; // This will be hard to do
+
+    // Unvisited array
+    for (let i = 0; i < this.originalUnvisitedPlaces.length; i++) {
+      let filterPlace = this.originalUnvisitedPlaces[i];
+      let typesLength = filterPlace.types.length;
+      for (let i = 0; i < typesLength; i++) {
+        if (!this.typeFilterOptions.includes(filterPlace.types[i]) && filterPlace.types[i] != "point_of_interest" && filterPlace.types[i] != "establishment") {
+          this.typeFilterOptions.push(filterPlace.types[i]);
+        };
+      }
+    }
+
+    // Visited array
+    for (let i = 0; i < this.originalVisitedPlaces.length; i++) {
+      let filterPlace = this.originalVisitedPlaces[i];
+      let typesLength = filterPlace.types.length;
+      for (let i = 0; i < typesLength; i++) {
+        if (!this.typeFilterOptions.includes(filterPlace.types[i]) && filterPlace.types[i] != "point_of_interest" && filterPlace.types[i] != "establishment") {
+          this.typeFilterOptions.push(filterPlace.types[i]);
+        }
+      }
+    }
+
+    // This is going to return the Google types. Do we want to format differently?
+    this.typeFilterOptions.sort();
+    console.log("Filter Options: ", this.typeFilterOptions);
+  }
+
+  setTypeFilter(event) {
+    this.filterValue = event.detail.value;
+    console.log('Filter Set: ', this.filterValue);
+  }
+
+  // Is there an easier/better way to do this?
+  filterMyPlaces() {
+    this.myUnvisitedPlaces = this.originalUnvisitedPlaces;
+    this.myVisitedPlaces = this.originalVisitedPlaces;
+
+    this.myUnvisitedPlaces = this.myUnvisitedPlaces.filter((p) =>
+      p.types.includes(this.filterValue)
+    );
+
+    this.myVisitedPlaces = this.myVisitedPlaces.filter((p) =>
+      p.types.includes(this.filterValue)
+    );
+
+    // console.log('Filtered Unvisited: ', this.filteredUnvisitedPlaces);
+    // console.log('Filtered Visited: ', this.filteredVisitedPlaces);
+  }
+
+  clearFilter() {
+    this.myUnvisitedPlaces = this.originalUnvisitedPlaces;
+    this.myVisitedPlaces = this.originalVisitedPlaces;
+  }
 }

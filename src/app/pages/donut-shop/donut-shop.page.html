@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>donut-shop</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <h4>If you are ever in the area of</h4>
+    <h2>{{currentDonutShop.donutShopCityState}}</h2>
+    <h4>May we suggest the following donut shop?</h4>
+    <ion-item-divider></ion-item-divider>
+    <img src={{currentDonutShop.donutShopPhotoURL}}><br>
+    <p>
+      {{currentDonutShop.donutShopName}}<br>
+      {{currentDonutShop.donutShopAddress}}<br>
+      {{currentDonutShop.donutShopCityState}}
+    </p>
+    <p><a href={{currentDonutShop.donutShopWebsite}}>Visit their website</a></p>
+  </ion-card>  
+    <app-footer></app-footer>
+</ion-content>

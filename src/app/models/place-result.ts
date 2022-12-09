@@ -1,7 +1,7 @@
 export class PlaceResult {
   place_id?: string;
   name?: string;
-  types?: [];
+  types?: Array<any>;
   formatted_address?: string;
   rating?: number;
   price_level?: number;
@@ -19,7 +19,7 @@ export class PlaceResult {
   constructor(
     place_id?: string,
     name?: string,
-    types?: [],
+    types?: Array<any>,
     formatted_address?: string,
     rating?: number,
     price_level?: number,
