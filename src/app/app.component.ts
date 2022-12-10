@@ -67,6 +67,7 @@ export class AppComponent {
       (response) => {
         if (response != null) {
           this.currentUser = response.username;
+          this.authService.currentUser$.next(response);
 
           if (this.currentUser) {
             // Public boolean observable used to modify dropdown menu.

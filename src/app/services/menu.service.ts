@@ -10,6 +10,7 @@ export class MenuService {
   public active$!: Observable<boolean>;
   public currentUser: string = "";
 
+  
   constructor() { }
 
   //method used to modify dropdown menu.
