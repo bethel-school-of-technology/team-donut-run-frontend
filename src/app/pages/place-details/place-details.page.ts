@@ -233,11 +233,13 @@ export class PlaceDetailsPage implements OnInit {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
 
+
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
+
           }
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
@@ -251,8 +253,10 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     } else {
+
       this.signInToSavePlaceAlert();
       //this.router.navigate(['sign-in']);
+
 
     }
 
@@ -266,6 +270,7 @@ export class PlaceDetailsPage implements OnInit {
       .subscribe(
         () => {
           // Do we want to route to the MyPlaces page or keep on the Place Details page?
+
           this.placeRemovedFromSavedAlert();
           this.userSavedPlace = false;
         },
@@ -299,11 +304,13 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = true");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
+
           this.placeMarkedAsVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -320,11 +327,13 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = false");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
+
           this.placeRemovedFromVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -336,6 +345,8 @@ export class PlaceDetailsPage implements OnInit {
       this.signInToVisitPlaceAlert();
       //this.router.navigate(['sign-in']);
     }
+
+
   }
 
   PhotoClick(photo) {
