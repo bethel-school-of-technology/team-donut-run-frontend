@@ -64,7 +64,8 @@ const routes: Routes = [
   {
     path: 'create-experience',
     loadChildren: () => import('./pages/create-experience/create-experience.module').then( m => m.CreateExperiencePageModule)
-  }
+  },
+  {
     path: 'error',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
