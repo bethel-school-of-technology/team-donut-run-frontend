@@ -1,3 +1,78 @@
 img {
     max-height: 25em;
 }
+
+.Card{
+  
+    width:70%;
+    min-width: 335px;
+    margin:auto;
+    margin-top: 25px;
+   
+}
+
+.Photos{
+
+    object-fit:cover;
+    height: 400px;
+    width: 100%;
+    min-width: 200px;
+    max-height: 800px;
+   
+ 
+ }
+ 
+ .Title{
+    font-weight: bolder;
+    color:#D73210;
+    font-size: 36px;
+    margin: auto;
+    text-align: center
+
+ }
+
+  
+ .Text{
+    font-weight: bolder;
+    color: #FF9800;
+    font-size: 24px;
+    margin: auto;
+    text-align: center
+   
+
+ }
+
+ .Text2{
+    font-weight: bolder;
+    color:#081A35;
+    display:block;
+    font-size: 26px;
+    margin: auto;
+    text-align: center;
+ }
+
+ 
+ .Text3{
+    font-weight: bolder;
+    color: #FF9800;
+    display:block;
+    font-size: 26px;
+    margin: auto;
+    text-align: center;
+ }
+
+ 
+ .Text4{
+    font-weight: bolder;
+    color:#D73210;
+    display:block;
+    font-size: 24px;
+    margin: auto;
+    text-align: center;
+ }
+
+ .Top{
+    margin-top: 50px;
+ }
+
+ 
