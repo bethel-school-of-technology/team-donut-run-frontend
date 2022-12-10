@@ -14,17 +14,17 @@
     <ion-content class="ion-padding">
       <ion-list>
         <!-- public boolean observable used to modify dropdown menu. -->
-        <ng-template
-          [ngIf]="this.menuService.active$ | async"
-          [ngIfElse]="signedOut"
-        >
-          <h4>Welcome {{ this.menuService.currentUser }}</h4>
+
+        <ng-template [ngIf]="this.menuService.active$ | async" [ngIfElse]="signedOut">
+          <h4>Welcome {{this.menuService.currentUser}}</h4>
           <ion-item (click)="MyPlacesPage()">My Places</ion-item>
           <ion-item (click)="MyExperiencesPage()">My Experiences</ion-item>
           <ion-item (click)="ProfilePage()">My Profile</ion-item>
+          <ion-item (click)="MeetTheTeamPage()">Meet The Team</ion-item>
           <ion-item (click)="SignOut()">Sign Out</ion-item>
         </ng-template>
         <ng-template #signedOut>
+          <ion-item (click)="MeetTheTeamPage()">Meet The Team</ion-item>
           <ion-item (click)="SignInPage()">Sign In</ion-item>
           <ion-item (click)="SignUpPage()">Sign Up</ion-item>
         </ng-template>

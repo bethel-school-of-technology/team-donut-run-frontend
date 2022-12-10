@@ -233,6 +233,7 @@ export class PlaceDetailsPage implements OnInit {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
 
+
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
 
@@ -253,8 +254,10 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     } else {
+
       this.signInToSavePlaceAlert();
       //this.router.navigate(['sign-in']);
+
 
     }
 
@@ -308,6 +311,7 @@ export class PlaceDetailsPage implements OnInit {
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -330,6 +334,7 @@ export class PlaceDetailsPage implements OnInit {
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -341,6 +346,8 @@ export class PlaceDetailsPage implements OnInit {
       this.signInToVisitPlaceAlert();
       //this.router.navigate(['sign-in']);
     }
+
+
   }
 
   PhotoClick(photo) {

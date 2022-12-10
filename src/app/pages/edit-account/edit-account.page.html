@@ -1,9 +1,52 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>Edit Account</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <app-footer></app-footer>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <div class="ion-padding-horizontal ion-text-center">
+          <h1>Update User Details</h1>
+          <p>Modify the details to edit your account</p>
+        </div>
+        <div class="ion-padding-bottom ion-margin">
+          <form (ngSubmit)="onSubmit()">
+            <ion-list>  
+              <ion-item>  
+                <ion-label position="floating">Username</ion-label>  
+                <ion-input name="username" type="text" [(ngModel)]="currentUser.username"></ion-input>  
+              </ion-item>
+              <ion-item>  
+                <ion-label position="floating">Email</ion-label>  
+                <ion-input name="email" type="email" [(ngModel)]="currentUser.email"></ion-input>
+              </ion-item>
+              <ion-item>  
+                <ion-label position="floating">First Name</ion-label>  
+                <ion-input name="firstName" type="text" [(ngModel)]="currentUser.firstName"></ion-input>
+              </ion-item>
+              <ion-item>  
+                <ion-label position="floating">Last Name</ion-label>  
+                <ion-input name="lastName" type="text" [(ngModel)]="currentUser.lastName"></ion-input>
+              </ion-item>
+              <ion-item>  
+                <ion-label position="floating">Location</ion-label>  
+                <ion-input name="location" type="text" [(ngModel)]="currentUser.location"></ion-input>
+              </ion-item>     
+            </ion-list>
+            <div class= " ion-text-center ion-margin-top">
+              <ion-button type="submit">Submit Changes</ion-button>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-footer></app-footer>
 </ion-content>

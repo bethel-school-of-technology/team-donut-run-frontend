@@ -15,16 +15,6 @@
    color: #bdc6c9;
 }
 
-//  .btn_red{
-//   color: #c7908f;
-//   --ionicon-stroke-width: 40px;
-//  }
-
-//  .btn_green{
-//     color: #81b586;
-//     --ionicon-stroke-width: 40px;
-//  }
-
 .Center {
    margin-left: auto;
    margin-right: auto
@@ -57,7 +47,6 @@
 }
 
 
-
 .Round {
    border-radius: 15px;
    object-fit: cover;
@@ -73,9 +62,6 @@
    height: 108px;
    min-width: 108px;
    max-width: 108px;
-  
-
- 
 }
 
 
@@ -128,6 +114,7 @@
 }
 
 .Btn_Type{
+   // position:sticky;
    --box-shadow:none;  
    --background: rgba(0,0,0,0);
    padding-bottom: 35px;
@@ -137,11 +124,72 @@
    ion-icon{
       --ionicon-stroke-width: 50px;
    }
+
+
 }
 
-.lowerButtons{
-   margin-top: 8px
+.MobileButtons{
+
 }
+
+.Centered{
+// margin-left:50%;
+text-align: center;
+
+}
+
+.Saved:hover {
+
+   position: absolute;
+   top: -90%;
+   overflow: visible;
+   font-weight: 700;
+   color: #D73210;
+   animation: fadeInUp;
+ 
+   animation-duration: 2s;
+   /* don't forget to set a duration! */
+
+}
+
+.Saved2:hover {
+
+   position: absolute;
+   top: -90%;
+   overflow: visible;
+   font-weight: 700;
+   color:  #FF9800;
+   animation: fadeInUp;
+ 
+   animation-duration: 2s;
+   /* don't forget to set a duration! */
+
+}
+
+.Saved {
+
+   position: absolute;
+   color: #d7311000;
+
+}
+
+.Saved2 {
+
+   position: absolute;
+   color: #d7311000;
+
+}
+
+ion-button {
+   --overflow: visible;
+
+}
+
+ion-toolbar {
+
+   --background: #dcdcdc00;
+}
+
 
 .changeBtn {
    width: 120px;

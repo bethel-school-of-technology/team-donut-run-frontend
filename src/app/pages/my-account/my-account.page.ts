@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./my-account.page.scss'],
 })
 export class MyAccountPage implements OnInit {
+  
   currentUser: User = new User();
 
   constructor(private authService: AuthService) { }
@@ -23,6 +24,7 @@ export class MyAccountPage implements OnInit {
       (response) => {
         if (response != null) {
           this.currentUser = response;
+          this.authService.currentUser$.next(response);
           // console.log('Current User: ', this.currentUser);
           
         } else {
@@ -33,6 +35,11 @@ export class MyAccountPage implements OnInit {
         console.log('Current User Error: ', error);
       }
     );
+
+
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
 }
