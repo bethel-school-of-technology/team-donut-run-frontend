@@ -271,8 +271,8 @@ export class PlaceDetailsPage implements OnInit {
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
-          this.currentMyPlace.visited = false;
           this.userSavedPlace = false;
+          this.currentMyPlace.visited = false;
           this.placeRemovedFromSavedAlert();
         },
         (error) => {
