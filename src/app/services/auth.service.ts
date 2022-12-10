@@ -76,11 +76,11 @@ export class AuthService {
   }
 
   // PUT / edit user by current user route.
-  editCurrentUser(edittedUser: User): Observable<User> {
+  editCurrentUser(editedUser: User): Observable<User> {
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     }
-    return this.http.put<User>(`${this.userBaseUrl}/current/edit`, edittedUser, {
+    return this.http.put<User>(`${this.userBaseUrl}/current/edit`, editedUser, {
       headers: reqHeaders,
     });
   }
