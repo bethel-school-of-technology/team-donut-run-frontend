@@ -224,7 +224,7 @@ export class PlaceDetailsPage implements OnInit {
   // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
     if (this.currentUserId != undefined) {
-      console.log('Going to add to My Places');
+      // console.log('Going to add to My Places');
       this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
       this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
       
@@ -236,6 +236,7 @@ export class PlaceDetailsPage implements OnInit {
 
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
+
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
@@ -265,14 +266,14 @@ export class PlaceDetailsPage implements OnInit {
   // If user HAS already saved a place
   // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
   removePlacefromMyPlaces() {
+    
     this.placesService
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
-          // Do we want to route to the MyPlaces page or keep on the Place Details page?
-
-          this.placeRemovedFromSavedAlert();
+          this.currentMyPlace.visited = false;
           this.userSavedPlace = false;
+          this.placeRemovedFromSavedAlert();
         },
         (error) => {
           console.log('Remove Place Error: ', error);

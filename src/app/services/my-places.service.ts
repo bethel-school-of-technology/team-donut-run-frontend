@@ -31,7 +31,7 @@ export class MyPlacesService {
 
   // GET / a single my place by my place id -- NO auth
   // I'm not sure we'll actually use this?
-  getMyPlaceByMyPlaceId(myPlaceId: string): Observable<MyPlace> {
+  getMyPlaceByMyPlaceId(myPlaceId: number): Observable<MyPlace> {
     return this.http.get<MyPlace>(`${this.apiDataSource}/${myPlaceId}`);
   }
 

@@ -20,10 +20,7 @@ const routes: Routes = [
     path: 'sign-in',
     loadChildren: () => import('./pages/sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
+
   {
     path: 'my-places',
     loadChildren: () => import('./pages/my-places/my-places.module').then( m => m.MyPlacesPageModule)
@@ -57,13 +54,24 @@ const routes: Routes = [
     loadChildren: () => import('./pages/donut-shop/donut-shop.module').then( m => m.DonutShopPageModule)
   },
   {
+    path: 'my-experiences',
+    loadChildren: () => import('./pages/my-experiences/my-experiences.module').then( m => m.MyExperiencesPageModule)
+  },
+  {
+    path: 'experience-details/:id',
+    loadChildren: () => import('./pages/experience-details/experience-details.module').then( m => m.ExperienceDetailsPageModule)
+  },
+  {
+    path: 'create-experience',
+    loadChildren: () => import('./pages/create-experience/create-experience.module').then( m => m.CreateExperiencePageModule)
+  }
     path: 'error',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
-  },
+  }
 ];
 
 @NgModule({

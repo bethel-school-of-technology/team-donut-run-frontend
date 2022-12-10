@@ -9,6 +9,7 @@
             </ion-buttons>
           </ion-toolbar>
 
+
         </ion-col>
 
 
@@ -32,7 +33,8 @@
           </div>
         </ion-col>
 
-        <ion-col class="ion-hide-md-down ion-margin-horizontal" size-xs="12" size-sm="12" size-md="auto" size-lg="auto"
+
+        <ion-col class="ion-hide-md-down ion-padding-horizontal" size-xs="12" size-sm="12" size-md="auto" size-lg="auto"
           size-xl="auto">
           <ion-row *ngFor="let photo of photoLinkArray">
             <div class="ion-margin-top" *ngIf="photosExist">
@@ -43,11 +45,46 @@
           </ion-row>
         </ion-col>
 
+
         <ion-col class="ion-margin ion-margin-top" size-xs="11" size-sm="11" size-md="11" size-lg=""
           size-xl="5">
           <ion-row>
             <div class="ion-margin-end ion-no-margin ion-no-padding">
+
+              <ion-row class="ion-margin-bottom">
+                <ion-col class="ion-float-start">
+
+                  <!-- NEW BUTTONS -->
+                  <ion-button *ngIf="!this.userSavedPlace" (click)="savePlaceToMyPlaces()"
+                    class="changeBtn ion-text-uppercase ion-margin-end" color="primary">
+                    <ion-icon color="light" name="heart-outline"></ion-icon><span class="btnText">Save</span>
+                  </ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace" (click)="removePlacefromMyPlaces()"
+                    class="changeBtn ion-text-uppercase ion-margin-end" color="tertiary">
+                    <ion-icon color="light" name="close-circle-outline"></ion-icon><span class="btnText">Saved</span>
+                  </ion-button>
+
+                  <ion-button *ngIf="!this.userSavedPlace" (click)="toggleVisited()"
+                    class="changeBtn ion-text-uppercase" color="primary">
+                    <ion-icon color="light" name="add-circle"></ion-icon><span class="btnText">Visit</span>
+                  </ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && !this.currentMyPlace.visited" (click)="toggleVisited()"
+                    class="changeBtn ion-text-uppercase" color="primary">
+                    <ion-icon color="light" name="add-circle"></ion-icon><span class="btnText">Visit</span>
+                  </ion-button>
+
+                  <ion-button *ngIf="this.userSavedPlace && this.currentMyPlace.visited" (click)="toggleVisited()"
+                    class="changeBtn ion-text-uppercase" color="tertiary">
+                    <ion-icon color="light" name="pin-outline"></ion-icon><span class="btnText">Visited</span>
+                  </ion-button>
+
+                </ion-col>
+              </ion-row>
+
               <ion-row>
+
 
 
                 <ion-col class="ion-no-margin ion-no-padding" size-md="" size-sm="auto" size="auto">
@@ -55,10 +92,11 @@
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
-                  <p class="Text2 ion-no-margin ion-no-padding">
-                    {{this.placeDetails.formatted_address}}
+                  <p class="Text2 ion-no-margin ion-no-padding"><a href="https://www.google.com/maps/search/?api=1&query={{this.placeDetails.formatted_address}}&query_place_id={{this.placeDetails.place_id}}" target="_blank">
+                    {{this.placeDetails.formatted_address}}</a>
                   </p>
                 </ion-col>
+
 
                 <ion-col class=" ion-hide-md-down" size-xs="12" size-sm="12" size-md="" size-lg="" size-xl="">
                   <!-- Desktop buttons  -->
@@ -138,7 +176,7 @@
     </ion-grid>
   </div>
 
-  <!-- Kendals
+  <!-- Kendalls
     
     <p *ngIf="userSavedPlace">You've already saved this place!</p>
              
