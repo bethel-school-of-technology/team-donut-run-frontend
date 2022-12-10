@@ -53,6 +53,10 @@ export class AppComponent {
     this.navCtrl.navigateForward('search');
   }
 
+  MeetTheTeamPage() {
+    this.closeMenu();
+    this.navCtrl.navigateForward('meet-the-team');
+  }
   closeMenu() {
     this.menuCtrl.close();
   }
