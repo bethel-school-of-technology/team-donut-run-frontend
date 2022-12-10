@@ -23,36 +23,39 @@
         </swiper>
       </ion-col>
     </ion-row>
-    <div class="ion-padding">
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="12" sizeXs="12">
-          <h4>
-            Selected category:
-            <span class="selectedType" *ngIf="this.selectedType"
-              >{{this.selectedType.type}}</span
-            >
-          </h4>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="!this.useAdvSearch">
-        <ion-col size="12" class="signedOutSearchContainer">
-          <ion-button
-            class="btn ion-no-margin"
-            color="primary"
-            (click)="toggleDataSource()"
+    <ion-row
+      class="ion-justify-content-center ion-align-items-center selectedCatRow"
+    >
+      <ion-col size="12" sizeXs="12">
+        <h3 class="ion-padding-horizontal">
+          Selected category:
+          <span class="selectedType" *ngIf="this.selectedType"
+            >{{this.selectedType.type}}</span
           >
-            Search
-          </ion-button>
-        </ion-col>
-      </ion-row>
+        </h3>
+      </ion-col>
+    </ion-row>
+    <div class="searchContainer ion-padding">
+    <ion-row *ngIf="!this.useAdvSearch">
+      <ion-col size="12" class="signedOutSearchContainer">
+        <ion-button
+          class="btn ion-no-margin"
+          color="primary"
+          (click)="toggleDataSource()"
+        >
+          Search
+        </ion-button>
+      </ion-col>
+    </ion-row>
       <ion-row *ngIf="!this.useAdvSearch">
         <ion-col size="12" class="signedOutSearchContainer">
           <i class="ion-no-margin">Searching by current location.</i>
         </ion-col>
       </ion-row>
-
+      </div>
+    <div class="ion-padding advancedSearchContainer">
       <ion-row
-        class="ion-justify-content-center ion-align-items-center ion-padding-top"
+        class="ion-justify-content-center ion-align-items-center"
       >
         <ion-col class="advancedSearchForm">
           <ion-accordion-group (ionChange)="toggleAdvancedSearch($event)">
@@ -104,10 +107,12 @@
           </form>
         </ion-col>
       </ion-row>
-
-      <ion-row>
+    </div>
+      <ion-row
+        class="resultsRow ion-justify-content-center ion-align-items-center"
+      >
         <ion-col>
-          <h3 class="ion-no-margin ion-padding-top">Results</h3>
+          <h3 class="ion-padding-horizontal">Results</h3>
         </ion-col>
       </ion-row>
       <ion-row class="searchResultsRow">
@@ -142,7 +147,6 @@
           </ion-card>
         </ion-col>
       </ion-row>
-    </div>
   </ion-grid>
   <app-footer></app-footer>
 </ion-content>
