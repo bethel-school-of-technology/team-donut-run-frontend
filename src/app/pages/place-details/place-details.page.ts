@@ -273,7 +273,6 @@ export class PlaceDetailsPage implements OnInit {
 
           this.placeRemovedFromSavedAlert();
           this.userSavedPlace = false;
-r
         },
         (error) => {
           console.log('Remove Place Error: ', error);
