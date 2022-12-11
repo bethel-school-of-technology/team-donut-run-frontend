@@ -14,7 +14,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
   styleUrls: ['./create-experience.page.scss'],
 })
 export class CreateExperiencePage implements OnInit {
-  useAPI: boolean = true;
+  useAPI: boolean = false;
   useAPIPhotos: boolean = false;
 
   // User variables
