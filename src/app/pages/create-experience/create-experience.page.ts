@@ -14,8 +14,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
   styleUrls: ['./create-experience.page.scss'],
 })
 export class CreateExperiencePage implements OnInit {
-
-  useAPI: boolean = false;
+  useAPI: boolean = true;
   useAPIPhotos: boolean = false;
 
   // User variables
@@ -56,14 +55,13 @@ export class CreateExperiencePage implements OnInit {
   searchLongitude: number = null;
   locationSet: boolean;
 
-
   constructor(
-    private expService: ExperienceService, 
+    private expService: ExperienceService,
     private authService: AuthService,
     private router: Router,
     private geoService: GeolocationService,
     private alertController: AlertController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe((user) => {
@@ -72,29 +70,27 @@ export class CreateExperiencePage implements OnInit {
       this.authService.currentUser$.next(user);
     });
 
-    this.authService.currentUser$.subscribe(user => {
+    this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
   }
 
   searchByString(searchString: string): Array<PlaceResult> {
     if (searchString != null) {
-    console.log("Search String: ", searchString);
+      console.log('Search String: ', searchString);
 
-    let searchResults = this.setSearchResults(
-      this.searchLatitude,
-      this.searchLongitude,
-      searchString
-    );
+      let searchResults = this.setSearchResults(
+        this.searchLatitude,
+        this.searchLongitude,
+        searchString
+      );
 
-    console.log("String Search Results: ", searchResults);
-    return searchResults;
-
-  } else {
-    // Add alert here that there must be an entry?
-    console.log("Must enter valid string");
-  }
-
+      console.log('String Search Results: ', searchResults);
+      return searchResults;
+    } else {
+      // Add alert here that there must be an entry?
+      console.log('Must enter valid string');
+    }
   }
 
   // Set the places for the experience
@@ -102,7 +98,7 @@ export class CreateExperiencePage implements OnInit {
     this.firstPlaceId = googlePlaceId;
     this.firstPlaceName = name;
     this.firstPlaceSet = true;
-    console.log("First Place: ", this.firstPlaceId);
+    console.log('First Place: ', this.firstPlaceId);
   }
 
   unsetFirstPlace() {
@@ -115,7 +111,7 @@ export class CreateExperiencePage implements OnInit {
     this.secondPlaceId = googlePlaceId;
     this.secondPlaceName = name;
     this.secondPlaceSet = true;
-    console.log("Second Place: ", this.secondPlaceId);
+    console.log('Second Place: ', this.secondPlaceId);
   }
 
   unsetSecondPlace() {
@@ -128,7 +124,7 @@ export class CreateExperiencePage implements OnInit {
     this.thirdPlaceId = googlePlaceId;
     this.thirdPlaceName = name;
     this.thirdPlaceSet = true;
-    console.log("Third Place: ", this.thirdPlaceId);
+    console.log('Third Place: ', this.thirdPlaceId);
   }
 
   unsetThirdPlace() {
@@ -158,13 +154,15 @@ export class CreateExperiencePage implements OnInit {
       // Do we need to do this to set the other form items or does that happen automatically with data binding on submit?
       // console.log("New Experience: ", this.newExperience);
       // Call create experience method from service
-      this.expService.createNewExperience(this.newExperience).subscribe(result => {
-        console.log("New Experience Result: ", result);
-        window.alert("New experience added!");
-        this.router.navigate(['my-experiences']);
-      });
+      this.expService
+        .createNewExperience(this.newExperience)
+        .subscribe((result) => {
+          console.log('New Experience Result: ', result);
+          this.newExperienceAddedAlert();
+          this.router.navigate(['my-experiences']);
+        });
     } else {
-      window.alert('Please sign in to create experience.');
+      this.signInToCreateExperienceAlert();
       this.router.navigate(['sign-in']);
     }
   }
@@ -176,7 +174,7 @@ export class CreateExperiencePage implements OnInit {
 
     let request = {
       location: latLng,
-      rankBy: google.maps.places.RankBy.DISTANCE, 
+      rankBy: google.maps.places.RankBy.DISTANCE,
       // radius: searchRadius,
       keyword: searchString,
     };
@@ -201,7 +199,7 @@ export class CreateExperiencePage implements OnInit {
     this.nearbySearchByGeolocation(latLng, searchString).then(
       (results: Array<any>) => {
         // searchResults = results;
-        results.forEach(p => {
+        results.forEach((p) => {
           if (p.user_ratings_total > 100 && p.rating > 4) {
             searchResults.push(p);
           }
@@ -214,10 +212,10 @@ export class CreateExperiencePage implements OnInit {
         if (searchResults.length > this.searchLimit) {
           searchResults.length = this.searchLimit;
           // console.log(this.searchResults.length);
-        } 
+        }
 
         // Get photo and short_address
-        searchResults.forEach(sr => {
+        searchResults.forEach((sr) => {
           let placeId = sr.place_id;
           let foundPlace = results.find((p) => p.place_id === placeId);
 
@@ -233,15 +231,14 @@ export class CreateExperiencePage implements OnInit {
             foundPlace.plus_code == undefined
           ) {
             // Will/does this happen often enough that we need to handle it?
-            sr.short_address = "Address not available.";
+            sr.short_address = 'Address not available.';
             console.log('Address not available.');
           } else {
             let address = foundPlace.plus_code.compound_code;
             let split = address.split(/ (.*)/);
             sr.short_address = split[1];
           }
-
-        })
+        });
 
         console.log('Search Results: ', searchResults);
 
@@ -262,63 +259,66 @@ export class CreateExperiencePage implements OnInit {
   }
 
   clearSelectedLocation() {
-    this.searchCity = "";
-    this.searchState = "";
+    this.searchCity = '';
+    this.searchState = '';
     this.locationSet = false;
 
-    this.firstPlaceId = "";
+    this.firstPlaceId = '';
     this.firstPlaceSet = false;
     this.openFirst = false;
     this.firstSearchResults = [];
-    this.firstSearchString = "";
-    this.firstPlaceName = "";
+    this.firstSearchString = '';
+    this.firstPlaceName = '';
 
-    this.secondPlaceId = "";
+    this.secondPlaceId = '';
     this.secondPlaceSet = false;
     this.openSecond = false;
     this.secondSearchResults = [];
-    this.secondSearchString = "";
-    this.secondPlaceName = "";
+    this.secondSearchString = '';
+    this.secondPlaceName = '';
 
-    this.thirdPlaceId = "";
+    this.thirdPlaceId = '';
     this.thirdPlaceSet = false;
     this.openThird = false;
     this.thirdSearchResults = [];
-    this.thirdSearchString = "";
-    this.thirdPlaceName = "";
+    this.thirdSearchString = '';
+    this.thirdPlaceName = '';
 
-    this.newExperience.experienceUserLocation = "";
+    this.newExperience.experienceUserLocation = '';
   }
 
   setLocationInput() {
+    if (this.searchCity == undefined || this.searchState == undefined) {
+      this.cityOrStateMissingAlert();
+      this.clearSelectedLocation();
+    } else {
+      this.geoService
+        .getLocationData(this.searchCity, this.searchState)
+        .subscribe(
+          (result) => {
+            if (result == null || result == undefined || result.length == 0) {
+              this.cityDoesNotExistAlert();
+              this.clearSelectedLocation();
+            } else {
+              this.searchLatitude = result[0].lat;
+              this.searchLongitude = result[0].lon;
 
-      if (this.searchCity == undefined || this.searchState == undefined) {
-        this.cityOrStateMissingAlert();
-        this.clearSelectedLocation();
-      } else {
+              this.searchCity =
+                this.searchCity.charAt(0).toUpperCase() +
+                this.searchCity.slice(1);
+              this.newExperience.experienceUserLocation = `${this.searchCity}, ${this.searchState}`;
 
-        this.geoService
-          .getLocationData(this.searchCity, this.searchState)
-          .subscribe(
-            (result) => {
-              if (result == null || result == undefined || result.length == 0) {
-                this.cityDoesNotExistAlert();
-                this.clearSelectedLocation();
-              } else {
-                this.searchLatitude = result[0].lat;
-                this.searchLongitude = result[0].lon;
-
-                this.searchCity = this.searchCity.charAt(0).toUpperCase() + this.searchCity.slice(1);
-                this.newExperience.experienceUserLocation = `${this.searchCity}, ${this.searchState}`;
-
-                this.locationSet = true;
-                console.log("Set Location: ", this.newExperience.experienceUserLocation);
-              }
-            },
-            (error) => {
-              console.log('Error: ', error);
+              this.locationSet = true;
+              console.log(
+                'Set Location: ',
+                this.newExperience.experienceUserLocation
+              );
             }
-          );
+          },
+          (error) => {
+            console.log('Error: ', error);
+          }
+        );
       // }
     }
   }
@@ -411,4 +411,23 @@ export class CreateExperiencePage implements OnInit {
     await alert.present();
   }
 
+  async newExperienceAddedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'New experience added!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async signInToCreateExperienceAlert() {
+    const alert = await this.alertController.create({
+      header: 'Try Again!',
+      message: 'Please sign in to create a new experience!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 }

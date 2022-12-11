@@ -1,17 +1,15 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>experience-details</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"
+            ><ion-icon name="chevron-back-outline"></ion-icon
+          ></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/my-experiences']" color="light">Back</ion-button>
-      </ion-col>
-    </ion-row>
-
     <ion-row>
       <h1>{{experienceDetails.experienceTitle}}</h1>
       <p>Location: {{experienceDetails.experienceUserLocation}}</p>

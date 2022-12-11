@@ -1,20 +1,18 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>my-experiences</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"
+            ><ion-icon name="chevron-back-outline"></ion-icon
+          ></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
 <ion-content fullscreen="true">
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button [routerLink]="['/']" color="light">Back</ion-button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <h1>My Experiences</h1>
+        <h1 class="ion-padding-horizontal">My Experiences</h1>
         <ion-button (click)="CreateExperiencePage()">Create New Experience</ion-button>
         
       </ion-col>
