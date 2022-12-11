@@ -53,6 +53,7 @@ export class CreateExperiencePage implements OnInit {
   searchState: string;
   searchLatitude: number = null;
   searchLongitude: number = null;
+  locationSet: boolean;
 
 
   constructor(
@@ -76,6 +77,7 @@ export class CreateExperiencePage implements OnInit {
   }
 
   searchByString(searchString: string): Array<PlaceResult> {
+    if (searchString != null) {
     console.log("Search String: ", searchString);
 
     let searchResults = this.setSearchResults(
@@ -87,10 +89,14 @@ export class CreateExperiencePage implements OnInit {
     console.log("String Search Results: ", searchResults);
     return searchResults;
 
+  } else {
+    // Add alert here that there must be an entry?
+    console.log("Must enter valid string");
+  }
+
   }
 
   // Set the places for the experience
-
   setFirstPlace(googlePlaceId: string, name: string) {
     this.firstPlaceId = googlePlaceId;
     this.firstPlaceName = name;
@@ -153,7 +159,8 @@ export class CreateExperiencePage implements OnInit {
       // Call create experience method from service
       this.expService.createNewExperience(this.newExperience).subscribe(result => {
         console.log("New Experience Result: ", result);
-        // Navigate to experience details page
+        window.alert("New experience added!");
+        this.router.navigate(['my-experiences']);
       });
     } else {
       window.alert('Please sign in to create experience.');
@@ -192,6 +199,7 @@ export class CreateExperiencePage implements OnInit {
 
     this.nearbySearchByGeolocation(latLng, searchString).then(
       (results: Array<any>) => {
+        // searchResults = results;
         results.forEach(p => {
           if (p.user_ratings_total > 100 && p.rating > 4) {
             searchResults.push(p);
@@ -251,32 +259,59 @@ export class CreateExperiencePage implements OnInit {
     return searchResults;
   }
 
+  clearSelectedLocation() {
+    this.searchCity = "";
+    this.searchState = "";
+    this.locationSet = false;
+
+    this.firstPlaceId = "";
+    this.firstPlaceSet = false;
+    this.openFirst = false;
+    this.firstSearchResults = [];
+    this.firstSearchString = "";
+    this.firstPlaceName = "";
+
+    this.secondPlaceId = "";
+    this.secondPlaceSet = false;
+    this.openSecond = false;
+    this.secondSearchResults = [];
+    this.secondSearchString = "";
+    this.secondPlaceName = "";
+
+    this.thirdPlaceId = "";
+    this.thirdPlaceSet = false;
+    this.openThird = false;
+    this.thirdSearchResults = [];
+    this.thirdSearchString = "";
+    this.thirdPlaceName = "";
+
+    this.newExperience.experienceUserLocation = "";
+  }
+
   setLocationInput() {
-    // if (this.searchString == null) {
-    //   // Do we want an alert here?
-    //   console.log('Type not selected');
-    // } else {
+
       if (this.searchCity == undefined || this.searchState == undefined) {
         this.cityOrStateMissingAlert();
+        this.clearSelectedLocation();
       } else {
 
-        this.firstPlaceId = "";
-        this.firstPlaceSet = false;
-        this.openFirst = false;
-        this.firstSearchResults = [];
-        this.firstSearchString = "";
+        // this.firstPlaceId = "";
+        // this.firstPlaceSet = false;
+        // this.openFirst = false;
+        // this.firstSearchResults = [];
+        // this.firstSearchString = "";
 
-        this.secondPlaceId = "";
-        this.secondPlaceSet = false;
-        this.openSecond = false;
-        this.secondSearchResults = [];
-        this.secondSearchString = "";
+        // this.secondPlaceId = "";
+        // this.secondPlaceSet = false;
+        // this.openSecond = false;
+        // this.secondSearchResults = [];
+        // this.secondSearchString = "";
 
-        this.thirdPlaceId = "";
-        this.thirdPlaceSet = false;
-        this.openThird = false;
-        this.thirdSearchResults = [];
-        this.thirdSearchString = "";
+        // this.thirdPlaceId = "";
+        // this.thirdPlaceSet = false;
+        // this.openThird = false;
+        // this.thirdSearchResults = [];
+        // this.thirdSearchString = "";
 
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
@@ -284,6 +319,7 @@ export class CreateExperiencePage implements OnInit {
             (result) => {
               if (result == null || result == undefined || result.length == 0) {
                 this.cityDoesNotExistAlert();
+                this.clearSelectedLocation();
               } else {
                 this.searchLatitude = result[0].lat;
                 this.searchLongitude = result[0].lon;
@@ -295,6 +331,8 @@ export class CreateExperiencePage implements OnInit {
                 //   this.searchLatitude,
                 //   this.searchLongitude
                 // );
+
+                this.locationSet = true;
                 console.log("Set Location: ", this.newExperience.experienceUserLocation);
 
                 // if (this.useAPI == true) {

@@ -28,9 +28,9 @@
             <p>{{exp.experienceNotes}}</p>
             <p>{{exp.experienceUserLocation}}</p>
             <p>Created On: {{exp.createdOn}}</p>
-            <p>Place 1: {{exp.firstGooglePlaceId}}</p>
-            <p>Place 2: {{exp.secondGooglePlaceId}}</p>
-            <p>Place 3: {{exp.thirdGooglePlaceId}}</p>
+            <p *ngIf="exp.firstPlaceName">Place 1: {{exp.firstPlaceName}}</p>
+            <p *ngIf="exp.secondPlaceName">Place 2: {{exp.secondPlaceName}}</p>
+            <p *ngIf="exp.thirdPlaceName">Place 3: {{exp.thirdPlaceName}}</p>
           </ion-card>
         </ion-list>
       </ion-col>
