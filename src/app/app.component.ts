@@ -38,6 +38,11 @@ export class AppComponent {
     this.navCtrl.navigateForward('my-places');
   }
 
+  MyExperiencesPage() {
+    this.closeMenu();
+    this.navCtrl.navigateForward('my-experiences');
+  }
+
   SignInPage() {
     this.closeMenu();
     this.navCtrl.navigateForward('sign-in');
@@ -53,6 +58,10 @@ export class AppComponent {
     this.navCtrl.navigateForward('search');
   }
 
+  MeetTheTeamPage() {
+    this.closeMenu();
+    this.navCtrl.navigateForward('meet-the-team');
+  }
   closeMenu() {
     this.menuCtrl.close();
   }
@@ -63,6 +72,7 @@ export class AppComponent {
       (response) => {
         if (response != null) {
           this.currentUser = response.username;
+          this.authService.currentUser$.next(response);
 
           if (this.currentUser) {
             // Public boolean observable used to modify dropdown menu.

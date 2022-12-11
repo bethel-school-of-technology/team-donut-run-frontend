@@ -1,11 +1,24 @@
 .Ion-P{
-    font-size: 10px;
+    font-size: 15px;
     color: white;
     text-align: center;
+  
+
 }
+
 
 .flex-wrapper {
     position: sticky;
     top: 100%;
 
   }
+
+  
+.donut {
+    position:absolute;
+
+    img{
+        width:35px;
+        height:35px
+        drop-shadow(16px 16px 10px black)
+    }}

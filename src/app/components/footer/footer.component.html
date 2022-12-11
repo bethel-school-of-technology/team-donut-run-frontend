@@ -1,6 +1,21 @@
 <div class="flex-wrapper">
+
   <ion-toolbar color="secondary">
-    <p class="Ion-P">Copyright by DonutRun 2022</p>
-    <a (click)="TermsPage()"><p class="Ion-P">Terms and services</p></a>
-  </ion-toolbar>
+
+    <ion-grid>
+<ion-row class="">  
+  <ion-col></ion-col>
+  <ion-col size="auto"><p class="Ion-P ion-no-margin top">Copyright by DonutRun 2022</p>
+</ion-col>
+<ion-col> <div  *ngIf="!animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceInUp">
+  <img src="assets/logo/DonutRun.png" />
+</div>   <div  *ngIf="animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceOutRight">
+  <img src="assets/logo/DonutRun.png" />
+</div>   </ion-col>
+ </ion-row>
+
+ <a (click)="TermsPage()"><p class="Ion-P ion-no-margin bottom">Terms and services</p></a>
+  </ion-grid>
+</ion-toolbar>
+
 </div>

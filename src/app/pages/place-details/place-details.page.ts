@@ -224,7 +224,7 @@ export class PlaceDetailsPage implements OnInit {
   // Do we want to add a window confirmation that they have to confirm to add or just add automatically?
   savePlaceToMyPlaces() {
     if (this.currentUserId != undefined) {
-      console.log('Going to add to My Places');
+      // console.log('Going to add to My Places');
       this.saveNewPlace.googlePlaceId = this.currentGooglePlaceId;
       this.saveNewPlace.createdOn = 'Placeholder'; // this will autosave as a date on the backend
       
@@ -233,11 +233,14 @@ export class PlaceDetailsPage implements OnInit {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
 
+
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
+
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
+
           }
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
@@ -251,8 +254,10 @@ export class PlaceDetailsPage implements OnInit {
         }
       );
     } else {
+
       this.signInToSavePlaceAlert();
       //this.router.navigate(['sign-in']);
+
 
     }
 
@@ -261,13 +266,14 @@ export class PlaceDetailsPage implements OnInit {
   // If user HAS already saved a place
   // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
   removePlacefromMyPlaces() {
+    
     this.placesService
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
-          // Do we want to route to the MyPlaces page or keep on the Place Details page?
-          this.placeRemovedFromSavedAlert();
           this.userSavedPlace = false;
+          this.currentMyPlace.visited = false;
+          this.placeRemovedFromSavedAlert();
         },
         (error) => {
           console.log('Remove Place Error: ', error);
@@ -299,11 +305,13 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = true");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
+
           this.placeMarkedAsVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -320,11 +328,13 @@ export class PlaceDetailsPage implements OnInit {
       console.log("Visited = false");
       this.placesService.updateMyPlace(this.currentMyPlace).subscribe(
         () => {
+
           this.placeRemovedFromVisitedAlert();
           // this.apiFindAllPlacesByUserId();
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
+
           console.log('Update Place Error: ', error);
           if (error.status === 401 || error.status === 403) {
             this.router.navigate(['sign-in']);
@@ -336,6 +346,8 @@ export class PlaceDetailsPage implements OnInit {
       this.signInToVisitPlaceAlert();
       //this.router.navigate(['sign-in']);
     }
+
+
   }
 
   PhotoClick(photo) {

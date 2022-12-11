@@ -1,0 +1,42 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>my-experiences</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content fullscreen="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['/']" color="light">Back</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h1>My Experiences</h1>
+        <ion-button (click)="CreateExperiencePage()">Create New Experience</ion-button>
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-card *ngFor="let exp of this.myExperiencesArray">
+            <h2>{{exp.experienceTitle}}</h2>
+            <p>{{exp.experienceNotes}}</p>
+            <p>{{exp.experienceUserLocation}}</p>
+            <p>Created On: {{exp.createdOn}}</p>
+            <p>Place 1: {{exp.firstGooglePlaceId}}</p>
+            <p>Place 2: {{exp.secondGooglePlaceId}}</p>
+            <p>Place 3: {{exp.thirdGooglePlaceId}}</p>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+
+
+  </ion-grid>
+</ion-content>
