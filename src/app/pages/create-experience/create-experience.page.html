@@ -8,17 +8,17 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h1>Create New Experience</h1>
+        <h1 class="CenteredTitle">Create New Experience</h1>
         <form (ngSubmit)="createNewExperience()">
           <ion-list>
             <ion-item>
-              <ion-label>Name Experience</ion-label>
+              <ion-label color="primary">Name Experience</ion-label>
               <ion-input class="ion-text-end" placeholder="Enter Name" slot="end" type="name" name="title"
                 [(ngModel)]="this.newExperience.experienceTitle">
               </ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Notes</ion-label>
+              <ion-label color="primary">Notes</ion-label>
               <ion-textarea class="ion-text-end" placeholder="Enter Notes" slot="end" type="name" name="notes"
                 [(ngModel)]="this.newExperience.experienceNotes">
               </ion-textarea>
@@ -27,43 +27,47 @@
             <form (ngSubmit)="setLocationInput()">
               <ion-list>
                 <ion-item>
-                  <ion-label>City</ion-label>
+                  <ion-label color="primary">City</ion-label>
                   <ion-input class="ion-text-end" placeholder="Enter City Name" slot="end" type="city" name="city"
                     [(ngModel)]="this.searchCity">
                   </ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label>State</ion-label>
+                  <ion-label color="primary">State</ion-label>
                   <ion-select interface="popover" placeholder="Select State" (ngModel)="this.searchState"
                     (ionChange)="setState($event)">
                     <ion-select-option *ngFor="let state of stateOptions" [value]="state">{{state}}</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>
+              <div class="Centered">
               <ion-button *ngIf="this.searchCity && this.searchState && !this.firstPlaceSet" class="btn ion-margin-top" color="primary"
                 type="submit">
                 Set Location
               </ion-button>
+            </div>
             </form>
 
             <!-- START FIRST PLACE SELECTION -->
             <ion-accordion-group *ngIf="this.newExperience.experienceUserLocation" (ionChange)="toggleFirstPlace($event)">
               <ion-accordion value="firstPlace">
                 <ion-item slot="header" color="light">
-                  <ion-label>Select First Place</ion-label>
+                  <ion-label color="primary">Select First Place</ion-label>
                 </ion-item>
               </ion-accordion>
             </ion-accordion-group>
             <form *ngIf="this.openFirst" (ngSubmit)="this.firstSearchResults = searchByString(this.firstSearchString)">
               <ion-item>
-                <ion-label>Place #1 Type</ion-label>
+                <ion-label color="primary">Place #1 Type</ion-label>
                 <ion-input class="ion-text-end" placeholder="Enter Type" slot="end" type="place" name="firstPlace"
                   [(ngModel)]="this.firstSearchString">
                 </ion-input>
               </ion-item>
+              <div class="Centered">
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
                 Search
               </ion-button>
+              </div>
             </form>
 
             <ion-row *ngIf="this.openFirst" class="searchResultsRow">
@@ -87,15 +91,21 @@
                     </span>
                     <br>
                     <span>
-                      <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
+                      <div class="Centered">
+                      <ion-button class="btn ion-margin-top"  expand="block" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
+                      </div>
+                      <div class="Centered">
                       <ion-fab-button size="small" *ngIf="this.firstPlaceId != place.place_id"
                         (click)="setFirstPlace(place.place_id, place.name)">
                         <ion-icon name="add"></ion-icon>
                       </ion-fab-button>
+                      </div>
+                      <div class="Centered">
                       <ion-fab-button *ngIf="this.firstPlaceId == place.place_id" size="small" color="tertiary"
                         (click)="unsetFirstPlace()">
                         <ion-icon name="checkmark"></ion-icon>
                       </ion-fab-button>
+                      </div> 
                     </span>
                   </ion-card-content>
                 </ion-card>
@@ -104,9 +114,11 @@
             </ion-row>
 
             <!-- START SECOND PLACE SELECTION -->
+            <div class="Centered">
             <ion-button *ngIf="this.firstPlaceSet && !this.openSecond && !this.secondPlaceSet" class="btn ion-margin-top" color="primary" (click)="toggleFirstPlace($event)">
               Add Second Place
             </ion-button>
+            </div>
             <ion-accordion-group *ngIf="this.firstPlaceSet && !this.openFirst" (ionChange)="toggleSecondPlace($event)">
               <ion-accordion value="secondPlace">
                 <ion-item slot="header" color="light">
@@ -121,9 +133,11 @@
                   [(ngModel)]="this.secondSearchString">
                 </ion-input>
               </ion-item>
+              <div class="Centered">
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
                 Search
               </ion-button>
+              </div>
             </form>
 
             <ion-row *ngIf="this.openSecond && !this.openFirst" class="searchResultsRow">
@@ -147,7 +161,9 @@
                     </span>
                     <br>
                     <span>
-                      <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
+                      <div class="Centered">
+                      <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button> 
+                    </div>
                       <ion-fab-button size="small" *ngIf="this.secondPlaceId != place.place_id"
                         (click)="setSecondPlace(place.place_id, place.name)">
                         <ion-icon name="add"></ion-icon>
@@ -164,9 +180,11 @@
             </ion-row>
 
             <!-- START THIRD PLACE SELECTION -->
+            <div class="Centered">
             <ion-button *ngIf="this.secondPlaceSet && !this.openThird && !this.thirdPlaceId" class="btn ion-margin-top" color="primary" (click)="toggleSecondPlace($event)">
               Add Third Place
             </ion-button>
+            </div>
             <ion-accordion-group *ngIf="this.firstPlaceSet && !this.openFirst && this.secondPlaceSet && !this.openSecond" (ionChange)="toggleThirdPlace($event)">
               <ion-accordion value="thirdPlace">
                 <ion-item slot="header" color="light">
@@ -181,9 +199,11 @@
                   [(ngModel)]="this.thirdSearchString">
                 </ion-input>
               </ion-item>
+              <div class="Centered">
               <ion-button class="btn ion-margin-top" color="primary" type="submit">
                 Search
               </ion-button>
+              </div>
             </form>
 
             <ion-row *ngIf="this.openThird && !this.openFirst && !this.openSecond" class="searchResultsRow">
@@ -207,7 +227,9 @@
                     </span>
                     <br>
                     <span>
+                      <div class="Centered">
                       <ion-button class="btn ion-margin-top" color="primary" type="submit" [routerLink]="['/place-details', place.place_id]">View</ion-button>
+                     </div>
                       <ion-fab-button size="small" *ngIf="this.thirdPlaceId != place.place_id"
                         (click)="setThirdPlace(place.place_id, place.name)">
                         <ion-icon name="add"></ion-icon>
@@ -232,7 +254,9 @@
             <p *ngIf="this.secondPlaceName">Place #2: {{this.secondPlaceName}}</p>
             <p *ngIf="this.thirdPlaceName">Place #3: {{this.thirdPlaceName}}</p>
           </ion-list>
+          <div class="Centered">
           <ion-button *ngIf="this.firstPlaceId" class="btn" color="light" type="submit">Create New Experience</ion-button>
+          </div>
         </form>
       </ion-col>
     </ion-row>
