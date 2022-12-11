@@ -1,9 +1,87 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>experience-details</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['/my-experiences']" color="light">Back</ion-button>
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <h1>{{experienceDetails.experienceTitle}}</h1>
+      <p>Location: {{experienceDetails.experienceUserLocation}}</p>
+      <p>Created On: {{experienceDetails.createdOn}}</p>
+      <p>{{experienceDetails.experienceNotes}}</p>
+
+    </ion-row>
+    <ion-row>
+    <ion-col class="ion-hide-md-up ion-margin-right" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+      <div class="Centered ion-text-center">
+
+        <ion-button *ngIf="this.showOptions && !this.experienceDetails.completed" (click)="toggleCompleted()"
+          class="changeBtn MobileButtons ion-text-uppercase ion-margin-end" color="primary">
+          <ion-icon color="light" name="add-circle-outline"></ion-icon><span class="btnText">Mark as Completed</span>
+        </ion-button>
+
+        <ion-button *ngIf="this.showOptions && this.experienceDetails.completed" (click)="toggleCompleted()"
+          class="changeBtn MobileButtons ion-text-uppercase ion-margin-end" color="primary">
+          <ion-icon color="light" name="checkmark-circle"></ion-icon><span class="btnText">Completed</span>
+        </ion-button>
+
+      </div>
+    </ion-col>
+  </ion-row>
+
+    <!-- <ion-row>
+      <ion-card *ngFor="let place of savedPlaces" [routerLink]="['/place-details', place.place_id]">
+        <h4>{{place.name}}</h4>
+      </ion-card>
+    </ion-row> -->
+
+    <ion-row class="searchResultsRow">
+      <h2>Places</h2>
+
+      <ion-col
+        class="searchResultsContainer"
+        size-xs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="4"
+        *ngFor="let place of savedPlaces"
+      >
+        <ion-card
+          class="card"
+          [routerLink]="['/place-details', place.place_id]"
+        >
+          <div class="cardPhotoContainer">
+            <img [src]="place.photo_reference" />
+          </div>
+          <ion-card-content class="cardText">
+            <ion-text color="dark"><b>{{place.name}}</b></ion-text>
+            <p>{{place.formatted_address}}</p>
+            <p class="types"><b>Type:</b> {{place.types[0]}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-hide-md-up ion-margin-right" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+        <div class="Centered ion-text-center">
+  
+          <ion-button *ngIf="this.showOptions" (click)="deleteExperience()"
+            class="changeBtn MobileButtons ion-text-uppercase ion-margin-end" color="primary">
+            <ion-icon color="light" name="remove-circle"></ion-icon><span class="btnText">Delete Experience</span>
+          </ion-button>
+          <p>There is no undo!</p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

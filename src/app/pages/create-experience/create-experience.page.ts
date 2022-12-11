@@ -15,7 +15,8 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 })
 export class CreateExperiencePage implements OnInit {
 
-  useAPI: boolean = true;
+  useAPI: boolean = false;
+  useAPIPhotos: boolean = false;
 
   // User variables
   currentUser: User = new User();
@@ -220,11 +221,12 @@ export class CreateExperiencePage implements OnInit {
           let placeId = sr.place_id;
           let foundPlace = results.find((p) => p.place_id === placeId);
 
-          // COMMENTING OUT TO LIMIT REQUESTS
-          // sr.photo_reference = foundPlace.photos[0].getUrl({
-          //   maxWidth: 500,
-          //   maxHeight: 500,
-          // });
+          if (this.useAPIPhotos == true) {
+            sr.photo_reference = foundPlace.photos[0].getUrl({
+              maxWidth: 500,
+              maxHeight: 500,
+            });
+          }
 
           if (
             foundPlace.plus_code == null ||
@@ -295,24 +297,6 @@ export class CreateExperiencePage implements OnInit {
         this.clearSelectedLocation();
       } else {
 
-        // this.firstPlaceId = "";
-        // this.firstPlaceSet = false;
-        // this.openFirst = false;
-        // this.firstSearchResults = [];
-        // this.firstSearchString = "";
-
-        // this.secondPlaceId = "";
-        // this.secondPlaceSet = false;
-        // this.openSecond = false;
-        // this.secondSearchResults = [];
-        // this.secondSearchString = "";
-
-        // this.thirdPlaceId = "";
-        // this.thirdPlaceSet = false;
-        // this.openThird = false;
-        // this.thirdSearchResults = [];
-        // this.thirdSearchString = "";
-
         this.geoService
           .getLocationData(this.searchCity, this.searchState)
           .subscribe(
@@ -326,30 +310,9 @@ export class CreateExperiencePage implements OnInit {
 
                 this.searchCity = this.searchCity.charAt(0).toUpperCase() + this.searchCity.slice(1);
                 this.newExperience.experienceUserLocation = `${this.searchCity}, ${this.searchState}`;
-                // console.log(
-                //   'Result: ',
-                //   this.searchLatitude,
-                //   this.searchLongitude
-                // );
 
                 this.locationSet = true;
                 console.log("Set Location: ", this.newExperience.experienceUserLocation);
-
-                // if (this.useAPI == true) {
-                //   // use API data
-                //   this.setSearchResults(
-                //     this.searchLatitude,
-                //     this.searchLongitude,
-                //     this.searchString,
-                //     this.searchRadius
-                //   );
-                // } else {
-                //   // use MOCK data (doesn't care about user input)
-                //   // this.mockSearchAll();
-                //   console.log(
-                //     'Using mock data, advanced search not available.'
-                //   );
-                // }
               }
             },
             (error) => {

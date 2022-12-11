@@ -60,12 +60,12 @@ export class ExperienceService {
   }
 
   // PUT / update a saved experience with completed boolean AND/OR with a different place (V3?) -- auth
-  updateExperienceById(editExperience: Experience): Observable<Experience> {
+  updateExperience(editExperience: Experience): Observable<Experience> {
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     };
 
-    return this.http.post<Experience>(`${this.apiDataSource}/edit/${editExperience.experienceId}`, editExperience, { headers: reqHeaders });
+    return this.http.put<Experience>(`${this.apiDataSource}/edit/${editExperience.experienceId}`, editExperience, { headers: reqHeaders });
   }
 
   // DELETE / delete a saved experience -- auth

@@ -23,14 +23,24 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-card *ngFor="let exp of this.myExperiencesArray">
+          <ion-card *ngFor="let exp of this.myExperiencesArray" [routerLink]="['/experience-details', exp.experienceId]">
             <h2>{{exp.experienceTitle}}</h2>
-            <p>{{exp.experienceNotes}}</p>
-            <p>{{exp.experienceUserLocation}}</p>
-            <p>Created On: {{exp.createdOn}}</p>
-            <p *ngIf="exp.firstPlaceName">Place 1: {{exp.firstPlaceName}}</p>
-            <p *ngIf="exp.secondPlaceName">Place 2: {{exp.secondPlaceName}}</p>
-            <p *ngIf="exp.thirdPlaceName">Place 3: {{exp.thirdPlaceName}}</p>
+            <p>Location: {{exp.experienceUserLocation}}</p>
+            <!-- <p>Created On: {{exp.createdOn}}</p> -->
+            <!-- <p>{{exp.experienceNotes}}</p> -->
+            <ion-row>
+              <ion-col sizeXs="10">
+                <p *ngIf="exp.firstPlaceName">Place 1: {{exp.firstPlaceName}}</p>
+                <p *ngIf="exp.secondPlaceName">Place 2: {{exp.secondPlaceName}}</p>
+                <p *ngIf="exp.thirdPlaceName">Place 3: {{exp.thirdPlaceName}}</p>
+              </ion-col>
+              <ion-col sizeXs="2" class="ion-align-self-end">
+                <ion-fab-button *ngIf="exp.completed == true" size="small" class="ion-float-right">
+                  <ion-icon name="checkmark"></ion-icon>
+                </ion-fab-button>
+              </ion-col>
+            </ion-row>
+
           </ion-card>
         </ion-list>
       </ion-col>
