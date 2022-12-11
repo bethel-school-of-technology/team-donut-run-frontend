@@ -24,7 +24,7 @@
               </ion-textarea>
             </ion-item>
 
-            <form (ngSubmit)="setLocationInput()">
+            <form *ngIf="!this.locationSet" (ngSubmit)="setLocationInput()" (ngSubmit)="toggleFirstPlace($event)">
               <ion-list>
                 <ion-item>
                   <ion-label>City</ion-label>
@@ -40,11 +40,16 @@
                   </ion-select>
                 </ion-item>
               </ion-list>
-              <ion-button *ngIf="this.searchCity && this.searchState && !this.firstPlaceSet" class="btn ion-margin-top" color="primary"
+              <ion-button *ngIf="this.searchCity && this.searchState && !this.locationSet" class="btn ion-margin-top" color="primary"
                 type="submit">
                 Set Location
               </ion-button>
             </form>
+
+            <p *ngIf="this.searchCity && this.searchState && this.locationSet" class="ion-text-center">Location set as {{this.searchCity}}, {{this.searchState}}
+              <br>
+              <ion-button (click)="clearSelectedLocation()">Click to reset location</ion-button>
+            </p>
 
             <!-- START FIRST PLACE SELECTION -->
             <ion-accordion-group *ngIf="this.newExperience.experienceUserLocation" (ionChange)="toggleFirstPlace($event)">
@@ -104,7 +109,7 @@
             </ion-row>
 
             <!-- START SECOND PLACE SELECTION -->
-            <ion-button *ngIf="this.firstPlaceSet && !this.openSecond && !this.secondPlaceSet" class="btn ion-margin-top" color="primary" (click)="toggleFirstPlace($event)">
+            <ion-button *ngIf="this.firstPlaceSet && !this.openSecond && !this.secondPlaceSet" class="btn ion-margin-top" color="primary" (click)="this.openFirst = false && this.openSecond" (click)="toggleSecondPlace($event)">
               Add Second Place
             </ion-button>
             <ion-accordion-group *ngIf="this.firstPlaceSet && !this.openFirst" (ionChange)="toggleSecondPlace($event)">
@@ -164,7 +169,7 @@
             </ion-row>
 
             <!-- START THIRD PLACE SELECTION -->
-            <ion-button *ngIf="this.secondPlaceSet && !this.openThird && !this.thirdPlaceId" class="btn ion-margin-top" color="primary" (click)="toggleSecondPlace($event)">
+            <ion-button *ngIf="this.secondPlaceSet && !this.openThird && !this.thirdPlaceId" class="btn ion-margin-top" color="primary" (click)="this.openSecond = false" (click)="toggleThirdPlace($event)">
               Add Third Place
             </ion-button>
             <ion-accordion-group *ngIf="this.firstPlaceSet && !this.openFirst && this.secondPlaceSet && !this.openSecond" (ionChange)="toggleThirdPlace($event)">
@@ -232,6 +237,7 @@
             <p *ngIf="this.secondPlaceName">Place #2: {{this.secondPlaceName}}</p>
             <p *ngIf="this.thirdPlaceName">Place #3: {{this.thirdPlaceName}}</p>
           </ion-list>
+          
           <ion-button *ngIf="this.firstPlaceId" class="btn" color="light" type="submit">Create New Experience</ion-button>
         </form>
       </ion-col>

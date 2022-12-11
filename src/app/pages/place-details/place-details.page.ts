@@ -19,6 +19,7 @@ export class PlaceDetailsPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
   useAPI: boolean = false;
+  useAPIPhotos: boolean = false;
 
   // Place details variables
   placeDetails: PlaceResult = new PlaceResult();
@@ -74,6 +75,10 @@ export class PlaceDetailsPage implements OnInit {
         console.log('Current User Error: ', error);
       }
     );
+
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
 
     this.apiFindAllPlacesByUserId();
   }
@@ -201,14 +206,15 @@ export class PlaceDetailsPage implements OnInit {
             this.photoLimit = maxPhotoLimit;
           }
 
-          // COMMENTING OUT TO LIMIT REQUESTS
-          // for (let i = 0; i < this.photoLimit; i++) {
-          //   this.newPhoto = this.photoList[i].getUrl({
-          //     maxWidth: 500,
-          //     maxHeight: 500,
-          //   });
-          //   this.photoLinkArray.push(this.newPhoto);
-          // }
+          if (this.useAPIPhotos == true) {
+            for (let i = 0; i < this.photoLimit; i++) {
+                this.newPhoto = this.photoList[i].getUrl({
+                  maxWidth: 500,
+                  maxHeight: 500,
+                });
+                this.photoLinkArray.push(this.newPhoto);
+              }
+          }
 
           this.ChosenPhoto = this.photoLinkArray[0];
 
