@@ -2,30 +2,43 @@ body, html {
     height: 100%;
 }
 
-
+//On bigger screens
 .hero-image {
-
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://ionicframework.com/docs/img/demos/card-media.png");
-
-
-  height: 50%;
-
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: sticky;
+  position: relative;
+  width: 100%;
 }
 
-.hero-text {
-  text-align: center;
+.hero-image img {
+    width: 100%;
+    height: auto;
+  }
+
+.hero-image .btn {
   position: absolute;
+    height: 20%;
+    max-height: 60px;
+    font-size: large;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  -ms-transform: translate(-50%, -50%);
+  border: none;
+  cursor: pointer;
 }
 
-.Filler-Text{
-padding: 50px;
+//On smaller screens
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.button-container .btn {
+  width: 100%;
+  max-width: 250px;
+}
+
+.btn {
+  min-height: 55px;
 }

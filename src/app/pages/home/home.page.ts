@@ -15,7 +15,10 @@ export class HomePage implements OnInit {
   currentLatitude: number = null;
   currentLongitude: number = null;
 
-  constructor(private geoService: GeolocationService, public navCtrl: NavController) {}
+  constructor(
+    private geoService: GeolocationService,
+    public navCtrl: NavController
+  ) {}
 
   ngOnInit() {
     this.getGPS();
@@ -26,11 +29,11 @@ export class HomePage implements OnInit {
       this.position = result;
       this.currentLatitude = this.position.coords.latitude;
       this.currentLongitude = this.position.coords.longitude;
-      console.log("Current Latitude: " + this.currentLatitude);
+      console.log('Current Latitude: ' + this.currentLatitude);
       console.log('Current Longitude: ' + this.currentLongitude);
     });
   }
-   SearchPage() {
+  SearchPage() {
     this.navCtrl.navigateForward('search');
   }
 }

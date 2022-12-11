@@ -1,21 +1,63 @@
 <ion-content>
-  <div class="hero-image">
-    <div class="hero-text">
-      <p>What are you waiting for?</p>
-      <ion-button (click)="SearchPage()"> Start your journey </ion-button>
-    </div>
-  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-hide-lg-down">
+      <ion-col size="12" class="ion-no-padding">
+        <div class="hero-image">
+          <img src="assets/photos/homebannerlarge.png" alt="" />
+          <ion-button
+            class="btn ion-text-uppercase"
+            color="primary"
+            (click)="SearchPage()"
+          >
+            Start your journey
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-down ion-hide-lg-up">
+      <ion-col size="12" class="ion-no-padding">
+        <div class="hero-image">
+          <img src="assets/photos/homebannermed.png" alt="" />
+          <ion-button
+            class="btn ion-text-uppercase"
+            color="primary"
+            (click)="SearchPage()"
+          >
+            Start your journey
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-up">
+      <ion-col size="12" class="ion-no-padding">
+        <div>
+          <img src="assets/photos/homebannersmall.png" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-up">
+      <ion-col size="12" class="button-container">
+        <ion-button class="btn ion-text-uppercase" (click)="SearchPage()">
+          Start your journey
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-  <p class="Filler-Text">
-    An taima palis tehto hap. Úil telco nalanta or, oia oaris cotumo elendë ëa,
-    lá vírë tulca timpinen tul. Ar nur onótima taniquelassë. Yá axo ataquë
-    mirilya tanwëataquë, ep nún tasar racinë, varta tasar é mat. Up lívë inqua
-    nal, tyávë amanyar goneheca lis lá. Rambë artaquetta né erë. Nu cemna foina
-    caw, lápa nainië mittanya iel cé. As pio yára liquis. Má yulmë rambë ríc.
-    Sín tó talta hwarma, laira nostalë mel us. Viltë tasar lindë her sú, ainu
-    tussa amilessë aha ep, sir et yúyo hecil nahamna. Nú centa pereldar lav. Et
-    halda hesta nót. Cemna cotumo tol er, engë alatúvëaúra tuo ar, men rauko
-    melissë mí.
-  </p>
+    <ion-row>
+      <ion-col>
+        <p class="ion-padding ion-text-center ion-no-margin">
+          An taima palis tehto hap. Úil telco nalanta or, oia oaris cotumo
+          elendë ëa, lá vírë tulca timpinen tul. Ar nur onótima taniquelassë. Yá
+          axo ataquë mirilya tanwëataquë, ep nún tasar racinë, varta tasar é
+          mat. Up lívë inqua nal, tyávë amanyar goneheca lis lá. Rambë
+          artaquetta né erë. Nu cemna foina caw, lápa nainië mittanya iel cé. As
+          pio yára liquis. Má yulmë rambë ríc. Sín tó talta hwarma, laira
+          nostalë mel us. Viltë tasar lindë her sú, ainu tussa amilessë aha ep,
+          sir et yúyo hecil nahamna. Nú centa pereldar lav. Et halda hesta nót.
+          Cemna cotumo tol er, engë alatúvëaúra tuo ar, men rauko melissë mí.
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <app-footer></app-footer>
 </ion-content>
