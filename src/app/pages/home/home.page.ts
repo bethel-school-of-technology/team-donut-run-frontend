@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getGPS(); // make this a subject?
+    this.getGPS(); // make this a subject?
 
     this.authService.getCurrentUser().subscribe(
       (response) => {

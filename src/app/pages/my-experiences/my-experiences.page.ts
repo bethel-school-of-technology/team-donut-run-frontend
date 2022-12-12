@@ -14,7 +14,7 @@ import { ExperienceService } from 'src/app/services/experience.service';
 })
 export class MyExperiencesPage implements OnInit {
 
-  useAPI: boolean = false;
+  useAPI: boolean = true;
 
   myExperiencesArray: Experience[] = [];
 

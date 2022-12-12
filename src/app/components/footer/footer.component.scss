@@ -22,3 +22,14 @@
         height:35px
         drop-shadow(16px 16px 10px black)
     }}
+
+.google-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+}
+
+.google-row img {
+    margin-left: 3px;
+}
