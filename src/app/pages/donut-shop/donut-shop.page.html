@@ -9,19 +9,21 @@
 
  
   
-  <ion-card class="Card">
+  <div class="Card">
    
-    <ion-item-divider><h1 class="Title">  {{currentDonutShop.donutShopName}} </h1></ion-item-divider>
-    <img class="Photos" src="{{currentDonutShop.donutShopPhotoURL}}" /><br />
+
+    <img class="Photo" src="{{currentDonutShop.donutShopPhotoURL}}" /><br />
+    <h1 class="Title2">  {{currentDonutShop.donutShopName}} </h1>
     <p class="Text">
       {{currentDonutShop.donutShopAddress}}<br />
       {{currentDonutShop.donutShopCityState}}
     </p>
-  <div class="Text2">
-      <a  href="{{currentDonutShop.donutShopWebsite}}">Visit their website</a>
+  <div >
+      <a  class="MinorTxt" href="{{currentDonutShop.donutShopWebsite}}">Visit their website</a>
     </div>
-  </ion-card>
-  <app-footer></app-footer>
+  </div>
+
 </div>
 </ion-content>
 
+<app-footer></app-footer>
