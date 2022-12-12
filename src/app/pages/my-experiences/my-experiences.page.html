@@ -1,52 +1,52 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>my-experiences</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content fullscreen="true">
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/']" color="light">Back</ion-button>
-      </ion-col>
-    </ion-row>
 
     <ion-row>
-      <ion-col>
+      <ion-col class="ion-margin">
         <h1>My Experiences</h1>
-        <ion-button (click)="CreateExperiencePage()">Create New Experience</ion-button>
-        
+        <p>Here you'll find different experiences that you've curated over time. Select one to view all the details or create a new one!</p>
+        <ion-button class="ion-text-center" (click)="CreateExperiencePage()">Create New Experience</ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-card *ngFor="let exp of this.myExperiencesArray" [routerLink]="['/experience-details', exp.experienceId]">
-            <h2>{{exp.experienceTitle}}</h2>
-            <p>Location: {{exp.experienceUserLocation}}</p>
-            <!-- <p>Created On: {{exp.createdOn}}</p> -->
-            <!-- <p>{{exp.experienceNotes}}</p> -->
-            <ion-row>
-              <ion-col sizeXs="10">
-                <p *ngIf="exp.firstPlaceName">Place 1: {{exp.firstPlaceName}}</p>
-                <p *ngIf="exp.secondPlaceName">Place 2: {{exp.secondPlaceName}}</p>
-                <p *ngIf="exp.thirdPlaceName">Place 3: {{exp.thirdPlaceName}}</p>
-              </ion-col>
-              <ion-col sizeXs="2" class="ion-align-self-end">
-                <ion-fab-button *ngIf="exp.completed == true" size="small" class="ion-float-right">
-                  <ion-icon name="checkmark"></ion-icon>
-                </ion-fab-button>
-              </ion-col>
-            </ion-row>
+    <ion-row class="resultsRow">
+      <ion-col class="resultsContainer"
+      size-xs="12"
+      sizeSm="12"
+      sizeMd="6"
+      sizeLg="4"
+      *ngFor="let exp of this.myExperiencesArray">
+          <ion-card class="card" [routerLink]="['/experience-details', exp.experienceId]">
+            <ion-card-content class="cardText">              
+              <ion-text color="primary" class="title"><b>{{exp.experienceTitle}}</b></ion-text>
+              <span>
+                <ion-icon class="location" color="tertiary" name="location-outline"></ion-icon>
+                <ion-text class="location" color="tertiary"> {{exp.experienceUserLocation}}</ion-text>
+              </span>
+                <ion-text *ngIf="exp.firstPlaceName"><b>Place 1: </b>{{exp.firstPlaceName}}</ion-text>
+                <ion-text *ngIf="exp.secondPlaceName"><b>Place 2: </b>{{exp.secondPlaceName}}</ion-text>
+                <ion-text *ngIf="exp.thirdPlaceName"><b>Place 3: </b>{{exp.thirdPlaceName}}</ion-text>
 
+                <div class="btn-container">
+                  <ion-fab-button *ngIf="exp.completed == true" size="small" class="ion-float-right" >
+                    <ion-icon name="checkmark"></ion-icon>
+                  </ion-fab-button>
+                </div>
+
+          </ion-card-content>
           </ion-card>
-        </ion-list>
       </ion-col>
     </ion-row>
-
-
-
   </ion-grid>
+  <app-footer></app-footer>
 </ion-content>

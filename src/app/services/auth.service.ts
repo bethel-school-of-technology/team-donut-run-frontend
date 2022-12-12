@@ -45,6 +45,8 @@ export class AuthService {
   // Sign OUT
   signout(): void {
     localStorage.removeItem(this.tokenKey);
+    this.currentUser$.next(null);
+    console.log("User signed out.");
   }
 
   ////////////// USER ENDPOINTS ////////////////
@@ -55,11 +57,6 @@ export class AuthService {
 
   // GET / get CURRENT user
   getCurrentUser(): Observable<User> {
-    // let reqHeaders = {
-    //   Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
-    // };
-
-    // return this.http.get<User>(`${this.userBaseUrl}/current`, { headers: reqHeaders });
 
     if (localStorage.getItem(this.tokenKey) != null) {
       let reqHeaders = {

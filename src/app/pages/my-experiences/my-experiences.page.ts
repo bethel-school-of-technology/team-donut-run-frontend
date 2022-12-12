@@ -31,22 +31,24 @@ export class MyExperiencesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // get current user
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.currentUserId = user.userId;
-      this.authService.currentUser$.next(user);
-      // console.log('Current User: ', this.currentUser);
-    });
+    this.authService.getCurrentUser().subscribe(
+      (response) => {
+        if (response != null) {
+          this.currentUser = response;
+          this.currentUserId = response.userId;
+          console.log('Current User Id: ', this.currentUserId);
 
-    // get current user's experiences
-    this.expService.getAllCurrentUserExperiences().subscribe(exp => {
-      this.expService.myExperienceArray$.next(exp);
-      console.log("Current User Experiences: ", this.myExperiencesArray);
+          this.getCurrentUserExperiences();
 
-        this.getExperiencePlaceNames();
-      
-    })
+        } else {
+          console.log('No active user signed in.');
+          this.navCtrl.navigateForward('sign-in');
+        }
+      },
+      (error) => {
+        console.log('Current User Error: ', error);
+      }
+    );
 
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
@@ -60,6 +62,15 @@ export class MyExperiencesPage implements OnInit {
 
   CreateExperiencePage() {
     this.navCtrl.navigateForward('create-experience');
+  }
+
+  getCurrentUserExperiences() {
+    this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+      this.myExperiencesArray = exp;
+      this.expService.myExperienceArray$.next(exp);
+      console.log("Current User Experiences: ", this.myExperiencesArray);
+        this.getExperiencePlaceNames();
+    });
   }
 
   // There's probably a way to make this more concise, but for time's sake, this works!

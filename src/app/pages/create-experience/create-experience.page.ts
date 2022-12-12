@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Experience } from 'src/app/models/experience';
 import { PlaceResult } from 'src/app/models/place-result';
 import { User } from 'src/app/models/user';
@@ -15,7 +15,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 })
 export class CreateExperiencePage implements OnInit {
 
-  useAPI: boolean = false;
+  useAPI: boolean = true;
   useAPIPhotos: boolean = false;
 
   // User variables
@@ -62,15 +62,27 @@ export class CreateExperiencePage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private geoService: GeolocationService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public navCtrl: NavController
   ) { }
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.currentUserId = user.userId;
-      this.authService.currentUser$.next(user);
-    });
+
+    this.authService.getCurrentUser().subscribe(
+      (response) => {
+        if (response != null) {
+          this.currentUser = response;
+          this.currentUserId = response.userId;
+          console.log('Current User Id: ', this.currentUserId);
+        } else {
+          console.log('No active user signed in.');
+          this.navCtrl.navigateForward('sign-in');
+        }
+      },
+      (error) => {
+        console.log('Current User Error: ', error);
+      }
+    );
 
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
@@ -161,7 +173,9 @@ export class CreateExperiencePage implements OnInit {
       this.expService.createNewExperience(this.newExperience).subscribe(result => {
         console.log("New Experience Result: ", result);
         window.alert("New experience added!");
-        this.router.navigate(['my-experiences']);
+        this.router.navigate(['my-experiences']).then(() => {
+          window.location.reload();
+        });
       });
     } else {
       window.alert('Please sign in to create experience.');
@@ -202,7 +216,7 @@ export class CreateExperiencePage implements OnInit {
       (results: Array<any>) => {
         // searchResults = results;
         results.forEach(p => {
-          if (p.user_ratings_total > 100 && p.rating > 4) {
+          if (p.user_ratings_total > 50 && p.rating > 4) {
             searchResults.push(p);
           }
         });

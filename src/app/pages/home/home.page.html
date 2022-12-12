@@ -4,13 +4,15 @@
       <ion-col size="12" class="ion-no-padding">
         <div class="hero-image">
           <img src="assets/photos/homebannerlarge.png" alt="" />
-          <ion-button
-            class="btn ion-text-uppercase"
-            color="primary"
-            (click)="SearchPage()"
-          >
-            Start your journey
-          </ion-button>
+          <div class="btn-container">
+            <ion-button class="btn btn-margin ion-text-uppercase" color="light" (click)="SearchPage()">
+              Explore New Places
+            </ion-button>
+    
+            <ion-button class="btn ion-text-uppercase" color="light" (click)="CreateExperiencePage()">
+              Build An Experience
+            </ion-button>
+          </div>
         </div>
       </ion-col>
     </ion-row>
@@ -18,14 +20,16 @@
       <ion-col size="12" class="ion-no-padding">
         <div class="hero-image">
           <img src="assets/photos/homebannermed.png" alt="" />
-          <ion-button
-            class="btn ion-text-uppercase"
-            color="primary"
-            (click)="SearchPage()"
-          >
-            Start your journey
+          <div class="btn-container2">
+          <ion-button class="btn ion-text-uppercase" color="light" (click)="SearchPage()">
+            Explore New Places
+          </ion-button>
+          <br>
+          <ion-button class="btn ion-text-uppercase" color="light" (click)="CreateExperiencePage()">
+            Build An Experience
           </ion-button>
         </div>
+      </div>
       </ion-col>
     </ion-row>
     <ion-row class="ion-hide-md-up">
@@ -36,9 +40,14 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-hide-md-up">
-      <ion-col size="12" class="button-container">
+      <ion-col class="button-container">
         <ion-button class="btn ion-text-uppercase" (click)="SearchPage()">
-          Start your journey
+          Explore New Places
+        </ion-button>
+      </ion-col>
+      <ion-col class="button-container">
+        <ion-button class="btn ion-text-uppercase" (click)="CreateExperiencePage()">
+          Build An Experience
         </ion-button>
       </ion-col>
     </ion-row>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
 import { Router } from '@angular/router';
 
@@ -19,7 +19,8 @@ export class SignInPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
-    public menuService: MenuService
+    public menuService: MenuService,
+    public navCtrl: NavController,
   ) {}
 
   ngOnInit() {}
@@ -27,15 +28,18 @@ export class SignInPage implements OnInit {
   signin() {
     this.authService.signIn(this.username, this.password).subscribe(
       (response: any) => {
-        console.log("myUserToken:", response);
+        // console.log("myUserToken:", response);
         // this.presentToast();
         //use this public boolean observable to add current user to menu template.
         this.menuService.active$ = this.menuService.GetUserActiveState("active",this.username);
-        this.router.navigateByUrl('/home').then(() => {
+        this.navCtrl.navigateForward('/home')
+        .then(() => {
           this.loginSuccessfulAlert();
-          // .then(() => {
-          //   window.location.reload();
-          // })
+        });
+
+        this.authService.getCurrentUser().subscribe(user => {
+          this.authService.currentUser$.next(user);
+          console.log("Subject User: ", user);
         });
       },
       (error) => {

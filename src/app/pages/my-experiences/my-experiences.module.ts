@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MyExperiencesPageRoutingModule } from './my-experiences-routing.module';
 
 import { MyExperiencesPage } from './my-experiences.page';
+import { FooterModule } from "../../components/footer/footer.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MyExperiencesPageRoutingModule
-  ],
-  declarations: [MyExperiencesPage]
+    declarations: [MyExperiencesPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        MyExperiencesPageRoutingModule,
+        FooterModule
+    ]
 })
 export class MyExperiencesPageModule {}

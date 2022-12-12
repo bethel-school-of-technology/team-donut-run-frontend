@@ -18,7 +18,7 @@ declare var google;
 export class PlaceDetailsPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = false;
+  useAPI: boolean = true;
   useAPIPhotos: boolean = false;
 
   // Place details variables
@@ -67,6 +67,7 @@ export class PlaceDetailsPage implements OnInit {
           console.log('Current User Id: ', this.currentUserId);
 
           this.checkIfSaved(this.currentGooglePlaceId);
+          this.apiFindAllPlacesByUserId();
         } else {
           console.log('No active user signed in.');
         }
@@ -80,7 +81,7 @@ export class PlaceDetailsPage implements OnInit {
       this.currentUser = user;
     });
 
-    this.apiFindAllPlacesByUserId();
+    
   }
 
   // Options for the category slider
@@ -238,15 +239,11 @@ export class PlaceDetailsPage implements OnInit {
         (result) => {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
-
-
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
-
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
-
           }
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
@@ -272,7 +269,6 @@ export class PlaceDetailsPage implements OnInit {
   // If user HAS already saved a place
   // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
   removePlacefromMyPlaces() {
-    
     this.placesService
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
