@@ -56,6 +56,7 @@ export class MyExperiencesPage implements OnInit {
 
     this.expService.myExperienceArray$.subscribe(array => {
       this.myExperiencesArray = array;
+      this.getExperiencePlaceNames();
     });
 
   }
@@ -69,7 +70,7 @@ export class MyExperiencesPage implements OnInit {
       this.myExperiencesArray = exp;
       this.expService.myExperienceArray$.next(exp);
       console.log("Current User Experiences: ", this.myExperiencesArray);
-        this.getExperiencePlaceNames();
+        // this.getExperiencePlaceNames();
     });
   }
 
