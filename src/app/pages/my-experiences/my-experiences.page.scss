@@ -1,0 +1,55 @@
+.resultsContainer {
+    //border-color: rgb(142, 242, 103);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+    min-height: 150px;
+}
+
+.cardText {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    text-align: left;
+    //background-color: pink;
+}
+
+// ion-col {
+//     background-color: #ad230e96;
+//     border: solid 1px rgb(0, 149, 172);
+// }
+
+// ion-row {
+//     background-color: aquamarine;
+//     border: solid 2px yellowgreen;
+// }
+
+.btn-container {
+    position: absolute;
+    //   height: 20%;
+    //   max-height: 60px;
+    //   font-size: large;
+    top: 1%;
+    left: 82%;
+    // transform: translate(50%, 50%);
+    // -ms-transform: translate(-50%, -50%);
+    // border: solid purple 2px;
+    // cursor: pointer;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .location {
+    font-size: 16px;
+  }

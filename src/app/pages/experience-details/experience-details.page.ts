@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Experience } from 'src/app/models/experience';
 import { PlaceResult } from 'src/app/models/place-result';
 import { User } from 'src/app/models/user';
@@ -37,7 +38,8 @@ export class ExperienceDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private expService: ExperienceService,
     private router: Router,
-    private resultsService: ResultsService
+    private resultsService: ResultsService,
+    public navCtrl: NavController,
   ) { }
 
   ngOnInit() {
@@ -49,8 +51,13 @@ export class ExperienceDetailsPage implements OnInit {
           this.currentUser = response;
           this.currentUserId = response.userId;
           // console.log('Current User Id: ', this.currentUserId);
+          if (this.currentUserId == this.experienceDetails.userId) {
+            this.showOptions = true;
+            console.log("Experience belongs to user");
+          }
         } else {
           console.log('No active user signed in.');
+          this.navCtrl.navigateForward('sign-in');
         }
       },
       (error) => {
@@ -62,10 +69,7 @@ export class ExperienceDetailsPage implements OnInit {
       this.currentUser = user;
     });
 
-    if (this.currentUserId == this.experienceDetails.userId) {
-      this.showOptions = true;
-      console.log("Experience belongs to user");
-    }
+    
   }
 
   getCurrentExperience() {
@@ -186,7 +190,9 @@ export class ExperienceDetailsPage implements OnInit {
       this.expService.deleteExperienceById(this.experienceDetails.experienceId).subscribe(() => {
         // Add window alert that experience has been deleted?
         console.log("Experience deleted.");
-        this.router.navigate(['my-experiences']);
+        this.router.navigate(['my-experiences']).then(() => {
+          window.location.reload();
+        });
       })
     } else {
       console.log("Not current user's experience. Unable to delete.");

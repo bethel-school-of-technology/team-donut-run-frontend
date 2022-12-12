@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Experience } from 'src/app/models/experience';
 import { PlaceResult } from 'src/app/models/place-result';
 import { User } from 'src/app/models/user';
@@ -14,6 +14,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
   styleUrls: ['./create-experience.page.scss'],
 })
 export class CreateExperiencePage implements OnInit {
+
   useAPI: boolean = false;
   useAPIPhotos: boolean = false;
 
@@ -60,15 +61,28 @@ export class CreateExperiencePage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private geoService: GeolocationService,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    public navCtrl: NavController
+  ) { }
+
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.currentUserId = user.userId;
-      this.authService.currentUser$.next(user);
-    });
+
+    this.authService.getCurrentUser().subscribe(
+      (response) => {
+        if (response != null) {
+          this.currentUser = response;
+          this.currentUserId = response.userId;
+          console.log('Current User Id: ', this.currentUserId);
+        } else {
+          console.log('No active user signed in.');
+          this.navCtrl.navigateForward('sign-in');
+        }
+      },
+      (error) => {
+        console.log('Current User Error: ', error);
+      }
+    );
 
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
@@ -154,12 +168,15 @@ export class CreateExperiencePage implements OnInit {
       // Do we need to do this to set the other form items or does that happen automatically with data binding on submit?
       // console.log("New Experience: ", this.newExperience);
       // Call create experience method from service
+
       this.expService
         .createNewExperience(this.newExperience)
         .subscribe((result) => {
           console.log('New Experience Result: ', result);
           this.newExperienceAddedAlert();
-          this.router.navigate(['my-experiences']);
+          this.router.navigate(['my-experiences']).then(() => {
+          window.location.reload();
+        });
         });
     } else {
       this.signInToCreateExperienceAlert();
@@ -199,8 +216,9 @@ export class CreateExperiencePage implements OnInit {
     this.nearbySearchByGeolocation(latLng, searchString).then(
       (results: Array<any>) => {
         // searchResults = results;
-        results.forEach((p) => {
-          if (p.user_ratings_total > 100 && p.rating > 4) {
+        results.forEach(p => {
+          if (p.user_ratings_total > 50 && p.rating > 4) {
+
             searchResults.push(p);
           }
         });
