@@ -84,23 +84,17 @@
     padding: 10px;
 }
 .selectedCatRow {
-    background-color: var(--ion-color-primary);
-    color: var(--ion-color-light);
+    background-color: var(--ion-color-light); 
 }
 .resultsRow {
-    background-color: var(--ion-color-primary); 
-    color: var(--ion-color-light);
+    background-color: var(--ion-color-light); 
 }
-.advancedSearchContainer {
 
-}
 .advancedSearchForm {
     max-width: 700px;
-    background-color: var(--ion-color-light);
+    border: solid 2px var(--ion-color-warning); 
 }
-.searchContainer {
-    //background-color: var(--ion-color-secondary); 
-}
+
 .btn {
     min-height: 50px;
 }
