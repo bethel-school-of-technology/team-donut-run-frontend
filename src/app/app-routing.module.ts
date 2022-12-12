@@ -66,6 +66,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/create-experience/create-experience.module').then( m => m.CreateExperiencePageModule)
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
     path: 'error',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
@@ -73,11 +81,12 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   }
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

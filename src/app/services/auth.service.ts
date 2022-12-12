@@ -18,7 +18,7 @@ export class AuthService {
 
   public currentUser$ = new Subject<User>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ////////////// AUTH ENDPOINTS ////////////////
 
@@ -83,6 +83,18 @@ export class AuthService {
     return this.http.put<User>(`${this.userBaseUrl}/current/edit`, editedUser, {
       headers: reqHeaders,
     });
+  }
+
+  forgotPassword(email: string) {
+    return this.http.post(`${this.userBaseUrl}/forgot-password`, { email });
+  }
+
+  validateResetToken(token: string) {
+    return this.http.post(`${this.userBaseUrl}/validate-reset-token`, { token });
+}
+
+  resetPassword(token: string, password: string, confirmPassword: string) {
+    return this.http.post(`${this.userBaseUrl}/reset-password`, { token, password, confirmPassword });
   }
 
   // DELETE / delete user by user id
