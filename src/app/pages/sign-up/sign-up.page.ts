@@ -25,8 +25,8 @@ export class SignUpPage implements OnInit {
   ngOnInit(): void {
     this.ionicForm = this.formBuilder.group({
       //not required fields to sign up
-      // firstName: [],
-      // lastName: [],
+      firstName: [],
+      lastName: [],
       email: [
         '',
         [
@@ -35,9 +35,9 @@ export class SignUpPage implements OnInit {
         ],
       ],
       //required fields to sign up
-      // username: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-      // location: [],
+      username: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      location: [],
     });
   }
 
