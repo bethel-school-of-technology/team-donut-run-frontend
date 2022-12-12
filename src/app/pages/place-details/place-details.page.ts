@@ -45,7 +45,7 @@ export class PlaceDetailsPage implements OnInit {
 
   // Placeholder text while editorial_summary is not working
   placeOverview: string =
-    'Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO mlkshk godard pour-over blog tumblr humblebrag. Blue bottle put a bird on it twee prism biodiesel brooklyn. Blue bottle ennui tbh succulents.';
+    "This place has received great reviews from both locals and travelers alike. We think you'll love it! If not, let us know how we can finetune our search. We've done the work to filter through place recommendations to bring you the highest rated - and hopefully most fun - places in the area of your search. (This is custom placeholder text because the field that would provide this data isn't available from Google yet.)";
 
   constructor(
     private resultsService: ResultsService,
