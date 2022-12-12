@@ -15,8 +15,8 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 })
 export class CreateExperiencePage implements OnInit {
 
-  useAPI: boolean = false;
-  useAPIPhotos: boolean = false;
+  useAPI: boolean = true;
+  useAPIPhotos: boolean = true;
 
   // User variables
   currentUser: User = new User();
