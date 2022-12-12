@@ -45,7 +45,6 @@ export class ResetPasswordPage implements OnInit {
       console.log('Error: ', error)
       window.alert("Reset Error: Password must be at least 6 characters and both fields must match");
       if (error.status === 401 || error.status === 403) {
-        // this.router.navigateByUrl('/sign-in');
       }
     });
   }
