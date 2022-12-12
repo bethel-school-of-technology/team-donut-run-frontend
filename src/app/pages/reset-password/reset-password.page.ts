@@ -27,7 +27,6 @@ export class ResetPasswordPage implements OnInit {
     this.authService.validateResetToken(this.token).subscribe( response => {
       console.log(response)
       window.alert("Your token is valid, proceed to change your password.");
-      // this.router.navigateByUrl('/my-account');
     }, error => {
       console.log('Error: ', error)
       window.alert("Your token is NOT valid");
@@ -44,7 +43,7 @@ export class ResetPasswordPage implements OnInit {
       this.router.navigateByUrl('/sign-in');
     }, error => {
       console.log('Error: ', error)
-      window.alert("Password reset NOT successful. Try again.");
+      window.alert("Reset Error: Password must be at least 6 characters and both fields must match");
       if (error.status === 401 || error.status === 403) {
         // this.router.navigateByUrl('/sign-in');
       }

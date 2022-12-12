@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first, finalize } from 'rxjs/operators';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -28,6 +26,7 @@ export class ForgotPasswordPage implements OnInit {
         window.alert("Check your email for a password reset link");
         // this.router.navigateByUrl('/my-account');
       }, error => {
+        window.alert("Enter a valid Email address.");
         console.log('Error: ', error)
         if (error.status === 401 || error.status === 403) {
           this.router.navigateByUrl('/sign-in');
