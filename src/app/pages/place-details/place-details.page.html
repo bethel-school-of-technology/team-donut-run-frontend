@@ -4,15 +4,16 @@
       <ion-row>
         <ion-col>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-back-button defaultHref="home"></ion-back-button>
+            <ion-buttons  slot="start">
+              <ion-back-button  defaultHref="home"></ion-back-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size-xs="12" size-sm="12" size-md="" size-lg="5" size-xl="5">
+
+        <ion-col size-xs="12" size-sm="12" size-md="" size-lg="6" size-xl="6">
           <div class="ion-hide-md-down">
             <img class="ion-margin Round box-shadow" alt="{{ChosenPhoto}}" src="{{ChosenPhoto}}" />
           </div>
@@ -27,8 +28,7 @@
           </div>
         </ion-col>
 
-        <ion-col class="ion-hide-md-down ion-margin-horizontal" size-xs="12" size-sm="12" size-md="auto" size-lg="auto"
-          size-xl="auto">
+        <ion-col class="ion-hide-md-down ion-margin-horizontal" size-xs="12" size-sm="12" size-md="auto" size-lg="auto" size-xl="auto">
           <ion-row *ngFor="let photo of photoLinkArray">
             <div class="ion-margin-top" *ngIf="photosExist">
               <button class="clear" (click)="PhotoClick(photo) ">
@@ -39,7 +39,7 @@
         </ion-col>
 
         <!-- Mobile buttons -->
-        <ion-col class="ion-hide-md-up ion-margin-right" size-xs="12" size-sm="12" size-md="12" size-lg="" size-xl="">
+        <ion-col class="ion-hide-md-up ion-margin-right" size-xs="12" size-sm="12" size-md="" size-lg="" size-xl="">
           <div class="Centered ">
 
             <ion-button *ngIf="!this.userSavedPlace" (click)="savePlaceToMyPlaces()"
@@ -70,23 +70,23 @@
           </div>
         </ion-col>
 
-        <ion-col class="ion-margin ion-margin-top" size-xs="11" size-sm="11" size-md="11" size-lg="" size-xl="5">
+        <ion-col class="ion-margin ion-margin-top" size-xs="11" size-sm="11" size-md="11" size-lg="" size-xl="">
           <ion-row>
             <div class="ion-margin-end ion-no-margin ion-no-padding">
               <ion-row>
-                <ion-col class="ion-no-margin ion-no-padding" size-md="" size-sm="auto" size="auto">
+                <ion-col class="ion-no-margin ion-no-padding" size-sm="auto" size-md="" size-lg="" size-xl="">
 
                   <h3 class="Title ion-no-margin ion-no-padding">
                     {{this.placeDetails.name}}
                   </h3>
-                  <p class="Text2 ion-no-margin ion-no-padding"><a
+                  <p class="Text2 ion-no-margin ion-no-padding"><a class="Text2"
                       href="https://www.google.com/maps/search/?api=1&query={{this.placeDetails.formatted_address}}&query_place_id={{this.placeDetails.place_id}}"
                       target="_blank">
                       {{this.placeDetails.formatted_address}}</a>
                   </p>
                 </ion-col>
 
-                <ion-col class=" ion-hide-md-down" size-xs="12" size-sm="12" size-md="" size-lg="" size-xl="">
+                <ion-col class=" ion-hide-md-down" size-xs="" size-sm="" size-md="" size-lg="" size-xl="">
                   <!-- Desktop buttons  -->
                   <div class="ion-float-md-end ">
 
@@ -127,12 +127,13 @@
 
 
               <p class="Text">{{placeOverview}}</p>
-              <ion-card-subtitle><a href="{{this.placeDetails.website}}"
+             <a href="{{this.placeDetails.website}}"
                   class="ion-no-margin ion-no-padding">{{this.placeDetails.website}}</a>
-              </ion-card-subtitle>
+         
             </div>
           </ion-row>
         </ion-col>
+
       </ion-row>
     </ion-grid>
   </div>

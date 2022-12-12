@@ -25,7 +25,7 @@
 .Text2 {
 
    color: #FF9800;
-   font-size: large;
+   font-size: 110%;
 
 }
 
@@ -38,7 +38,7 @@
 .Title {
    font-weight: bolder;
    color:#D73210;
-   font-size: 24px;
+   font-size: 250%;
 
 }
 
@@ -46,8 +46,8 @@
 .Round {
    border-radius: 15px;
    object-fit: cover;
-   height: 500px;
-   width: 100%;
+   height: 800px;
+   width: 300%;
    margin-top: 12 px;
    margin-bottom:4px
 }
@@ -196,3 +196,9 @@ ion-toolbar {
    margin-left: 5px;
    color: white;
 }
+
+.Cushion{
+   margin: 2%;
+   margin-left: 8;
+}
+
