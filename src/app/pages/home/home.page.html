@@ -1,21 +1,69 @@
 <ion-content>
-  <div class="hero-image">
-    <div class="hero-text">
-      <p>What are you waiting for?</p>
-      <ion-button (click)="SearchPage()"> Start your journey </ion-button>
-    </div>
-  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-hide-lg-down">
+      <ion-col size="12" class="ion-no-padding">
+        <div class="hero-image">
+          <img src="assets/photos/homebannerlarge.png" alt="" />
+          <div class="btn-container">
+            <ion-button class="btn btn-margin ion-text-uppercase" color="light" (click)="SearchPage()">
+              Explore New Places
+            </ion-button>
+    
+            <ion-button class="btn ion-text-uppercase" color="light" (click)="CreateExperiencePage()">
+              Build An Experience
+            </ion-button>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-down ion-hide-lg-up">
+      <ion-col size="12" class="ion-no-padding">
+        <div class="hero-image">
+          <img src="assets/photos/homebannermed.png" alt="" />
+          <div class="btn-container2">
+          <ion-button class="btn ion-text-uppercase" color="light" (click)="SearchPage()">
+            Explore New Places
+          </ion-button>
+          <br>
+          <ion-button class="btn ion-text-uppercase" color="light" (click)="CreateExperiencePage()">
+            Build An Experience
+          </ion-button>
+        </div>
+      </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-up">
+      <ion-col size="12" class="ion-no-padding">
+        <div>
+          <img src="assets/photos/homebannersmall.png" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-hide-md-up">
+      <ion-col class="button-container">
+        <ion-button class="btn ion-text-uppercase" (click)="SearchPage()">
+          Explore New Places
+        </ion-button>
+      </ion-col>
+      <ion-col class="button-container">
+        <ion-button class="btn ion-text-uppercase" (click)="CreateExperiencePage()">
+          Build An Experience
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-  <p class="Filler-Text">
-    An taima palis tehto hap. Úil telco nalanta or, oia oaris cotumo elendë ëa,
-    lá vírë tulca timpinen tul. Ar nur onótima taniquelassë. Yá axo ataquë
-    mirilya tanwëataquë, ep nún tasar racinë, varta tasar é mat. Up lívë inqua
-    nal, tyávë amanyar goneheca lis lá. Rambë artaquetta né erë. Nu cemna foina
-    caw, lápa nainië mittanya iel cé. As pio yára liquis. Má yulmë rambë ríc.
-    Sín tó talta hwarma, laira nostalë mel us. Viltë tasar lindë her sú, ainu
-    tussa amilessë aha ep, sir et yúyo hecil nahamna. Nú centa pereldar lav. Et
-    halda hesta nót. Cemna cotumo tol er, engë alatúvëaúra tuo ar, men rauko
-    melissë mí.
-  </p>
+    <ion-row>
+      <ion-col>
+        <div class="about">
+          <h3>
+            Welcome to RexFinder!
+          </h3> 
+          <h5>This is your one-stop shop for finding new places to explore and curating unique multi-place experiences.</h5>
+           <p>Why the name? So glad you asked. We're going to help you find dinosaurs! Totally kidding. Rex is short for "recs" which is short for "recommendations". It's our way of serving up a short and helpful list recommendations to eliminate that dreaded analysis paralysis and get you on your way to a new place fast. No more guessing; just pick, save, and go! 
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <app-footer></app-footer>
 </ion-content>

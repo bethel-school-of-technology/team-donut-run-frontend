@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { Experience } from 'src/app/models/experience';
 import { PlaceResult } from 'src/app/models/place-result';
 import { User } from 'src/app/models/user';
@@ -23,7 +24,6 @@ export class MyExperiencesPage implements OnInit {
 
   placeName: string;
 
-
   constructor(
     private expService: ExperienceService, 
     public navCtrl: NavController,
@@ -31,19 +31,24 @@ export class MyExperiencesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // get current user
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.currentUserId = user.userId;
-      this.authService.currentUser$.next(user);
-      // console.log('Current User: ', this.currentUser);
-    });
+    this.authService.getCurrentUser().subscribe(
+      (response) => {
+        if (response != null) {
+          this.currentUser = response;
+          this.currentUserId = response.userId;
+          console.log('Current User Id: ', this.currentUserId);
 
-    // get current user's experiences
-    this.expService.getAllCurrentUserExperiences().subscribe(exp => {
-      this.expService.myExperienceArray$.next(exp);
-      console.log("Current User Experiences: ", this.myExperiencesArray);
-    })
+          this.getCurrentUserExperiences();
+
+        } else {
+          console.log('No active user signed in.');
+          this.navCtrl.navigateForward('sign-in');
+        }
+      },
+      (error) => {
+        console.log('Current User Error: ', error);
+      }
+    );
 
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
@@ -51,24 +56,57 @@ export class MyExperiencesPage implements OnInit {
 
     this.expService.myExperienceArray$.subscribe(array => {
       this.myExperiencesArray = array;
-    })
+    });
+
   }
 
   CreateExperiencePage() {
     this.navCtrl.navigateForward('create-experience');
   }
 
-  getPlaceDetails() {
-    for (let i = 0; i <= this.myExperiencesArray.length-1; i++) {
-      this.myExperiencesArray[i].firstPlaceName;
-    }
+  getCurrentUserExperiences() {
+    this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+      this.myExperiencesArray = exp;
+      this.expService.myExperienceArray$.next(exp);
+      console.log("Current User Experiences: ", this.myExperiencesArray);
+        this.getExperiencePlaceNames();
+    });
   }
 
-  // GET PLACE NAME
-  getPlaceName(googlePlaceId: string) {
-    this.getAPIPlaceDetails(googlePlaceId).then((results: PlaceResult) => {
-      return results.name; 
-    })
+  // There's probably a way to make this more concise, but for time's sake, this works!
+  getExperiencePlaceNames() {
+    for (let i = 0; i <= this.myExperiencesArray.length-1; i++) {
+      let id1 = this.myExperiencesArray[i].firstGooglePlaceId;
+      let id2 = this.myExperiencesArray[i].secondGooglePlaceId;
+      let id3 = this.myExperiencesArray[i].thirdGooglePlaceId;
+      
+      if (this.useAPI == true) {
+        this.getAPIPlaceDetails(id1).then((results: PlaceResult) => {
+          this.myExperiencesArray[i].firstPlaceName = results.name;
+        });
+
+        if (id2) {
+        this.getAPIPlaceDetails(id2).then((results: PlaceResult) => {
+          this.myExperiencesArray[i].secondPlaceName = results.name;
+        });}
+
+        if (id3) {
+        this.getAPIPlaceDetails(id3).then((results: PlaceResult) => {
+        this.myExperiencesArray[i].thirdPlaceName = results.name;
+      });}
+
+      } else {
+        this.myExperiencesArray[i].firstPlaceName = "Mock Place 1";
+
+        if (id2) {
+          this.myExperiencesArray[i].secondPlaceName = "Mock Place 2";
+        }
+
+        if (id3) {
+          this.myExperiencesArray[i].thirdPlaceName = "Mock Place 3";
+        }
+      }
+    }
   }
 
   getAPIPlaceDetails(googlePlaceId: string) {
@@ -81,9 +119,6 @@ export class MyExperiencesPage implements OnInit {
       fields: [
         'place_id', 
         'name', 
-        'types', 
-        // 'formatted_address', 
-        // 'photos'
       ],
     };
 

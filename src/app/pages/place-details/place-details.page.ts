@@ -18,7 +18,8 @@ declare var google;
 export class PlaceDetailsPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = false;
+  useAPI: boolean = true;
+  useAPIPhotos: boolean = true;
 
   // Place details variables
   placeDetails: PlaceResult = new PlaceResult();
@@ -44,7 +45,7 @@ export class PlaceDetailsPage implements OnInit {
 
   // Placeholder text while editorial_summary is not working
   placeOverview: string =
-    'Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO mlkshk godard pour-over blog tumblr humblebrag. Blue bottle put a bird on it twee prism biodiesel brooklyn. Blue bottle ennui tbh succulents.';
+    "This place has received great reviews from both locals and travelers alike. We think you'll love it! If not, let us know how we can finetune our search. We've done the work to filter through place recommendations to bring you the highest rated - and hopefully most fun - places in the area of your search. (This is custom placeholder text because the field that would provide this data isn't available from Google yet.)";
 
   constructor(
     private resultsService: ResultsService,
@@ -66,6 +67,7 @@ export class PlaceDetailsPage implements OnInit {
           console.log('Current User Id: ', this.currentUserId);
 
           this.checkIfSaved(this.currentGooglePlaceId);
+          this.apiFindAllPlacesByUserId();
         } else {
           console.log('No active user signed in.');
         }
@@ -75,7 +77,11 @@ export class PlaceDetailsPage implements OnInit {
       }
     );
 
-    this.apiFindAllPlacesByUserId();
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+
+    
   }
 
   // Options for the category slider
@@ -201,14 +207,15 @@ export class PlaceDetailsPage implements OnInit {
             this.photoLimit = maxPhotoLimit;
           }
 
-          // COMMENTING OUT TO LIMIT REQUESTS
-          // for (let i = 0; i < this.photoLimit; i++) {
-          //   this.newPhoto = this.photoList[i].getUrl({
-          //     maxWidth: 500,
-          //     maxHeight: 500,
-          //   });
-          //   this.photoLinkArray.push(this.newPhoto);
-          // }
+          if (this.useAPIPhotos == true) {
+            for (let i = 0; i < this.photoLimit; i++) {
+                this.newPhoto = this.photoList[i].getUrl({
+                  maxWidth: 500,
+                  maxHeight: 500,
+                });
+                this.photoLinkArray.push(this.newPhoto);
+              }
+          }
 
           this.ChosenPhoto = this.photoLinkArray[0];
 
@@ -232,15 +239,11 @@ export class PlaceDetailsPage implements OnInit {
         (result) => {
           console.log("New My Place: ", result);
           if (this.saveNewPlace.visited == true) {
-
-
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
-
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
-
           }
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
@@ -266,13 +269,12 @@ export class PlaceDetailsPage implements OnInit {
   // If user HAS already saved a place
   // Do we want to add a window confirmation that they have to confirm to remove or just remove automatically?
   removePlacefromMyPlaces() {
-    
     this.placesService
       .deleteMyPlaceByPlaceId(this.currentMyPlace.myPlaceId)
       .subscribe(
         () => {
-          this.currentMyPlace.visited = false;
           this.userSavedPlace = false;
+          this.currentMyPlace.visited = false;
           this.placeRemovedFromSavedAlert();
         },
         (error) => {

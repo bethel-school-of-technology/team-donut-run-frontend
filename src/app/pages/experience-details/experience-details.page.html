@@ -1,9 +1,123 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>experience-details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/my-experiences"
+        ><ion-icon name="chevron-back-outline"></ion-icon
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-padding ion-no-margin">
+        <h1 class="ion-no-margin">{{experienceDetails.experienceTitle}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="detailsContainer">
+      <ion-col class="ion-padding-horizontal ion-no-margin" size="12">
 
+          <span class="ion-no-margin location">
+            <ion-icon size="large" color="primary" name="location-outline"></ion-icon>
+            <ion-text color="primary"> {{experienceDetails.experienceUserLocation}}</ion-text>
+          </span>
+      </ion-col>
+      <ion-col class="ion-padding-horizontal ion-no-margin" size="12">
+        <p class="ion-no-margin"><i><b>Created On: </b> {{experienceDetails.createdOn}}</i></p>
+      </ion-col>
+      <ion-col class="ion-padding-horizontal ion-no-margin" size="12">
+        <p class="ion-no-margin"><b>Notes: </b>{{experienceDetails.experienceNotes}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-col>
+        <div class="Centered ion-text-center">
+          <ion-button
+            *ngIf="this.showOptions && !this.experienceDetails.completed"
+            (click)="toggleCompleted()"
+            class="changeBtn MobileButtons ion-text-uppercase ion-margin-end"
+            color="primary"
+          >
+            <ion-icon color="light" name="add-circle-outline"></ion-icon
+            ><span class="buttonText">Mark as Completed</span>
+          </ion-button>
+
+          <ion-button
+            *ngIf="this.showOptions && this.experienceDetails.completed"
+            (click)="toggleCompleted()"
+            class="changeBtn MobileButtons ion-text-uppercase ion-margin-end"
+            color="primary"
+          >
+            <ion-icon color="light" name="checkmark-circle"></ion-icon
+            ><span class="buttonText">Completed</span>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-card *ngFor="let place of savedPlaces" [routerLink]="['/place-details', place.place_id]">
+        <h4>{{place.name}}</h4>
+      </ion-card>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col class="ion-padding ion-no-margin">
+        <h2 class="ion-no-margin">Places</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="searchResultsRow">
+      <ion-col
+        class="searchResultsContainer"
+        size-xs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="4"
+        *ngFor="let place of savedPlaces"
+      >
+        <ion-card
+          class="card"
+          [routerLink]="['/place-details', place.place_id]"
+        >
+          <div class="cardPhotoContainer">
+            <img [src]="place.photo_reference" />
+          </div>
+          <ion-card-content class="cardText">
+            <ion-text color="dark"><b>{{place.name}}</b></ion-text>
+            <p class="addressContainer">{{place.formatted_address}}</p>
+            <p class="types"><b>Type:</b> {{place.types[0]}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col
+        class="ion-margin-right"
+        size-xs="12"
+        size-sm="12"
+        size-md="12"
+        size-lg=""
+        size-xl=""
+      >
+        <div class="Centered ion-text-center">
+          <ion-button
+            *ngIf="this.showOptions"
+            (click)="deleteExperience()"
+            class="changeBtn MobileButtons ion-text-uppercase ion-margin-end"
+            color="primary"
+          >
+            <ion-icon color="light" name="remove-circle"></ion-icon
+            ><span class="buttonText">Delete Experience</span>
+          </ion-button>
+          <p><i>There is no undo!</i></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-footer></app-footer>
 </ion-content>

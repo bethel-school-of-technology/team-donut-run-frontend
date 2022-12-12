@@ -11,10 +11,6 @@
    padding: 0px;
 }
 
-.button {
-   color: #bdc6c9;
-}
-
 .Center {
    margin-left: auto;
    margin-right: auto
@@ -29,7 +25,7 @@
 .Text2 {
 
    color: #FF9800;
-   font-size: large;
+   font-size: 110%;
 
 }
 
@@ -42,7 +38,7 @@
 .Title {
    font-weight: bolder;
    color:#D73210;
-   font-size: 24px;
+   font-size: 250%;
 
 }
 
@@ -128,9 +124,6 @@
 
 }
 
-.MobileButtons{
-
-}
 
 .Centered{
 // margin-left:50%;
@@ -160,7 +153,7 @@ text-align: center;
    font-weight: 700;
    color:  #FF9800;
    animation: fadeInUp;
- 
+   right: 1em;
    animation-duration: 2s;
    /* don't forget to set a duration! */
 
@@ -170,15 +163,19 @@ text-align: center;
 
    position: absolute;
    color: #d7311000;
-
+   right: 1em;
+ 
 }
 
 .Saved2 {
 
    position: absolute;
-   color: #d7311000;
 
+   color: #d7311000;
+  
 }
+
+
 
 ion-button {
    --overflow: visible;
@@ -198,4 +195,17 @@ ion-toolbar {
 
 .btnText {
    margin-left: 5px;
+   color: white;
 }
+
+.Cushion{
+   margin: 2%;
+   margin-left: 8;
+}
+
+// What does this do? It's throwing off the mobile buttons.
+// span {
+//    width: 75%;
+//    margin-right: 15px;
+//  }
+ 

@@ -19,7 +19,8 @@ declare var google;
 export class SearchPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
-  useAPI: boolean = false;
+  useAPI: boolean = true;
+  useAPIPhotos: boolean = true;
 
   // To get current geolocation
   position: Position = null;
@@ -193,11 +194,14 @@ export class SearchPage implements OnInit {
         this.searchResults.forEach(sr => {
           let placeId = sr.place_id;
           let foundPlace = results.find((p) => p.place_id === placeId);
-          sr.photo_reference = foundPlace.photos[0].getUrl({
-            maxWidth: 500,
-            maxHeight: 500,
-          });
 
+          if (this.useAPIPhotos == true) {
+            sr.photo_reference = foundPlace.photos[0].getUrl({
+              maxWidth: 500,
+              maxHeight: 500,
+            });
+          }
+          
           if (
             foundPlace.plus_code == null ||
             foundPlace.plus_code == undefined

@@ -97,6 +97,7 @@ export class AppComponent {
     this.authService.signout();
     //change active state to false and remove currentUser to modify dropdown menu.
     this.menuService.active$ = this.menuService.GetUserActiveState('', '');
+    this.authService.currentUser$.next(null);
     this.SignInPage();
   }
 }

@@ -1,21 +1,32 @@
 <div class="flex-wrapper">
-
+  <ion-row >
+    <ion-col >
+      <span class="google-row">All Place Details Powered by <img src="assets/google_logo/desktop/google_on_white.png" alt=""> </span>
+    </ion-col>
+  </ion-row>
   <ion-toolbar color="secondary">
 
     <ion-grid>
-<ion-row class="">  
-  <ion-col></ion-col>
-  <ion-col size="auto"><p class="Ion-P ion-no-margin top">Copyright by DonutRun 2022</p>
-</ion-col>
-<ion-col> <div  *ngIf="!animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceInUp">
-  <img src="assets/logo/DonutRun.png" />
-</div>   <div  *ngIf="animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceOutRight">
-  <img src="assets/logo/DonutRun.png" />
-</div>   </ion-col>
- </ion-row>
+      
+      <ion-row class="">
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <p class="Ion-P ion-no-margin top">Copyright by DonutRun 2022</p>
+        </ion-col>
+        <ion-col>
+          <div *ngIf="!animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceInUp">
+            <img src="assets/logo/DonutRun.png" />
+          </div>
+          <div *ngIf="animatePlay" (click)="DonutPage()" class="donut animate__animated animate__bounceOutRight">
+            <img src="assets/logo/DonutRun.png" />
+          </div>
+        </ion-col>
+      </ion-row>
 
- <a (click)="TermsPage()"><p class="Ion-P ion-no-margin bottom">Terms and services</p></a>
-  </ion-grid>
-</ion-toolbar>
+      <a (click)="TermsPage()">
+        <p class="Ion-P ion-no-margin bottom">Terms and Conditions</p>
+      </a>
+    </ion-grid>
+  </ion-toolbar>
 
 </div>

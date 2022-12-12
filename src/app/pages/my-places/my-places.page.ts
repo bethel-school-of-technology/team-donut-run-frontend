@@ -27,6 +27,7 @@ export class MyPlacesPage implements OnInit {
   // To use to easily switch between mock and API data
   // TRUE = using Google Data (so, use FALSE most of the time)
   useAPI: boolean = true;
+  useAPIPhotos: boolean = true;
 
   // Place details variable
   myPlaceArray: MyPlace[] = [];
@@ -182,14 +183,15 @@ export class MyPlacesPage implements OnInit {
           this.currentPlaceDetails.types = typesArray;
           // this.currentPlaceDetails.types = typesArray[0];
 
-          // COMMENTING OUT BC IT RACKS UP API CALLS FAST
-          // let photoList: Array<any> = this.currentPlaceDetails.photos;
-          // let placePhoto = photoList[0].getUrl({
-          //   maxWidth: 500,
-          //   maxHeight: 500,
-          // });
-          // this.currentPlaceDetails.photo_reference = placePhoto;
-
+          if (this.useAPIPhotos == true) {
+            let photoList: Array<any> = this.currentPlaceDetails.photos;
+            let placePhoto = photoList[0].getUrl({
+              maxWidth: 500,
+              maxHeight: 500,
+            });
+            this.currentPlaceDetails.photo_reference = placePhoto;
+          }
+          
           // console.log('API Current Place Details: ', this.currentPlaceDetails);
 
           this.myVisitedPlaces.push(this.currentPlaceDetails);
@@ -202,7 +204,7 @@ export class MyPlacesPage implements OnInit {
         .getSavedResultsByGooglePlaceId(googlePlaceId)
         .subscribe((result) => {
           this.currentPlaceDetails = result[0];
-          this.currentPlaceDetails.types = result[0].types[0];
+          this.currentPlaceDetails.types = result[0].types;
 
           this.myVisitedPlaces.push(this.currentPlaceDetails);
         });
@@ -220,13 +222,14 @@ export class MyPlacesPage implements OnInit {
           this.currentPlaceDetails.types = typesArray;
           // this.currentPlaceDetails.types = typesArray[0];
 
-          // COMMENTING OUT BC IT RACKS UP API CALLS FAST
-          // let photoList: Array<any> = this.currentPlaceDetails.photos;
-          // let placePhoto = photoList[0].getUrl({
-          //   maxWidth: 500,
-          //   maxHeight: 500,
-          // });
-          // this.currentPlaceDetails.photo_reference = placePhoto;
+          if (this.useAPIPhotos == true) {
+            let photoList: Array<any> = this.currentPlaceDetails.photos;
+            let placePhoto = photoList[0].getUrl({
+              maxWidth: 500,
+              maxHeight: 500,
+            });
+            this.currentPlaceDetails.photo_reference = placePhoto;
+          }
 
           // console.log('API Current Place Details: ', this.currentPlaceDetails);
 

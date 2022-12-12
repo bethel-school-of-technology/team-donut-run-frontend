@@ -2,30 +2,73 @@ body, html {
     height: 100%;
 }
 
-
+//On bigger screens
 .hero-image {
-
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1558369178-6556d97855d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60");
-
-
-  height: 50%;
-
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: sticky;
+  position: relative;
+  width: 100%;
 }
 
-.hero-text {
-  text-align: center;
+.hero-image img {
+    width: 100%;
+    height: auto;
+  }
+
+.hero-image .btn-container {
   position: absolute;
+    height: 20%;
+    max-height: 60px;
+    font-size: large;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  -ms-transform: translate(-50%, -50%);
+  border: none;
+  cursor: pointer;
 }
 
-.Filler-Text{
-padding: 50px;
+.hero-image .btn-container2 {
+  position: absolute;
+    height: 15%;
+    max-height: 60px;
+    font-size: large;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border: none;
+  cursor: pointer;
 }
+
+//On smaller screens
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.button-container .btn {
+  width: 100%;
+  max-width: 220px;
+}
+
+.btn {
+  min-height: 45px;
+  width: 220px;
+  font-weight: bold;
+}
+
+.btn-margin {
+  margin-right: 50px;
+}
+
+.about {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+
+
