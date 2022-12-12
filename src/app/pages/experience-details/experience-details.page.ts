@@ -15,7 +15,7 @@ import { ResultsService } from 'src/app/Services/results.service';
 })
 export class ExperienceDetailsPage implements OnInit {
 
-  useAPI: boolean = true;
+  useAPI: boolean = false;
   useAPIPhotos: boolean = false;
 
   experienceDetails: Experience = new Experience();
