@@ -241,9 +241,15 @@ export class PlaceDetailsPage implements OnInit {
           if (this.saveNewPlace.visited == true) {
             this.placeSavedAndVisitedAlert();
             this.userSavedPlace = true;
+            this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+            this.placesService.myPlaceArray$.next(result);
+          });
           } else {
             this.placeSavedAlert();
             this.userSavedPlace = true;
+            this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+              this.placesService.myPlaceArray$.next(result);
+            });
           }
           this.checkIfSaved(this.currentGooglePlaceId);
           // this.apiFindAllPlacesByUserId();
@@ -276,6 +282,11 @@ export class PlaceDetailsPage implements OnInit {
           this.userSavedPlace = false;
           this.currentMyPlace.visited = false;
           this.placeRemovedFromSavedAlert();
+          this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+            // this.myPlaceArray = result;
+            this.placesService.myPlaceArray$.next(result);
+            // console.log('My Place Results: ', this.myPlaceArray);
+          });
         },
         (error) => {
           console.log('Remove Place Error: ', error);
@@ -309,7 +320,9 @@ export class PlaceDetailsPage implements OnInit {
         () => {
 
           this.placeMarkedAsVisitedAlert();
-          // this.apiFindAllPlacesByUserId();
+          this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+            this.placesService.myPlaceArray$.next(result);
+          });
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();
@@ -332,7 +345,9 @@ export class PlaceDetailsPage implements OnInit {
         () => {
 
           this.placeRemovedFromVisitedAlert();
-          // this.apiFindAllPlacesByUserId();
+          this.placesService.getAllCurrentUserPlaces().subscribe((result) => {
+            this.placesService.myPlaceArray$.next(result);
+          });
         },
         (error) => {
           this.unableToMarkAsVisitedAlert();

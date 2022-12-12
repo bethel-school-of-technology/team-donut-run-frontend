@@ -174,9 +174,13 @@ export class CreateExperiencePage implements OnInit {
         .subscribe((result) => {
           console.log('New Experience Result: ', result);
           this.newExperienceAddedAlert();
-          this.router.navigate(['my-experiences']).then(() => {
-          window.location.reload();
-        });
+          this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+            this.expService.myExperienceArray$.next(exp);
+          });
+          this.router.navigate(['my-experiences']);
+        //   .then(() => {
+        //   window.location.reload();
+        // });
         });
     } else {
       this.signInToCreateExperienceAlert();

@@ -172,11 +172,17 @@ export class ExperienceDetailsPage implements OnInit {
         this.experienceDetails.completed = true;
         this.expService.updateExperience(this.experienceDetails).subscribe(() => {
           console.log("Place marked as completed");
-        })
+          this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+            this.expService.myExperienceArray$.next(exp);
+          });
+        });
       } else if (this.experienceDetails.completed == true) {
         this.experienceDetails.completed = false;
         this.expService.updateExperience(this.experienceDetails).subscribe(() => {
           console.log("Place UNmarked as completed");
+          this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+            this.expService.myExperienceArray$.next(exp);
+          });
         });
       }
     } else {
@@ -190,9 +196,13 @@ export class ExperienceDetailsPage implements OnInit {
       this.expService.deleteExperienceById(this.experienceDetails.experienceId).subscribe(() => {
         // Add window alert that experience has been deleted?
         console.log("Experience deleted.");
-        this.router.navigate(['my-experiences']).then(() => {
-          window.location.reload();
+        this.expService.getAllCurrentUserExperiences().subscribe(exp => {
+          this.expService.myExperienceArray$.next(exp);
         });
+        this.router.navigate(['my-experiences']);
+        // .then(() => {
+        //   window.location.reload();
+        // });
       })
     } else {
       console.log("Not current user's experience. Unable to delete.");
