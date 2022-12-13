@@ -13,18 +13,20 @@ export class ResetPasswordPage implements OnInit {
   password: string = "";
   confirmPassword: string = "";
 
-  constructor( private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,) { }
 
   ngOnInit() {
-    
+
     this.token = this.route.snapshot.queryParams['token'];
 
     // remove token from url to prevent http referer leakage
     this.router.navigate([], { relativeTo: this.route, replaceUrl: true });
 
-    this.authService.validateResetToken(this.token).subscribe( response => {
+    //validate token by comparing to ResetToken and checking ResetTokenExpires
+    //values in the database.
+    this.authService.validateResetToken(this.token).subscribe(response => {
       console.log(response)
       window.alert("Your token is valid, proceed to change your password.");
     }, error => {
@@ -35,14 +37,16 @@ export class ResetPasswordPage implements OnInit {
       }
     });
   }
-
+    //reset the password by passing in the token from the email link along with the
+    //password and confirmPassword values entered in the form.
   onSubmit() {
-    this.authService.resetPassword(this.token, this.password, this.confirmPassword ).subscribe( response => {
+    this.authService.resetPassword(this.token, this.password, this.confirmPassword).subscribe(response => {
       console.log(response)
       window.alert("Password reset successful, you can now login.");
       this.router.navigateByUrl('/sign-in');
     }, error => {
       console.log('Error: ', error)
+      //generic error message for now.  Can implement more complex validation later.
       window.alert("Reset Error: Password must be at least 6 characters and both fields must match");
       if (error.status === 401 || error.status === 403) {
       }

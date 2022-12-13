@@ -14,8 +14,8 @@ export class ForgotPasswordPage implements OnInit {
 
   constructor(private authService: AuthService, private router: Router ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+  
 //Modified version of "forgot password feature" from:
 //https://jasonwatmore.com/post/2020/08/29/angular-10-boilerplate-email-sign-up-
 //with-verification-authentication-forgot-password#account-login-component-ts
@@ -24,7 +24,6 @@ export class ForgotPasswordPage implements OnInit {
     this.authService.forgotPassword(this.email).subscribe( response => {
         console.log(response)
         window.alert("Check your email for a password reset link");
-        // this.router.navigateByUrl('/my-account');
       }, error => {
         window.alert("Enter a valid Email address.");
         console.log('Error: ', error)
@@ -33,5 +32,4 @@ export class ForgotPasswordPage implements OnInit {
         }
       });
     }
-
 }
