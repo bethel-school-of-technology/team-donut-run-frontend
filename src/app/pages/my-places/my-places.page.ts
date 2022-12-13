@@ -92,6 +92,7 @@ export class MyPlacesPage implements OnInit {
     
     this.placesService.myPlaceArray$.subscribe(array => {
       this.myPlaceArray = array;
+      this.sortSavedPlacesByUserId(this.myPlaceArray);
     });
   }
 
@@ -147,12 +148,12 @@ export class MyPlacesPage implements OnInit {
       // this.myPlaceArray = result;
       this.placesService.myPlaceArray$.next(result);
       // console.log('My Place Results: ', this.myPlaceArray);
-      this.sortSavedPlacesByUserId(this.myPlaceArray);
+      
     });
 
     // To use in filtering
-    this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
-    this.originalVisitedPlaces = this.myVisitedPlaces;
+    // this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
+    // this.originalVisitedPlaces = this.myVisitedPlaces;
 
     // console.log('Original Visited Places Result: ', this.originalVisitedPlaces);
     // console.log('Original Unvisited Places Result: ', this.originalUnvisitedPlaces);
@@ -160,6 +161,8 @@ export class MyPlacesPage implements OnInit {
 
   // Sorts whether the place has been visited or not
   sortSavedPlacesByUserId(myPlaceArray) {
+    this.myVisitedPlaces = [];
+    this.myUnvisitedPlaces = [];
     for (let i = 0; i <= this.myPlaceArray.length - 1; i++) {
       let currentMyPlace = this.myPlaceArray[i];
       this.currentGooglePlaceId = myPlaceArray[i].googlePlaceId;
@@ -170,6 +173,9 @@ export class MyPlacesPage implements OnInit {
         this.getUnvisitedPlaceDetailsByGooglePlaceId(this.currentGooglePlaceId);
       }
     }
+
+    this.originalUnvisitedPlaces = this.myUnvisitedPlaces;
+    this.originalVisitedPlaces = this.myVisitedPlaces;
   }
 
   // Gets Place Details to display on My Places VISITED cards
