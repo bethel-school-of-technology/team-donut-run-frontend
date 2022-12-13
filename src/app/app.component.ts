@@ -18,7 +18,7 @@ export class AppComponent {
     public menuCtrl: MenuController,
     public menuService: MenuService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.CheckCurrentUser();
@@ -62,6 +62,7 @@ export class AppComponent {
     this.closeMenu();
     this.navCtrl.navigateForward('meet-the-team');
   }
+
   closeMenu() {
     this.menuCtrl.close();
   }
